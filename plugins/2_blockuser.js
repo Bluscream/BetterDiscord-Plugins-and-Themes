@@ -67,6 +67,19 @@ blockPlugin.prototype.start = function() {
         blockButtonFunc();
     });
 
+	// var observer = new MutationObserver(function (mutations) {
+		// mutations.forEach(function (mutation) {
+			// [].slice.call($('.message-group')).forEach(function (message) {
+				// var blockedUser = blockPlugin.blockList.[username];
+				// if($(message).children(".avatar-large").first()[0].outerHTML.indexOf(blockedUser) > -1){
+					// $(message).css('display', 'none');
+					// console.log("Hidden msg by: " + blockedUser);
+				// }
+			// });
+		// });
+	// });
+	// observer.observe(document.body, { childList: true, subtree: true });
+	
 	console.log("BetterDiscord: " + this.getName() + " v" + this.getVersion() + " by " + this.getAuthor() + " started.");
 };
 
