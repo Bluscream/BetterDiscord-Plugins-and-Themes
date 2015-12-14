@@ -44,15 +44,15 @@ blockPlugin.prototype.start = function() {
     };
 	var blockListButtonFunc = function() {
 		if (!$('#blockListButton').length) {
-			$('.user-popout-options').append('<button class="btn btn-server" id="blockListButton">Blocked Users</button>');
+			$('.user-popout-options').append('<button class="btn btn" id="blockListButton">Blocked Users</button>');
 			$('#blockListButton').on("click", function () {
 				var locStore = localStorage.getItem('blockPluginBlockList1');
 				if (locStore == '{}') {
-					alert("Blocklist", "No users blocked.");
+					infoAlert('Blocklist', 'No users blocked.');
 				} else {
-					alert("Blocklist", localStorage.getItem('blockPluginBlockList1'));
+					blackAlert('Blocklist', localStorage.getItem('blockPluginBlockList1'));
 					console.log("BetterDiscord: "+blockPlugin.prototype.getName() +": Blocklist:\n" + localStorage.getItem('blockPluginBlockList1'));
-				};
+				};				
 			});
 		};
 	};
@@ -62,10 +62,7 @@ blockPlugin.prototype.start = function() {
 			if (locStore != '{}') {
 				$('.user-popout-options').append('<button class="btn btn-server" id="clearblockListButton">Clear Blocked Users</button>');
 				$('#clearblockListButton').on("click", function () {
-					$.each( blockPlugin.blockList, function(name, id){
-						delete blockPlugin.blockList;
-						// localStorage.setItem('blockPluginBlockList1', JSON.stringify(blockPlugin.blockList));
-					});
+					localStorage.setItem('blockPluginBlockList1', '{}');
 					successAlert(blockPlugin.prototype.getName(), "Blocklist has been cleared")
 				});
 			} else {
