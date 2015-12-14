@@ -14,13 +14,13 @@ userInfo.prototype.start = function() {
     $('span[data-reactid=".0.4"]').on('DOMNodeInserted', '.popout', function() {
         if ($('#UserInfo').length <= 0) {
             var username = $(".user-popout").find(".username").text();
-			var userid = BdApi.getUserIdByName(username);
-			usernamebyid = BdApi.getUserNameById(userid);
+			var id = BdApi.getUserIdByName(username);
+			var usernamebyid = BetterAPI.getUserNameById(id);
             $('.user-popout-options').append('<button class="btn" id="UserInfo">Info</button>');
             $('#UserInfo').on("click", function () {
 				// window.prompt("Name", username);
 				// window.prompt("ID", userid);
-				alert("Name: \"" + username + "\" | NamebyID: \"" + usernamebyid + "\" | ID: " + userid);
+				infoAlert("\""+ username +"\"s Info", "Name by ID: \"" + usernamebyid + "\" | ID: " + userid);
 				console.log("Name: \"" + username + "\" ID: " + userid);
             });
         }
@@ -42,7 +42,7 @@ userInfo.prototype.getName = function() {
 };
 
 userInfo.prototype.getDescription = function() {
-	return "Adds functionality to block a user";
+	return "Adds functionality to see more information.";
 };
 
 userInfo.prototype.getVersion = function() {

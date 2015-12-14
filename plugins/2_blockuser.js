@@ -2,28 +2,21 @@
 //```
 function blockPlugin() {}
 blockPlugin.prototype.load = function() {
-	appendTo = function(link, Element){
-		var $head = $("head");
-		var $headlinklast = $head.find( link + ":last");
-		if ($headlinklast.length){
-		   $headlinklast.after(Element);
-		}
-		else {
-		   $head.append(Element);
-		};
-	};
-	appendTo("link[rel='stylesheet']", '<link rel="stylesheet" href="https://cdn.rawgit.com/VersatilityWerks/jAlert/master/src/jAlert-v3.css" type="text/css">');
+	
+	BetterAPI.appendTo("link[rel='stylesheet']", '<link rel="stylesheet" href="https://cdn.rawgit.com/VersatilityWerks/jAlert/master/src/jAlert-v3.css" type="text/css">');
 	$("head").append('<script src="https://raw.githubusercontent.com/VersatilityWerks/jAlert/master/src/jAlert-v3.min.js"></script>');
 	$("head").append('<script src="https://raw.githubusercontent.com/VersatilityWerks/jAlert/master/src/jAlert-functions.min.js"></script>');
+	
 	console.log("BetterDiscord: " + this.getName() + " v" + this.getVersion() + " by " + this.getAuthor() + " loaded.");
 };
 blockPlugin.prototype.unload = function() {
 	console.log("BetterDiscord: " + this.getName() + " v" + this.getVersion() + " by " + this.getAuthor() + " unloaded.");
 };
 blockPlugin.prototype.start = function() {
+	
     blockPlugin.blockList = JSON.parse(localStorage.getItem('blockPluginBlockList1')) || {};
     blockPlugin.forceUpdate = false;
-   var updateChat = function(){
+	updateChat = function(){
         if(Object.keys(blockPlugin.blockList).length > 0 || blockPlugin.forceUpdate){
             [].slice.call($('.message-group')).forEach(function (message) {
                 $.each( blockPlugin.blockList, function(name, id){
@@ -70,13 +63,23 @@ blockPlugin.prototype.start = function() {
 			};
 		}
 	};
+	blockUser = function(username, id) {
+			blockPlugin.blockList[username] = id;
+			localStorage.setItem('blockPluginBlockList1', JSON.stringify(blockPlugin.blockList));
+			console.log("\"" + username + "\" #" + id + " was added to blocklist.")
+	};
+	unblockUser = function(username) {
+		delete blockPlugin.blockList[username];
+		localStorage.setItem('blockPluginBlockList1', JSON.stringify(blockPlugin.blockList));
+			console.log("\"" + username + "\" was removed to blocklist.")
+	};
     var blockButtonFunc = function() {
         if (!$('#blockUser').length && !$('#unblockUser').length) {
             var username = $(".user-popout").find(".username").text();
             if (!blockPlugin.blockList.hasOwnProperty(username)) {
                 $('.user-popout-options').append('<button class="btn btn-server" id="blockUser">Block</button>');
                 $('#blockUser').on("click", function () {
-                    var id = BdApi.getUserIdByName(username);
+                    var id = BetterAPI.getUserIdByName(username);
                     if(id == null){
 						  errorAlert(blockPlugin.prototype.getName() + ' - Error', 'Can\'t get userID for: \"' + username + '\". \n\nUser needs to be visible in the userlist.');
                         return;
@@ -117,16 +120,21 @@ blockPlugin.prototype.start = function() {
             }
         }
     };
+//--------------------------------------------------------------------------------------------------------------------------------------------
+//----------------------------------------------------------------/*Events*/------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------------------------------------------------
     $('span[data-reactid=".0.4"]').on('DOMNodeInserted', '.popout', function() {
         blockButtonFunc();
 		blockListButtonFunc();
 		clearblockListButtonFunc();
     });
     $('body').on('DOMSubtreeModified', function() {
-        // updateChat();
+        updateChat();
     });
+	
 	console.log("BetterDiscord: " + this.getName() + " v" + this.getVersion() + " by " + this.getAuthor() + " started.");
 };
+
 blockPlugin.prototype.stop = function() {
 	$('span[data-reactid=".0.4"').off('DOMNodeInserted.blockPlugin');
 	console.log("BetterDiscord: " + this.getName() + " v" + this.getVersion() + " by " + this.getAuthor() + " stopped.");
