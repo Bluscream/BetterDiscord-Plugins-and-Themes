@@ -15,11 +15,12 @@ userInfo.prototype.start = function() {
         if ($('#UserInfo').length <= 0) {
             var username = $(".user-popout").find(".username").text();
 			var userid = BdApi.getUserIdByName(username);
+			usernamebyid = BdApi.getUserNameById(userid);
             $('.user-popout-options').append('<button class="btn" id="UserInfo">Info</button>');
             $('#UserInfo').on("click", function () {
 				// window.prompt("Name", username);
 				// window.prompt("ID", userid);
-				window.alert("Name: \"" + username + "\"\nID: " + userid);
+				alert("Name: \"" + username + "\" | NamebyID: \"" + usernamebyid + "\" | ID: " + userid);
 				console.log("Name: \"" + username + "\" ID: " + userid);
             });
         }
