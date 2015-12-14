@@ -2,7 +2,7 @@
 //```
 function blockPlugin() {}
 
-blockPlugin.prototype.load = function() {
+blockPlugin.prototype.load = function() {	
 	console.log("BetterDiscord: " + this.getName() + " v" + this.getVersion() + " by " + this.getAuthor() + " loaded.");
 };
 
@@ -11,35 +11,35 @@ blockPlugin.prototype.unload = function() {
 };
 
 blockPlugin.prototype.start = function() {
-    // $('span[data-reactid=".0.4"]').on('DOMNodeInserted', '.popout', function() {
-        // if ($('#blockUser').length <= 0) {
-            // var username = $(".user-popout").find(".username").text();
-            // $('.user-popout-options').append('<button class="btn btn-server" id="blockUser">Block</button>');
-            // $('#blockUser').on("click", function () {
-				// var userid = BdApi.getUserIdByName(username);
-				// var blockedUser = $.cookie("blockUser");
-				// $.cookie('blockUser', blockedUser + ',' + userid);
-				// console.log("Blocked: " + blockedUser);
-            // });
-        // }
-    // });
 	
-	// var observer = new MutationObserver(function (mutations) {
-		// mutations.forEach(function (mutation) {
-			// [].slice.call($('.message-group')).forEach(function (message) {
-				// var blockedUser = $.cookie("blockUser");
-				// if($(message).children(".avatar-large").first()[0].outerHTML.indexOf(blockedUser) > -1){
-					// $(message).css('display', 'none');
-					// console.log("Hidden msg by: " + blockedUser);
-				// }
-			// });
-		// });
-	// });
-	// observer.observe(document.body, { childList: true, subtree: true });
-	// console.log("BetterDiscord: " + "Blocked Users: " + $.cookie("blockUser"))
-	
-	
-    blockPlugin.blockList = {};
+	pluginAlert = function(type, msg){
+		// window.alert("BetterDiscord: " + blockPlugin.prototype.getName() + ": " + type + ":\n\n" + msg);
+		$('body').jAlert('Welcome to jAlert Demo Page', "success");
+		// console.log("BetterDiscord: " + this.getName() + ": " + type + ": " + msg);
+	};
+
+    blockPlugin.blockList = JSON.parse(localStorage.getItem('blockPluginBlockList')) || {};
+    blockPlugin.forceUpdate = false;
+
+    var updateChat = function(){
+        if(Object.keys(blockPlugin.blockList).length > 0 || blockPlugin.forceUpdate){
+            [].slice.call($('.message-group')).forEach(function (message) {
+                $.each( blockPlugin.blockList, function(name, id){
+                    if($(message).children(".avatar-large").first()[0].outerHTML.indexOf(id) > -1){
+                        $(message).css('display', 'none');
+                    } else {
+                        $(message).removeAttr('style');
+                    }
+                });
+            });
+            $(".scroller.messages").scrollTop(999999);
+        }
+        if(Object.keys(blockPlugin.blockList).length <= 0 && blockPlugin.forceUpdate) {
+            $('.message-group').removeAttr('style');
+            $(".scroller.messages").scrollTop(999999);
+        }
+        blockPlugin.forceUpdate = false;
+    };
 
     var blockButtonFunc = function() {
         if (!$('#blockUser').length && !$('#unblockUser').length) {
@@ -47,40 +47,41 @@ blockPlugin.prototype.start = function() {
             if (!blockPlugin.blockList.hasOwnProperty(username)) {
                 $('.user-popout-options').append('<button class="btn btn-server" id="blockUser">Block</button>');
                 $('#blockUser').on("click", function () {
-                    blockPlugin.blockList[username] = BdApi.getUserIdByName(username);
-                    console.log('Blocked user: \"' + username + '\" #' + blockPlugin.blockList[username]);
+                    var id = BdApi.getUserIdByName(username);
+                    if(id == null){
+                        // window.alert("Can't get userID for: " + username + "\nUser needs to be visible in the userlist.");
+						pluginAlert('Error', 'test');
+                        return;
+                    }
+                    blockPlugin.blockList[username] = id;
+                    localStorage.setItem('blockPluginBlockList', JSON.stringify(blockPlugin.blockList));
                     $('#blockUser').remove();
                     blockButtonFunc();
+                    updateChat();
                 });
             } else {
                 $('.user-popout-options').append('<button class="btn btn-server" id="unblockUser">Unblock</button>');
                 $('#unblockUser').on("click", function () {
-                    console.log('Unblocked user: \"' + username + '\" #' + blockPlugin.blockList[username]);
                     delete blockPlugin.blockList[username];
+                    localStorage.setItem('blockPluginBlockList', JSON.stringify(blockPlugin.blockList));
                     $('#unblockUser').remove();
                     blockButtonFunc();
+                    blockPlugin.forceUpdate = true;
+                    updateChat();
                 });
             }
         }
     };
+
     $('span[data-reactid=".0.4"]').on('DOMNodeInserted', '.popout', function() {
         blockButtonFunc();
     });
 
-	// var observer = new MutationObserver(function (mutations) {
-		// mutations.forEach(function (mutation) {
-			// [].slice.call($('.message-group')).forEach(function (message) {
-				// var blockedUser = blockPlugin.blockList.[username];
-				// if($(message).children(".avatar-large").first()[0].outerHTML.indexOf(blockedUser) > -1){
-					// $(message).css('display', 'none');
-					// console.log("Hidden msg by: " + blockedUser);
-				// }
-			// });
-		// });
-	// });
-	// observer.observe(document.body, { childList: true, subtree: true });
-	
+    $('body').on('DOMSubtreeModified', function() {
+        // updateChat();
+    });
 	console.log("BetterDiscord: " + this.getName() + " v" + this.getVersion() + " by " + this.getAuthor() + " started.");
+
 };
 
 blockPlugin.prototype.stop = function() {
