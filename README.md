@@ -7,3 +7,5 @@ Please note that not every single plugin/theme is by me. If i took your plugin/t
 
 
 If you want to make plugin coding easier for me please support me [here](https://github.com/Jiiks/BetterDiscordApp/issues/88) :)
+
+Everything goes to ``` %appdata%\BetterDiscord\ ```
