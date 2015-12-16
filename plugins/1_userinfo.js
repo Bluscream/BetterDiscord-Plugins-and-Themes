@@ -14,10 +14,11 @@ userInfo.prototype.start = function() {
             $('#UserInfo').on("click", function () {
 				var username = $(".user-popout").find(".username").text();
 				var id = BetterAPI.getUserIdByName(username);
+				var name = BetterAPI.getUserNameById(id);
 				// infoAlert(username +'\'s Info','Name: '+username+'\n'+'UID: '+id);
 				$.jAlert({
 					'title': username +'\'s Info',
-					'content': 'Name: '+username+'\nUID: '+id,
+					'content': 'Name: '+username+'<br>UID: '+id,
 					'theme': 'blue',
 					'class': 'btn',
 					// 'closeOnClick': true,
