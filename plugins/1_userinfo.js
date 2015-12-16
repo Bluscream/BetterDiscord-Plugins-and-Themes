@@ -14,15 +14,20 @@ userInfo.prototype.start = function() {
             $('#UserInfo').on("click", function () {
 				var username = $(".user-popout").find(".username").text();
 				var id = BetterAPI.getUserIdByName(username);
-				infoAlert(username +'\'s Info','Name: '+username+'\n'+'UID: '+id);
-				// $.jAlert({
-					// 'title': username +'\'s Info',
-					// [ {'content': 'Name: '+username}, {'content': '\nUID: '+id} ]
-					// 'theme': 'blue',
-					// 'size': 'md',
-					// 'showAnimation': 'fadeInUp',
-					// 'hideAnimation': 'fadeOutDown' 
-				// });
+				// infoAlert(username +'\'s Info','Name: '+username+'\n'+'UID: '+id);
+				$.jAlert({
+					'title': username +'\'s Info',
+					'content': 'Name: '+username+'\nUID: '+id,
+					'theme': 'blue',
+					'class': 'btn',
+					// 'closeOnClick': true,
+					// 'onOpen': function(alert){ return false; }	
+					'btns': [ {
+						'text': 'copy'
+					}, {
+						'text': 'close'
+					} ]
+				});
 				console.clear();
 				BetterAPI.log(0, "info", userInfo.prototype.getName()+": "+username+'\'s Info', "\n\nName: \""+username+"\"\nUID: \""+id+"\"");
             });

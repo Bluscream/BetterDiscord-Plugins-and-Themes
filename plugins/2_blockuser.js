@@ -66,56 +66,58 @@ blockPlugin.prototype.start = function() {
 	blockUser = function(username, id) {
 			blockPlugin.blockList[username] = id;
 			localStorage.setItem('blockPluginBlockList1', JSON.stringify(blockPlugin.blockList));
-			console.log("\"" + username + "\" #" + id + " was added to blocklist.")
+			$('#blockUser').remove();
+			blockButtonFunc();
+			updateChat();
+			successAlert(blockPlugin.prototype.getName() + ' - Success', 'User \"'+username+'\" ('+id+') has been blocked and his/her messages were removed.');
+			console.log("\"" + username + "\" #" + id + " was added to your blocklist.")
 	};
-	unblockUser = function(username) {
+	unblockUser = function(username, id) {
 		delete blockPlugin.blockList[username];
 		localStorage.setItem('blockPluginBlockList1', JSON.stringify(blockPlugin.blockList));
-			console.log("\"" + username + "\" was removed to blocklist.")
+		$('#unblockUser').remove();
+		blockButtonFunc();
+		blockPlugin.forceUpdate = true;
+		updateChat();
+		successAlert(blockPlugin.prototype.getName() + " - Success", "User \""+username+"\" ("+id+") has been unblocked and his/her messages were restored.");
+		console.log("\"" + username + "\" was removed from your blocklist.")
 	};
     var blockButtonFunc = function() {
         if (!$('#blockUser').length && !$('#unblockUser').length) {
             var username = $(".user-popout").find(".username").text();
+            var id = BetterAPI.getUserIdByName(username);
+			console.info(username)
             if (!blockPlugin.blockList.hasOwnProperty(username)) {
                 $('.user-popout-options').append('<button class="btn btn-server" id="blockUser">Block</button>');
                 $('#blockUser').on("click", function () {
-                    var id = BetterAPI.getUserIdByName(username);
                     if(id == null){
 						  errorAlert(blockPlugin.prototype.getName() + ' - Error', 'Can\'t get userID for: \"' + username + '\". \n\nUser needs to be visible in the userlist.');
                         return;
-                    }
-					confirm(function(){
-						blockPlugin.blockList[username] = id;
-						localStorage.setItem('blockPluginBlockList1', JSON.stringify(blockPlugin.blockList));
-						$('#blockUser').remove();
-						blockButtonFunc();
-						updateChat();
-						successAlert(blockPlugin.prototype.getName() + ' - Success', 'User \"'+username+'\" ('+id+') has been blocked and his/her messages were removed.');
-					  }, function(){
-						return;
-					  }
-					);
+					}
+					$.jAlert({
+						'title': 'Block '+username+'?',
+						'type': 'confirm',
+						'confirmQuestion': 'Do you really want to block \"'+username+'\"?',
+						'theme': 'yellow',
+						'class': 'btn',
+						'onConfirm': function(e, btn) { blockUser(username, id) }
+					});
                 });
             } else {
                 $('.user-popout-options').append('<button class="btn btn-server" id="unblockUser">Unblock</button>');
                 $('#unblockUser').on("click", function () {
-					confirm(function(){
-						name = BdApi.getUserNameById(blockPlugin.blockList[username]);
-						if(name == null){
-							successAlert(blockPlugin.prototype.getName() + " - Success", "User #"+blockPlugin.blockList[username]+" has been unblocked and his/her messages were restored.");
-						} else {
-							successAlert(blockPlugin.prototype.getName() + " - Success", "User \""+name+"\" ("+blockPlugin.blockList[username]+") has been unblocked and his/her messages were restored.");
-						}
-						delete blockPlugin.blockList[username];
-						localStorage.setItem('blockPluginBlockList1', JSON.stringify(blockPlugin.blockList));
-						$('#unblockUser').remove();
-						blockButtonFunc();
-						blockPlugin.forceUpdate = true;
-						updateChat();
-					  }, function(){
-						return;
-					  }
-					);
+					if(id == null){
+						errorAlert(blockPlugin.prototype.getName() + ' - Error', 'Can\'t get userID for: \"' + username + '\". \n\nUser needs to be visible in the userlist.');
+                        return;
+					}
+					$.jAlert({
+						'title': 'Unblock '+username+'?',
+						'type': 'confirm',
+						'confirmQuestion': 'Do you really want to unblock \"'+username+'\"?',
+						'theme': 'yellow',
+						'class': 'btn',
+						'onConfirm': function(e, btn) { unblockUser(username, id) }
+					});
                 });
             }
         }
