@@ -8,5 +8,5 @@ All themes go to ``` %appdata%\BetterDiscord\themes\ ```
 ##Twitchcord ([Discord Twitchcord.css](https://github.com/Bluscream/BetterDiscord-Plugins-and-Themes/blob/master/themes/Discord%20Twitchcord.css))
 ![Twitchcord](https://i.gyazo.com/085e92526982d976a964f8d2477b1928.png)
 
-##Rounded Glass([Discord Rounded Glass.css](https://github.com/Bluscream/BetterDiscord-Plugins-and-Themes/blob/master/themes/Discord%20Rounded%20Glass.css))
+##Rounded Glass ([Discord Rounded Glass.css](https://github.com/Bluscream/BetterDiscord-Plugins-and-Themes/blob/master/themes/Discord%20Rounded%20Glass.css))
 ![Rounded Glass](http://i.imgur.com/8HYwkic.jpg)
