@@ -1,5 +1,5 @@
 # BetterDiscord-Plugins-and-Themes
-Unofficial Plugins and Themes for BetterDiscord
+Unofficial Plugins and Themes for [BetterDiscord](https://github.com/Jiiks/BetterDiscordApp)
 
 This is a collection of plugins 'n themes. I'll try to keep them as up-to-date as possible.
 
