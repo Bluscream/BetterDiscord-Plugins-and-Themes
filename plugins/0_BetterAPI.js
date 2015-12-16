@@ -101,8 +101,8 @@ BetterAPI.prototype.unload = function() {
 BetterAPI.prototype.start = function() {	
 		// $.post("https://discordapp.com/api/auth/login",
 		// {
-			// email: "admin@timo.de.vc",
-			// password: "wxiWH.@P9PBJiezw|u%(]H?*lV)4Op*D%);({]k08#0U*mE[p/DunaFVY{If4HJV2U;^%NWN>|-;eF[%&ZWWVh~]=Vi-e-?j-r7j@fHs,^%_{_=i+;_pqW#ez2.&G4wz,w(Gv{5Xi-9L?Pb*L#h)VNWVT-7>w(+/{Car>D]Oy;Gp-g=*-nc/)/Ek]t(E[[B=$f[zI=gx"
+			// email: "",
+			// password: ""
 		// },
 		// function(token){
 			// console.log("token: " + token);
