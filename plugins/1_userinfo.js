@@ -13,15 +13,15 @@ userInfo.prototype.unload = function() {
 userInfo.prototype.start = function() {
     $('span[data-reactid=".0.4"]').on('DOMNodeInserted', '.popout', function() {
         if ($('#UserInfo').length <= 0) {
-            var username = $(".user-popout").find(".username").text();
-			var id = BdApi.getUserIdByName(username);
 			// var usernamebyid = BetterAPI.getUserNameById(id);
             $('.user-popout-options').append('<button class="btn" id="UserInfo">Info</button>');
             $('#UserInfo').on("click", function () {
+				var username = $(".user-popout").find(".username").text();
+				var id = BetterAPI.getUserIdByName(username);
 				// window.prompt("Name", username);
 				// window.prompt("ID", userid);
 				infoAlert("\""+ username +"\"s Info","ID: " + id);
-				console.log("Name: \"" + username + "\" ID: " + id);
+				console.log("Name: \"%s\" ID: " + id, username);
             });
         }
     });

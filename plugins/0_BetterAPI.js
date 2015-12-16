@@ -1,8 +1,9 @@
 //META{"name":"BetterAPI"}*//
-//```
 function BetterAPI() {}
 
 BetterAPI.prototype.load = function() {
+	
+	var debug = 1;
 	
 	//appendTo
 	BetterAPI.appendTo = function(link, Element){
@@ -21,45 +22,80 @@ BetterAPI.prototype.load = function() {
 	// $("head").append('<script src="https://cdn.rawgit.com/izy521/discord.io/master/lib/index.js"></script>');
 	// $("head").append('<script src="https://cdn.rawgit.com/qeled/discordie/master/lib/index.js"></script>');
 	
+	//isNumber
+	BetterAPI.isNumber = function(string) {
+		return /^\d+$/.test(string);
+	};
+	//log
+	BetterAPI.log = function(dbg, type, pluginName, msg, vars) {
+		if ( (dbg = "debug") || (dbg = 1) ) {
+			if (debug == 1) {
+				switch(type) {
+					case "info":
+						console.info("[BetterDiscord] " + pluginName + ": " + msg, vars);
+						break;
+					case "warn":
+						console.warn("[BetterDiscord] " + pluginName + ": " + msg, vars);
+						break;
+					case "error":
+						console.error("[BetterDiscord] " + pluginName + ": " + msg, vars);
+						break;
+					default:
+						console.log("[BetterDiscord] " + pluginName + ": " + msg, vars);
+				};
+			} else {
+				return;
+			}
+		} else {
+			switch(type) {
+				case "info":
+					console.info("[BetterDiscord] " + pluginName + ": " + msg, vars);
+					break;
+				case "warn":
+					console.warn("[BetterDiscord] " + pluginName + ": " + msg, vars);
+					break;
+				case "error":
+					console.error("[BetterDiscord] " + pluginName + ": " + msg, vars);
+					break;
+				default:
+					console.log("[BetterDiscord] " + pluginName + ": " + msg, vars);
+			};
+		};	
+	};
 	//getUserIdByName
 	BetterAPI.getUserIdByName = function(name) {
 		var nick = "";
-		var match = "";
-		
-		// $.post("GET https://discordapp.com/api/channels/110373943822540800/messages?before=111222333444555666&after=111222333444555666&limit=50", function(data, status){
-			// console.log("Data: " + nonce + "\nStatus: " + status);
-		// });
-		
+		var match = "";		
 		var users = $(".member-username");
 		// console.clear();
 		for(var i = 0 ; i < users.length ; i++) {
 			var user = $(users[i]);
-			// console.log("Userlist: #"+i+" " + user.text() + " | name: "+name)
 			if(user.text() == name) {
 				var avatarUrl = user.closest(".member").find(".avatar-small").css("background-image");
 				match = avatarUrl.match(/\d+/);
 				nick = user.text();
-			}
-		}
+			};
+		};
 		if (match == "") {
             [].slice.call($('.message-group')).forEach(function (message) {
 				var user = $(message).find(".user-name");
+				var username = user.text();
 				var comment = $(user).parents(".comment");
 				var silbling = $(comment).prev();
 				var avatarUrl = $(silbling).css("background-image");
-				match = avatarUrl.match(/\d+/);
-				// console.log("UID of "+user.text()+": "+match)
-				nick = user.text();
+				if (name == username) {
+					match = avatarUrl.match(/\d+/);
+					nick = user.text();
+				};
 			});
 		};
-		if (match != "") {
-			console.log("UID of \""+nick+"\" is "+match);
+		if ( ( match != "" ) && ( /^\d+$/.test(match) ) && ( ( match.length < 17 ) || ( match.length > 18 ) ) ) {
+			console.log("BetterDiscord: "+ BetterAPI.prototype.getName() +": UID of \""+nick+"\" is "+match);
 			return match;
 		} else {
 			return null;
 		};
 	};
-	
 	//getUserNameById
 	BetterAPI.getUserNameById = function(id) {
 		var match = "";
@@ -98,16 +134,7 @@ BetterAPI.prototype.unload = function() {
 	console.log("BetterDiscord: " + this.getName() + " v" + this.getVersion() + " by " + this.getAuthor() + " unloaded.");
 };
 
-BetterAPI.prototype.start = function() {	
-		// $.post("https://discordapp.com/api/auth/login",
-		// {
-			// email: "",
-			// password: ""
-		// },
-		// function(token){
-			// console.log("token: " + token);
-		// });
-		
+BetterAPI.prototype.start = function() {		
 	console.log("BetterDiscord: " + this.getName() + " v" + this.getVersion() + " by " + this.getAuthor() + " started.");
 };
 
@@ -134,4 +161,3 @@ BetterAPI.prototype.getVersion = function() {
 BetterAPI.prototype.getAuthor = function() {
 	return "Bluscream";
 };
-//```
