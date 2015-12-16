@@ -20,8 +20,8 @@ userInfo.prototype.start = function() {
             $('#UserInfo').on("click", function () {
 				// window.prompt("Name", username);
 				// window.prompt("ID", userid);
-				infoAlert("\""+ username +"\"s Info","ID: " + userid);
-				console.log("Name: \"" + username + "\" ID: " + userid);
+				infoAlert("\""+ username +"\"s Info","ID: " + id);
+				console.log("Name: \"" + username + "\" ID: " + id);
             });
         }
     });
