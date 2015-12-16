@@ -1,0 +1,132 @@
+//META{"name":"Twitchcord","description":"Changes all accents from blue to Twitch Purple","author":"Soulweaver","version":"1.0"}*//
+
+form[data-reactid=".0.1.1.0.2.1.0.1"]{
+	margin: 0 !important;
+}
+
+.channel-textarea{
+	margin: 20px 20px 30px !important;
+}
+
+#twitchcord-button-container{
+	right: 20px !important;
+}
+
+.tooltip{
+	background-color: #6441A5 !important;
+}
+
+.tooltip-top:after{
+	border-top-color: #6441A5 !important;
+}
+
+.tooltip-right:after{
+	border-right-color: #6441A5 !important;
+}
+
+.divider.divider-red span {
+	color: #6441A5 !important;
+	background:transparent !important; 
+}
+
+.guild-channels ul .channel-text.selected:before{
+	border-left: 4px solid #6441A5 !important;
+}
+
+.chat .title-wrap .topic a {
+	color: #B9A3E3 !important;
+}
+
+.checkbox .checkbox-inner input[type=checkbox]:checked+span {
+	background-color: #6441A5 !important;
+	border-color: #6441A5 !important;
+}
+
+.radio .radio-inner span:after {
+	background:#6441A5 !important;
+}
+
+.slider-bar-fill {
+	background:#6441A5 !important;
+}
+
+.form .control-group input[type=email]:focus, .form .control-group input[type=password]:focus, .form .control-group input[type=text]:focus, .form .control-group textarea:focus{
+	border-bottom: 2px solid #6441A5 !important;
+}
+
+.user-settings-modal a {
+	color: #6441A5 !important;
+}
+
+.guilds li.active .guild-inner {
+	background:#6441A5 !important;
+}
+
+.guilds li.active .guild-inner, .guilds li:hover .guild-inner{
+	background:#6441A5 !important;
+}
+
+.tab-bar.SIDE .tab-bar-item:before {
+	border-left: 4px solid #6441A5 !important;
+}
+
+.chat>.content .messages .divider.divider-red>div {
+	background:#6441A5 !important;
+}
+
+.form .btn-primary{
+	background:#6441A5 !important;
+}
+
+.popout header{
+	background-color:#6441A5 !important;
+}
+
+.chat .new-messages-bar{
+	background-color:#6441A5 !important;
+}
+
+.guild-channels ul .channel-text:hover{
+	background: linear-gradient(to right, #6441A5 85%,#2e3136) !important;
+}
+
+.tab-bar.TOP .tab-bar-item.selected {
+	border-bottom: 2px solid #6441A5 !important;
+}
+
+.user-popout .user-popout-options .btn {
+    background-color: #6441A5 !important;
+    border: 1px solid #6441A5 !important;
+}
+
+.user-popout .user-popout-options .btn:hover {
+    background-color: #55368F !important;
+}
+
+.user-popout .user-popout-options .btn.btn-server {
+ 	background-color: transparent !important;   
+}
+
+.member-roles .member-role{
+ 	color: #6441A5 !important;    
+}
+
+.highlight {
+ 	color: #B9A3E3 !important;   
+}
+
+.message-group .mentioned .message-text:after {
+ border-left: 4px solid #6441A5 !important; 
+}
+
+.chat>.content .messages .mentioned .message-text {
+    background: rgba(100,65,165,.1) !important;
+}
+
+.chat>.content .messages .message-group .comment .markup .highlight:hover {
+   background: rgba(100,65,165,.7) !important; 
+}
+
+.scroller-wrap .scroller::-webkit-scrollbar-thumb {
+    background-color: #6441A5 !important;
+}

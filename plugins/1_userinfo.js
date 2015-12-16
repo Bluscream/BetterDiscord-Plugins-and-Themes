@@ -1,4 +1,4 @@
-//META{"name":"userInfo"}*//
+//META{"name":"userInfo"}*// Needs https://github.com/Bluscream/BetterDiscord-Plugins-and-Themes/blob/master/plugins/0_BetterAPI.js to work properly!
 //```
 function userInfo() {}
 
@@ -15,12 +15,12 @@ userInfo.prototype.start = function() {
         if ($('#UserInfo').length <= 0) {
             var username = $(".user-popout").find(".username").text();
 			var id = BdApi.getUserIdByName(username);
-			var usernamebyid = BetterAPI.getUserNameById(id);
+			// var usernamebyid = BetterAPI.getUserNameById(id);
             $('.user-popout-options').append('<button class="btn" id="UserInfo">Info</button>');
             $('#UserInfo').on("click", function () {
 				// window.prompt("Name", username);
 				// window.prompt("ID", userid);
-				infoAlert("\""+ username +"\"s Info", "Name by ID: \"" + usernamebyid + "\" | ID: " + userid);
+				infoAlert("\""+ username +"\"s Info","ID: " + userid);
 				console.log("Name: \"" + username + "\" ID: " + userid);
             });
         }

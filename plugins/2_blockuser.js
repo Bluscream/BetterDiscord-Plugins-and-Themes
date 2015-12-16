@@ -1,4 +1,4 @@
-//META{"name":"blockPlugin"}*//
+//META{"name":"blockPlugin"}*// Needs https://github.com/Bluscream/BetterDiscord-Plugins-and-Themes/blob/master/plugins/0_BetterAPI.js to work!
 //```
 function blockPlugin() {}
 blockPlugin.prototype.load = function() {
@@ -27,11 +27,11 @@ blockPlugin.prototype.start = function() {
                     }
                 });
             });
-            $(".scroller.messages").scrollTop(999999);
+            // $(".scroller.messages").scrollTop(999999);
         }
         if(Object.keys(blockPlugin.blockList).length <= 0 && blockPlugin.forceUpdate) {
             $('.message-group').removeAttr('style');
-            $(".scroller.messages").scrollTop(999999);
+            // $(".scroller.messages").scrollTop(999999);
         }
         blockPlugin.forceUpdate = false;
     };

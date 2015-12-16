@@ -16,10 +16,20 @@ BetterAPI.prototype.load = function() {
 		};
 	};
 	
+	BetterAPI.appendTo("link[rel='stylesheet']", '<link rel="stylesheet" href="https://cdn.rawgit.com/VersatilityWerks/jAlert/master/src/jAlert-v3.css" type="text/css">');
+	// $("head").append('<script src="https://cdn.rawgit.com/hydrabolt/discord.js/master/lib/index.js"></script>');
+	// $("head").append('<script src="https://cdn.rawgit.com/izy521/discord.io/master/lib/index.js"></script>');
+	// $("head").append('<script src="https://cdn.rawgit.com/qeled/discordie/master/lib/index.js"></script>');
+	
 	//getUserIdByName
 	BetterAPI.getUserIdByName = function(name) {
 		var nick = "";
 		var match = "";
+		
+		// $.post("GET https://discordapp.com/api/channels/110373943822540800/messages?before=111222333444555666&after=111222333444555666&limit=50", function(data, status){
+			// console.log("Data: " + nonce + "\nStatus: " + status);
+		// });
+		
 		var users = $(".member-username");
 		// console.clear();
 		for(var i = 0 ; i < users.length ; i++) {
@@ -78,7 +88,6 @@ BetterAPI.prototype.load = function() {
 		};
 	};
 	
-	BetterAPI.appendTo("link[rel='stylesheet']", '<link rel="stylesheet" href="https://cdn.rawgit.com/VersatilityWerks/jAlert/master/src/jAlert-v3.css" type="text/css">');
 	$("head").append('<script src="https://raw.githubusercontent.com/VersatilityWerks/jAlert/master/src/jAlert-v3.min.js"></script>');
 	$("head").append('<script src="https://raw.githubusercontent.com/VersatilityWerks/jAlert/master/src/jAlert-functions.min.js"></script>');
 
@@ -89,7 +98,16 @@ BetterAPI.prototype.unload = function() {
 	console.log("BetterDiscord: " + this.getName() + " v" + this.getVersion() + " by " + this.getAuthor() + " unloaded.");
 };
 
-BetterAPI.prototype.start = function() {
+BetterAPI.prototype.start = function() {	
+		// $.post("https://discordapp.com/api/auth/login",
+		// {
+			// email: "admin@timo.de.vc",
+			// password: "wxiWH.@P9PBJiezw|u%(]H?*lV)4Op*D%);({]k08#0U*mE[p/DunaFVY{If4HJV2U;^%NWN>|-;eF[%&ZWWVh~]=Vi-e-?j-r7j@fHs,^%_{_=i+;_pqW#ez2.&G4wz,w(Gv{5Xi-9L?Pb*L#h)VNWVT-7>w(+/{Car>D]Oy;Gp-g=*-nc/)/Ek]t(E[[B=$f[zI=gx"
+		// },
+		// function(token){
+			// console.log("token: " + token);
+		// });
+		
 	console.log("BetterDiscord: " + this.getName() + " v" + this.getVersion() + " by " + this.getAuthor() + " started.");
 };
 
