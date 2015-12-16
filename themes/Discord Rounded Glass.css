@@ -1,0 +1,82 @@
+//META{"name":"Rounded Glass","description":"A simple theme to satisfy that make it easy to swap out the background","author":"Megamit","version":"1.0"}*//
+
+body{
+	background: url("https://i.imgur.com/T2xHZtt.jpg");
+}
+
+.hljs {
+    background-color:rgba(131, 148, 150, 0);
+    color: #839496;
+    -webkit-text-size-adjust: none;
+}
+.guilds-wrapper{
+	background-color:rgba(30, 33, 36, 0.5);
+}
+/*channels*/
+
+.guild-header header{
+	  background-color:rgba(131, 148, 150, 0.4);
+}
+.guild-header ul{
+	  background-color:rgba(131, 148, 150, 0.4);
+}
+.channels-wrap>*{
+	background-color:rgba(30, 33, 36, 0.4);
+}
+.guild-channels{
+	background-color:rgba(30, 33, 36, 0.4);
+}
+.guild-channels ul .channel-text{
+	transition: opacity .15s ease;
+	opacity: 0.3;
+	background-color:rgba(30, 30, 30, 0.8);
+	border-style: solid;
+	border-width: 2px;
+	border-color: rgba(30, 30, 30, 1);
+	border-radius: 5px;
+}
+.guild-channels ul .channel-text:hover{
+	opacity:1;
+	background-color:rgba(30, 30, 30, 1);
+	border-style: solid;
+	border-width: 2px;
+	border-color: rgba(30, 30, 30, 1);
+	border-radius: 5px;
+}
+.guild-channels ul .channel-text.selected{
+	opacity:1;
+	background-color:rgba(30, 30, 30, 0.3);
+	border-style: solid;
+	border-width: 2px;
+	border-color: rgba(30, 30, 30, 0.7);
+	border-radius: 5px;
+}
+.guild-channels ul .channel-text a{
+	padding: 4px 3px 5px 10px;
+}
+.guild-channels ul .channel-text,.guild-channels ul .channel-text-selected{
+	margin: 4px 3px 5px 10px;
+}
+
+/*Chat*/
+.theme-dark .chat .title-wrap, .theme-light .chat .title-wrap{
+	background-color:rgba(30, 33, 36, 0.2);
+}
+.chat>.content{
+	background-color:rgba(30, 33, 36, 0.2) !important;
+}
+
+.chat .message-group .comment{
+	background-color:rgba(30, 30, 30, 0.7);
+	border-style: solid;
+	border-width: 5px;
+	border-color: rgba(30, 30, 30, 1);
+	border-radius: 5px;
+}
+/*Members*/
+.channel-members{
+	background-color:rgba(30, 33, 36, 0.2) !important;
+}
+.tex .hljs-formula {
+    background-color:rgba(7, 54, 66, 0);
+}
