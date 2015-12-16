@@ -1,5 +1,7 @@
 #Plugins
 
+All plugins go to ``` %appdata%\BetterDiscord\plugins\ ```
+
 ##BetterAPI Plugin ([0_BetterAPI.js](https://github.com/Bluscream/BetterDiscord-Plugins-and-Themes/blob/master/plugins/0_BetterAPI.js))
 Provides a better API mantained by me.
 
