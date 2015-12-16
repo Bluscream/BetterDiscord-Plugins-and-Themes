@@ -1,9 +1,9 @@
-#Plugins Info
+#Plugins
 
 ##BetterAPI Plugin ([0_BetterAPI.js](https://github.com/Bluscream/BetterDiscord-Plugins-and-Themes/blob/master/plugins/0_BetterAPI.js))
 Provides a better API mantained by me.
 
-*This plugin is a requirement for most of my other plugins to work!*
+**This plugin is a requirement for most of my other plugins to work!**
 
 ##User Info Plugin ([1_userinfo.js](https://github.com/Bluscream/BetterDiscord-Plugins-and-Themes/blob/master/plugins/1_userinfo.js))
 Gives you the ability to see more info about a user.
