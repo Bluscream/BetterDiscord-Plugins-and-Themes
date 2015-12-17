@@ -1,11 +1,5 @@
 //META{"name":"Clear Blue","description":"A fancy looking clear blue theme","author":"Taff","version":"1.0"}*//
 
-.flex-spacer.flex-vertical {
-  background:none !important;
-
-}
-
-
 .settings-header {
   background:#213248 !important;
 
@@ -19,6 +13,7 @@ background-color: #1a2838 !important ;
 }
 
 #twitchcord-button {
+  background-color: transparent !important;  
   background-image: url(https://openmerchantaccount.com/img2/twitch6aa.png);
 
 }
@@ -35,6 +30,17 @@ background-color: #1a2838 !important ;
 }
 .tab-bar-item {
   color:darkgrey !important;
+
+}
+
+
+.flex-spacer.flex-vertical {
+  background:none !important;
+
+}
+
+.flex-spacer.flex-vertical form {
+  background:none !important;
 
 }
 
@@ -152,7 +158,7 @@ background-color: #1a2838 !important ;
 }
 
 .divider.divider-red span {
-  color:#213248 !important;
+  color:white !important;
   background:transparent !important;
 
 }
@@ -221,18 +227,6 @@ background-color: #1a2838 !important ;
 .user-popout .user-popout-options .btn {
   background:#213248 !important;
   border:1px solid black
-
-}
-
-
-.form .btn-primary {
-  background:black;
-
-}
-
-.form .btn-primary:hover {
-  background:white;
-  color:darkgrey;
 
 }
 
@@ -335,12 +329,21 @@ background-color: #213248;
 
 }
 
-.user-settings-modal a {
-  color:white;
-
+.scroller-wrap .scroller::-webkit-scrollbar-track-piece {
+    background-color: transparent !important;
+    border: 1px solid #1A2838 !important;
 }
 
-.user-settings-modal a:hover {
-  color:green;
-
+.scroller-wrap .scroller::-webkit-scrollbar-thumb {
+    border-color: transparent !important;
+    background: #1A2838 !important; 
+    border: 1px solid grey !important;
+}
+.app.flex-vertical.theme-dark .channel-name:before{
+    color: green!important;
+    content: ">"; 
+}
+.app.flex-vertical.theme-light .channel-name:before{
+    color: red!important;
+    content: ">"; 
 }

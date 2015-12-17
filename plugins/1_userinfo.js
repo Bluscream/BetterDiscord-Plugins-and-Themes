@@ -16,17 +16,20 @@ userInfo.prototype.start = function() {
 				var id = BetterAPI.getUserIdByName(username);
 				var name = BetterAPI.getUserNameById(id);
 				// infoAlert(username +'\'s Info','Name: '+username+'\n'+'UID: '+id);
+				// Name: '+username+'<br>UID: '+id,
 				$.jAlert({
 					'title': username +'\'s Info',
-					'content': 'Name: '+username+'<br>UID: '+id,
+					'content': '<table style="width:100%"><tr><td><b>Name: </b></td><td>'+username+'</td></tr><tr><td><b>UID: </b></td><td>'+id+'</td></tr><tr><td><b>Name by ID: </b></td><td>'+name+'</td></tr></table></>',
 					'theme': 'blue',
-					'class': 'btn',
-					// 'closeOnClick': true,
-					// 'onOpen': function(alert){ return false; }	
+					// 'class': 'ja_body',
+					'id': 'ja_body',
 					'btns': [ {
-						'text': 'copy'
+						'text': 'Copy',
+						'class': 'btn_copy',
+						'onClick': function(e, btn) { new Clipboard('ja_body'); BetterAPI.log(1, "log", userInfo.prototype.getName()+": ",'Copied \"'+$('.ja_body').html()+'\" to clipboard.'); },
+						// 'data-clipboard-target': '.ja_body'
 					}, {
-						'text': 'close'
+						'text': 'Close'
 					} ]
 				});
 				console.clear();

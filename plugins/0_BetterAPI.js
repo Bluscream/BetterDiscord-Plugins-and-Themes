@@ -2,7 +2,7 @@
 function BetterAPI() {}
 
 BetterAPI.prototype.load = function() {
-	debug = 0;
+	debug = 1;
 	BetterAPI.prototype.loadCore();
 	BetterAPI.prototype.injectCSS();
 	BetterAPI.prototype.injectJS();
