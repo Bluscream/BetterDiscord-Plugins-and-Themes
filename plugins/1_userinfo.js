@@ -9,25 +9,32 @@ userInfo.prototype.unload = function() {
 userInfo.prototype.start = function() {
     $('span[data-reactid=".0.4"]').on('DOMNodeInserted', '.popout', function() {
         if ($('#UserInfo').length <= 0) {
-			// var usernamebyid = BetterAPI.getUserNameById(id);
             $('.user-popout-options').append('<button class="btn" id="UserInfo">Info</button>');
             $('#UserInfo').on("click", function () {
 				var username = $(".user-popout").find(".username").text();
 				var id = BetterAPI.getUserIdByName(username);
-				var name = BetterAPI.getUserNameById(id);
-				// infoAlert(username +'\'s Info','Name: '+username+'\n'+'UID: '+id);
-				// Name: '+username+'<br>UID: '+id,
+				var name = BdApi.getUserNameById(id);
 				$.jAlert({
 					'title': username +'\'s Info',
-					'content': '<table style="width:100%"><tr><td><b>Name: </b></td><td>'+username+'</td></tr><tr><td><b>UID: </b></td><td>'+id+'</td></tr><tr><td><b>Name by ID: </b></td><td>'+name+'</td></tr></table></>',
+					'content': '<table style="width:100%">'+
+						'<tr>'+
+							'<td><b>Name: </b></td>'+
+							'<td>'+username+'</td>'+
+						'</tr>'+
+						'<tr>'+
+							'<td><b>UID: </b></td>'+
+							'<td>'+id+'</td>'+
+						'</tr>'+
+						'<tr>'+
+							'<td><b>Name by ID: </b></td>'+
+							'<td>'+name+'</td>'+
+						'</tr>'+
+					'</table>',
 					'theme': 'blue',
-					// 'class': 'ja_body',
-					'id': 'ja_body',
 					'btns': [ {
 						'text': 'Copy',
 						'class': 'btn_copy',
 						'onClick': function(e, btn) { new Clipboard('ja_body'); BetterAPI.log(1, "log", userInfo.prototype.getName()+": ",'Copied \"'+$('.ja_body').html()+'\" to clipboard.'); },
-						// 'data-clipboard-target': '.ja_body'
 					}, {
 						'text': 'Close'
 					} ]

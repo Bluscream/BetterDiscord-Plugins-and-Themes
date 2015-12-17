@@ -1,5 +1,12 @@
 //META{"name":"Helpfull icons","description":"Adds helpfull icons to links.","author":"raezr","version":"1.0"}*//
 
+/* Image */
+a[href $=".png"],a[href $=".PNG"],
+a[href $=".jpg"],a[href $=".JPG"],
+a[href $=".gif"],a[href $=".GIF"] {
+	background: url(a[href]) center right no-repeat !important;
+	padding: 0 18px 0 0 !important;
+}
 /* Audio */
 
 a[href $=".ogg"],
