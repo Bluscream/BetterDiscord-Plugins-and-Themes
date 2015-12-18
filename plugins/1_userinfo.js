@@ -8,42 +8,37 @@ userInfo.prototype.unload = function() {
 };
 userInfo.prototype.start = function() {
     $('span[data-reactid=".0.4"]').on('DOMNodeInserted', '.popout', function() {
-        if ($('#UserInfo').length <= 0) {
-            $('.user-popout-options').append('<button class="btn" id="UserInfo">Info</button>');
-            $('#UserInfo').on("click", function () {
-				var username = $(".user-popout").find(".username").text();
-				var id = BetterAPI.getUserIdByName(username);
-				var name = BdApi.getUserNameById(id);
-				$.jAlert({
-					'title': username +'\'s Info',
-					'content': '<table style="width:100%">'+
-						'<tr>'+
-							'<td><b>Name: </b></td>'+
-							'<td>'+username+'</td>'+
-						'</tr>'+
-						'<tr>'+
-							'<td><b>UID: </b></td>'+
-							'<td>'+id+'</td>'+
-						'</tr>'+
-						'<tr>'+
-							'<td><b>Name by ID: </b></td>'+
-							'<td>'+name+'</td>'+
-						'</tr>'+
-					'</table>',
-					'theme': 'blue',
-					'btns': [ {
-						'text': 'Copy',
-						'class': 'btn_copy',
-						'onClick': function(e, btn) { new Clipboard('ja_body'); BetterAPI.log(1, "log", userInfo.prototype.getName()+": ",'Copied \"'+$('.ja_body').html()+'\" to clipboard.'); },
-					}, {
-						'text': 'Close'
-					} ]
-				});
-				console.clear();
-				BetterAPI.log(0, "info", userInfo.prototype.getName()+": "+username+'\'s Info', "\n\nName: \""+username+"\"\nUID: \""+id+"\"");
-            });
-        }
-    });
+		BetterAPI.addUserLabel("UserInfoLabel", "Info", '<p><b>UID: </b>'+BetterAPI_UserPopup_id+'</p>')});
+		BetterAPI.addUserButton("btn", "UserInfo", "Info");
+		$('#UserInfo').on("click", function () {
+			$.jAlert({
+				'title': username +'\'s Info',
+				'content': '<table style="width:100%">'+
+					'<tr>'+
+						'<td><b>Name: </b></td>'+
+						'<td>'+username+'</td>'+
+					'</tr>'+
+					'<tr>'+
+						'<td><b>UID: </b></td>'+
+						'<td>'+id+'</td>'+
+					'</tr>'+
+					'<tr>'+
+						'<td><b>Name by ID: </b></td>'+
+						'<td>'+name+'</td>'+
+					'</tr>'+
+				'</table>',
+				'theme': 'blue',
+				'btns': [ {
+					'text': 'Copy',
+					'class': 'btn_copy',
+					'onClick': function(e, btn) { new Clipboard('ja_body'); BetterAPI.log(1, "log", userInfo.prototype.getName()+": ",'Copied \"'+$('.ja_body').html()+'\" to clipboard.'); },
+				}, {
+					'text': 'Close'
+				} ]
+			});
+			console.clear();
+			BetterAPI.log(0, "info", userInfo.prototype.getName()+": "+username+'\'s Info', "\n\nName: \""+username+"\"\nUID: \""+id+"\"");
+		});
 	console.log("BetterDiscord: " + this.getName() + " v" + this.getVersion() + " by " + this.getAuthor() + " started.");
 };
 userInfo.prototype.stop = function() {

@@ -8,6 +8,7 @@ BetterAPI.prototype.load = function() {
 	BetterAPI.prototype.injectJS();
 	BetterAPI.prototype.loadCore();
 	BetterAPI.prototype.loadAPI();
+	BetterAPI.prototype.loadEvents();
 	console.log("BetterDiscord: " + this.getName() + " v" + this.getVersion() + " by " + this.getAuthor() + " loaded.");
 };
 
@@ -20,6 +21,7 @@ BetterAPI.prototype.start = function() {
 };
 
 BetterAPI.prototype.stop = function() {
+	BetterAPI.prototype.unloadEvents();
 	console.log("BetterDiscord: " + this.getName() + " v" + this.getVersion() + " by " + this.getAuthor() + " stopped.");
 };
 
@@ -174,4 +176,42 @@ BetterAPI.prototype.loadAPI  = function() {
 			return null;
 		};
 	};
+	//```js
+	// BetterAPI.addUserLabel("divID", "label", "<html>");
+	BetterAPI.addUserLabel = function(divID, label, html) {
+        if ($(divID).length <= 0) {$('.user-popout-options').prepend(''+
+			'<div id= "'+divID+'"class="roles-container">'+
+				'<span class="label">'+label+'</span>'+
+				'<ul class="member-roles">'+
+					html+
+				'</ul>'+
+			'</div>');
+		} else {
+			$(divID).remove();
+			BetterAPI.addUserLabel(divID, label, html);
+		}
+	};
+	//```
+	// BetterAPI.addUserButton("btn", "divID", "text");
+	BetterAPI.addUserButton = function(type, divID, text) {
+        if ($(divID).length <= 0) {
+			$('.user-popout-options').append('<button class="'+type+'" id="'+divID+'">'+text+'</button>');
+		} else {
+			$(divID).remove();
+			BetterAPI.addUserButton(type, divID, text);
+		};
+	};
+};
+BetterAPI.prototype.loadEvents  = function() {
+	$('span[data-reactid=".0.4"]').on('DOMNodeInserted', '.popout', function() {
+		BetterAPI.gatheredUserPopup = false;
+		var BetterAPI_UserPopup_name = $(".user-popout").find(".username").text();
+		var BetterAPI_UserPopup_id = BetterAPI.getUserIdByName(BetterAPI_UserPopup_name);
+		var BetterAPI_UserPopup_nameByID = BdApi.getUserNameById(BetterAPI_UserPopup_id);
+		BetterAPI.gatheredUserPopup = true;
+	});
+};
+BetterAPI.prototype.unloadEvents  = function() {
+	$('span[data-reactid=".0.4"]').off('DOMNodeInserted');
+	$('body').off('DOMSubtreeModified');
 };

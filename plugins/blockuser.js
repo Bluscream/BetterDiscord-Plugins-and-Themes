@@ -79,11 +79,13 @@ blockUser.prototype.start = function () {
                     blockButtonFunc();
                     updateChat();
                 });
+				//```js
                 $('.user-popout-options').append(''+
-					'<div id="showblocklistdiv" style="display:inline-block;font-size:x-small;padding-top:5px;">'+
-					'<a href="#" id="showblocklist" align="left" style="text-align:left">Show Blocklist</a>'+
-					'<a href="#" id="clearblocklist" align="right" style="text-align:right">Clear Blocklist</a></div>');
-                $('#clearblocklist').on('click', function () {
+					'<div id="showblocklistdiv" style="font-size:x-small;padding-top:5px;">'+
+					'<a href="#" id="showblocklist">Show Blocklist</a>'+
+					'<a href="#" id="clearblocklist" style="float:right">Clear Blocklist</a></div>');
+                //```
+				$('#clearblocklist').on('click', function () {
                     clearBlocklist();
                 });
                 $('#showblocklist').on('click', function () {
@@ -103,9 +105,9 @@ blockUser.prototype.start = function () {
                     updateChat();
                 });
                 $('.user-popout-options').append(''+
-					'<div id="showblocklistdiv" style="display:inline-block;font-size:x-small;padding-top:5px;">'+
-					'<p align="left"><a href="#" id="showblocklist">Show Blocklist</a></p>'+
-					'<p align="right"><a href="#" id="clearblocklist">Clear Blocklist</a></p></div>');
+					'<div id="showblocklistdiv" style="font-size:x-small;padding-top:5px;">'+
+					'<a href="#" id="showblocklist">Show Blocklist</a>'+
+					'<a href="#" id="clearblocklist" style="float:right">Clear Blocklist</a></div>');
                 $('#clearblocklist').on('click', function () {
                     clearBlocklist();
                 });
