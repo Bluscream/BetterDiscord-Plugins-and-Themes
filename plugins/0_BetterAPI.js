@@ -8,7 +8,7 @@ BetterAPI.prototype.load = function() {
 	BetterAPI.prototype.injectJS();
 	BetterAPI.prototype.loadCore();
 	BetterAPI.prototype.loadAPI();
-	BetterAPI.prototype.loadEvents();
+	// BetterAPI.prototype.loadEvents();
 	console.log("BetterDiscord: " + this.getName() + " v" + this.getVersion() + " by " + this.getAuthor() + " loaded.");
 };
 
@@ -21,7 +21,7 @@ BetterAPI.prototype.start = function() {
 };
 
 BetterAPI.prototype.stop = function() {
-	BetterAPI.prototype.unloadEvents();
+	// BetterAPI.prototype.unloadEvents();
 	console.log("BetterDiscord: " + this.getName() + " v" + this.getVersion() + " by " + this.getAuthor() + " stopped.");
 };
 
@@ -187,8 +187,8 @@ BetterAPI.prototype.loadAPI  = function() {
 				'</ul>'+
 			'</div>');
 		} else {
-			$(divID).remove();
-			BetterAPI.addUserLabel(divID, label, html);
+			// $(divID).remove();
+			// BetterAPI.addUserLabel(divID, label, html);
 		}
 	};
 	//```
@@ -197,8 +197,8 @@ BetterAPI.prototype.loadAPI  = function() {
         if ($(divID).length <= 0) {
 			$('.user-popout-options').append('<button class="'+type+'" id="'+divID+'">'+text+'</button>');
 		} else {
-			$(divID).remove();
-			BetterAPI.addUserButton(type, divID, text);
+			// $(divID).remove();
+			// BetterAPI.addUserButton(type, divID, text);
 		};
 	};
 };
