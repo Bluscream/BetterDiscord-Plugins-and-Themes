@@ -180,15 +180,13 @@ BetterAPI.prototype.loadAPI  = function() {
 	// BetterAPI.addUserLabel("divID", "label", "<html>");
 	BetterAPI.addUserLabel = function(divID, label, html) {
 		console.log("Length: \""+$(divID).length+"\"");
-		if ($(divID.startsWith("#") ? divID : "#" + divID).length <= 0) {$('.user-popout-options').prepend(''+			'<div id="'+divID+'"class="roles-container">'+
-			'<span class="label">'+label+'</span>'+
-			'<ul class="member-roles">'+
-				html+
-			'</ul>'+
+		if ($(divID.startsWith("#") ? divID : "#" + divID).length <= 0) {$('.user-popout-options').prepend(''+
+			'<div id="'+divID+'"class="roles-container">'+
+				'<span class="label">'+label+'</span>'+
+				'<ul class="member-roles">'+
+					html+
+				'</ul>'+
 			'</div>');
-		} else {
-			// $(divID).remove();
-			// BetterAPI.addUserLabel(divID, label, html);
 		}
 	};
 	//```
