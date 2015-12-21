@@ -11,7 +11,7 @@ userInfo.prototype.start = function() {
 		var name = $(".user-popout").find(".username").text();
 		var id = BetterAPI.getUserIdByName(name);
 		var nameByID = BdApi.getUserNameById(id);
-		BetterAPI.addUserLabel("UserInfoLabel", "Info", '<p><b>UID: </b>'+id+'</p>')});
+		BetterAPI.addUserLabel("#UserInfoLabel", "Info", '<p><b>UID: </b>'+id+'</p>')});
 		BetterAPI.addUserButton("btn", "UserInfo", "Info");
 		$('#UserInfo').on("click", function () {
 			$.jAlert({

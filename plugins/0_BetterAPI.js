@@ -179,12 +179,12 @@ BetterAPI.prototype.loadAPI  = function() {
 	//```js
 	// BetterAPI.addUserLabel("divID", "label", "<html>");
 	BetterAPI.addUserLabel = function(divID, label, html) {
-        if ($(divID).length <= 0) {$('.user-popout-options').prepend(''+
-			'<div id= "'+divID+'"class="roles-container">'+
-				'<span class="label">'+label+'</span>'+
-				'<ul class="member-roles">'+
-					html+
-				'</ul>'+
+		console.log("Length: \""+$(divID).length+"\"");
+		if ($(divID.startsWith("#") ? divID : "#" + divID).length <= 0) {$('.user-popout-options').prepend(''+			'<div id="'+divID+'"class="roles-container">'+
+			'<span class="label">'+label+'</span>'+
+			'<ul class="member-roles">'+
+				html+
+			'</ul>'+
 			'</div>');
 		} else {
 			// $(divID).remove();
