@@ -2,6 +2,22 @@
 
 var blockUser = function () {};
 
+blockUser.prototype.getName = function () {
+    return "blockUser Plugin";
+};
+
+blockUser.prototype.getDescription = function () {
+    return "Adds block functionality to the user menu";
+};
+
+blockUser.prototype.getVersion = function () {
+    return "0.0.1";
+};
+
+blockUser.prototype.getAuthor = function () {
+    return "Pohky";
+};
+
 blockUser.prototype.start = function () {
 
     blockUser.blockList = JSON.parse(localStorage.getItem('blockUserBlockList')) || {};
@@ -144,18 +160,6 @@ blockUser.prototype.load = function () {};
 
 blockUser.prototype.unload = function () {};
 
-blockUser.prototype.getName = function () {
-    return "blockUser Plugin";
-};
-
-blockUser.prototype.getDescription = function () {
-    return "Adds block functionality to the user menu";
-};
-
-blockUser.prototype.getVersion = function () {
-    return "0.0.1";
-};
-
-blockUser.prototype.getAuthor = function () {
-    return "Pohky";
+blockUser.prototype.getSettingsPanel = function() {
+	return '<h3>Blocked Users</h3>';
 };

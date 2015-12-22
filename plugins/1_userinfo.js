@@ -11,37 +11,37 @@ userInfo.prototype.start = function() {
 		var name = $(".user-popout").find(".username").text();
 		var id = BetterAPI.getUserIdByName(name);
 		var nameByID = BdApi.getUserNameById(id);
-		BetterAPI.addUserLabel("UserInfoLabel", "Info", '<p><b>UID: </b>'+id+'</p>')});
-		BetterAPI.addUserButton("btn", "UserInfo", "Info");
-		$('#UserInfo').on("click", function () {
-			$.jAlert({
-				'title': username +'\'s Info',
-				'content': '<table style="width:100%">'+
-					'<tr>'+
-						'<td><b>Name: </b></td>'+
-						'<td>'+name+'</td>'+
-					'</tr>'+
-					'<tr>'+
-						'<td><b>UID: </b></td>'+
-						'<td>'+id+'</td>'+
-					'</tr>'+
-					'<tr>'+
-						'<td><b>Name by ID: </b></td>'+
-						'<td>'+nameByID+'</td>'+
-					'</tr>'+
-				'</table>',
-				'theme': 'blue',
-				'btns': [ {
-					'text': 'Copy',
-					'class': 'btn_copy',
-					'onClick': function(e, btn) { new Clipboard('ja_body'); BetterAPI.log(1, "log", userInfo.prototype.getName()+": ",'Copied \"'+$('.ja_body').html()+'\" to clipboard.'); },
-				}, {
-					'text': 'Close'
-				} ]
-			});
-			console.clear();
+		BetterAPI.addUserLabel("UserInfoLabel", "Info", '<b>Name: </b>'+name+'<br><b>UID: </b>'+id);
+		// BetterAPI.addUserButton("btn", "#UserInfo", "Info");
+		// $('#UserInfo').on("click", function () {
+			// $.jAlert({
+				// 'title': name +'\'s Info',
+				// 'content': '<table style="width:100%">'+
+					// '<tr>'+
+						// '<td><b>Name: </b></td>'+
+						// '<td>'+name+'</td>'+
+					// '</tr>'+
+					// '<tr>'+
+						// '<td><b>UID: </b></td>'+
+						// '<td>'+id+'</td>'+
+					// '</tr>'+
+					// '<tr>'+
+						// '<td><b>Name by ID: </b></td>'+
+						// '<td>'+nameByID+'</td>'+
+					// '</tr>'+
+				// '</table>',
+				// 'theme': 'blue',
+				// 'btns': [ {
+					// 'text': 'Copy',
+					// 'class': 'btn_copy',
+					// 'onClick': function(e, btn) { new Clipboard('ja_body'); BetterAPI.log(1, "log", userInfo.prototype.getName()+": ",'Copied \"'+$('.ja_body').html()+'\" to clipboard.'); },
+				// }, {
+					// 'text': 'Close'
+				// } ]
+			// });
 			BetterAPI.log(0, "info", userInfo.prototype.getName()+": "+name+'\'s Info', "\n\nName: \""+name+"\"\nUID: \""+id+"\"");
 		});
+	});
 	console.log("BetterDiscord: " + this.getName() + " v" + this.getVersion() + " by " + this.getAuthor() + " started.");
 };
 userInfo.prototype.stop = function() {

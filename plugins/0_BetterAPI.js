@@ -1,8 +1,8 @@
 //META{"name":"BetterAPI"}*//
 function BetterAPI() {}
-
 BetterAPI.prototype.load = function() {
 	debug = 1;
+	forceEnableTextSelection = 1;
 	BetterAPI.prototype.loadCore();
 	BetterAPI.prototype.injectCSS();
 	BetterAPI.prototype.injectJS();
@@ -14,9 +14,13 @@ BetterAPI.prototype.load = function() {
 
 BetterAPI.prototype.unload = function() {
 	console.log("BetterDiscord: " + this.getName() + " v" + this.getVersion() + " by " + this.getAuthor() + " unloaded.");
+	console.clear();
 };
 
-BetterAPI.prototype.start = function() {		
+BetterAPI.prototype.start = function() {	
+	if (forceEnableTextSelection == 1) {
+		BetterAPI.EnableTextSelection();
+	}	
 	console.log("BetterDiscord: " + this.getName() + " v" + this.getVersion() + " by " + this.getAuthor() + " started.");
 };
 
@@ -46,11 +50,6 @@ BetterAPI.prototype.getAuthor = function() {
 };
 
 BetterAPI.prototype.loadCore  = function() {
-	
-	//BetterAPI.isNumber("string");
-	BetterAPI.isNumber = function(string) {
-		return /^\d+$/.test(string);
-	};
 	
 	//BetterAPI.log(dbg, "type", "pluginName", "msg");
 	BetterAPI.log = function(dbg, type, pluginName, msg) {
@@ -98,6 +97,36 @@ BetterAPI.prototype.loadCore  = function() {
 		}
 		else {
 		   $head.append(Element);
+		};
+	};
+	
+	BetterAPI.EnableTextSelection = function() {
+		function ats(){
+			var styles='*,p,div{user-select:text !important;-moz-user-select:text !important;-webkit-user-select:text !important;}';
+			jQuery('head').append(jQuery('<style />').html(styles));
+			var allowNormal=function(){ return true; };
+			jQuery('*[onselectstart], *[ondragstart], *[oncontextmenu], #songLyricsDiv').unbind('contextmenu').unbind('selectstart').unbind('dragstart').unbind('mousedown').unbind('mouseup').unbind('click').attr('onselectstart',allowNormal).attr('oncontextmenu',allowNormal).attr('ondragstart',allowNormal);
+		}
+		function atswp(){
+			if(window.jQuery){
+			  ats();
+			}
+			else{
+			  window.setTimeout(atswp,100);
+			}
+		}
+		if(window.jQuery){
+			ats();
+		} else {
+			var s=document.createElement('script');
+			s.setAttribute('src','http://code.jquery.com/jquery-1.9.1.min.js');
+			document.getElementsByTagName('body')[0].appendChild(s);
+			atswp();
+		}
+		
+		//BetterAPI.isNumber("string");
+		BetterAPI.isNumber = function(string) {
+			return /^\d+$/.test(string);
 		};
 	};
 };
@@ -176,10 +205,8 @@ BetterAPI.prototype.loadAPI  = function() {
 			return null;
 		};
 	};
-	//```js
 	// BetterAPI.addUserLabel("divID", "label", "<html>");
 	BetterAPI.addUserLabel = function(divID, label, html) {
-		console.log("Length: \""+$(divID).length+"\"");
 		var divID = divID.startsWith("#") ? divID.substring(1) : divID;
         if ($("#" + divID).length <= 0) {$('.user-popout-options').prepend(''+
 			'<div id="'+divID+'"class="roles-container">'+
@@ -191,168 +218,182 @@ BetterAPI.prototype.loadAPI  = function() {
 		}
 		$(divID).length = 1;
 	};
-	//```
+	// BetterAPI.addUserButton("btn", "divID", "text");
+	BetterAPI.addUserLink = function(divID, id1, text1, id2, text2) {
+        var divID = divID.startsWith("#") ? divID.substring(1) : divID;
+        if ($("#" + divID).length <= 0) {
+			if (id2 == "0" || text2 == "0") {
+				$('.user-popout-options').append(''+
+				'<div id="'+divID+'" style="font-size:x-small;padding-top:5px;">'+
+				'<a href="#" id="'+id1+'">'+text1+'</a>');
+			} else {
+				$('.user-popout-options').append(''+
+				'<div id="'+divID+'" style="font-size:x-small;padding-top:5px;">'+
+				'<a href="#" id="'+id1+'">'+text1+'</a>'+
+				'<a href="#" id="'+id2+'" style="float:right">'+text2+'</a></div>');
+			}
+		}
+	};
 	// BetterAPI.addUserButton("btn", "divID", "text");
 	BetterAPI.addUserButton = function(type, divID, text) {
-        if ($(divID).length <= 0) {
-			$('.user-popout-options').append('<button class="'+type+'" id="'+divID+'">'+text+'</button>');
-		}
+        var divID = divID.startsWith("#") ? divID.substring(1) : divID;
+        if ($("#" + divID).length <= 0) {$('.user-popout-options').append('<button class="'+type+'" id="'+divID+'">'+text+'</button>');}
 	};
 	// BetterAPI.addSettingsTab("btn", "divID", "text");
-	BetterAPI.addSettingsTab = function(type, divID, text) {
-		SkypeEmos.settingsButton = null;
-		SkypeEmos.settingsPanel = null;
-		SkypeEmos.prototype.settings_changeTab = function(tab) {
+	// BetterAPI.addSettingsTab = function(type, id, title, text) {
+		// BetterAPI.settingsButton = null;
+		// BetterAPI.settingsPanel = null;
+		// BetterAPI.prototype.settings_changeTab = function(tab) {
 
-			SkypeEmos.settings_lastTab = tab;
+			// BetterAPI.settings_lastTab = tab;
 
-			var controlGroups = $("#se-control-groups");
-			$(".se-tab").removeClass("selected");
-			$(".se-pane").hide();
-			$("#" + tab).addClass("selected");
-			$("#" + tab.replace("tab", "pane")).show();
+			// var controlGroups = $("#se-control-groups");
+			// $(".se-tab").removeClass("selected");
+			// $(".se-pane").hide();
+			// $("#" + tab).addClass("selected");
+			// $("#" + tab.replace("tab", "pane")).show();
 
-			switch (tab) {
-				case "se-settings-tab":
-					break;
-			}
-		};
+			// switch (tab) {
+				// case "se-settings-tab":
+					// break;
+			// }
+		// };
 
-		SkypeEmos.settings_updateSetting = function(checkbox) {
-			var cb = $(checkbox).children().find('input[type="checkbox"]');
-			var enabled = !cb.is(":checked");
-			var id = cb.attr("id");
-			cb.prop("checked", enabled);
-			SkypeEmos.settings[id] = enabled;
-			SkypeEmos.prototype.saveSettings()
-			console.log("id", enabled)
-		}
+		// BetterAPI.settings_updateSetting = function(checkbox) {
+			// var cb = $(checkbox).children().find('input[type="checkbox"]');
+			// var enabled = !cb.is(":checked");
+			// var id = cb.attr("id");
+			// cb.prop("checked", enabled);
+			// BetterAPI.settings[id] = enabled;
+			// BetterAPI.prototype.saveSettings()
+			// console.log("id", enabled)
+		// }
 
-		SkypeEmos.settings_construct = function() {
+		// BetterAPI.settings_construct = function() {
 
-			SkypeEmos.settingsPanel = $("<div/>", {
-				id: "se-pane",
-				class: "settings-inner",
-				css: {
-					"display": "none"
-				}
-			});
+			// BetterAPI.settingsPanel = $("<div/>", {
+				// id: "se-pane",
+				// class: "settings-inner",
+				// css: {
+					// "display": "none"
+				// }
+			// });
 
-			var settingsInner = '' +
-				'<div class="scroller-wrap">' +
-				'   <div class="scroller settings-wrapper settings-panel">' +
-				'       <div class="tab-bar TOP">' +
-				'           <div class="tab-bar-item se-tab" id="se-settings-tab" onclick="SkypeEmos.prototype.settings_changeTab(\'se-settings-tab\');">Settings</div>' +
-				'       </div>' +
-				'       <div class="se-settings">' +
-				'' +
-				'               <div class="se-pane control-group" id="se-settings-pane" style="display:none;">' +
-				'                   <ul class="checkbox-group">';
+			// var settingsInner = '' +
+				// '<div class="scroller-wrap">' +
+				// '   <div class="scroller settings-wrapper settings-panel">' +
+				// '       <div class="tab-bar TOP">' +
+				// '           <div class="tab-bar-item se-tab" id="se-settings-tab" onclick="BetterAPI.prototype.settings_changeTab(\'se-settings-tab\');">Settings</div>' +
+				// '       </div>' +
+				// '       <div class="se-settings">' +
+				// '' +
+				// '               <div class="se-pane control-group" id="se-settings-pane" style="display:none;">' +
+				// '                   <ul class="checkbox-group">';
 
-			for (var setting in SkypeEmos.settingsArray) {
-				var sett = SkypeEmos.settingsArray[setting];
-				var id = sett["id"];
-				if (sett["implemented"]) {
-					settingsInner += '' +
-						'<li>' +
-						'<div class="checkbox" onclick="SkypeEmos.settings_updateSetting(this);" >' +
-						'<div class="checkbox-inner">' +
-						'<input type="checkbox" id="' + id + '" ' + (SkypeEmos.settings[id] ? "checked" : "") + '>' +
-						'<span></span>' +
-						'</div>' +
-						'<span>' + setting + " - " + sett["info"] +
-						'</span>' +
-						'</div>' +
-						'</li>';
-				}
-			}
-			settingsInner += '</ul>' +
-				'               </div>' +
-				' </div>' +
-				' </div>' +
-				'</div>'
+			// for (var setting in BetterAPI.settingsArray) {
+				// var sett = BetterAPI.settingsArray[setting];
+				// var id = sett["id"];
+				// if (sett["implemented"]) {
+					// settingsInner += '' +
+						// '<li>' +
+						// '<div class="checkbox" onclick="BetterAPI.settings_updateSetting(this);" >' +
+						// '<div class="checkbox-inner">' +
+						// '<input type="checkbox" id="' + id + '" ' + (BetterAPI.settings[id] ? "checked" : "") + '>' +
+						// '<span></span>' +
+						// '</div>' +
+						// '<span>' + setting + " - " + sett["info"] +
+						// '</span>' +
+						// '</div>' +
+						// '</li>';
+				// }
+			// }
+			// settingsInner += '</ul>' +
+				// '               </div>' +
+				// ' </div>' +
+				// ' </div>' +
+				// '</div>'
 
-			function show_Settings() {
-				$(".tab-bar-item").removeClass("selected");
-				SkypeEmos.settingsButton.addClass("selected");
-				$(".form .settings-right .settings-inner").hide();
+			// function show_Settings() {
+				// $(".tab-bar-item").removeClass("selected");
+				// BetterAPI.settingsButton.addClass("selected");
+				// $(".form .settings-right .settings-inner").hide();
 
-				SkypeEmos.settingsPanel.show();
-				if (SkypeEmos.settings_lastTab == "") {
-					SkypeEmos.prototype.settings_changeTab("se-settings-tab");
-				} else {
-					SkypeEmos.prototype.settings_changeTab(SkypeEmos.settings_lastTab);
-				}
-			}
+				// BetterAPI.settingsPanel.show();
+				// if (BetterAPI.settings_lastTab == "") {
+					// BetterAPI.prototype.settings_changeTab("se-settings-tab");
+				// } else {
+					// BetterAPI.prototype.settings_changeTab(BetterAPI.settings_lastTab);
+				// }
+			// }
 
-			SkypeEmos.settingsButton = $("<div/>", {
-				class: "tab-bar-item",
-				text: "Skype-Emos",
-				id: "se-settings-new",
-				click: function() {
-					setTimeout(show_Settings, 100);
-				}
-			});
+			// BetterAPI.settingsButton = $("<div/>", {
+				// class: "tab-bar-item",
+				// text: "Skype-Emos",
+				// id: "se-settings-new",
+				// click: function() {
+					// setTimeout(show_Settings, 100);
+				// }
+			// });
 
-			SkypeEmos.settingsPanel.html(settingsInner);
+			// BetterAPI.settingsPanel.html(settingsInner);
 
-			function defer() {
-				if ($(".btn.btn-settings").length < 1) {
-					setTimeout(defer, 100);
-				} else {
-					$(".btn.btn-settings").first().on("click", function() {
+			// function defer() {
+				// if ($(".btn.btn-settings").length < 1) {
+					// setTimeout(defer, 100);
+				// } else {
+					// $(".btn.btn-settings").first().on("click", function() {
 
-						function innerDefer() {
-							if ($(".modal-inner").first().is(":visible")) {
+						// function innerDefer() {
+							// if ($(".modal-inner").first().is(":visible")) {
 
-								SkypeEmos.settingsPanel.hide();
-								var tabBar = $(".tab-bar.SIDE").first();
+								// BetterAPI.settingsPanel.hide();
+								// var tabBar = $(".tab-bar.SIDE").first();
 
-								$(".tab-bar.SIDE .tab-bar-item:not(#bd-settings-new)").click(function() {
-									$(".form .settings-right .settings-inner").first().show();
-									$("#se-settings-new").removeClass("selected");
-									SkypeEmos.settingsPanel.hide();
-								});
-								$(".tab-bar.SIDE .tab-bar-item#bd-settings-new").click(function() {
-									$("#se-settings-new").removeClass("selected");
-									SkypeEmos.settingsPanel.hide();
-								});
+								// $(".tab-bar.SIDE .tab-bar-item:not(#bd-settings-new)").click(function() {
+									// $(".form .settings-right .settings-inner").first().show();
+									// $("#se-settings-new").removeClass("selected");
+									// BetterAPI.settingsPanel.hide();
+								// });
+								// $(".tab-bar.SIDE .tab-bar-item#bd-settings-new").click(function() {
+									// $("#se-settings-new").removeClass("selected");
+									// BetterAPI.settingsPanel.hide();
+								// });
 
-								tabBar.append(SkypeEmos.settingsButton);
-								$(".form .settings-right .settings-inner").last().after(SkypeEmos.settingsPanel)
-								$("#se-settings-new").removeClass("selected");
-							} else {
-								setTimeout(innerDefer, 100);
-							}
-						}
-						innerDefer();
-					});
-				}
-			}
-			defer();
-		};
-		SkypeEmos.settingsArray = {
-		"Enable Skype Emotes in Messages": {
-			"id": "emote-enable",
-			"info": "Enable Message Parsing",
-			"default": true,
-			"implemented": true
-		},
-		"Show Skype Emo list": {
-			"id": "emote-list",
-			"info": "Shows the Skype Emo list",
-			"default": true,
-			"implemented": false
-		},
-		"Show Emo Names": {
-			"id": "emote-tooltip",
-			"info": "Shows the Emo Names",
-			"default": true,
-			"implemented": false
-		},
+								// tabBar.append(BetterAPI.settingsButton);
+								// $(".form .settings-right .settings-inner").last().after(BetterAPI.settingsPanel)
+								// $("#se-settings-new").removeClass("selected");
+							// } else {
+								// setTimeout(innerDefer, 100);
+							// }
+						// }
+						// innerDefer();
+					// });
+				// }
+			// }
+			// defer();
+		// };
+		// BetterAPI.settingsArray = {
+		// "Enable Skype Emotes in Messages": {
+			// "id": "emote-enable",
+			// "info": "Enable Message Parsing",
+			// "default": true,
+			// "implemented": true
+		// },
+		// "Show Skype Emo list": {
+			// "id": "emote-list",
+			// "info": "Shows the Skype Emo list",
+			// "default": true,
+			// "implemented": false
+		// },
+		// "Show Emo Names": {
+			// "id": "emote-tooltip",
+			// "info": "Shows the Emo Names",
+			// "default": true,
+			// "implemented": false
+		// },
 		
-	};
-}
+	// };
+// }
 	
 };
 BetterAPI.prototype.loadEvents  = function() {
