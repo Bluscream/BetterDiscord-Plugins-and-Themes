@@ -215,7 +215,7 @@ BetterAPI.prototype.loadAPI  = function() {
 			console.log('---');
 			console.log('ID: '+id);
 			console.log('URL: '+url);
-			console.log('MATCH: '+url.match(/\d+/));
+			console.log('URLMATCH: '+url.match(/\d+/));
 			if(id == url.match(/\d+/)) {
 				console.log('MATCHED');
 				match = url.match(/([^/]+$)/g);
@@ -229,7 +229,7 @@ BetterAPI.prototype.loadAPI  = function() {
 				console.log('===');
 				console.log('ID: '+id);
 				console.log('URL: '+url);
-				console.log('MATCH: '+url.match(/\d+/));
+				console.log('URLMATCH: '+url.match(/\d+/));
 				if(id == url.match(/\d+/)) {
 					console.log('MATCHED');
 					match = url.match(/([^/]+$)/g);
