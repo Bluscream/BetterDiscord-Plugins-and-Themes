@@ -10,7 +10,7 @@ userInfo.prototype.start = function() {
     $('span[data-reactid=".0.4"]').on('DOMNodeInserted', '.popout', function() {
 		var name = $(".user-popout").find(".username").text();
 		var id = BetterAPI.getUserIdByName(name);
-		var nameByID = BdApi.getUserNameById(id);
+		// var nameByID = BdApi.getUserNameById(id);
 		BetterAPI.addUserLabel("UserInfoLabel", "Info", '<b>Name: </b>'+name+'<br><b>UID: </b>'+id);
 		// BetterAPI.addUserButton("btn", "#UserInfo", "Info");
 		// $('#UserInfo').on("click", function () {
@@ -39,8 +39,8 @@ userInfo.prototype.start = function() {
 					// 'text': 'Close'
 				// } ]
 			// });
-			BetterAPI.log(0, "info", userInfo.prototype.getName()+": "+name+'\'s Info', "\n\nName: \""+name+"\"\nUID: \""+id+"\"");
-		});
+			// BetterAPI.log(0, "info", userInfo.prototype.getName()+": "+name+'\'s Info', "\n\nName: \""+name+"\"\nUID: \""+id+"\"");
+		// });
 	});
 	console.log("BetterDiscord: " + this.getName() + " v" + this.getVersion() + " by " + this.getAuthor() + " started.");
 };
