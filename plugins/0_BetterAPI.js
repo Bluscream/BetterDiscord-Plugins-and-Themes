@@ -1,7 +1,7 @@
 //META{"name":"BetterAPI"}*//
 function BetterAPI() {}
 BetterAPI.prototype.load = function() {
-	debug = 1;
+	debug = 0;
 	forceEnableTextSelection = 1;
 	BetterAPI.prototype.loadCore();
 	BetterAPI.prototype.injectCSS();
@@ -204,7 +204,36 @@ BetterAPI.prototype.loadAPI  = function() {
 		} else {
 			return null;
 		};
-	};
+	};	
+	// BetterAPI.addUserLabel("divID", "label", "<html>");
+	BetterAPI.getUserAvatar = function(id) {
+		var match = "";
+		var users = $(".avatar-small");
+		for(var i = 0 ; i < users.length ; i++) {
+			var user = $(users[i]);
+			var url = user.css("background-image");
+			console.log(url + ' = '+url.match(/\d+\D+/));
+			if(id == url.match(/\d+/)) {
+				match = url.match(/\d+\D+/);
+			}
+		}
+		// if (match == "") {
+			// var users = $(".avatar-large");
+			// for(var i = 0 ; i < users.length ; i++) {
+				// var user = $(users[i]);
+				// var url = user.css("background-image");
+			// console.log(url + ' - '+url.match(/\d+/));
+				// if(id == url.match(/\d+/)) {
+				// match = url.match(/\d+\D+/);
+				// }
+			// }
+		// };
+		if (match != "") {
+			return match;
+		} else {
+			return null;
+		};
+	}
 	// BetterAPI.addUserLabel("divID", "label", "<html>");
 	BetterAPI.addUserLabel = function(divID, label, html) {
 		var divID = divID.startsWith("#") ? divID.substring(1) : divID;
