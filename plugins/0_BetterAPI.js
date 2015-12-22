@@ -205,29 +205,38 @@ BetterAPI.prototype.loadAPI  = function() {
 			return null;
 		};
 	};	
-	// BetterAPI.addUserLabel("divID", "label", "<html>");
+	// BetterAPI.getUserAvatar(id);
 	BetterAPI.getUserAvatar = function(id) {
 		var match = "";
 		var users = $(".avatar-small");
 		for(var i = 0 ; i < users.length ; i++) {
 			var user = $(users[i]);
 			var url = user.css("background-image");
-			console.log(url + ' = '+url.match(/\d+\D+/));
+			console.log('---');
+			console.log('ID: '+id);
+			console.log('URL: '+url);
+			console.log('MATCH: '+url.match(/\d+/));
 			if(id == url.match(/\d+/)) {
-				match = url.match(/\d+\D+/);
+				console.log('MATCHED');
+				match = url.match(/([^/]+$)/g);
 			}
 		}
-		// if (match == "") {
-			// var users = $(".avatar-large");
-			// for(var i = 0 ; i < users.length ; i++) {
-				// var user = $(users[i]);
-				// var url = user.css("background-image");
-			// console.log(url + ' - '+url.match(/\d+/));
-				// if(id == url.match(/\d+/)) {
-				// match = url.match(/\d+\D+/);
-				// }
-			// }
-		// };
+		if (match == "") {
+			var users = $(".avatar-large");
+			for(var i = 0 ; i < users.length ; i++) {
+				var user = $(users[i]);
+				var url = user.css("background-image");
+				console.log('===');
+				console.log('ID: '+id);
+				console.log('URL: '+url);
+				console.log('MATCH: '+url.match(/\d+/));
+				if(id == url.match(/\d+/)) {
+					console.log('MATCHED');
+					match = url.match(/([^/]+$)/g);
+				}
+			}
+		};
+		console.log('MATCH: '+match);
 		if (match != "") {
 			return match;
 		} else {
