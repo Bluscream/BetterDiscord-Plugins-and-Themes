@@ -7,7 +7,8 @@ Provides a better API mantained by me.
 
 **This plugin is a requirement for most of my other plugins to work!**
 
-Currently available BetterAPI functions: ```js
+Currently available BetterAPI functions:
+```js
 BetterAPI.log(dbg, "type", "pluginName", "msg");
 BetterAPI.appendTo("link", "Element");
 BetterAPI.EnableTextSelection();
