@@ -61,7 +61,7 @@ blockPlugin.prototype.start = function() {
 		if (locStore == '{}') {
 			infoAlert('Blocklist', 'No users blocked.');
 		} else {
-			// blackAlert('Blocklist', localStorage.getItem('blockUserBlockList'));
+			blackAlert('Blocklist', localStorage.getItem('blockUserBlockList'));
 			pluginModule.showSettings("blockPlugin");
 			console.log("BetterDiscord: "+blockPlugin.prototype.getName() +": Blocklist:\n" + localStorage.getItem('blockUserBlockList'));
 		};				
@@ -193,7 +193,7 @@ blockPlugin.prototype.start = function() {
                     blockButtonFunc();
                     updateChat();
                 });
-				BetterAPI.addUserLink("showblocklistdiv", "showblocklist", "Show Blocklist", "clearblocklist", "Clear Blocklist")
+				BetterAPI.addUserLink("showblocklistdiv", "showblocklist", "#", "Show Blocklist", "clearblocklist", "#", "Clear Blocklist")
 				$('#clearblocklist').on('click', function () {
                     clearBlocklist();
                 });
@@ -213,7 +213,7 @@ blockPlugin.prototype.start = function() {
                     blockUser.forceUpdate = true;
                     updateChat();
                 });
-				BetterAPI.addUserLink("showblocklistdiv", "showblocklist", "Show Blocklist", "clearblocklist", "Clear Blocklist")
+				BetterAPI.addUserLink("showblocklistdiv", "showblocklist", "#", "Show Blocklist", "clearblocklist", "#", "Clear Blocklist")
                 $('#clearblocklist').on('click', function () {
                     clearBlocklist();
                 });

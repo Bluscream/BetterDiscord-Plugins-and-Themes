@@ -218,19 +218,19 @@ BetterAPI.prototype.loadAPI  = function() {
 		}
 		$(divID).length = 1;
 	};
-	// BetterAPI.addUserButton("btn", "divID", "text");
-	BetterAPI.addUserLink = function(divID, id1, text1, id2, text2) {
+	// BetterAPI.addUserLink(divID, id1, href1, text1, id2, href2, text2);
+	BetterAPI.addUserLink = function(divID, id1, href1, text1, id2, href2, text2) {
         var divID = divID.startsWith("#") ? divID.substring(1) : divID;
         if ($("#" + divID).length <= 0) {
-			if (id2 == "0" || text2 == "0") {
+			if (id2 == "0" || href2 == "0" || text2 == "0") {
 				$('.user-popout-options').append(''+
 				'<div id="'+divID+'" style="font-size:x-small;padding-top:5px;">'+
-				'<a href="#" id="'+id1+'">'+text1+'</a>');
+				'<a href="'+href1+'" id="'+id1+'">'+text1+'</a>');
 			} else {
 				$('.user-popout-options').append(''+
 				'<div id="'+divID+'" style="font-size:x-small;padding-top:5px;">'+
-				'<a href="#" id="'+id1+'">'+text1+'</a>'+
-				'<a href="#" id="'+id2+'" style="float:right">'+text2+'</a></div>');
+				'<a href="'+href1+'" id="'+id1+'">'+text1+'</a>'+
+				'<a href="'+href2+'" id="'+id2+'" style="float:right">'+text2+'</a></div>');
 			}
 		}
 	};
