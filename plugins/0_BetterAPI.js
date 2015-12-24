@@ -204,45 +204,50 @@ BetterAPI.prototype.loadAPI  = function() {
 		} else {
 			return null;
 		};
-	};	
+	};
 	// BetterAPI.getUserAvatar(id);
 	BetterAPI.getUserAvatar = function(id) {
-		var match = "";
-		var users = $(".avatar-small");
-		for(var i = 0 ; i < users.length ; i++) {
-			var user = $(users[i]);
-			var url = user.css("background-image");
-			console.log('---');
-			console.log('ID: '+id);
-			console.log('URL: '+url);
-			console.log('URLMATCH: '+url.match(/\d+/));
+		var match = null;
+		$(".avatar-small").each(function(){ 
+			var url = $(this).css("background-image");
 			if(id == url.match(/\d+/)) {
-				console.log('MATCHED');
-				match = url.match(/([^/]+$)/g);
-			}
-		}
-		if (match == "") {
-			var users = $(".avatar-large");
-			for(var i = 0 ; i < users.length ; i++) {
-				var user = $(users[i]);
-				var url = user.css("background-image");
-				console.log('===');
-				console.log('ID: '+id);
-				console.log('URL: '+url);
-				console.log('URLMATCH: '+url.match(/\d+/));
+				match = url.split("/").pop(-1).slice(0, -5);
+				return false;
+			}        
+		});
+		if(!match) {
+			$(".avatar-large").each(function(){ 
+				var url = $(this).css("background-image");
 				if(id == url.match(/\d+/)) {
-					console.log('MATCHED');
-					match = url.match(/([^/]+$)/g);
-				}
-			}
-		};
-		console.log('MATCH: '+match);
-		if (match != "") {
-			return match;
-		} else {
-			return null;
-		};
+					match = url.split("/").pop(-1).slice(0, -5);
+					return false;
+				}        
+			});
+		}
+		return match;
 	}
+		// var match = "";
+		// var users = $(".avatar-small");
+		// for(var i = 0 ; i < users.length ; i++) {
+			// var user = $(users[i]);
+			// var url = user.css("background-image");
+			// if(id == url.match(/\d+/)) {
+				// match = url.match(/([^/]+$)/g);
+				// break;
+			// }
+		// }
+		// if (match == "") {
+			// var users = $(".avatar-large");
+			// for(var i = 0 ; i < users.length ; i++) {
+				// var user = $(users[i]);
+				// var url = user.css("background-image");
+				// if(id == url.match(/\d+/)) {
+					// match = url.match(/([^/]+$)/g);
+					// break;
+				// }
+			// }
+		// };
+		// console.log('MATCH: '+match);
 	// BetterAPI.addUserLabel("divID", "label", "<html>");
 	BetterAPI.addUserLabel = function(divID, label, html) {
 		var divID = divID.startsWith("#") ? divID.substring(1) : divID;

@@ -239,18 +239,18 @@ blockPlugin.prototype.start = function() {
 };
 
 blockPlugin.prototype.getSettingsPanel = function() {
-	return '<h3>Blocked Users</h3><br><br>'/*+localStorage.getItem('blockUserBlockList')*/;
-	var obj = localStorage.getItem('blockUserBlockList');
-	var tbl=$("<table/>").attr("id","mytable");
-    $("#div1").append(tbl);
-    for(var i=0;i<obj.length;i++)
-    {
-        var tr="<tr>";
-        var td1="<td>"+obj[i]["id"]+"</td>";
-        var td2="<td>"+obj[i]["name"]+"</td>";
-        var td3="<td>"+obj[i]["color"]+"</td></tr>";
-       $("#mytable").append(tr+td1+td2+td3); 
-    }
+	return '<h3>Blocked Users</h3><br><br>'+localStorage.getItem('blockUserBlockList');
+	// var obj = localStorage.getItem('blockUserBlockList');
+	// var tbl=$("<table/>").attr("id","mytable");
+    // $("#div1").append(tbl);
+    // for(var i=0;i<obj.length;i++)
+    // {
+        // var tr="<tr>";
+        // var td1="<td>"+obj[i]["id"]+"</td>";
+        // var td2="<td>"+obj[i]["name"]+"</td>";
+        // var td3="<td>"+obj[i]["color"]+"</td></tr>";
+       // $("#mytable").append(tr+td1+td2+td3); 
+    // }
 };
 
 blockPlugin.prototype.stop = function() {

@@ -12,11 +12,11 @@ userInfo.prototype.start = function() {
 		var name = $(".user-popout").find(".username").text();
 		id = BetterAPI.getUserIdByName(name);
 		console.log('ID: '+id);
-		var avatar = BetterAPI.getUserAvatar(id);
-		console.log('AVATAR: '+avatar);
+		avatarID = BetterAPI.getUserAvatar(id);
+		console.log('AVATAR: '+avatarID);
 		// var nameByID = BdApi.getUserNameById(id);
 		BetterAPI.addUserLabel("UserInfoLabel", "Info", ''+
-		'<img src="https://cdn.discordapp.com/avatars/'+id+'/'+avatar+'.jpg"></img><br>'+
+		'<img src="https://cdn.discordapp.com/avatars/'+id+'/'+avatarID+'.jpg"></img><br>'+
 		'<b>Name: </b>'+name+'<br>'+
 		'<b>UID: </b>'+id);
 		// BetterAPI.addUserButton("btn", "#UserInfo", "Info");
