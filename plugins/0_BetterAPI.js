@@ -173,7 +173,7 @@ BetterAPI.prototype.loadAPI  = function() {
 		};
 		if ( ( match != "" ) && ( /^\d+$/.test(match) ) && ( ( match.length < 17 ) || ( match.length > 18 ) ) ) {
 			BetterAPI.log(1, "log", BetterAPI.prototype.getName(), "UID of \""+nick+"\" is \""+match+"\"");
-			return match;
+			return ""+match;
 		} else {
 			return null;
 		};

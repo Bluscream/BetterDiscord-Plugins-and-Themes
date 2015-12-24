@@ -14,6 +14,7 @@ BetterAPI.appendTo("link", "Element");
 BetterAPI.EnableTextSelection();
 BetterAPI.getUserIdByName("name");
 BetterAPI.getUserNameById(id);
+BetterAPI.getUserAvatar(id);
 BetterAPI.addUserLabel("divID", "label", "<html>");
 BetterAPI.addUserLink(divID, id1, href1, text1, [id2, href2, text2]);
 BetterAPI.addUserButton("btn", "divID", "text");
