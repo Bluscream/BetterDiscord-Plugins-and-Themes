@@ -10,7 +10,7 @@ userInfo.prototype.unload = function() {
 userInfo.prototype.start = function() {
     $('span[data-reactid=".0.4"]').on('DOMNodeInserted', '.popout', function() {
 		var name = $(".user-popout").find(".username").text();
-		id = (""+BetterAPI.getUserIdByName(name)).trim();
+		id = BetterAPI.getUserIdByName(name);
 		avatarID = BetterAPI.getUserAvatar(id);
 		// var nameByID = BdApi.getUserNameById(id);
 		BetterAPI.addUserLabel("UserInfoLabel", "Info", ''+
