@@ -1,7 +1,7 @@
 //META{"name":"BetterAPI"}*//
 function BetterAPI() {}
 BetterAPI.prototype.load = function() {
-	debug = 1;
+	debug = 0;
 	forceEnableTextSelection = 1;
 	BetterAPI.prototype.loadCore();
 	BetterAPI.prototype.injectCSS();
