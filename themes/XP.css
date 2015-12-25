@@ -1,0 +1,86 @@
+/META{"name":"Discord XP","description":"xxx","author":"Megamit","version":"1.0"}*//
+.app{
+	top:30px;
+}
+.theme-dark .chat .title-wrap .channel-mute-button{
+    top: 8px;
+    position: fixed;
+    left: 5px;
+}
+.theme-dark .chat .title-wrap, .theme-light .chat .title-wrap{
+		-webkit-font-smoothing: none !important;
+		text-shadow: 1px 1px 0px #000;
+		max-width:calc(100% - 170px);
+		position: fixed;
+		top: 8px;
+		left: 25px;
+		z-index:3001;
+		font-family: "Trebuchet MS";
+		font-weight: initial;
+		font-size: 12px;
+		position: fixed;
+		z-index: 3001;
+		background-color:transparent!important;
+		margin: 0;
+		border-width: 0 !important;
+		padding: 0;
+		min-height: 0;
+		opacity: 1;
+		flex-direction:row;
+		box-shadow:none;
+}
+.theme-dark .chat .title-wrap .title:before{
+	content: "Discord - ";
+}
+.theme-dark .chat .title-wrap .title:before:before{
+	content: "test"
+}
+.theme-dark .chat .title-wrap .topic,.theme-dark .chat .title-wrap .title{
+	color: #FFF;
+	font-family: "Trebuchet MS";
+	font-weight: initial;
+	font-size: 12px;
+}
+.theme-dark .chat .title-wrap>*, .theme-light .chat .title-wrap>*{
+	display:inline-block;
+	}
+.titlebar{
+	background: url("https://i.imgur.com/7ogUxEL.png");
+	height:30px;
+}
+.win-buttons{
+	top:6px;
+	right:6px;
+	background-color:transparent;
+	border-width:0;
+}
+.win-buttons button{
+	opacity:1;
+}
+.win-buttons button+button{
+	margin-left:2px;
+}
+.win-buttons.win-buttons-light .win-minimize, .win-buttons .win-minimize{
+	background-image: url("https://i.imgur.com/mxCF6lk.png");
+	width:21px;
+	height:21px;
+}
+.win-buttons.win-buttons-light .win-minimize:hover, .win-buttons .win-minimize:hover{
+	background-image: url("https://i.imgur.com/nuDESKk.png");
+}
+.win-buttons.win-buttons-light .win-maximize, .win-buttons .win-maximize{
+	background-image: url("https://i.imgur.com/PlIKN4Z.png");
+	width:21px;
+	height:21px;
+}
+.win-buttons.win-buttons-light .win-maximize:hover, .win-buttons .win-maximize:hover{
+	background-image: url("https://i.imgur.com/cEFgRyD.png");
+}
+.win-buttons.win-buttons-light .win-close, .win-buttons .win-close{
+	background-image: url("https://i.imgur.com/1e2OCfW.png");
+	width:21px;
+	height:21px;
+}
+.win-buttons.win-buttons-light .win-close:hover, .win-buttons .win-close:hover{
+	background-image: url("https://i.imgur.com/y706KR1.png");
+}

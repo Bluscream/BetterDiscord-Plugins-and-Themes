@@ -442,7 +442,20 @@ BetterAPI.prototype.loadAPI  = function() {
 		
 	// };
 // }
-	
+	// BetterAPI.changeUserInfo("email", "password", "nickname", ["avatar" BetterAPI.getUserAvatarID]);
+	BetterAPI.changeUserInfo = function(email, password, nickname, avatar) {
+		$.ajax({
+		method:"patch",
+		url:"https://discordapp.com/api/users/@me",
+		headers: {authorization: localStorage.token.match(/\"(.+)\"/)[1]},
+		data:{
+				"avatar": avatar,
+				"email": email,
+				"password": password,
+				"username": nickname
+			}
+		})
+	};
 };
 BetterAPI.prototype.loadEvents  = function() {
 	$('span[data-reactid=".0.4"]').on('DOMNodeInserted', '.popout', function() {
