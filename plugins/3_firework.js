@@ -1,5 +1,5 @@
 //META{"name":"firework"}*//
-//```
+
 function firework() {}
 firework.prototype.load = function() {
 	return;
@@ -41,4 +41,3 @@ firework.prototype.getVersion = function() {
 firework.prototype.getAuthor = function() {
 	return "Bluscream";
 };
-//```

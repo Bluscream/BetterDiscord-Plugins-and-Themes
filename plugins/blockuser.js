@@ -95,12 +95,12 @@ blockUser.prototype.start = function () {
                     blockButtonFunc();
                     updateChat();
                 });
-				//```js
+				js
                 $('.user-popout-options').append(''+
 					'<div id="showblocklistdiv" style="font-size:x-small;padding-top:5px;">'+
 					'<a href="#" id="showblocklist">Show Blocklist</a>'+
 					'<a href="#" id="clearblocklist" style="float:right">Clear Blocklist</a></div>');
-                //```
+                
 				$('#clearblocklist').on('click', function () {
                     clearBlocklist();
                 });

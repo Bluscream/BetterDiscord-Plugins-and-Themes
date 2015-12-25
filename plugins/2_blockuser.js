@@ -1,5 +1,4 @@
 //META{"name":"blockPlugin"}*// Needs https://github.com/Bluscream/BetterDiscord-Plugins-and-Themes/blob/master/plugins/0_BetterAPI.js to work!
-//```
 function blockPlugin() {}
 blockPlugin.prototype.load = function() {
 	// $("head").append('<script src="https://cdn.rawgit.com/Bluscream/BetterDiscord-Plugins-and-Themes/master/plugins%2F0_BetterAPI.js"></script>');
