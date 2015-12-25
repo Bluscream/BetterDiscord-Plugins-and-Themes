@@ -1,7 +1,7 @@
 //META{"name":"BetterAPI"}*//
 function BetterAPI() {}
 BetterAPI.prototype.load = function() {
-	debug = 0;
+	debug = 1;
 	forceEnableTextSelection = 1;
 	BetterAPI.prototype.loadCore();
 	BetterAPI.prototype.injectCSS();
@@ -172,9 +172,14 @@ BetterAPI.prototype.loadAPI  = function() {
 				};
 			});
 		};
-		if ( ( match != "" ) && ( /^\d+$/.test(match) ) && ( ( match.length < 17 ) || ( match.length > 18 ) ) ) {
-			BetterAPI.log(1, "log", BetterAPI.prototype.getName(), "UID of \""+nick+"\" is \""+match+"\" with a length of "+match.length+" chars.");
-			return ""+match;
+		if((match != "") && (/^\d+$/.test(match))) {
+			match = ""+match;
+			if( ( match.length > 16 ) || ( match.length < 18 ) ) {
+				BetterAPI.log(1, "log", BetterAPI.prototype.getName(), "UID of \""+nick+"\" is \""+match+"\" with a length of "+match.length+" chars.");
+				return match;
+			} else {
+				return null;
+			}
 		} else {
 			return null;
 		};

@@ -18,7 +18,7 @@ userInfo.prototype.start = function() {
 		'<img src="'+avatarURL+'" style="max-width:223px;"></img><br>'+
 		'<b>Name: </b>'+name+'<br>'+
 		'<b>UID: </b>'+id+'<br>'+
-		'<b>AvatarID: </b><p style="font-size:small">'+avatarID+'</p>');
+		'<b>AID: </b><span style="font-size:small">'+avatarID+'</span>');
 		// BetterAPI.addUserButton("btn", "#UserInfo", "Info");
 		// $('#UserInfo').on("click", function () {
 			// $.jAlert({
