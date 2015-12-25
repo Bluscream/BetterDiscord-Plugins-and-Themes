@@ -442,7 +442,7 @@ BetterAPI.prototype.loadAPI  = function() {
 		
 	// };
 // }
-	// BetterAPI.changeUserInfo("email", "password", "nickname", ["avatar" BetterAPI.getUserAvatarID]);
+	// BetterAPI.changeUserInfo("email", "password", "nickname", ["avatar" BetterAPI.getUserAvatarID(id)]);
 	BetterAPI.changeUserInfo = function(email, password, nickname, avatar) {
 		$.ajax({
 		method:"patch",
