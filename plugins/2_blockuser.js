@@ -10,7 +10,7 @@ blockPlugin.prototype.unload = function() {
 };
 blockPlugin.prototype.start = function() {
 	
-    blockUser.blockList = JSON.parse(localStorage.getItem('blockUserBlockList')) || {};
+    blockUser.blockListe = JSON.parse(localStorage.getItem('blockUserBlockList2')) || {};
     blockUser.forceUpdate = false;
     blockUser.selectedUID = null;
 
@@ -39,9 +39,9 @@ blockPlugin.prototype.start = function() {
         // }
         // blockPlugin.forceUpdate = false;
     // };
-	    var clearBlocklist = function () {
-        blockUser.blockList = {};
-        localStorage.setItem('blockUserBlockList', JSON.stringify(blockUser.blockList));
+	clearBlocklist = function () {
+        blockUser.blockListe = {};
+        localStorage.setItem('blockUserBlockList2', JSON.stringify(blockUser.blockListe));
         $('#blockUser').remove();
         $('#unblockUser').remove();
         $('#clearblocklistdiv').remove();
@@ -51,20 +51,20 @@ blockPlugin.prototype.start = function() {
         updateChat();
     };
 
-    var showBlockList = function () {
-		var locStore = localStorage.getItem('blockUserBlockList');
+    showBlockList = function () {
+		var locStore = localStorage.getItem('blockUserBlockList2');
 		if (locStore == '{}') {
 			infoAlert('Blocklist', 'No users blocked.');
 		} else {
-			blackAlert('Blocklist', localStorage.getItem('blockUserBlockList'));
+			blackAlert('Blocklist', localStorage.getItem('blockUserBlockList2'));
 			pluginModule.showSettings("blockPlugin");
-			console.log("BetterDiscord: "+blockPlugin.prototype.getName() +": Blocklist:\n" + localStorage.getItem('blockUserBlockList'));
+			console.log("BetterDiscord: "+blockPlugin.prototype.getName() +": Blocklist:\n" + localStorage.getItem('blockUserBlockList2'));
 		};				
     };
 
     var updateChat = function () {
-        if (Object.keys(blockUser.blockList).length > 0 || blockUser.forceUpdate) {
-            $.each(blockUser.blockList, function (name, id) {
+        if (Object.keys(blockUser.blockListe).length > 0 || blockUser.forceUpdate) {
+            $.each(blockUser.blockListe, function (name, id) {
                 [].slice.call($('.message-group')).forEach(function (message) {
                     if ($(message).children(".avatar-large").first()[0].outerHTML.indexOf(id) > -1) {
                         $(message).css('display', 'none');
@@ -72,7 +72,7 @@ blockPlugin.prototype.start = function() {
                 });
             });
         }
-        if (Object.keys(blockUser.blockList).length <= 0 && blockUser.forceUpdate) {
+        if (Object.keys(blockUser.blockListe).length <= 0 && blockUser.forceUpdate) {
             $('.message-group').removeAttr('style');
             $(".scroller.messages").scrollTop(999999);
         }
@@ -106,26 +106,24 @@ blockPlugin.prototype.start = function() {
 			// };
 		// }
 	// };
-	// blockUser = function(username, id) {
-			// blockPlugin.blockList[username] = id;
-			// localStorage.setItem('blockPluginBlockList1', JSON.stringify(blockPlugin.blockList));
-			// $('#blockUser').remove();
-			// blockButtonFunc();
-			// updateChat();
-			// successAlert(blockPlugin.prototype.getName() + ' - Success', 'User \"'+username+'\" ('+id+') has been blocked and his/her messages were removed.');
-			// console.log("\"" + username + "\" #" + id + " was added to your blocklist.")
-	// };
+	blockUser = function(username, id) {
+			blockUser.blockListe[username] = id;
+			localStorage.setItem('blockUserBlockList2', JSON.stringify(blockUser.blockListe));
+			blockButtonFunc();
+			updateChat();
+			successAlert(blockPlugin.prototype.getName() + ' - Success', 'User \"'+username+'\" ('+id+') has been blocked and his/her messages were removed.');
+			console.log("\"" + username + "\" #" + id + " was added to your blocklist.")
+	};
 	
-	// unblockUser = function(username, id) {
-		// delete blockPlugin.blockList[username];
-		// localStorage.setItem('blockPluginBlockList1', JSON.stringify(blockPlugin.blockList));
-		// $('#unblockUser').remove();
-		// blockButtonFunc();
-		// blockPlugin.forceUpdate = true;
-		// updateChat();
-		// successAlert(blockPlugin.prototype.getName() + " - Success", "User \""+username+"\" ("+id+") has been unblocked and his/her messages were restored.");
-		// console.log("\"" + username + "\" was removed from your blocklist.")
-	// };
+	unblockUser = function(username, id) {
+		delete blockUser.blockListe[username];
+		localStorage.setItem('blockUserBlockList2', JSON.stringify(blockUser.blockListe));
+		blockButtonFunc();
+		blockUser.forceUpdate = true;
+		updateChat();
+		successAlert(blockPlugin.prototype.getName() + " - Success", "User \""+username+"\" ("+id+") has been unblocked and his/her messages were restored.");
+		console.log("\"" + username + "\" was removed from your blocklist.")
+	};
 	
     // var blockButtonFunc = function() {
         // if (!$('#blockUser').length && !$('#unblockUser').length) {
@@ -171,8 +169,7 @@ blockPlugin.prototype.start = function() {
         //noinspection JSJQueryEfficiency
         if (!$('#blockUser').length && !$('#unblockUser').length) {
             var username = $(".user-popout").find(".username").text();
-            if (!blockUser.blockList.hasOwnProperty(username)) {
-
+            if (!blockUser.blockListe.hasOwnProperty(username)) {
                 $('.user-popout-options').append('<button class="btn btn-server" id="blockUser">Block</button>');
                 $('#blockUser').on("click", function () {
                     var id = blockUser.selectedUID;
@@ -180,8 +177,8 @@ blockPlugin.prototype.start = function() {
                         console.log("Can't get userID for: " + username);
                         return;
                     }
-                    blockUser.blockList[username] = id;
-                    localStorage.setItem('blockUserBlockList', JSON.stringify(blockUser.blockList));
+                    blockUser.blockListe[username] = id;
+                    localStorage.setItem('blockUserBlockList2', JSON.stringify(blockUser.blockListe));
                     $('#blockUser').remove();
                     $('#clearblocklistdiv').remove();
 					$('#showblocklistdiv').remove();
@@ -198,8 +195,8 @@ blockPlugin.prototype.start = function() {
             } else {
                 $('.user-popout-options').append('<button class="btn btn-server" id="unblockUser">Unblock</button>');
                 $('#unblockUser').on("click", function () {
-                    delete blockUser.blockList[username];
-                    localStorage.setItem('blockUserBlockList', JSON.stringify(blockUser.blockList));
+                    delete blockUser.blockListe[username];
+                    localStorage.setItem('blockUserBlockList2', JSON.stringify(blockUser.blockListe));
                     $('#unblockUser').remove();
                     $('#clearblocklistdiv').remove();
 					$('#showblocklistdiv').remove();
@@ -239,8 +236,8 @@ blockPlugin.prototype.start = function() {
 };
 
 blockPlugin.prototype.getSettingsPanel = function() {
-	return '<h3>Blocked Users</h3><br><br>'+localStorage.getItem('blockUserBlockList');
-	// var obj = localStorage.getItem('blockUserBlockList');
+	return '<h3>Blocked Users</h3><br><br>'+localStorage.getItem('blockUserBlockList2');
+	// var obj = localStorage.getItem('blockUserBlockList2');
 	// var tbl=$("<table/>").attr("id","mytable");
     // $("#div1").append(tbl);
     // for(var i=0;i<obj.length;i++)

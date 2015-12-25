@@ -156,6 +156,7 @@ BetterAPI.prototype.loadAPI  = function() {
 				var avatarUrl = user.closest(".member").find(".avatar-small").css("background-image");
 				match = avatarUrl.match(/\d+/);
 				nick = user.text();
+				break;
 			};
 		};
 		if (match == "") {
@@ -172,7 +173,7 @@ BetterAPI.prototype.loadAPI  = function() {
 			});
 		};
 		if ( ( match != "" ) && ( /^\d+$/.test(match) ) && ( ( match.length < 17 ) || ( match.length > 18 ) ) ) {
-			BetterAPI.log(1, "log", BetterAPI.prototype.getName(), "UID of \""+nick+"\" is \""+match+"\"");
+			BetterAPI.log(1, "log", BetterAPI.prototype.getName(), "UID of \""+nick+"\" is \""+match+"\" with a length of "+match.length+" chars.");
 			return ""+match;
 		} else {
 			return null;
@@ -205,8 +206,8 @@ BetterAPI.prototype.loadAPI  = function() {
 			return null;
 		};
 	};
-	// BetterAPI.getUserAvatar(id);
-	BetterAPI.getUserAvatar = function(id) {
+	// BetterAPI.getUserAvatarID(id);
+	BetterAPI.getUserAvatarID = function(id) {
 		var match = null;
 		$(".avatar-small").each(function(){ 
 			var url = $(this).css("background-image");
@@ -226,28 +227,27 @@ BetterAPI.prototype.loadAPI  = function() {
 		}
 		return match;
 	}
-		// var match = "";
-		// var users = $(".avatar-small");
-		// for(var i = 0 ; i < users.length ; i++) {
-			// var user = $(users[i]);
-			// var url = user.css("background-image");
-			// if(id == url.match(/\d+/)) {
-				// match = url.match(/([^/]+$)/g);
-				// break;
-			// }
-		// }
-		// if (match == "") {
-			// var users = $(".avatar-large");
-			// for(var i = 0 ; i < users.length ; i++) {
-				// var user = $(users[i]);
-				// var url = user.css("background-image");
-				// if(id == url.match(/\d+/)) {
-					// match = url.match(/([^/]+$)/g);
-					// break;
-				// }
-			// }
-		// };
-		// console.log('MATCH: '+match);
+	// BetterAPI.getUserAvatarURL(id);
+	BetterAPI.getUserAvatarURL = function(id) {
+		var match = null;
+		$(".avatar-small").each(function(){ 
+			var url = $(this).css("background-image");
+			if(id == url.match(/\d+/)) {
+				match = url.substring(4, url.length - 1);
+				return false;
+			}        
+		});
+		if(!match) {
+			$(".avatar-large").each(function(){ 
+				var url = $(this).css("background-image");
+				if(id == url.match(/\d+/)) {
+					match = url.substring(4, url.length - 1);
+					return false;
+				}        
+			});
+		}
+		return match;
+	}
 	// BetterAPI.addUserLabel("divID", "label", "<html>");
 	BetterAPI.addUserLabel = function(divID, label, html) {
 		var divID = divID.startsWith("#") ? divID.substring(1) : divID;
