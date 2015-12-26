@@ -35,7 +35,7 @@ function DCMQuotingPlugin(){
     };
 
     var inject = function(){
-        DCMQuoting.enabled = true;
+        window.DCMQuoting.enabled = true;
         document.addEventListener("DOMNodeInsertedIntoDocument", function() {
             update();
         }, false);
@@ -55,15 +55,16 @@ function DCMQuotingPlugin(){
     //Still no good way to get all messages with BetterDiscord (afaik meaning I'm probably wrong)... copy OP whilst using a mod id (mod id = expected amount of ghosts scripted installed + 2)
     var update = function(){
         if ((typeof(document.getElementsByClassName("messages")[0]) !== 'undefined') 
-                && (document.getElementsByClassName("messages")[0] !== null)
-                && (DCMQuoting.enabled)) {
-            var elements = document
-                .getElementsByClassName("messages")[0]
+            && (document.getElementsByClassName("messages")[0] !== null)
+            && (window.DCMQuoting.enabled)) {
+            
+            var elements = document.getElementsByClassName("messages")[0]
                 .getElementsByTagName("div");
-            for (a of elements) {
-                var elementsC = a.getElementsByTagName("span");
-                for (element of elementsC) {
-                    var content = element.parentElement.parentElement;
+            for (var i = 0, im = elements.length; im > i; i++) {
+                var element = elements[i]
+                    .getElementsByTagName("span");
+                for (var ia = 0, ima = element.length; ima > ia; ia++) {
+                    var content = element[ia].parentElement.parentElement;
                     if ((content.className == "body") && (checkVal(content) == ghostModId))
                         content.getElementsByTagName("h2")[0].appendChild(createSpan())
                 }
@@ -71,6 +72,8 @@ function DCMQuotingPlugin(){
         }
     };
 };
+
+
  
 
 DCMQuotingPlugin.prototype.getName = function() { 
@@ -115,9 +118,10 @@ var CDCMQuoting = function(){
         
         var comments = element.getElementsByClassName("comment")[0]
             .getElementsByClassName("message");
-        
-        for (comment of comments) {
-            var text = comment.getElementsByClassName("markup")[0]
+               
+        var index;
+        for (index = 0; index < comments.length; ++index) {
+            var text = comments[index].getElementsByClassName("markup")[0]
                 .innerText
                 .replace("(edited)", "")
                 .replace("\n\r", "")
@@ -133,29 +137,35 @@ var CDCMQuoting = function(){
         textArea.onkeydown = function() {
             var key = event.keyCode || event.charCode;
             if(key == 8 || key == 46)
-               DCMQuoting.resize(this);
+               window.DCMQuoting.resize(this);
         };
         textArea.style.height = textArea.scrollHeight > textArea.clientHeight ? (textArea.scrollHeight) + "px" : (textArea.value == "" ? "18px" : "80px");
     }
 
     this.clicked = function(messageElement){
         var textArea = document.getElementsByTagName("textarea")[0];
-        const message = this.getMessage(messageElement);
+        const message = window.DCMQuoting.getMessage(messageElement);
         const oldMsg = textArea.value;
         var quote = (oldMsg == "" ? oldMsg : oldMsg + "\n") + message + "\n";    //append if text is already in the text box
         
-        $(textArea).focus().val("").val(quote);
-        this.resize(textArea);
+
+        if ((typeof(betterDiscordIPC) !== 'undefined') && (betterDiscordIPC !== null)) { 
+            $(textArea).focus().val("").val(quote);
+        } else {
+            textArea.value = quote;
+        }
+
+        window.DCMQuoting.resize(textArea);
         textArea.scrollTop = textArea.scrollHeight;
     };
 };
 
-var DCMQuoting = new CDCMQuoting();
+window.DCMQuoting = new CDCMQuoting();
 
 
 //TODO: http://stackoverflow.com/questions/4386300/javascript-dom-how-to-remove-all-events-of-a-dom-object 
 function removeAllEvents(node, event) {
-    DCMQuoting.enabled = false;
+    window.DCMQuoting.enabled = false;
 };
 
 if (!((typeof(betterDiscordIPC) !== 'undefined') && (betterDiscordIPC !== null))) {
