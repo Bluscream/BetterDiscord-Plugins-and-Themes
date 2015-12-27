@@ -8,9 +8,7 @@
 function DCMQuotingPlugin(){
     var ghostModId = 2;
 
-    this.load = function(){
-        inject();
-    };
+    this.load = function(){};
 
     this.start = function(){
         inject(); 

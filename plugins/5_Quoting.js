@@ -1,11 +1,9 @@
 //META{"name":"DCMQuotingPlugin_"}*// 
 function DCMQuotingPlugin_(){
     var ghostModId = 2;
-    this.load = function(){
-        inject();
-    };
+    this.load = function(){};
     this.start = function(){
-        inject(); 
+        inject();
     };
     this.unload = function(){
         removeAllEvents(document, "DOMNodeInsertedIntoDocument");
@@ -26,14 +24,27 @@ function DCMQuotingPlugin_(){
         window.DCMQuoting.enabled = true;
         document.addEventListener("DOMNodeInsertedIntoDocument", function() {
             update();
+			createCharCounter();
         }, false);
         document.addEventListener("DOMNodeInserted", function() {
             update();
+			createCharCounter();
         }, false);
     };
+	var createCharCounter = function(){
+			if ($('.charcounter').length <= 0) {
+				$('textarea').keyup(updateCount);
+				$('textarea').keydown(updateCount);
+				$(document).find("[data-reactid='.0.1.1.0.2.1.0.1']").append('<span class="charcounter" style="font-size:small;color:red"></span>');
+			}
+	}
+	function updateCount() {
+		var cs = $(this).val().length;
+		$('.charcounter').text(cs+'/2000')
+	}
     var createSpan = function(){
         var span = document.createElement("span");
-        span.setAttribute("style", "display:inline-block");
+        span.setAttribute("style", "display:inline-block;font-size:big");
         span.innerText = "[Quote]";
         span.setAttribute("onclick", "DCMQuoting.clicked(this);");
         return span;
