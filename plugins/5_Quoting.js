@@ -24,23 +24,24 @@ function DCMQuotingPlugin_(){
         window.DCMQuoting.enabled = true;
         document.addEventListener("DOMNodeInsertedIntoDocument", function() {
             update();
-			createCharCounter();
         }, false);
         document.addEventListener("DOMNodeInserted", function() {
             update();
-			createCharCounter();
         }, false);
     };
-	var createCharCounter = function(){
-			if ($('.charcounter').length <= 0) {
-				$('textarea').keyup(updateCount);
-				$('textarea').keydown(updateCount);
-				$(document).find("[data-reactid='.0.1.1.0.2.1.0.1']").append('<span class="charcounter" style="font-size:small;color:red"></span>');
-			}
+	createCharCounter = function() {
+		// $('textarea').off('keyup');
+		// $('textarea').off('keydown');
+		if ($('.charcounter').length <= 0) {
+			$(document).find("[data-reactid='.0.1.1.0.2.1.0.1']").append('<span class="charcounter" style="font-size:small;color:red"></span>');
+			$('textarea').keyup(updateCount());
+			$('textarea').keydown(updateCount());
+			DCMQuotingPlugin_.updateCount();
+		}
 	}
-	function updateCount() {
+	updateCount = function() {
 		var cs = $(this).val().length;
-		$('.charcounter').text(cs+'/2000')
+		$('.charcounter').text(cs+'/2000');
 	}
     var createSpan = function(){
         var span = document.createElement("span");
@@ -49,7 +50,6 @@ function DCMQuotingPlugin_(){
         span.setAttribute("onclick", "DCMQuoting.clicked(this);");
         return span;
     };
-    //Still no good way to get all messages with BetterDiscord (afaik meaning I'm probably wrong)... copy OP whilst using a mod id (mod id = expected amount of ghosts scripted installed + 2)
     var update = function(){
         if ((typeof(document.getElementsByClassName("messages")[0]) !== 'undefined') 
             && (document.getElementsByClassName("messages")[0] !== null)
@@ -70,6 +70,10 @@ function DCMQuotingPlugin_(){
 };
 DCMQuotingPlugin_.prototype.getName = function() { 
     return "Quoting Plugin"; 
+}; 
+DCMQuotingPlugin_.prototype.onSwitch = function() { 
+	DCMQuotingPlugin_.createCharCounter();
+	DCMQuotingPlugin_.updateCount();
 }; 
 DCMQuotingPlugin_.prototype.getDescription = function() { 
     return "Quoting from Discord Client Modding ported by NotGGhost and edited by Bluscream"; 
