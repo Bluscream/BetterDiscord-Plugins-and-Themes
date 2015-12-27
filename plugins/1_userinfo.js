@@ -2,10 +2,8 @@
 function userInfo() {}
 userInfo.prototype.load = function() {
 	// $("head").append('<script src="https://cdn.rawgit.com/Bluscream/BetterDiscord-Plugins-and-Themes/master/plugins%2F0_BetterAPI.js"></script>');
-	console.log("BetterDiscord: " + this.getName() + " v" + this.getVersion() + " by " + this.getAuthor() + " loaded.");
 };
 userInfo.prototype.unload = function() {
-	console.log("BetterDiscord: " + this.getName() + " v" + this.getVersion() + " by " + this.getAuthor() + " unloaded.");
 };
 userInfo.prototype.start = function() {
     $('span[data-reactid=".0.4"]').on('DOMNodeInserted', '.popout', function() {
@@ -49,14 +47,11 @@ userInfo.prototype.start = function() {
 			// BetterAPI.log(0, "info", userInfo.prototype.getName()+": "+name+'\'s Info', "\n\nName: \""+name+"\"\nUID: \""+id+"\"");
 		// });
 	});
-	console.log("BetterDiscord: " + this.getName() + " v" + this.getVersion() + " by " + this.getAuthor() + " started.");
 };
 userInfo.prototype.stop = function() {
 	$('span[data-reactid=".0.4"').off('DOMNodeInserted.userInfo');
-	console.log("BetterDiscord: " + this.getName() + " v" + this.getVersion() + " by " + this.getAuthor() + " stopped.");
 };
 userInfo.prototype.update = function() {
-	console.log("BetterDiscord: " + this.getName() + " v" + this.getVersion() + " by " + this.getAuthor() + " updated.");
 };
 userInfo.prototype.getName = function() {
 	return "User Info Plugin";

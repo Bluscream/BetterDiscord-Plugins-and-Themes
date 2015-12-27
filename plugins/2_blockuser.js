@@ -2,17 +2,13 @@
 function blockPlugin() {}
 blockPlugin.prototype.load = function() {
 	// $("head").append('<script src="https://cdn.rawgit.com/Bluscream/BetterDiscord-Plugins-and-Themes/master/plugins%2F0_BetterAPI.js"></script>');
-	console.log("BetterDiscord: " + this.getName() + " v" + this.getVersion() + " by " + this.getAuthor() + " loaded.");
 };
 blockPlugin.prototype.unload = function() {
-	console.log("BetterDiscord: " + this.getName() + " v" + this.getVersion() + " by " + this.getAuthor() + " unloaded.");
 };
 blockPlugin.prototype.start = function() {
-	
     blockUser.blockListe = JSON.parse(localStorage.getItem('blockUserBlockList2')) || {};
     blockUser.forceUpdate = false;
     blockUser.selectedUID = null;
-
     var getUID = function (e) {
         if (e.target.classList.contains('user-name')) {
             return $(e.target).parents('.message-group').children('.avatar-large').css('backgroundImage').match(/\/(\d{1,})\//)[1];
@@ -49,7 +45,6 @@ blockPlugin.prototype.start = function() {
         blockUser.forceUpdate = true;
         updateChat();
     };
-
     showBlockList = function () {
 		var locStore = localStorage.getItem('blockUserBlockList2');
 		if (locStore == '{}') {
@@ -57,10 +52,8 @@ blockPlugin.prototype.start = function() {
 		} else {
 			blackAlert('Blocklist', localStorage.getItem('blockUserBlockList2'));
 			pluginModule.showSettings("blockPlugin");
-			console.log("BetterDiscord: "+blockPlugin.prototype.getName() +": Blocklist:\n" + localStorage.getItem('blockUserBlockList2'));
 		};				
     };
-
     var updateChat = function () {
         if (Object.keys(blockUser.blockListe).length > 0 || blockUser.forceUpdate) {
             $.each(blockUser.blockListe, function (name, id) {
@@ -86,7 +79,7 @@ blockPlugin.prototype.start = function() {
 					// infoAlert('Blocklist', 'No users blocked.');
 				// } else {
 					// blackAlert('Blocklist', localStorage.getItem('blockPluginBlockList1'));
-					// console.log("BetterDiscord: "+blockPlugin.prototype.getName() +": Blocklist:\n" + localStorage.getItem('blockPluginBlockList1'));
+					// 
 				// };				
 			// });
 		// };
@@ -111,9 +104,7 @@ blockPlugin.prototype.start = function() {
 			blockButtonFunc();
 			updateChat();
 			successAlert(blockPlugin.prototype.getName() + ' - Success', 'User \"'+username+'\" ('+id+') has been blocked and his/her messages were removed.');
-			console.log("\"" + username + "\" #" + id + " was added to your blocklist.")
 	};
-	
 	unblockUser = function(username, id) {
 		delete blockUser.blockListe[username];
 		localStorage.setItem('blockUserBlockList2', JSON.stringify(blockUser.blockListe));
@@ -121,9 +112,7 @@ blockPlugin.prototype.start = function() {
 		blockUser.forceUpdate = true;
 		updateChat();
 		successAlert(blockPlugin.prototype.getName() + " - Success", "User \""+username+"\" ("+id+") has been unblocked and his/her messages were restored.");
-		console.log("\"" + username + "\" was removed from your blocklist.")
 	};
-	
     // var blockButtonFunc = function() {
         // if (!$('#blockUser').length && !$('#unblockUser').length) {
             // var username = $(".user-popout").find(".username").text();
@@ -173,7 +162,6 @@ blockPlugin.prototype.start = function() {
                 $('#blockUser').on("click", function () {
                     var id = blockUser.selectedUID;
                     if (id === null) {
-                        console.log("Can't get userID for: " + username);
                         return;
                     }
                     blockUser.blockListe[username] = id;
@@ -220,7 +208,6 @@ blockPlugin.prototype.start = function() {
     $('span[data-reactid=".0.4"]').on('DOMNodeInserted', '.popout', function () {
         blockButtonFunc();
     });
-
     $('body').on('DOMSubtreeModified', function () {
         updateChat();
         $('.user-name').off('click').on('click', function (e) {
@@ -230,10 +217,7 @@ blockPlugin.prototype.start = function() {
             blockUser.selectedUID = getUID(e);
         });
     });
-	
-	console.log("BetterDiscord: " + this.getName() + " v" + this.getVersion() + " by " + this.getAuthor() + " started.");
 };
-
 blockPlugin.prototype.getSettingsPanel = function() {
 	return '<h3>Blocked Users</h3><br><br>'+localStorage.getItem('blockUserBlockList2');
 	// var obj = localStorage.getItem('blockUserBlockList2');
@@ -248,16 +232,13 @@ blockPlugin.prototype.getSettingsPanel = function() {
        // $("#mytable").append(tr+td1+td2+td3); 
     // }
 };
-
 blockPlugin.prototype.stop = function() {
     $('span[data-reactid=".0.4"]').off('DOMNodeInserted');
     $('body').off('DOMSubtreeModified');
     $('.user-name').off('click');
     $('.member').off('click');
-	console.log("BetterDiscord: " + this.getName() + " v" + this.getVersion() + " by " + this.getAuthor() + " stopped.");
 };
 blockPlugin.prototype.update = function() {
-	console.log("BetterDiscord: " + this.getName() + " v" + this.getVersion() + " by " + this.getAuthor() + " updated.");
 };
 blockPlugin.prototype.getName = function() {
 	return "Block User Plugin";

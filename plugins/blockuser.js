@@ -1,29 +1,21 @@
 //META{"name":"blockUser"}*//
-
 var blockUser = function () {};
-
 blockUser.prototype.getName = function () {
     return "blockUser Plugin";
 };
-
 blockUser.prototype.getDescription = function () {
     return "Adds block functionality to the user menu";
 };
-
 blockUser.prototype.getVersion = function () {
     return "0.0.1";
 };
-
 blockUser.prototype.getAuthor = function () {
     return "Pohky";
 };
-
 blockUser.prototype.start = function () {
-
     blockUser.blockList = JSON.parse(localStorage.getItem('blockUserBlockList')) || {};
     blockUser.forceUpdate = false;
     blockUser.selectedUID = null;
-
     var getUID = function (e) {
         if (e.target.classList.contains('user-name')) {
             return $(e.target).parents('.message-group').children('.avatar-large').css('backgroundImage').match(/\/(\d{1,})\//)[1];
@@ -32,7 +24,6 @@ blockUser.prototype.start = function () {
         }
         return null;
     };
-
     var clearBlocklist = function () {
         blockUser.blockList = {};
         localStorage.setItem('blockUserBlockList', JSON.stringify(blockUser.blockList));
@@ -44,7 +35,6 @@ blockUser.prototype.start = function () {
         blockUser.forceUpdate = true;
         updateChat();
     };
-
     var showBlockList = function () {
         blockUser.blockList = {};
         localStorage.setItem('blockUserBlockList', JSON.stringify(blockUser.blockList));
@@ -56,7 +46,6 @@ blockUser.prototype.start = function () {
         blockUser.forceUpdate = true;
         updateChat();
     };
-
     var updateChat = function () {
         if (Object.keys(blockUser.blockList).length > 0 || blockUser.forceUpdate) {
             $.each(blockUser.blockList, function (name, id) {
@@ -73,18 +62,15 @@ blockUser.prototype.start = function () {
         }
         blockUser.forceUpdate = false;
     };
-
     var blockButtonFunc = function () {
         //noinspection JSJQueryEfficiency
         if (!$('#blockUser').length && !$('#unblockUser').length) {
             var username = $(".user-popout").find(".username").text();
             if (!blockUser.blockList.hasOwnProperty(username)) {
-
                 $('.user-popout-options').append('<button class="btn btn-server" id="blockUser">Block</button>');
                 $('#blockUser').on("click", function () {
                     var id = blockUser.selectedUID;
                     if (id === null) {
-                        console.log("Can't get userID for: " + username);
                         return;
                     }
                     blockUser.blockList[username] = id;
@@ -99,7 +85,6 @@ blockUser.prototype.start = function () {
 					'<div id="showblocklistdiv" style="font-size:x-small;padding-top:5px;">'+
 					'<a href="#" id="showblocklist">Show Blocklist</a>'+
 					'<a href="#" id="clearblocklist" style="float:right">Clear Blocklist</a></div>');
-                
 				$('#clearblocklist').on('click', function () {
                     clearBlocklist();
                 });
@@ -132,11 +117,9 @@ blockUser.prototype.start = function () {
             }
         }
     };
-
     $('span[data-reactid=".0.4"]').on('DOMNodeInserted', '.popout', function () {
         blockButtonFunc();
     });
-
     $('body').on('DOMSubtreeModified', function () {
         updateChat();
         $('.user-name').off('click').on('click', function (e) {
@@ -147,18 +130,14 @@ blockUser.prototype.start = function () {
         });
     });
 };
-
 blockUser.prototype.stop = function () {
     $('span[data-reactid=".0.4"]').off('DOMNodeInserted');
     $('body').off('DOMSubtreeModified');
     $('.user-name').off('click');
     $('.member').off('click');
 };
-
 blockUser.prototype.load = function () {};
-
 blockUser.prototype.unload = function () {};
-
 blockUser.prototype.getSettingsPanel = function() {
 	return '<h3>Blocked Users</h3>';
 };

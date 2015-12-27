@@ -1,7 +1,5 @@
 //META{"name":"webSock"}*//
-
 function webSock() {}
-
 OPCODE_DISPATCH = 0;
 OPCODE_HEARTBEAT = 1;
 OPCODE_IDENTIFY = 2;
@@ -11,34 +9,26 @@ OPCODE_VOICE_SERVER_PING = 5;
 OPCODE_RESUME = 6;
 OPCODE_REDIRECT = 7;
 OPCODE_REQUEST_GUILD_MEMBERS = 8;
-
 CONNECTING = 0;
 OPEN = 1;
 CLOSING = 2;
 CLOSED = 3;
-
-
 webSock.internal={}
 webSock.prototype.load = function() {
 	//Called when plugin is loaded
 };
-
 webSock.prototype.unload = function() {
 	//Called when plugin is unloaded
 };
-
 webSock.prototype.start = function() {
-	
 	var token = localStorage.token.match(/\"(.+)\"/)[1];
 	webSock.headers = {authorization:token}
-	console.log(token);
 	$.ajax({
 			method:"get",
 			url:"https://discordapp.com/api/gateway",
 			headers:webSock.headers,
 			success:function(data){
 				var gateway = data.url;
-				console.log(gateway);
 				webSock.ws = new WebSocket(gateway);
 				webSock.ws.onopen = function(){
 					webSock.sendData(OPCODE_IDENTIFY,{
@@ -74,51 +64,39 @@ webSock.prototype.start = function() {
 								webSock.internal.messages = [];
 							}else if(reply.t == "MESSAGE_CREATE"){
 								var d = reply.d;
-								
-							
 							}
 						}
 					}
 			},
 			dataType:"JSON"
 		})
-	
 };
-
 webSock.prototype.stop = function() {
 	//Called when plugin is stopped
 };
-
 webSock.prototype.getName = function() {
     return "BetterDiscordWebsock";
 };
-
 webSock.prototype.getDescription = function() {
     return "Simple websocket plugin that can be used to read/write socket data";
 };
-
 webSock.prototype.getVersion = function() {
     return "1.0";
 };
-
 webSock.prototype.getAuthor = function() {
     return "Megamit/Mitchell";
 };
-
 /* webSock.prototype.getSettingsPanel = function() {
 	return '<h3>Test Plugin</h3>';
 }; */
-
 webSock.sendData = function(opcode,data){	
 	webSock.ws.send(JSON.stringify({op: opcode, d: data}));
 }
 webSock.sendMessage = function(){
-	
 }
 webSock.sendHeartbeat = function(){
 	webSock.sendData (OPCODE_HEARTBEAT, Date.now())
 }
-
 webSock.setStatus = function(game, idle){
 	webSock.sendData (OPCODE_STATUS_UPDATE, {
                 "idle_since": idle?idle:null,
