@@ -50,3 +50,4 @@ plugins/PrivatePlugin.js
 temp/BetterDiscord.zip
 temp/BetterDiscordApp-stable/betterdiscord.js
 temp/BetterDiscordApp-stable/lib/BetterDiscord.js
+temp/BetterDiscordApp-stable/lib/Utils.js
