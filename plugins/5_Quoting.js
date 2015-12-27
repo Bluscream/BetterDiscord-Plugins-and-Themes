@@ -1,8 +1,4 @@
 //META{"name":"DCMQuotingPlugin"}*// 
-/*
-  NON-Crossplatform script
-*/
-//This class is for hacky QUOTE INJECTION only
 function DCMQuotingPlugin(){
     var ghostModId = 2;
     this.load = function(){
@@ -65,13 +61,13 @@ DCMQuotingPlugin.prototype.getName = function() {
     return "Quoting"; 
 }; 
 DCMQuotingPlugin.prototype.getDescription = function() { 
-    return "Quoting from Discord Client Modding ported by NotGGhost"; 
+    return "Quoting from Discord Client Modding ported by NotGGhost and edited by Bluscream"; 
 }; 
 DCMQuotingPlugin.prototype.getVersion = function() { 
-    return "0.1.7"; 
+    return "0.1.8"; 
 }; 
 DCMQuotingPlugin.prototype.getAuthor = function() { 
-    return "Ghost"; 
+    return "Ghost, Bluscream"; 
 }; 
 DCMQuotingPlugin.prototype.getSettingsPanel = function() { 
     return '<center><img src="https://s14.postimg.org/6w6z0pdpd/NJa3g_V_1.png"></img><br><b style="font-size: 40px;"> Nothing to see here yet... </b></center>'; 
