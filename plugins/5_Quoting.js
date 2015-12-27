@@ -1,5 +1,5 @@
-//META{"name":"DCMQuotingPlugin"}*// 
-function DCMQuotingPlugin(){
+//META{"name":"DCMQuotingPlugin_"}*// 
+function DCMQuotingPlugin_(){
     var ghostModId = 2;
     this.load = function(){
         inject();
@@ -57,19 +57,19 @@ function DCMQuotingPlugin(){
         }
     };
 };
-DCMQuotingPlugin.prototype.getName = function() { 
-    return "Quoting"; 
+DCMQuotingPlugin_.prototype.getName = function() { 
+    return "Quoting Plugin"; 
 }; 
-DCMQuotingPlugin.prototype.getDescription = function() { 
+DCMQuotingPlugin_.prototype.getDescription = function() { 
     return "Quoting from Discord Client Modding ported by NotGGhost and edited by Bluscream"; 
 }; 
-DCMQuotingPlugin.prototype.getVersion = function() { 
+DCMQuotingPlugin_.prototype.getVersion = function() { 
     return "0.1.8"; 
 }; 
-DCMQuotingPlugin.prototype.getAuthor = function() { 
+DCMQuotingPlugin_.prototype.getAuthor = function() { 
     return "Ghost, Bluscream"; 
 }; 
-DCMQuotingPlugin.prototype.getSettingsPanel = function() { 
+DCMQuotingPlugin_.prototype.getSettingsPanel = function() { 
     return '<center><img src="https://s14.postimg.org/6w6z0pdpd/NJa3g_V_1.png"></img><br><b style="font-size: 40px;"> Nothing to see here yet... </b></center>'; 
 }; 
 var CDCMQuoting = function(){
@@ -135,5 +135,5 @@ function removeAllEvents(node, event) {
 if (!((typeof(betterDiscordIPC) !== 'undefined') && (betterDiscordIPC !== null))) {
     var str = "Warning: This Discord Quoting script is designed to work in BetterDiscord only!\nHOWEVER it is still trying to load\n\n(Discord Client Modding is deprecated)";
     alert(str);
-    new DCMQuotingPlugin().start();
+    new DCMQuotingPlugin_().start();
 }
