@@ -121,9 +121,6 @@ BetterAPI.prototype.injectJS  = function() {
 	$("head").append('<script src="https://raw.githubusercontent.com/VersatilityWerks/jAlert/master/src/jAlert-v3.min.js"></script>');
 	$("head").append('<script src="https://raw.githubusercontent.com/VersatilityWerks/jAlert/master/src/jAlert-functions.min.js"></script>');
 	$("head").append('<script src="https://cdn.rawgit.com/zenorocha/clipboard.js/v1.5.5/dist/clipboard.min.js"></script>');
- // $("head").append('<script src="https://cdn.rawgit.com/hydrabolt/discord.js/master/lib/index.js"></script>');
- // $("head").append('<script src="https://cdn.rawgit.com/izy521/discord.io/master/lib/index.js"></script>');
- // $("head").append('<script src="https://cdn.rawgit.com/qeled/discordie/master/lib/index.js"></script>');
 };
 BetterAPI.prototype.loadAPI  = function() {
 	// BetterAPI.getUserIdByName("name");
@@ -233,6 +230,14 @@ BetterAPI.prototype.loadAPI  = function() {
 			});
 		}
 		return match;
+	}
+	// BetterAPI.getCurrentChannelName();
+	BetterAPI.getCurrentChannelName = function() {
+		return $(".active .channel-name").text()
+	}
+	// BetterAPI.getCurrentServerName();
+	BetterAPI.getCurrentServerName = function() {
+		return $(document).find("[data-reactid='.0.1.1.0.1.0.0.0.0']").text();
 	}
 	// BetterAPI.addUserLabel("divID", "label", "<html>");
 	BetterAPI.addUserLabel = function(divID, label, html) {

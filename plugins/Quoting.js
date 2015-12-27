@@ -38,7 +38,7 @@ function DCMQuotingPlugin(){
     var createSpan = function(){
         var span = document.createElement("span");
         span.setAttribute("style", "display:inline-block");
-        span.innerText = "Quote";
+        span.innerText = "[Quote]";
         span.setAttribute("onclick", "DCMQuoting.clicked(this);");
         return span;
     };
@@ -90,9 +90,13 @@ var CDCMQuoting = function(){
             .replace("Today at ", "");
         var username = body.getElementsByTagName("h2")[0]
             .getElementsByClassName("user-name")[0].innerText;
+		// var uid = BetterAPI.getUserIdByName(username);
         var comments = element.getElementsByClassName("comment")[0]
             .getElementsByClassName("message");
+		var channel = BetterAPI.getCurrentChannelName();
+		var server = BetterAPI.getCurrentServerName();
         var index;
+		var msg = msg + "`[" + time + "]`: \"" + username + "\" said in #"+channel+" on **"+server+"**: ```\n";
         for (index = 0; index < comments.length; ++index) {
             var text = comments[index].getElementsByClassName("markup")[0]
                 .innerText
@@ -100,8 +104,9 @@ var CDCMQuoting = function(){
                 .replace("\n\r", "")
                 .replace("_", "");
             if (!(text == ""))
-                msg = msg + "[" + time + "] " + username + ": _" + text + "_\n" ;
+                msg = msg + text + "\n";
         }
+		var msg = msg + "```";
         return msg;
     };
     this.resize = function(textArea){
