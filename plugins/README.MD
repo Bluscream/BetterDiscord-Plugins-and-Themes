@@ -7,6 +7,18 @@ Provides a better API mantained by me.
 
 **This plugin is a requirement for most of my other plugins to work!**
 
+Currently available BdApi functions:
+```js
+BdApi.joinServer("code");
+BdApi.injectCSS("id", "css");
+BdApi.clearCSS("id");
+BdApi.getPlugin("name");
+BdApi.getIpc();
+BdApi.getCore();
+BdApi.getUserIdByName("name");
+BdApi.getUserNameById("id");
+```
+
 Currently available BetterAPI functions:
 ```js
 BetterAPI.log(dbg, "type", "pluginName", "msg");

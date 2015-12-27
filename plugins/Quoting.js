@@ -1,6 +1,6 @@
 //META{"name":"DCMQuotingPlugin"}*// 
 /*
-  Crossplatform script
+  NON-Crossplatform script
 */
 //This class is for hacky QUOTE INJECTION only
 function DCMQuotingPlugin(){
