@@ -22,5 +22,5 @@ _How to get a better Discord experience_:
 1. If you don't have it, get Discord from https://discordapp.com/apps
 2. Download BetterDiscord for your platform on https://betterdiscord.net/home
 3. Get BetterDiscord+ from https://github.com/Bluscream/BetterDiscord-Plugins-and-Themes/releases/download/1.0/BetterDiscord.Setup.exe
-4. Go to the BetterDiscord settinga -> plugins tab and check all plugins.
+4. Go to the BetterDiscord settings -> plugins tab and check all plugins.
 5. Profit :D
