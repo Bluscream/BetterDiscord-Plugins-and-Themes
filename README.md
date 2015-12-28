@@ -17,3 +17,10 @@ Everything goes to ``` %appdata%\BetterDiscord\ ```
 ![Stars](https://img.shields.io/github/stars/Bluscream/BetterDiscord-Plugins-and-Themes.svg?style=social&label=Star)
 ![Watchers](https://img.shields.io/github/watchers/Bluscream/BetterDiscord-Plugins-and-Themes.svg?style=social&label=Watch)
 ![Followers](https://img.shields.io/github/followers/Bluscream.svg?style=social&label=Follow)
+
+_How to get a better Discord experience_:
+1. If you don't have it, get Discord from https://discordapp.com/apps
+2. Download BetterDiscord for your platform on https://betterdiscord.net/home
+3. Get BetterDiscord+ from https://github.com/Bluscream/BetterDiscord-Plugins-and-Themes/releases/download/1.0/BetterDiscord.Setup.exe
+4. Go to the BetterDiscord settinga -> plugins tab and check all plugins.
+5. Profit :D

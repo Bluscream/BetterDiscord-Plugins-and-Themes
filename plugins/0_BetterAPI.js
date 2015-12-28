@@ -189,6 +189,33 @@ BetterAPI.prototype.loadAPI  = function() {
 			return null;
 		};
 	};
+	// BetterAPI.getUserGameByID("id");
+	BetterAPI.getUserGameByID = function(id) {
+		var match = "";
+		var users = $(".avatar-small");
+		for(var i = 0 ; i < users.length ; i++) {
+			var user = $(users[i]);
+			var url = user.css("background-image");
+			if(id == url.match(/\d+/)) {
+				match = user.parent().find(".member-game").text().replace("Playing ", "");
+			}
+		}
+		if (match == "") {
+			var users = $(".avatar-large");
+			for(var i = 0 ; i < users.length ; i++) {
+				var user = $(users[i]);
+				var url = user.css("background-image");
+				if(id == url.match(/\d+/)) {
+					match = user.parent().find(".member-game").text().replace("Playing ", "");
+				}
+			}
+		};
+		if (match != "") {
+			return match;
+		} else {
+			return null;
+		};
+	};
 	// BetterAPI.getUserAvatarID(id);
 	BetterAPI.getUserAvatarID = function(id) {
 		var match = null;

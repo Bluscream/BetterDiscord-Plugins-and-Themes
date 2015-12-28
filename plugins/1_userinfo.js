@@ -6,17 +6,30 @@ userInfo.prototype.load = function() {
 userInfo.prototype.unload = function() {
 };
 userInfo.prototype.start = function() {
+	$(document).on('DOMNodeInserted', '.guild-header-open', function() {
+		console.log('test');
+	});
     $('span[data-reactid=".0.4"]').on('DOMNodeInserted', '.popout', function() {
 		var name = $(".user-popout").find(".username").text();
 		id = BetterAPI.getUserIdByName(name);
 		avatarID = BetterAPI.getUserAvatarID(id);
 		avatarURL = BetterAPI.getUserAvatarURL(id);
 		nameByID = BdApi.getUserNameById(id);
-		BetterAPI.addUserLabel("UserInfoLabel", "Info", ''+
-		'<img src="'+avatarURL+'" style="max-width:223px;"></img><br>'+
-		'<b>Name: </b>'+name+'<br>'+
-		'<b>UID: </b>'+id+'<br>'+
-		'<b>AID: </b><span style="font-size:x-small">'+avatarID+'</span>');
+		gameByID = BetterAPI.getUserGameByID(id);
+		if (gameByID == null) {	
+			BetterAPI.addUserLabel("UserInfoLabel", "Info", ''+
+			'<img src="'+avatarURL+'" style="max-width:223px;"></img><br>'+
+			'<b>Name: </b><span style="float:right">'+name+'</span><br>'+
+			'<b>UID: </b><span style="color:darkgrey;float:right">'+id+'</span><br>'+
+			'<b>AID: </b><span style="font-size:x-small;float:right">'+avatarID+'</span>');
+		} else {
+			BetterAPI.addUserLabel("UserInfoLabel", "Info", ''+
+			'<img src="'+avatarURL+'" style="max-width:223px;"></img><br>'+
+			'<b>Name: </b><span style="float:right">'+name+'</span><br>'+
+			'<b>UID: </b><span style="color:darkgrey;float:right">'+id+'</span><br>'+
+			'<b>AID: </b><span style="font-size:small;float:right">'+avatarID+'</span><br>'+
+			'<b>Game: </b><span style="color:blue;float:right">'+gameByID+'</span>');
+		}
 		// BetterAPI.addUserButton("btn", "#UserInfo", "Info");
 		// $('#UserInfo').on("click", function () {
 			// $.jAlert({

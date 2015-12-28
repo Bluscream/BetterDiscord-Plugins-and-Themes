@@ -1,5 +1,5 @@
-//META{"name":"DCMQuotingPlugin_"}*// 
-function DCMQuotingPlugin_(){
+//META{"name":"DCMQuotingPlugin"}*// 
+function DCMQuotingPlugin(){
     var ghostModId = 2;
     this.load = function(){};
     this.start = function(){
@@ -29,18 +29,18 @@ function DCMQuotingPlugin_(){
             update();
         }, false);
     };
-	createCharCounter = function() {
+	this.createCharCounter = function() {
 		// $('textarea').off('keyup');
 		// $('textarea').off('keydown');
 		if ($('.charcounter').length <= 0) {
 			$(document).find("[data-reactid='.0.1.1.0.2.1.0.1']").append('<span class="charcounter" style="font-size:small;color:red"></span>');
 			$('textarea').keyup(updateCount());
 			$('textarea').keydown(updateCount());
-			DCMQuotingPlugin_.updateCount();
+			DCMQuotingPlugin.updateCount();
 		}
 	}
-	updateCount = function() {
-		var cs = $(this).val().length;
+	this.updateCount = function() {
+		var cs = $('textarea').val().length;
 		$('.charcounter').text(cs+'/2000');
 	}
     var createSpan = function(){
@@ -68,23 +68,23 @@ function DCMQuotingPlugin_(){
         }
     };
 };
-DCMQuotingPlugin_.prototype.getName = function() { 
+DCMQuotingPlugin.prototype.getName = function() { 
     return "Quoting Plugin"; 
 }; 
-DCMQuotingPlugin_.prototype.onSwitch = function() { 
-	DCMQuotingPlugin_.createCharCounter();
-	DCMQuotingPlugin_.updateCount();
+DCMQuotingPlugin.prototype.onSwitch = function() { 
+	// DCMQuotingPlugin.createCharCounter();
+	// DCMQuotingPlugin.updateCount();
 }; 
-DCMQuotingPlugin_.prototype.getDescription = function() { 
+DCMQuotingPlugin.prototype.getDescription = function() { 
     return "Quoting from Discord Client Modding ported by NotGGhost and edited by Bluscream"; 
 }; 
-DCMQuotingPlugin_.prototype.getVersion = function() { 
+DCMQuotingPlugin.prototype.getVersion = function() { 
     return "0.1.8"; 
 }; 
-DCMQuotingPlugin_.prototype.getAuthor = function() { 
+DCMQuotingPlugin.prototype.getAuthor = function() { 
     return "Ghost, Bluscream"; 
 }; 
-DCMQuotingPlugin_.prototype.getSettingsPanel = function() { 
+DCMQuotingPlugin.prototype.getSettingsPanel = function() { 
     return '<center><img src="https://s14.postimg.org/6w6z0pdpd/NJa3g_V_1.png"></img><br><b style="font-size: 40px;"> Nothing to see here yet... </b></center>'; 
 }; 
 var CDCMQuoting = function(){
@@ -150,5 +150,5 @@ function removeAllEvents(node, event) {
 if (!((typeof(betterDiscordIPC) !== 'undefined') && (betterDiscordIPC !== null))) {
     var str = "Warning: This Discord Quoting script is designed to work in BetterDiscord only!\nHOWEVER it is still trying to load\n\n(Discord Client Modding is deprecated)";
     alert(str);
-    new DCMQuotingPlugin_().start();
+    new DCMQuotingPlugin().start();
 }
