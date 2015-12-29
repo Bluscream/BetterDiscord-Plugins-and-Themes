@@ -18,6 +18,7 @@ Everything goes to ``` %appdata%\BetterDiscord\ ```
 ![Watchers](https://img.shields.io/github/watchers/Bluscream/BetterDiscord-Plugins-and-Themes.svg?style=social&label=Watch)
 ![Followers](https://img.shields.io/github/followers/Bluscream.svg?style=social&label=Follow)
 
+
 __How to get a better Discord experience__:
 1. If you don't have it, get **Discord** from https://discordapp.com/apps
 2. Download **BetterDiscord** for your platform on https://betterdiscord.net/home
