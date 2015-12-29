@@ -19,16 +19,16 @@ userInfo.prototype.start = function() {
 		if (gameByID == null) {	
 			BetterAPI.addUserLabel("UserInfoLabel", "Info", ''+
 			'<img src="'+avatarURL+'" style="max-width:223px;"></img><br>'+
-			'<b>Name: </b><span style="float:right">'+name+'</span><br>'+
-			'<b>UID: </b><span style="color:darkgrey;float:right">'+id+'</span><br>'+
-			'<b>AID: </b><span style="font-size:x-small;float:right">'+avatarID+'</span>');
+			'<b>Name: </b>'+name+'<br>'+
+			'<b>UID: </b><span style="color:darkgrey">'+id+'</span><br>'+
+			'<b>AID: </b><span style="font-size:x-small">'+avatarID+'</span>');
 		} else {
 			BetterAPI.addUserLabel("UserInfoLabel", "Info", ''+
 			'<img src="'+avatarURL+'" style="max-width:223px;"></img><br>'+
-			'<b>Name: </b><span style="float:right">'+name+'</span><br>'+
-			'<b>UID: </b><span style="color:darkgrey;float:right">'+id+'</span><br>'+
-			'<b>AID: </b><span style="font-size:small;float:right">'+avatarID+'</span><br>'+
-			'<b>Game: </b><span style="color:blue;float:right">'+gameByID+'</span>');
+			'<b>Name: </b>'+name+'<br>'+
+			'<b>UID: </b><span style="color:darkgrey">'+id+'</span><br>'+
+			'<b>AID: </b><span style="font-size:x-small">'+avatarID+'</span><br>'+
+			'<b>Game: </b><span style="color:blue">'+gameByID+'</span>');
 		}
 		// BetterAPI.addUserButton("btn", "#UserInfo", "Info");
 		// $('#UserInfo').on("click", function () {

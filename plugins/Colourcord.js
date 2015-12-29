@@ -1,16 +1,10 @@
 //META{"name":"colourCord"}*//
 function colourCord() {}
 colourCord.prototype.load = function() {
-    //Called when plugin is loaded(eg. Discord load/reload)
-    console.info("%c[BetterDiscord]" + " %c" + this.getName() + "(" + this.getVersion() + ") loaded", "color: purple; font-weight: bold;", "");
 };
 colourCord.prototype.unload = function() {
-    //Called when plugin is unloaded
-    console.info("%c[BetterDiscord]" + " %c" + this.getName() + "(" + this.getVersion() + ") unloaded", "color: purple; font-weight: bold;", "");
 };
 colourCord.prototype.start = function() {
-    //Called when user starts plugin
-    console.info("%c[BetterDiscord]" + " %c" + this.getName() + "(" + this.getVersion() + ") started", "color: purple; font-weight: bold;", "");
     var s = document.createElement("script");
     s.type = "text/javascript";
     s.src = "//raw.githubusercontent.com/DavidDurman/FlexiColorPicker/master/colorpicker.min.js";
@@ -20,8 +14,6 @@ colourCord.prototype.start = function() {
     colourCord.applyColour();
 };
 colourCord.prototype.stop = function() {
-    //Called when user stops plugin
-    console.info("%c[BetterDiscord]" + " %c" + this.getName() + "(" + this.getVersion() + ") stopped", "color: purple; font-weight: bold;", "");
 };
 colourCord.prototype.getSettingsPanel = function() {
 	var maccent = localStorage.mainAccent == undefined ? "#FFFFFF" : localStorage.mainAccent;

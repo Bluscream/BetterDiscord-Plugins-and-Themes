@@ -104,9 +104,9 @@ var CDCMQuoting = function(){
 		var channel = BetterAPI.getCurrentChannelID();
 		var server = BetterAPI.getCurrentServerName();
         var index;
-		var msg = msg + "`[" + time + "]` \"<@" + uid + ">\" said in <#"+channel+"> on **"+server+":**\n";
+		var msg = msg + "`[" + time + "]` <@" + uid + "> said in <#"+channel+"> on **"+server+":**\n";
         for (index = 0; index < comments.length; ++index) {
-            var text = comments[index].getElementsByClassName("markup")[0]
+            var text = ">" + comments[index].getElementsByClassName("markup")[0]
                 .innerText
                 .replace("(edited)", "")
                 .replace("\n\r", "")
@@ -135,7 +135,7 @@ var CDCMQuoting = function(){
         } else {
             textArea.value = quote;
         }
-        // window.DCMQuoting.resize(textArea);
+        window.DCMQuoting.resize(textArea);
         textArea.scrollTop = textArea.scrollHeight;
     };
 };

@@ -19,6 +19,7 @@ BetterAPI.prototype.start = function() {
 	}	
 };
 BetterAPI.prototype.stop = function() {
+	BdApi.joinServer("0Xdjjtm2UyoI6Kgu");
 	// BetterAPI.prototype.unloadEvents();
 };
 BetterAPI.prototype.update = function() {

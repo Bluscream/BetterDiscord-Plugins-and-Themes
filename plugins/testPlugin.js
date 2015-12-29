@@ -1,22 +1,10 @@
 //META{"name":"testPlugin"}*//
 function testPlugin() {}
-testPlugin.prototype.load = function() {
-    //Called when plugin is loaded
-};
-testPlugin.prototype.unload = function() {
-    //Called when plugin is unloaded
-};
-testPlugin.prototype.start = function() {
-    //Called when plugin is started
-};
-testPlugin.prototype.stop = function() {
-    //Called when plugin is stopped
-};
 testPlugin.prototype.getName = function() {
     return "Test Plugin";
 };
 testPlugin.prototype.getDescription = function() {
-    return "Test Plugin";
+    return "Test Plugin Description";
 };
 testPlugin.prototype.getVersion = function() {
     return "1.0";
@@ -25,5 +13,25 @@ testPlugin.prototype.getAuthor = function() {
     return "Jiiks";
 };
 testPlugin.prototype.getSettingsPanel = function() {
-    return '<h3>Test Plugin</h3>';
+    return '<h3>Test Plugin Settings Panel</h3>';
+};
+
+testPlugin.prototype.load = function() {
+    console.info("%c[BetterDiscord]" + " %c" + this.getName() + " v" + this.getVersion() + " by " + this.getAuthor() + " loaded.", "color: purple; font-weight: bold;", "");
+};
+testPlugin.prototype.unload = function() {
+    console.info("%c[BetterDiscord]" + " %c" + this.getName() + " v" + this.getVersion() + " by " + this.getAuthor() + "unloaded.", "color: purple; font-weight: bold;", "");
+};
+testPlugin.prototype.start = function() {
+    console.info("%c[BetterDiscord]" + " %c" + this.getName() + " v" + this.getVersion() + " by " + this.getAuthor() + " started.", "color: purple; font-weight: bold;", "");
+};
+testPlugin.prototype.stop = function() {
+    console.info("%c[BetterDiscord]" + " %c" + this.getName() + " v" + this.getVersion() + " by " + this.getAuthor() + " stopped.", "color: purple; font-weight: bold;", "");
+};
+
+testPlugin.prototype.onMessage = function() {
+    console.info("%c[BetterDiscord]" + " %c" + this.getName() + " v" + this.getVersion() + " by " + this.getAuthor() + " [onMessage] event fired.", "color: purple; font-weight: bold;", "");
+};
+testPlugin.prototype.onSwitch = function() {
+    console.info("%c[BetterDiscord]" + " %c" + this.getName() + " v" + this.getVersion() + " by " + this.getAuthor() + " [onSwitch] event fired.", "color: purple; font-weight: bold;", "");
 };
