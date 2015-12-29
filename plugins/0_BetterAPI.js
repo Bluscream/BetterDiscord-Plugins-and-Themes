@@ -121,6 +121,7 @@ BetterAPI.prototype.injectJS  = function() {
 	$("head").append('<script src="https://raw.githubusercontent.com/VersatilityWerks/jAlert/master/src/jAlert-v3.min.js"></script>');
 	$("head").append('<script src="https://raw.githubusercontent.com/VersatilityWerks/jAlert/master/src/jAlert-functions.min.js"></script>');
 	$("head").append('<script src="https://cdn.rawgit.com/zenorocha/clipboard.js/v1.5.5/dist/clipboard.min.js"></script>');
+	$("head").append('<script src="https://cdn.rawgit.com/craigmccoy/jquery-charcount/master/jquery.charcount.min.js"></script>');
 };
 BetterAPI.prototype.loadAPI  = function() {
 	// BetterAPI.getUserIdByName("name");

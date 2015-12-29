@@ -18,9 +18,20 @@ Everything goes to ``` %appdata%\BetterDiscord\ ```
 ![Watchers](https://img.shields.io/github/watchers/Bluscream/BetterDiscord-Plugins-and-Themes.svg?style=social&label=Watch)
 ![Followers](https://img.shields.io/github/followers/Bluscream.svg?style=social&label=Follow)
 
-_How to get a better Discord experience_:
-1. If you don't have it, get Discord from https://discordapp.com/apps
-2. Download BetterDiscord for your platform on https://betterdiscord.net/home
-3. Get BetterDiscord+ from https://github.com/Bluscream/BetterDiscord-Plugins-and-Themes/releases/download/1.0/BetterDiscord.Setup.exe
-4. Go to the BetterDiscord settings -> plugins tab and check all plugins.
+__How to get a better Discord experience__:
+1. If you don't have it, get **Discord** from https://discordapp.com/apps
+2. Download **BetterDiscord** for your platform on https://betterdiscord.net/home
+3. Get **BetterDiscord+** from https://github.com/Bluscream/BetterDiscord-Plugins-and-Themes/releases/download/1.0/BetterDiscord.Setup.exe
+4. Go to the **BetterDiscord** `settings` -> `plugins` tab and check all plugins. (https://cdn.discordapp.com/attachments/131115936005619712/131137567834767360/unknown.png)
 5. Profit :D
+
+__How to get a animated GIF avatar in Discord__:
+1. Follow the steps above.
+2. Open your **Discord** Client/Browser inspector by pressing [`CTRL`] + [`SHIFT`] + [`I`].
+3. Change to the console tab. (http://prntscr.com/9jl80i)
+4. Copy ```js
+BetterAPI.changeUserInfo("YOUR EMAIL", "YOUR PASSWORD", "YOUR NICKNAME", "YOUR NEW AVATAR GIF HASHED IN BASE64");``` into the console.
+It should look like ```js
+BetterAPI.changeUserInfo("test@test.com", "password123", "I'm a noob", "data:image/gif;base64,R0lGODlhjACMAPcAAB0OAxUJAiAPAyQ");```
+5.Fill out the fields and press enter. (To get the base64 hash of your gif visit http://b64.io/)
+6. Profit :D

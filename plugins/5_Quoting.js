@@ -29,20 +29,24 @@ function DCMQuotingPlugin(){
             update();
         }, false);
     };
-	this.createCharCounter = function() {
+	createCharCounter = function() {
+		$(document).find("[data-reactid='.0.1.1.0.2.1.0.1']").charcount({
+			maxLength: 2000,
+			position: 'after'
+		});
 		// $('textarea').off('keyup');
 		// $('textarea').off('keydown');
-		if ($('.charcounter').length <= 0) {
-			$(document).find("[data-reactid='.0.1.1.0.2.1.0.1']").append('<span class="charcounter" style="font-size:small;color:red"></span>');
-			$('textarea').keyup(updateCount());
-			$('textarea').keydown(updateCount());
-			DCMQuotingPlugin.updateCount();
-		}
+		// if ($('.charcounter').length <= 0) {
+			// $(document).find("[data-reactid='.0.1.1.0.2.1.0.1']").append('<span class="charcounter" style="font-size:small;color:red"></span>');
+			// $('textarea').keyup(updateCount());
+			// $('textarea').keydown(updateCount());
+			// DCMQuotingPlugin.updateCount();
+		// }
 	}
-	this.updateCount = function() {
-		var cs = $('textarea').val().length;
-		$('.charcounter').text(cs+'/2000');
-	}
+	// this.updateCount = function() {
+		// var cs = $('textarea').val().length;
+		// $('.charcounter').text(cs+'/2000');
+	// }
     var createSpan = function(){
         var span = document.createElement("span");
         span.setAttribute("style", "display:inline-block;font-size:big");
@@ -50,6 +54,9 @@ function DCMQuotingPlugin(){
         span.setAttribute("onclick", "DCMQuoting.clicked(this);");
         return span;
     };
+	var createEditButton = function() {
+		// <div class="btn-item" data-reactid=".0.4.$=11=2$13434-popout.0.0">Edit</div>
+	}
     var update = function(){
         if ((typeof(document.getElementsByClassName("messages")[0]) !== 'undefined') 
             && (document.getElementsByClassName("messages")[0] !== null)
@@ -61,8 +68,9 @@ function DCMQuotingPlugin(){
                     .getElementsByTagName("span");
                 for (var ia = 0, ima = element.length; ima > ia; ia++) {
                     var content = element[ia].parentElement.parentElement;
-                    if ((content.className == "body") && (checkVal(content) == ghostModId))
-                        content.getElementsByTagName("h2")[0].appendChild(createSpan())
+                    if ((content.className == "body") && (checkVal(content) == ghostModId)) {
+                        content.getElementsByTagName("h2")[0].appendChild(createSpan());
+					}
                 }
             }
         }
@@ -72,7 +80,7 @@ DCMQuotingPlugin.prototype.getName = function() {
     return "Quoting Plugin"; 
 }; 
 DCMQuotingPlugin.prototype.onSwitch = function() { 
-	// DCMQuotingPlugin.createCharCounter();
+	createCharCounter();
 	// DCMQuotingPlugin.updateCount();
 }; 
 DCMQuotingPlugin.prototype.getDescription = function() { 
