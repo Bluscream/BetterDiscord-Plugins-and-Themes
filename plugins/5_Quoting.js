@@ -4,6 +4,7 @@ function DCMQuotingPlugin(){
     this.load = function(){};
     this.start = function(){
         inject();
+		createCharCounter();
     };
     this.unload = function(){
         removeAllEvents(document, "DOMNodeInsertedIntoDocument");
@@ -30,23 +31,12 @@ function DCMQuotingPlugin(){
         }, false);
     };
 	createCharCounter = function() {
-		$(document).find("[data-reactid='.0.1.1.0.2.1.0.1']").charcount({
+		$(document).find("[data-reactid='.0.1.1.0.2.1.0.1.0.0.1']").charcount({
 			maxLength: 2000,
-			position: 'after'
+			position: 'before'
 		});
-		// $('textarea').off('keyup');
-		// $('textarea').off('keydown');
-		// if ($('.charcounter').length <= 0) {
-			// $(document).find("[data-reactid='.0.1.1.0.2.1.0.1']").append('<span class="charcounter" style="font-size:small;color:red"></span>');
-			// $('textarea').keyup(updateCount());
-			// $('textarea').keydown(updateCount());
-			// DCMQuotingPlugin.updateCount();
-		// }
+		$('.charcount-display').css("font-size", "small");
 	}
-	// this.updateCount = function() {
-		// var cs = $('textarea').val().length;
-		// $('.charcounter').text(cs+'/2000');
-	// }
     var createSpan = function(){
         var span = document.createElement("span");
         span.setAttribute("style", "display:inline-block;font-size:big");
@@ -81,7 +71,6 @@ DCMQuotingPlugin.prototype.getName = function() {
 }; 
 DCMQuotingPlugin.prototype.onSwitch = function() { 
 	createCharCounter();
-	// DCMQuotingPlugin.updateCount();
 }; 
 DCMQuotingPlugin.prototype.getDescription = function() { 
     return "Quoting from Discord Client Modding ported by NotGGhost and edited by Bluscream"; 
@@ -109,13 +98,13 @@ var CDCMQuoting = function(){
             .replace("Today at ", "");
         var username = body.getElementsByTagName("h2")[0]
             .getElementsByClassName("user-name")[0].innerText;
-		// var uid = BetterAPI.getUserIdByName(username);
+		var uid = BetterAPI.getUserIdByName(username);
         var comments = element.getElementsByClassName("comment")[0]
             .getElementsByClassName("message");
-		var channel = BetterAPI.getCurrentChannelName();
+		var channel = BetterAPI.getCurrentChannelID();
 		var server = BetterAPI.getCurrentServerName();
         var index;
-		var msg = msg + "`[" + time + "]`: \"" + username + "\" said in #"+channel+" on **"+server+"**: ```\n";
+		var msg = msg + "`[" + time + "]` \"<@" + uid + ">\" said in <#"+channel+"> on **"+server+":**\n";
         for (index = 0; index < comments.length; ++index) {
             var text = comments[index].getElementsByClassName("markup")[0]
                 .innerText
@@ -125,7 +114,7 @@ var CDCMQuoting = function(){
             if (!(text == ""))
                 msg = msg + text + "\n";
         }
-		var msg = msg + "```";
+		// var msg = msg + "```";
         return msg;
     };
     this.resize = function(textArea){
@@ -146,7 +135,7 @@ var CDCMQuoting = function(){
         } else {
             textArea.value = quote;
         }
-        window.DCMQuoting.resize(textArea);
+        // window.DCMQuoting.resize(textArea);
         textArea.scrollTop = textArea.scrollHeight;
     };
 };

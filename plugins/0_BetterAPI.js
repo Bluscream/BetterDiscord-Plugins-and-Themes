@@ -263,9 +263,19 @@ BetterAPI.prototype.loadAPI  = function() {
 	BetterAPI.getCurrentChannelName = function() {
 		return $(".active .channel-name").text()
 	}
+	// BetterAPI.getCurrentChannelID();
+	BetterAPI.getCurrentChannelID = function() {
+		var _url = window.location.pathname;
+		return _url.match(/\d+$/);
+	}
 	// BetterAPI.getCurrentServerName();
 	BetterAPI.getCurrentServerName = function() {
 		return $(document).find("[data-reactid='.0.1.1.0.1.0.0.0.0']").text();
+	}
+	// BetterAPI.getCurrentServerID();
+	BetterAPI.getCurrentServerID = function() {
+		var _url = window.location.pathname;
+		return _url.match(/\d+/);
 	}
 	// BetterAPI.addUserLabel("divID", "label", "<html>");
 	BetterAPI.addUserLabel = function(divID, label, html) {
