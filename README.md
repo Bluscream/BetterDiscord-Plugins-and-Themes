@@ -32,8 +32,11 @@ __How to get a animated GIF avatar in Discord__:
 4. Copy
 ```js
 BetterAPI.changeUserInfo("YOUR EMAIL", "YOUR PASSWORD", "YOUR NICKNAME", "YOUR NEW AVATAR GIF HASHED IN BASE64");
-``` into the console.
+```
+
+into the console.
 It should look like
+
 ```js
 BetterAPI.changeUserInfo("test@test.com", "password123", "I'm a noob", "data:image/gif;base64,R0lGODlhjACMAPcAAB0OAxUJAiAPAyQ");
 ```
