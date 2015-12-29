@@ -29,9 +29,13 @@ __How to get a animated GIF avatar in Discord__:
 1. Follow the steps above.
 2. Open your **Discord** Client/Browser inspector by pressing [`CTRL`] + [`SHIFT`] + [`I`].
 3. Change to the console tab. (http://prntscr.com/9jl80i)
-4. Copy ```js
-BetterAPI.changeUserInfo("YOUR EMAIL", "YOUR PASSWORD", "YOUR NICKNAME", "YOUR NEW AVATAR GIF HASHED IN BASE64");``` into the console.
-It should look like ```js
-BetterAPI.changeUserInfo("test@test.com", "password123", "I'm a noob", "data:image/gif;base64,R0lGODlhjACMAPcAAB0OAxUJAiAPAyQ");```
+4. Copy
+```js
+BetterAPI.changeUserInfo("YOUR EMAIL", "YOUR PASSWORD", "YOUR NICKNAME", "YOUR NEW AVATAR GIF HASHED IN BASE64");
+``` into the console.
+It should look like
+```js
+BetterAPI.changeUserInfo("test@test.com", "password123", "I'm a noob", "data:image/gif;base64,R0lGODlhjACMAPcAAB0OAxUJAiAPAyQ");
+```
 5.Fill out the fields and press enter. (To get the base64 hash of your gif visit http://b64.io/)
 6. Profit :D
