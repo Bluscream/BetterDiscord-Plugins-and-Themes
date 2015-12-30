@@ -1,14 +1,10 @@
 //META{"name":"userInfo"}*// Needs https://github.com/Bluscream/BetterDiscord-Plugins-and-Themes/blob/master/plugins/0_BetterAPI.js to work properly!
 function userInfo() {}
 userInfo.prototype.load = function() {
-	// $("head").append('<script src="https://cdn.rawgit.com/Bluscream/BetterDiscord-Plugins-and-Themes/master/plugins%2F0_BetterAPI.js"></script>');
 };
 userInfo.prototype.unload = function() {
 };
 userInfo.prototype.start = function() {
-	$(document).on('DOMNodeInserted', '.guild-header-open', function() {
-		console.log('test');
-	});
     $('span[data-reactid=".0.4"]').on('DOMNodeInserted', '.popout', function() {
 		var name = $(".user-popout").find(".username").text();
 		id = BetterAPI.getUserIdByName(name);

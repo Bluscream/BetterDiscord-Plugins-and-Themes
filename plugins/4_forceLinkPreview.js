@@ -1,13 +1,15 @@
 //META{"name":"forceLinkPreview"}*// Needs https://github.com/Bluscream/BetterDiscord-Plugins-and-Themes/blob/master/plugins/0_BetterAPI.js to work properly!
-function forceLinkPreview() {}
+function forceLinkPreview() {
+}
 forceLinkPreview.prototype.load = function() {
 };
 forceLinkPreview.prototype.unload = function() {
 };
 forceLinkPreview.prototype.start = function() {
-	$('.imageLink').each(function(){
-	   $(this).append(' <img src="'+test+'">'); 
-	});
+	// forceLinkPreview.prototype.addPreviews();
+};
+forceLinkPreview.prototype.onSwitch = function() {
+	// forceLinkPreview.prototype.addPreviews();
 };
 forceLinkPreview.prototype.stop = function() {
 };
@@ -25,3 +27,9 @@ forceLinkPreview.prototype.getVersion = function() {
 forceLinkPreview.prototype.getAuthor = function() {
 	return "Bluscream";
 };
+forceLinkPreview.prototype.addPreviews = function() {
+	$(/href="((?:.+)(?:\.(?:gif|jpg|jpeg|png|bmp|webp)))/).each(function(){
+		var orginal = /href="((?:.+)(?:\.(?:gif|jpg|jpeg|png|bmp|webp)))/;
+		$(this).append(' <img src="'+orginal+'">'); 
+	});
+}
