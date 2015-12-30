@@ -31,17 +31,29 @@ function DCMQuotingPlugin(){
         }, false);
     };
 	createCharCounter = function() {
-		$(document).find("[data-reactid='.0.1.1.0.2.1.0.1.0.0.1']").charcount({
-			maxLength: 2000,
-			position: 'before'
-		});
-		$('.charcount-display').css("font-size", "small");
+		if ($('.charcount-display').length <= 0) {
+			$(document).find("[data-reactid='.0.1.1.0.2.1.0.1.0.0.1']").charcount({
+				maxLength: 2000,
+				position: 'before'
+			});
+			$('.charcount-display').css("font-size", "small");
+		}
 	}
-    var createSpan = function(){
+	var createSpan = function(text){
         var span = document.createElement("span");
         span.setAttribute("style", "display:inline-block;font-size:big");
-        span.innerText = "[Quote]";
-        span.setAttribute("onclick", "DCMQuoting.clicked(this);");
+        span.innerText = text;
+        return span;
+	}
+    var createButton = function(text, func, mode){
+        var span = document.createElement("span");
+        span.setAttribute("style", "display:inline-block;font-size:big");
+        span.innerText = "["+text+"]";
+		if (mode) {
+			span.setAttribute("onclick", 'DCMQuoting.'+func+'(this, "'+mode+'");');
+		} else {
+			span.setAttribute("onclick", 'DCMQuoting.'+func+'(this);');
+		}
         return span;
     };
 	var createEditButton = function() {
@@ -59,7 +71,12 @@ function DCMQuotingPlugin(){
                 for (var ia = 0, ima = element.length; ima > ia; ia++) {
                     var content = element[ia].parentElement.parentElement;
                     if ((content.className == "body") && (checkVal(content) == ghostModId)) {
-                        content.getElementsByTagName("h2")[0].appendChild(createSpan());
+                        content.getElementsByTagName("h2")[0].appendChild(createSpan("| Quote: "));
+                        content.getElementsByTagName("h2")[0].appendChild(createButton("Server", "clicked", "server"));
+                        content.getElementsByTagName("h2")[0].appendChild(createButton("Channel", "clicked", "channel"));
+                        content.getElementsByTagName("h2")[0].appendChild(createButton("Client", "clicked", "client"));
+                        // content.getElementsByTagName("h2")[0].appendChild(createSpan(" | "));
+                        // content.getElementsByTagName("h2")[0].appendChild(createButton("Hide", "clickedHide"));
 					}
                 }
             }
@@ -86,7 +103,7 @@ DCMQuotingPlugin.prototype.getSettingsPanel = function() {
 }; 
 var CDCMQuoting = function(){
     this.enabled = true;
-    this.getMessage = function(element) {
+    this.getMessage = function(element, mode) {
         var msg = "";
         while (!(element.classList.contains("message-group")))
             element = element.parentElement;
@@ -104,7 +121,15 @@ var CDCMQuoting = function(){
 		var channel = BetterAPI.getCurrentChannelID();
 		var server = BetterAPI.getCurrentServerName();
         var index;
-		var msg = msg + "`[" + time + "]` <@" + uid + "> said in <#"+channel+"> on **"+server+":**\n";
+		if (mode == "client") {
+			var msg = msg + "`[" + time + "]` <@" + uid + "> said:\n";
+		} else if (mode == "channel") {
+			var msg = msg + "`[" + time + "]` <@" + uid + "> said in <#"+channel+">:\n";
+		} else if (mode == "server") {
+			var msg = msg + "`[" + time + "]` <@" + uid + "> said in <#"+channel+">:\n";
+		} else {
+			var msg = msg + "`[" + time + "]` \"" + uid + "\" said:\n";
+		}
         for (index = 0; index < comments.length; ++index) {
             var text = ">" + comments[index].getElementsByClassName("markup")[0]
                 .innerText
@@ -125,9 +150,9 @@ var CDCMQuoting = function(){
         };
         textArea.style.height = textArea.scrollHeight > textArea.clientHeight ? (textArea.scrollHeight) + "px" : (textArea.value == "" ? "18px" : "80px");
     }
-    this.clicked = function(messageElement){
+    this.clicked = function(messageElement, mode){
         var textArea = document.getElementsByTagName("textarea")[0];
-        const message = window.DCMQuoting.getMessage(messageElement);
+        const message = window.DCMQuoting.getMessage(messageElement, mode);
         const oldMsg = textArea.value;
         var quote = (oldMsg == "" ? oldMsg : oldMsg + "\n") + message + "\n";    //append if text is already in the text box
         if ((typeof(betterDiscordIPC) !== 'undefined') && (betterDiscordIPC !== null)) { 
@@ -137,6 +162,13 @@ var CDCMQuoting = function(){
         }
         window.DCMQuoting.resize(textArea);
         textArea.scrollTop = textArea.scrollHeight;
+    };
+    this.clickedHide = function(messageElement){
+        while (!(messageElement.classList.contains("message-group")))
+            messageElement = messageElement.parentElement;
+		var comments = messageElement.getElementsByClassName("comment")[0]
+            .getElementsByClassName("message");
+        $(message).css('display', 'none');
     };
 };
 window.DCMQuoting = new CDCMQuoting();
