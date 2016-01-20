@@ -1,0 +1,691 @@
+/META{"name":"Darker Discord","description":"'cause who likes round edges anywhere","author":"Megamit/Mitchell","version":"1.0"}*//
+
+.channel-textarea-inner textarea {
+    font-family: sans-serif !important;
+}
+
+.user-popout .user-popout-options .btn.btn-server:hover {
+    border-color: #f69191;
+    background-color: #131313;
+}
+
+.popout section {
+    padding: 20px;
+    background-color: hsla(0, 0%, 10%, 0.98);
+    border-radius: 0 0 3px 3px;
+}
+
+.user-popout .user-popout-options .btn.btn-server {
+    color: #f04747;
+    background-color: rgb(41, 41, 41);
+    border: none;
+    padding: 8px 12px;
+    border-color: #f9b5b5;
+}
+
+.popout header {
+    background-color: rgba(41, 41, 41, 0.98);
+    border-radius: 0px;
+}
+
+.guild-channels ul .channel-text:hover {
+    background: -webkit-linear-gradient(to right,#0C0C0C 85%,#0C0C0C);
+    background: linear-gradient(to right,#0c0c0c 85%,#0c0c0c);
+}
+
+.channel:hover {
+    background: -webkit-linear-gradient(to right,#0C0C0C 85%,#0C0C0C);
+    background: linear-gradient(to right,#0C0C0C 85%,#0C0C0C);
+    color: #fff;
+}
+
+.help-container { background-color: #080808; display: none !important;}
+
+.message-group { padding: 7px 0; }
+
+.guilds { padding: 9px 7px; width: 75px;}
+
+.guilds-wrapper { width: 55px; }
+.guilds { padding: 9px 7px; width: 65px; }
+.guilds li { width: 40px; height: 40px; }
+.guilds li .avatar-small { width: 40px; height: 40px; background-size: 40px 40px; }
+.guilds li .guild-inner a { width: 40px; height: 40px; }
+.guilds li.unread .guild-inner:before { left: -14px; }
+.guilds-add { line-height: 0%; }
+
+span {
+    font-family: arial;
+    font-size: 13px;
+}
+
+.chat .divider>span {
+    background-color: #fff;
+    line-height: 19px;
+    color: #99aab5;
+    font-weight: 600;
+    padding: 0 10px;
+    display: none;
+    font-size: 14px;
+}
+
+strong.user-name {
+    font-family: arial;
+    font-size: 13px !important;
+}
+
+.avatar-large {
+    border-radius: 0;
+}
+
+.channel-textarea {
+    margin: 0px 0 3px;
+    width: 100%;
+    position: relative;
+    -webkit-transform: translateZ(0);
+    -ms-transform: translateZ(0);
+    transform: translateZ(0);
+}
+
+.theme-dark .channel-textarea-inner {
+    border-color: #080808 !important;
+    background: #080808 !important;
+}
+
+.channel-textarea-inner {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: box;
+    display: flex;
+    position: relative;
+    padding: 10px 7px !important;
+    border-radius: 3px;
+    border: 2px solid #dadddf;
+    box-sizing: border-box;
+    background-color: #fff;
+}
+
+.messages-wrapper {
+    background: #080808;
+}
+
+.message-group {
+    border: none;
+}
+
+.divider {
+    display: none !important;
+    color: #080808;
+    background: #080808;
+}
+
+.theme-dark .chat .title-wrap {
+    background-color: #080808;
+    border-bottom: 1px solid #080808;
+}
+
+.guild-header header {
+    background-color: #080808;
+    }
+
+.guild-header header:hover {
+    background-color: #080808;
+    }
+
+.guild-channels header span {
+    -webkit-box-flex: 1;
+    -o-box-flex: 1;
+    box-flex: 1;
+    -webkit-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
+    font-size: 12px !important;
+    font-family: sans-serif;
+    font-weight: 100 !important;
+}
+
+.guild-channels {
+    background-color: #080808;
+    border: none !important;
+    padding: 5px 0;
+    box-sizing: border-box;
+    position: relative;
+    overflow: hidden;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    -webkit-box-flex: 1;
+    -o-box-flex: 1;
+    box-flex: 1;
+    -webkit-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
+}
+
+li.channel.channel-text.selected {
+    background: #080808 !important;
+} 
+
+.avatar-large {
+    width: 35px;
+    height: 35px;
+    background-size: 35px 35px;
+    border-radius: 20px;
+    background-clip: padding-box;
+    position: relative;
+    background-color: none;
+}
+
+.message-group .avatar-large {
+    margin-top: -2px;
+    margin-right: 10px !important;
+}
+
+.account {
+    height: 70px;
+    background: #080808;
+    color: #fff;
+    font-size: 14px;
+    font-weight: 500;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: box;
+    display: flex;
+    -webkit-box-align: center;
+    -o-box-align: center;
+    -ms-flex-align: center;
+    -webkit-align-items: center;
+    align-items: center;
+    padding: 0 10px;
+    border-top: 1px solid #080808;
+} 
+
+.account .btn-deafen, .account .btn-settings {
+    box-shadow: inset 1px 0 0 #080808;
+}
+
+.account .btn {
+    width: 32px;
+    height: 32px;
+    background: #101010;
+    position: relative;
+    border-radius: 0px !important;
+    border: none !important;
+    border-color: #080808;
+}
+
+.account .btn-deafen, .account .btn-settings {
+    box-shadow: inset 1px 0 0 #101010;
+}
+
+.links {
+    border-top: 1px solid #080808;
+    background: #080808;
+    padding: 7px 10px;
+    font-size: 10px;
+    -webkit-flex-shrink: 0;
+    flex-shrink: 0;
+}
+
+.guilds-wrapper {
+    overflow: hidden;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: box;
+    display: flex;
+    width: 80px;
+    -webkit-box-orient: vertical;
+    -o-box-orient: vertical;
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    background: #080808;
+}
+
+.help-container {
+
+	background-color: #080808;
+
+	}
+
+.help-container:after {
+    content: ' ';
+    position: absolute;
+    top: -15px;
+    left: 0;
+    height: 15px;
+    width: 100%;
+    z-index: 1;
+    background: -webkit-linear-gradient(90deg,#080808 20%,transparent);
+    background: linear-gradient(0deg,#080808 20%,transparent);
+    pointer-events: none;
+}
+
+.guilds-add {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: #080808;
+    color: #535559;
+    border: 1px dashed #535559;
+    padding: 0;
+    font-size: 40px;
+    font-weight: 200;
+    text-align: center;
+    line-height: 100%;
+    -webkit-transition: border-color .25s ease,color .25s ease;
+    transition: border-color .25s ease,color .25s ease;
+}
+
+.guilds li .guild-inner {
+    cursor: pointer;
+    -webkit-transition: background-color .25s ease-in,border-radius .3s cubic-bezier(.68,-1.25,.228,1.8);
+    transition: background-color .25s ease-in,border-radius .3s cubic-bezier(.68,-1.25,.228,1.8);
+    overflow: hidden;
+    border-radius: 25px;
+    background: #080808;
+    font-size: 18px;
+    text-align: center;
+    line-height: 50px;
+}
+
+.avatar-small {
+    width: 25px;
+    height: 25px;
+    background-size: 25px 25px;
+    border-radius: 27px;
+    background-clip: padding-box;
+    position: relative;
+    background-color: none;
+    float: left;
+    margin-top: 6px;
+    margin-right: 10px;
+}
+
+.channel-members .member+h2 {
+    margin-top: 5px;
+}
+
+.theme-dark .channel-members .member.popout-open, .theme-dark .channel-members .member:hover {
+    background: -webkit-linear-gradient(left,#080808 85%,#080808);
+    background: linear-gradient(to right,#0C0C0C 85%,#080808);
+}
+
+.guild-header header span {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -webkit-box-flex: 1;
+    -o-box-flex: 1;
+    box-flex: 1;
+    -webkit-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
+    line-height: 56px;
+    font-weight: 100 !important;
+}
+
+.channel-members .member {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: box;
+    display: flex;
+    color: #737f8d;
+    padding: 5px 30px;
+    padding-right: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    line-height: 30px;
+    -webkit-box-align: center;
+    -o-box-align: center;
+    -ms-flex-align: center;
+    -webkit-align-items: center;
+    align-items: center;
+    font-family: sans-serif !important;
+    font-weight: 100 !important;
+    font-size: 13px !important;
+}
+
+.form .control-group input[type=email], .form .control-group input[type=password], .form .control-group input[type=text], .form .control-group textarea {
+    font-size: 16px;
+    font-weight: 400;
+    color: #A5A5A5;
+    border: none;
+    outline: none;
+    border-bottom: none !important;
+    margin-bottom: 1px;
+    width: 100%;
+    resize: none;
+    background: #0E0E0E;
+    padding-left: 5px;
+}
+
+.avatar-uploader .avatar-uploader-inner {
+    display: inline-block;
+    width: 138px;
+    height: 138px;
+    border: 5px solid #080808;
+    border-radius: 138px;
+    margin-bottom: 10px;
+    background-color: #738bd7;
+    background-size: 128px 128px;
+    background-position: center center;
+    background-repeat: no-repeat;
+    position: relative;
+    box-sizing: border-box;
+    -webkit-transition: box-shadow .1s;
+    transition: box-shadow .1s;
+}
+
+span {
+    font-family: arial;
+    font-size: 13px;
+    color: #676767;
+}
+
+.settings .settings-actions {
+    background-color: #080808;
+    border-top: 1px solid #080808;
+    box-sizing: border-box;
+    width: 100%;
+    padding: 18px 40px;
+    border-radius: 0 0 5px 0;
+    text-align: right;
+    -webkit-flex-shrink: 0;
+    flex-shrink: 0;
+}
+
+.form .btn-primary {
+    border-radius: 3px;
+    background-color: #171717;
+    color: #fff;
+}
+
+.settings .settings-header {
+    border-radius: 5px 0 0 5px;
+    background-color: #0A0A0A;
+    font-family: Whitney,Helvetica Neue,Helvetica,Arial,Lucida Grande,sans-serif;
+    color: #fff;
+    font-weight: 600;
+    box-shadow: 0 1px 0 rgba(0,0,0,.05),inset 0 -1px 0 rgba(0,0,0,.1);
+    box-sizing: border-box;
+    width: 190px;
+    -webkit-flex-shrink: 0;
+    flex-shrink: 0;
+}
+
+.form .btn-primary:hover {
+    background-color: #0E0E0E;
+}
+
+.guild-channels ul .channel .channel-name {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding-right: 5px;
+    -webkit-box-flex: 1;
+    -moz-box-flex: 1;
+    -o-box-flex: 1;
+    -ms-box-flex: 1;
+    box-flex: 1;
+    -webkit-flex-grow: 1;
+    flex-grow: 1;
+    color: #C7C7C7;
+}
+
+#voice-connection {
+    background: #080808;
+    color: #fff;
+    font-size: 14px;
+    font-weight: 600;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: box;
+    display: flex;
+    -webkit-box-align: center;
+    -o-box-align: center;
+    -ms-flex-align: center;
+    -webkit-align-items: center;
+    align-items: center;
+    padding: 10px;
+    border-top: 1px solid #080808;
+    -webkit-flex-shrink: 0;
+    flex-shrink: 0;
+}
+
+#voice-connection .btn-disconnect {
+    box-shadow: inset 1px 0 0 #080808;
+}
+
+#voice-connection .btn {
+    width: 32px;
+    height: 32px;
+    background: #101010;
+    position: relative;
+}
+
+.chat form {
+    -webkit-flex-shrink: 0;
+    flex-shrink: 0;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: box;
+    display: flex;
+    box-shadow: 0 -1px 0 rgba(0,0,0,.1);
+    margin: 0 !important;
+    position: relative;
+}
+
+.theme-dark .channel-textarea-inner {
+    border-color: #080808 !important;
+    background-color: #080808 !important;
+}
+
+.theme-dark .channel-members {
+    background-color: #080808 !important;
+}
+
+.channel-textarea-inner {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: box;
+    display: flex;
+    position: relative;
+    padding: 12px 10px;
+    border-radius: 3px;
+    border: 2px solid #080808 !important;
+    box-sizing: border-box;
+    background-color: #fff;
+}
+
+.theme-dark .chat form {
+    border-top: 1px solid hsla(0,0%,100%,.06);
+    background: #080808 !important;
+}
+
+.avatar-large {
+    border-radius: 27px !important;
+}
+
+.theme-dark .chat>.content :first-child .scroller-wrap ::-webkit-scrollbar-track-piece {
+    background-color: #080808 !important;
+    border-color: #080808 !important;
+}
+
+:first-child .scroller-wrap ::-webkit-scrollbar-thumb {
+    background-color: #1e2124 !important;
+    border-color: #080808 !important;
+}
+
+.typing {
+    position: absolute;
+    display: none !important;
+    bottom: 1px;
+    left: 0;
+    height: 26px;
+    width: 100%;
+    background-color: hsla(0, 0%, 0%, 0.8);
+    color: #747B84;
+    font-size: 13px;
+    font-weight: 500;
+    line-height: 24px;
+    resize: none;
+    overflow-y: hidden;
+    background: #080808 !important;
+}
+
+#voice-connection .btn-group {
+    border: 1px solid #1c1e22;
+    overflow: hidden;
+    -webkit-flex-shrink: 0;
+    flex-shrink: 0;
+    border-radius: 3px;
+    left: 60px !important;
+    bottom: 42px;
+    position: absolute !important;
+    display: block;
+    z-index: 1;
+}
+
+
+.private-channels {
+    background-color: #080808;
+    padding: 20px 0;
+    box-sizing: border-box;
+    position: relative;
+    overflow: hidden;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    -webkit-box-flex: 1;
+    -o-box-flex: 1;
+    box-flex: 1;
+    -webkit-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
+}
+
+.channels-wrap {
+    width: 180px !important;
+    margin-left: -25px;
+}
+
+.channel-members .invite-btn {
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 30px;
+    padding: 5px 23px;
+    margin-left: 30px;
+    margin-right: 15px;
+    -webkit-transition: background-color .2s ease;
+    transition: background-color .2s ease;
+    border-radius: 3px;
+    color: #fff;
+    background-color: #191919;
+}
+
+.channel-members .invite-btn:hover {
+    background-color: #252525;
+}
+
+.theme-dark .chat .title-wrap .topic .topic-full {
+    background-color: #080808;
+    border-bottom: 1px solid #080808;
+    box-shadow: none;
+}
+
+.guild-header ul {
+    position: absolute;
+    top: 56px;
+    left: 0;
+    background: #080808;
+    box-shadow: 0 2px 0 rgba(0,0,0,.06),inset 0 -1px 0 rgba(0,0,0,.06);
+    width: 100%;
+    z-index: 1;
+    -webkit-transition: -webkit-transform .25s ease-out;
+    transition: transform .25s ease-out;
+    -webkit-transform: translate3d(0,-110%,0);
+    -ms-transform: translate3d(0,-110%,0);
+    transform: translate3d(0,-110%,0);
+    box-sizing: border-box;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.notice {
+    background-color: #080808;
+    color: #fff !important;
+    text-align: center;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 40px;
+    position: relative;
+    z-index: 3;
+    -webkit-flex-shrink: 0;
+    flex-shrink: 0;
+}
+
+#twitchcord-button-container {
+    position: absolute;
+    width: 50px;
+    height: 45px;
+    right: 0;
+    display: block;
+    bottom: 0px;
+    background: transparent;
+}
+
+.popout.popout-top.no-arrow {
+    margin-bottom: 10px;
+    left: 145px !important;
+}
+
+#twitchcord-button {
+    background-color: #080808;
+    position: absolute;
+    width: 50px;
+    height: 42px;
+    top: 2px;
+    right: 2px;
+    background-image: url(https://static-cdn.jtvnw.net/emoticons/v1/74510/1.0);
+    background-repeat: no-repeat;
+    background-size: 36px;
+    background-position: 7px;
+}
+
+#twitchcord-button-container {
+    position: absolute;
+    width: 50px;
+    height: 45px;
+    right: 0;
+    display: block;
+    bottom: 1px;
+}
+
+
+    .private-channels .channel:hover {
+    background: -webkit-linear-gradient(left,#080808 85%,#080808);
+    background: linear-gradient(to right,#0C0C0C 85%,#080808);
+    color: #fff;
+}
+
+.private-channels .channel.selected {
+    background: -webkit-linear-gradient(left,#080808 85%,#080808);
+    background: linear-gradient(to right,#0C0C0C 85%,#080808);
+    color: #fff;
+}
+
+.theme-dark .chat>.content .messages .message-group .comment .markup .highlight:hover {
+    background-color: rgba(115, 139, 215, 0);
+}
+
+.theme-dark .chat>.content .messages .message-group .comment .markup .highlight {
+    background-color: rgba(115, 139, 215, 0);
+}

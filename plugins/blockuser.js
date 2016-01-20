@@ -26,30 +26,33 @@ blockUser.prototype.start = function() {
         }
         return null;
     };
-	var BlockUser = function(username, id) {
-			blockUser.blockListe[username] = id;
-			localStorage.setItem('blockUserBlockList', JSON.stringify(blockUser.blockListe));
-			blockButtonFunc();
+	BlockUser = function(username, id) {
+			blockUser.blockList[username] = id;
+			localStorage.setItem('blockUserBlockList', JSON.stringify(blockUser.blockList));
 			updateChat();
-			successAlert(blockUser.prototype.getName() + ' - Success', 'User \"'+username+'\" ('+id+') has been blocked and his/her messages were removed.');
+			alertify.error('\"'+username+'\" has been blocked.');
+			// successAlert(blockUser.prototype.getName() + ' - Success', 'User \"'+username+'\" ('+id+') has been blocked and his/her messages were removed.');
 	};
-	var UnblockUser = function(username, id) {
-		delete blockUser.blockListe[username];
-		localStorage.setItem('blockUserBlockList', JSON.stringify(blockUser.blockListe));
-		blockButtonFunc();
+	UnblockUser = function(username) {
+		delete blockUser.blockList[username];
+		localStorage.setItem('blockUserBlockList', JSON.stringify(blockUser.blockList));
 		blockUser.forceUpdate = true;
 		updateChat();
-		successAlert(blockUser.prototype.getName() + " - Success", "User \""+username+"\" ("+id+") has been unblocked and his/her messages were restored.");
+		alertify.success('\"'+username+'\" has been unblocked.');
+		// successAlert(blockUser.prototype.getName() + " - Success", "User \""+username+"\" ("+id+") has been unblocked and his/her messages were restored.");
 	};
-    var showBlockList = function () {
+    showBlockList = function () {
 		var locStore = localStorage.getItem('blockUserBlockList');
+		var data = JSON.parse(locStore) || {};
 		if (locStore == '{}') {
 			infoAlert('Blocklist', 'No users blocked.');
 		} else {
-			blackAlert('Blocklist', localStorage.getItem('blockUserBlockList'));
+			var jsonHtmlTable = ConvertJsonToTable(''+data, 'jsonTable', null, 'Download');
+			Core.prototype.alert("<b>Blocked Users</b>", locStore);
+			// blackAlert('Blocklist', localStorage.getItem('blockUserBlockList'));
 		};		
     };
-    var clearBlocklist = function () {
+    clearBlocklist = function () {
         blockUser.blockList = {};
         localStorage.setItem('blockUserBlockList', JSON.stringify(blockUser.blockList));
         $('#blockUser').remove();
@@ -79,21 +82,19 @@ blockUser.prototype.start = function() {
     var blockButtonFunc = function () {
         //noinspection JSJQueryEfficiency
         if (!$('#blockUser').length && !$('#unblockUser').length) {
-            var username = $(".user-popout").find(".username").text();
+            var username = ''+$(".user-popout").find(".username").text();
             if (!blockUser.blockList.hasOwnProperty(username)) {
                 $('.user-popout-options').append('<button class="btn btn-server" id="blockUser">Block</button>');
                 $('#blockUser').on("click", function () {
-                    var id = blockUser.selectedUID;
+                    var id = ''+blockUser.selectedUID;
                     if (id === null) {
                         return;
                     }
-                    blockUser.blockList[username] = id;
-                    localStorage.setItem('blockUserBlockList', JSON.stringify(blockUser.blockList));
+                    BlockUser(username,id);
                     $('#blockUser').remove();
                     $('#clearblocklistdiv').remove();
 					$('#showblocklistdiv').remove();
                     blockButtonFunc();
-                    updateChat();
                 });
                 BetterAPI.addUserLink("showblocklistdiv", "showblocklist", "#", "Show Blocklist", "clearblocklist", "#", "Clear Blocklist")
 				$('#clearblocklist').on('click', function () {
@@ -105,15 +106,13 @@ blockUser.prototype.start = function() {
             } else {
                 $('.user-popout-options').append('<button class="btn btn-server" id="unblockUser">Unblock</button>');
                 $('#unblockUser').on("click", function () {
-                    delete blockUser.blockList[username];
-                    localStorage.setItem('blockUserBlockList', JSON.stringify(blockUser.blockList));
+                    UnblockUser(username);
                     $('#unblockUser').remove();
                     $('#clearblocklistdiv').remove();
 					$('#showblocklistdiv').remove();
                     blockButtonFunc();
                     $('.message-group').removeAttr('style');
                     blockUser.forceUpdate = true;
-                    updateChat();
                 });
                 BetterAPI.addUserLink("showblocklistdiv", "showblocklist", "#", "Show Blocklist", "clearblocklist", "#", "Clear Blocklist")
                 $('#clearblocklist').on('click', function () {

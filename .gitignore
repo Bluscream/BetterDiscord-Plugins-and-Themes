@@ -46,9 +46,10 @@ Network Trash Folder
 Temporary Items
 .apdisk
 *.json
+
+# Unnessary Stuff
+temp
+
+# Private Stuff
 plugins/PrivatePlugin.js
-temp/BetterDiscord.zip
-temp/BetterDiscordApp-stable/betterdiscord.js
-temp/BetterDiscordApp-stable/lib/BetterDiscord.js
-temp/BetterDiscordApp-stable/lib/Utils.js
-temp/BetterDiscordApp-stable/README.md
+plugins/Z_LastPlugin.js

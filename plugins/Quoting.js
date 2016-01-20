@@ -75,8 +75,9 @@ function DCMQuotingPlugin(){
                         content.getElementsByTagName("h2")[0].appendChild(createButton("Server", "clicked", "server"));
                         content.getElementsByTagName("h2")[0].appendChild(createButton("Channel", "clicked", "channel"));
                         content.getElementsByTagName("h2")[0].appendChild(createButton("Client", "clicked", "client"));
-                        // content.getElementsByTagName("h2")[0].appendChild(createSpan(" | "));
+                        content.getElementsByTagName("h2")[0].appendChild(createSpan(" | "));
                         // content.getElementsByTagName("h2")[0].appendChild(createButton("Hide", "clickedHide"));
+                        content.getElementsByTagName("h2")[0].appendChild(createButton("All clients", "clickedallClients"));
 					}
                 }
             }
@@ -90,16 +91,21 @@ DCMQuotingPlugin.prototype.onSwitch = function() {
 	createCharCounter();
 }; 
 DCMQuotingPlugin.prototype.getDescription = function() { 
-    return "Quoting from Discord Client Modding ported by NotGGhost and edited by Bluscream"; 
+    return "Quoting for Discord"; 
 }; 
 DCMQuotingPlugin.prototype.getVersion = function() { 
     return "0.1.8"; 
 }; 
 DCMQuotingPlugin.prototype.getAuthor = function() { 
-    return "Ghost, Bluscream"; 
+    return "Ghost"; //This version was modified by Bluscream.
 }; 
-DCMQuotingPlugin.prototype.getSettingsPanel = function() { 
-    return '<center><img src="https://s14.postimg.org/6w6z0pdpd/NJa3g_V_1.png"></img><br><b style="font-size: 40px;"> Nothing to see here yet... </b></center>'; 
+DCMQuotingPlugin.prototype.getSettingsPanel = function() {
+	const _author = 'NotGGhost';
+	const _repo = 'Discord-Client-Modding';
+	const _path = 'blob/master/Quoting.js';
+    return 'This version of "'+DCMQuotingPlugin.prototype.getName()+'" was modified by Bluscream.</br></br>\
+		If you want the original version by <a href="https://github.com/'+_author+'">'+_author+'</a>,'+
+			' get it from <a href="https://github.com/'+_author+'/'+_repo+'/'+_path+'">here</a>.'; 
 }; 
 var CDCMQuoting = function(){
     this.enabled = true;
@@ -121,12 +127,17 @@ var CDCMQuoting = function(){
 		var channel = BetterAPI.getCurrentChannelID();
 		var server = BetterAPI.getCurrentServerName();
         var index;
+		if (uid){
+			var uid = '<@'+uid+'>';
+		}else{
+			var uid = '@'+username;
+		}
 		if (mode == "client") {
-			var msg = msg + "`[" + time + "]` <@" + uid + "> said:\n";
+			var msg = msg + "`[" + time + "]` " + uid + " said:\n";
 		} else if (mode == "channel") {
-			var msg = msg + "`[" + time + "]` <@" + uid + "> said in <#"+channel+">:\n";
+			var msg = msg + "`[" + time + "]` " + uid + " said in <#"+channel+">:\n";
 		} else if (mode == "server") {
-			var msg = msg + "`[" + time + "]` <@" + uid + "> said in <#"+channel+">:\n";
+			var msg = msg + "`[" + time + "]` " + uid + " said in <#"+channel+"> on **"+server+"**:\n";
 		} else {
 			var msg = msg + "`[" + time + "]` \"" + uid + "\" said:\n";
 		}
@@ -163,6 +174,22 @@ var CDCMQuoting = function(){
         window.DCMQuoting.resize(textArea);
         textArea.scrollTop = textArea.scrollHeight;
     };
+    this.clickedallClients = function(messageElement){
+		var quote = "";
+        var textArea = document.getElementsByTagName("textarea")[0];
+        var clients = BetterAPI.getClientUIDList();
+		for (i = 0; i < clients.length; ++i) {
+			var quote = quote + "<@" + clients[i] + "> ";
+		}
+        const oldMsg = textArea.value;
+        if ((typeof(betterDiscordIPC) !== 'undefined') && (betterDiscordIPC !== null)) { 
+            $(textArea).focus().val("").val(quote);
+        } else {
+            textArea.value = quote;
+        }
+        window.DCMQuoting.resize(textArea);
+        textArea.scrollTop = textArea.scrollHeight;
+    };
     this.clickedHide = function(messageElement){
         while (!(messageElement.classList.contains("message-group")))
             messageElement = messageElement.parentElement;
@@ -177,7 +204,5 @@ function removeAllEvents(node, event) {
     window.DCMQuoting.enabled = false;
 };
 if (!((typeof(betterDiscordIPC) !== 'undefined') && (betterDiscordIPC !== null))) {
-    var str = "Warning: This Discord Quoting script is designed to work in BetterDiscord only!\nHOWEVER it is still trying to load\n\n(Discord Client Modding is deprecated)";
-    alert(str);
     new DCMQuotingPlugin().start();
 }

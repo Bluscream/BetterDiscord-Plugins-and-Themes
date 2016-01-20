@@ -1,0 +1,40 @@
+#connecting { height:10px;background:red; }
+#connecting * { display:none; }
+.channels-wrap { width:15%; }
+.callout-backdrop {
+   	background-color:transparent !important;
+}
+.callout-backdrop img {
+   	background-color:black !important;
+}
+.modal[data-reactid=".0.5.$=1$modal"]{
+    padding:0;
+    background-color:black !important;
+}
+.modal-image{
+    display:flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+}
+.image{
+    width:auto !important;
+    height:auto !important;
+    max-width:100% !important;
+    max-height:100% !important;
+}
+.charcount{
+   width: 1120px !important;
+}
+.CodeMirror {
+    display: all !important;
+    height: 400px !important;
+}
+.image-gif{ display:none !important; }
+
+li[data-reactid=".0.1.1.0.0.0.1.$=1$133218815222874112"],
+div[data-reactid=".0.1.1.0.1.0.0.1:$133220611790077952"],
+li[data-reactid=".0.1.1.0.0.0.1.$=1$133220611790077952"],
+div[data-reactid=".0.1.1.0.1.0.0.1:$133218815222874112"],
+li[data-reactid=".0.1.1.0.0.0.1.$=1$136900939939315712"],
+li[data-reactid=".0.1.1.0.0.0.1.$=1$137296699784691712"]
+{display:none !important;}

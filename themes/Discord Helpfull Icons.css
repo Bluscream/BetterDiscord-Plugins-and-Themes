@@ -47,7 +47,8 @@ a[href $=".rm"],a[href $=".RM"],
 a[href $=".divx"],a[href $=".DIVX"],
 a[href $=".xvid"],a[href $=".XVID"],
 a[href $=".m4v"],a[href $=".M4V"],
-a[href $=".mp4"],a[href $=".MP4"] {
+a[href $=".mp4"],a[href $=".MP4"],
+a[href $=".webm"],a[href $=".WEBM"] {
 	background: url("data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAMAAAC67D+PAAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAASUExURczg9bLR8DOF1maj4P///wBmzL8VgU8AAABLSURBVHjaYmBmZWVkYWFkZWUGCCAGZgYmViBgYmAGCCAGhChAAIFEWYAAKAoQQEiiAAGEpBYggJBEAQIISS1AACGJAgQQklqAAAMARm0BQ7tR/e0AAAAASUVORK5CYII=") center right no-repeat !important;
 	padding: 0 13px 0 0 !important;
 }

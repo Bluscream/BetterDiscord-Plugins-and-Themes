@@ -1,10 +1,10 @@
 //META{"name":"testPlugin"}*//
 function testPlugin() {}
 testPlugin.prototype.getName = function() {
-    return "Test Plugin";
+    return "Test";
 };
 testPlugin.prototype.getDescription = function() {
-    return "Test Plugin Description";
+    return "Test Description";
 };
 testPlugin.prototype.getVersion = function() {
     return "1.0";
