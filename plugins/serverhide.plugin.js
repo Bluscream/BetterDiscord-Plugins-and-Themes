@@ -48,10 +48,10 @@ sidehide.prototype.inject = function(){
 		}
 	)
 }
-sidehide.prototype.getName = function() {return         "Hide ServerList";};
+sidehide.prototype.getName = function() {return "Hide ServerList";};
 sidehide.prototype.getDescription = function() {return "Does what id says on the tin";};
-sidehide.prototype.getVersion = function() {return      "1.0";};
-sidehide.prototype.getAuthor = function() {return       "Megamit/Mitchell";};
+sidehide.prototype.getVersion = function() {return "1.0";};
+sidehide.prototype.getAuthor = function() {return "Megamit/Mitchell";};
 
 sidehide.prototype.setHidden = function(enable){
 	$("#sidehide_hider").remove()

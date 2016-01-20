@@ -59,7 +59,10 @@ customGamePlugin.prototype.setGame = function(game) {
 
 customGamePlugin.prototype.setPlaying = function() {
     if(!this.enabled) return;
-    if(this.uid == null) this.uid = $(".account .avatar-small").css("background-image").match(/\d+/);
+    if(this.uid == null) {
+    	if($(".account .avatar-small").css("background-image") == undefined)return;
+    	this.uid = $(".account .avatar-small").css("background-image").match(/\d+/);
+    }
 
     if(this.game == null) this.game = "";
     
@@ -69,7 +72,7 @@ customGamePlugin.prototype.setPlaying = function() {
         if(mgame.length) {
             mgame.find("strong").text(this.game);
         } else {
-            minner.append('<div class="member-game"><span>Playing </span><strong>'+this.game+'</strong></div>');
+            minner.append('<div class="member-game"><span>Playing: </span><strong>'+this.game+'</strong></div>');
         }
     } else {
         if(mgame.length) {

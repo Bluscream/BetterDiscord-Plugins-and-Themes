@@ -152,7 +152,7 @@ matrixWall.prototype.stop = function() {
 };
 
 matrixWall.prototype.getName = function() {
-    return "Matrix wallpaper";
+    return "Matrix Wallpaper";
 };
 
 matrixWall.prototype.getDescription = function() {

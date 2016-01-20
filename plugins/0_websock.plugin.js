@@ -218,7 +218,7 @@ webSock.prototype.stop = function() {
 };
 
 webSock.prototype.getName = function() {
-    return "BetterDiscordWebsock";
+    return "Websocket";
 };
 
 webSock.prototype.getDescription = function() {

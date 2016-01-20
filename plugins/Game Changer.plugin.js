@@ -42,7 +42,7 @@ GameChanger.prototype.onSwitch = function() {
 	$('.channel-textarea').removeClass('channel-textarea-disabled');
 };
 GameChanger.prototype.getName = function() {
-	return "Game Changer Plugin";
+	return "Game Changer";
 };
 GameChanger.prototype.getDescription = function() {
 	return "Shows which channel you are in as your game.";

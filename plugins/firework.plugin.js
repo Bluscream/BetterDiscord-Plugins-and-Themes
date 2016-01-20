@@ -20,7 +20,7 @@ firework.prototype.stop = function() {
 firework.prototype.update = function() {
 };
 firework.prototype.getName = function() {
-	return "Fire Work Plugin";
+	return "Fire Work";
 };
 firework.prototype.getDescription = function() {
 	return "Adds a crazy firework to your client.";

@@ -85,7 +85,7 @@ function DCMQuotingPlugin(){
     };
 };
 DCMQuotingPlugin.prototype.getName = function() { 
-    return "Quoting Plugin"; 
+    return "Quoting"; 
 }; 
 DCMQuotingPlugin.prototype.onSwitch = function() { 
 	createCharCounter();

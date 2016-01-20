@@ -19,7 +19,7 @@ snow.prototype.stop = function() {
 snow.prototype.update = function() {
 };
 snow.prototype.getName = function() {
-	return "Snow Plugin";
+	return "Snow";
 };
 snow.prototype.getDescription = function() {
 	return "Adds some snow to your chat.";

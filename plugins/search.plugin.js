@@ -187,8 +187,8 @@ function searchPlugin() {
 			self.cancelFlag = false;
 		},50)
 	}
-	this.getName = function(){return "searchPlugin"};
-	this.getDescription = function(){return "The return of ctrl+f! until at least discord devs decide to add it"};
+	this.getName = function(){return "Search"};
+	this.getDescription = function(){return "The return of [CTRL]+[F]! until at least discord devs decide to add it."};
 	this.getVersion = function(){return "1.0"};
 	this.getAuthor = function(){return "Megamit/Mitchell"};
 	this.load = function(){};

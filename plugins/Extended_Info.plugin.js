@@ -92,24 +92,34 @@ userInfo.prototype.start = function() {
 		});
 	});
 	$('ul[data-reactid=".0.1.1.0.1.3"]').livequery(function(){
-			BetterAPI.addLink("status", "Status", "status", "lg");
-	});
-	$('#status').click(function(){
-		if(BetterAPI.getCurrentServerID() == "129022124844253184"){
+		BetterAPI.addLink("status", "Status", "status", "lg");
+		$('#status').click(function(){
+			if(BetterAPI.getCurrentServerID() == "129022124844253184"){
+				$.jAlert({
+					'iframe': 'https://steamstat.us',
+					'size': $('#status').attr('size'),
+					'closeBtnAlt': true,
+					'closeOnClick': true
+				 });
+			} else {
+				$.jAlert({
+					'iframe': 'https://status.discordapp.com',
+					'size': $('#status').attr('size'),
+					'closeBtnAlt': true,
+					'closeOnClick': true
+				 });
+			};
+		});
+		BetterAPI.addLink("plus", "+", "https://discordapp.com/channels/@me", "full");
+		$('#plus').click(function(){
 			$.jAlert({
-				'iframe': 'https://steamstat.us',
-				'size': $('#status').attr('size'),
+				'iframe': $('#status').attr('href'),
+				'size': 'full',
+				'theme': 'black',
 				'closeBtnAlt': true,
 				'closeOnClick': true
 			 });
-		} else {
-			$.jAlert({
-				'iframe': 'https://status.discordapp.com',
-				'size': $('#status').attr('size'),
-				'closeBtnAlt': true,
-				'closeOnClick': true
-			 });
-		};
+		});
 	});
 	$('.user-settings-modal-account').livequery(function(){
 		if ($("#userinfopanel").length <= 0) {
@@ -149,6 +159,15 @@ userInfo.prototype.start = function() {
 		};
 	};
 	// appendMembers();
+	$('.footer').livequery(function(){
+		if($('#bdcl').length <= 0){
+			$('.footer').append(' | <a id="bdchangelog">BD Change Log</a>');
+			$('#bdchangelog').click(function(){
+				$('span[data-reactid=".0.5"]').remove();
+				$("body").append(Core.prototype.constructChangelog());
+			});
+		}
+	});
 };
 userInfo.prototype.onSwitch = function() {
 	// appendMembers();
@@ -162,7 +181,7 @@ userInfo.prototype.stop = function() {
 userInfo.prototype.update = function() {
 };
 userInfo.prototype.getName = function() {
-	return "Extended Info Plugin";
+	return "Extended Info";
 };
 userInfo.prototype.getDescription = function() {
 	return "Adds functionality to see more information.";

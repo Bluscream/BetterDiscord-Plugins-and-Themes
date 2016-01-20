@@ -1,7 +1,7 @@
 //META{"name":"blockUser"}*//
 function blockUser() {}
 blockUser.prototype.getName = function() {
-	return "Block User Plugin";
+	return "Block User";
 };
 blockUser.prototype.getDescription = function() {
 	return "Adds functionality to block a user";

@@ -19,18 +19,6 @@ BetterAPI.prototype.start = function() {
 	BetterAPI.enableTextSelection();
 	BetterAPI.enableAutoComplete();
 	// BetterAPI.enableButtons();
-	// $('ul[data-reactid=".0.1.1.0.1.3"]').livequery(function(){
-		// BetterAPI.addLink("plus", "+", "https://discordapp.com/channels/@me", "full");
-	// });
-	// $('#plus').click(function(){
-		// $.jAlert({
-			// 'iframe': $('#status').attr('href'),
-			// 'size': 'full',
-			// 'theme': 'black',
-			// 'closeBtnAlt': true,
-			// 'closeOnClick': true
-		 // });
-	// });
 };
 BetterAPI.prototype.stop = function() {
 	// BetterAPI.prototype.unloadEvents();
@@ -38,7 +26,7 @@ BetterAPI.prototype.stop = function() {
 BetterAPI.prototype.update = function() {
 };
 BetterAPI.prototype.getName = function() {
-	return "BetterAPI Plugin";
+	return "BetterAPI";
 };
 BetterAPI.prototype.getDescription = function() {
 	return "Enhances the BetterDiscord Plugin API.";

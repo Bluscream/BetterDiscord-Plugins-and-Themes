@@ -53,7 +53,7 @@ ehln.prototype.getSettingsPanel = function () {
 };
 
 ehln.prototype.getName = function () {
-    return "Highlight Name Everywhere";
+    return "Highlight Name";
 };
 ehln.prototype.getDescription = function () {
     return "Highlights Lines containing Name";
