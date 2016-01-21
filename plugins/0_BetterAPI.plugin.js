@@ -248,6 +248,10 @@ BetterAPI.prototype.loadCore  = function() {
 		localStorage.setItem('lastURL', window.location.href);
 		window.location.href = href;
 	}
+	// BetterAPI.bdAlert('content');
+	BetterAPI.bdAlert = function(title, text) {
+		Core.prototype.alert(title, text);
+	}
 };
 BetterAPI.prototype.injectCSS = function() {
 	BetterAPI.appendTo("link[rel='stylesheet']", '<link rel="stylesheet" href="https://cdn.rawgit.com/VersatilityWerks/jAlert/master/src/jAlert-v3.css" type="text/css">');
@@ -264,15 +268,6 @@ BetterAPI.prototype.injectJS  = function() {
 	// $("head").append('<script src="https://cdn.rawgit.com/flesler/jquery.scrollTo/master/jquery.scrollTo.min.js"></script>'); // 
 };
 BetterAPI.prototype.loadAPI  = function() {
-	// BetterAPI.getCurrentChannelName();
-	BetterAPI.getCurrentChannelName = function() {
-		return $(".active .channel-name").text()
-	}
-	// BetterAPI.getCurrentChannelID();
-	BetterAPI.getCurrentChannelID = function() {
-		var _url = window.location.pathname;
-		return _url.match(/\d+$/);
-	}
 	// BetterAPI.getCurrentServerName();
 	BetterAPI.getCurrentServerName = function() {
 		return $(document).find("[data-reactid='.0.1.1.0.1.0.0.0.0']").text();
@@ -281,6 +276,21 @@ BetterAPI.prototype.loadAPI  = function() {
 	BetterAPI.getCurrentServerID = function() {
 		var _url = window.location.pathname;
 		return _url.match(/\d+/);
+	}
+	// BetterAPI.getCurrentTextChannelName();
+	BetterAPI.getCurrentTextChannelName = function() {
+		return $(".active .channel-name").text()
+	}
+	// BetterAPI.getCurrentTextChannelID();
+	BetterAPI.getCurrentTextChannelID = function() {
+		var _url = window.location.pathname;
+		return _url.match(/\d+$/);
+	}
+	// BetterAPI.getCurrentVoiceChannelName();
+	BetterAPI.getCurrentVoiceChannelName = function() {
+		if($(".audio .channel-name").text()){
+			return $(".audio .channel-name").text()
+		}else{return null;}
 	}
 	// BetterAPI.getOwnID();
 	BetterAPI.getOwnID = function() {
@@ -459,8 +469,8 @@ BetterAPI.prototype.loadAPI  = function() {
 		}
 		return match;
 	}
-	// BetterAPI.getUserAvatarURLbyName("name");
-	BetterAPI.getUserAvatarURLbyName = function(name) {
+	// BetterAPI.getAvatarURLbyName("name");
+	BetterAPI.getAvatarURLbyName = function(name) {
 		var match = null;
 		$(".avatar-small").each(function(){ 
 			var _name = $(this).next().children().text();
@@ -480,8 +490,8 @@ BetterAPI.prototype.loadAPI  = function() {
 		}
 		return match;
 	}
-	// BetterAPI.getUserAvatarURL(id);
-	BetterAPI.getUserAvatarURL = function(id) {
+	// BetterAPI.getAvatarURL(id);
+	BetterAPI.getAvatarURL = function(id) {
 		var match = null;
 		$(".avatar-small").each(function(){ 
 			var url = $(this).css("background-image");
@@ -510,7 +520,7 @@ BetterAPI.prototype.loadAPI  = function() {
 			var name = $(_clients[i]).text();
 			var uid = BetterAPI.getUserIdByName(name);
 			var avatarID = BetterAPI.getUserAvatarIDbyName(name);
-			var avatarURL = BetterAPI.getUserAvatarURLbyName(name);
+			var avatarURL = BetterAPI.getAvatarURLbyName(name);
 			var game = BetterAPI.getUserGameByID(uid);
 			list.clients = clients;
 			var clients3 = {
@@ -522,7 +532,7 @@ BetterAPI.prototype.loadAPI  = function() {
 			}
 			list.clients.push(clients3);
 		}
-		BetterAPI.log(1, "log", BetterAPI.prototype.getName(), "Got clientlist of #"+BetterAPI.getCurrentChannelName()+" in \""+BetterAPI.getCurrentServerName()+"\" with a total of "+clients.length+" clients");
+		BetterAPI.log(1, "log", BetterAPI.prototype.getName(), "Got clientlist of #"+BetterAPI.getCurrentTextChannelName()+" in \""+BetterAPI.getCurrentServerName()+"\" with a total of "+clients.length+" clients");
 		return list.clients;
 	}
 	// BetterAPI.getClientNameList();

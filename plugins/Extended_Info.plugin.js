@@ -9,14 +9,14 @@ userInfo.prototype.start = function() {
 		var name = $(".user-popout").find(".username").text();
 		id = BetterAPI.getUserIdByName(name);
 		avatarID = BetterAPI.getUserAvatarID(id);
-		avatarURL = BetterAPI.getUserAvatarURL(id);
+		avatarURL = BetterAPI.getAvatarURL(id);
 		nameByID = BdApi.getUserNameById(id);
 		gameByID = BetterAPI.getUserGameByID(id);
 		if(!avatarID){
 			avatarID = BetterAPI.getUserAvatarIDbyName(name);
 		}
 		if(!avatarURL){
-			avatarURL = BetterAPI.getUserAvatarURLbyName(name);
+			avatarURL = BetterAPI.getAvatarURLbyName(name);
 		}
 		var _label = '';
 		if (avatarURL) {
@@ -70,21 +70,34 @@ userInfo.prototype.start = function() {
 	});
 	$("#serverinfobutton").livequery(function(){
 		$("#serverinfobutton").click(function(){
+			var _data = "";
+			var _title = "Server Information";
 			if (!$('.bd-alert').length <= 0) {
 				$('.bd-alert').remove();
 			}
 			var sname = BetterAPI.getCurrentServerName();
 			var sid = BetterAPI.getCurrentServerID();
-			Core.prototype.alert('Server Information - '+sname, '\
+			if(sid){
+				var aurl = BetterAPI.getAvatarURL(''+sid);
+			}
+			var tcn = BetterAPI.getCurrentTextChannelName();
+			var tcid = BetterAPI.getCurrentTextChannelID();
+			var vc = BetterAPI.getCurrentVoiceChannelName();
+			var uc = BetterAPI.userCount();
+			var onuc = BetterAPI.onlineUserCount();
+			var offuc = BetterAPI.offlineUserCount();
+			if(sname){ _title = 'Server Information - '+sname; _data = _data+'<b>Name: </b>'+sname+'<br>';	}
+			if(sid){ _data = _data+'<b>Server ID: </b>'+sid+'<br>'; }
+			if(tcn){ _data = _data+'<br><b>Active Text Channel: </b>'+tcn+'<br>'; }
+			if(tcid){ _data = _data+'<b>Active Text Channel ID: </b>'+tcid+'<br>'; }
+			if(vc){ _data = _data+'<br><b>Active Voice Channel: </b>'+vc+'<br>'; }
+			if(uc){ _data = _data+'<br><b>Users: </b>Total: <b>'+uc+'</b> Online: <font color="green">'+onuc+'</font> Offline: <font color="red">'+offuc+'</font>'; }
+			Core.prototype.alert(_title, '\
 				<TABLE BORDER="0" CELLPADDING="3" CELLSPACING="3">\
 					<TR>\
-						<TD><img border="5" src="'+BetterAPI.getUserAvatarURL(''+sid)+'"></img></TD>\
+						<TD><img width="165px" height="165px" src="'+aurl+'"></img></TD>\
 						<TD>\
-							<b> Name: </b>'+sname+'<br>\
-							<b> Server ID: </b>'+sid+'<br><br>\
-							<b> Channel: </b>'+BetterAPI.getCurrentChannelName()+'<br>\
-							<b> Channel ID: </b>'+BetterAPI.getCurrentChannelID()+'<br><br>\
-							<b> Users: </b>Total: <b>'+BetterAPI.userCount()+'</b> Online: <font color="green">'+BetterAPI.onlineUserCount()+'</font> Offline: <font color="red">'+BetterAPI.offlineUserCount()+'</font><br>\
+							'+_data+'\
 						</TD>\
 					</TR>\
 				</TABLE>\

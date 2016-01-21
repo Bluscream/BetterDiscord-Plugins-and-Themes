@@ -16,6 +16,7 @@ firework.prototype.stop = function() {
 	if(bdfw.id) {
 		delete bdfw.id;
 	}
+	delete bdfw;
 };
 firework.prototype.update = function() {
 };

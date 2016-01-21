@@ -32,7 +32,7 @@ GameChanger.prototype.onSwitch = function() {
 		var _playing = "with "+user+".";
 		BdApi.setPlaying(_playing);
 	} else {
-		var channel = BetterAPI.getCurrentChannelName();
+		var channel = BetterAPI.getCurrentTextChannelName();
 		var server = BetterAPI.getCurrentServerName();
 		var _playing = "in #"+channel+" on "+server+".";
 		BdApi.setPlaying(_playing);

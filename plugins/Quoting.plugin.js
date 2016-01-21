@@ -124,7 +124,7 @@ var CDCMQuoting = function(){
 		var uid = BetterAPI.getUserIdByName(username);
         var comments = element.getElementsByClassName("comment")[0]
             .getElementsByClassName("message");
-		var channel = BetterAPI.getCurrentChannelID();
+		var channel = BetterAPI.getCurrentTextChannelID();
 		var server = BetterAPI.getCurrentServerName();
         var index;
 		if (uid){
