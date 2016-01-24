@@ -49,6 +49,7 @@ Temporary Items
 
 # Unnessary Stuff
 temp
+resources
 
 # Private Stuff
 plugins/PrivatePlugin.js
