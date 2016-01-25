@@ -1,41 +1,20 @@
 //META{"name":"Transparent","description":"Just a theme to make everything transparent","author":"Blu","version":"1.0"}*//
-
-.app-mount{ background-color:black !important; }
-
-.modal-inner,
-.invite-button,
-.btn-mute,
-.btn-deafen,
-.btn-settings,
-.title-wrap, .channel-members,
-.content .flex-spacer,
-.app,
-.chat-empty,
-.guild-channels,
-.chat,
-.help-container,
-.content,
-.private-channels,
-.guild-header header,
-.typing,
-.account,
-.links,
-.divider-red span,
-.guilds-wrapper,
-.channels-wrap,
-#voice-connection,
-.chat .new-messages-bar,
-.chat .new-messages-bar:hover,
-.chat-empty,
+.modal-inner,.invite-button,.btn-mute,.btn-deafen,
+.btn-settings,.title-wrap, .channel-members,
+.content .flex-spacer,.app,.chat-empty,
+.guild-channels,.chat,.help-container,
+.content,.private-channels,.guild-header header,
+.typing,.account,.links,
+.divider-red span,.guilds-wrapper,.channels-wrap,
+#voice-connection,.chat .new-messages-bar,
+.chat .new-messages-bar:hover,.chat-empty,
 .chat>.content .messages .message-group .comment .markup .highlight,
-.chat .divider:not(.divider-red)>div,
-.chat .divider>span,
-.channel-textarea-inner,
-li[data-reactid=".0.1.1.0.0.0.0"],
-#bd-pub-button,
-#locationbar,
-textarea {background:transparent !important;}
-
+.chat .divider:not(.divider-red)>div,.chat .divider>span,
+.channel-textarea-inner,li[data-reactid=".0.1.1.0.0.0.0"],
+#bd-pub-button,#locationbar,textarea {background:transparent !important;}
+.app-mount{ background-color:black !important; }
+.s_emos_scanned{mix-blend-mode:difference !important}
+.hljs{background:rgba(46, 49, 54,0.9) !important;}
 .help-container:after{background:none !important;}
 .guild-header ul {
     opacity:0 !important;
