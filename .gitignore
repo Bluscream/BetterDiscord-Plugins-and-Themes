@@ -52,7 +52,6 @@ temp
 resources
 
 # Private Stuff
-plugins/PrivatePlugin.js
-plugins/Z_LastPlugin.js
+plugins/Private.plugin.js
+plugins/Z_Last.plugin.js
 plugins/Quoting_.plugin.js
-plugins/PrivatePlugin.plugin.js
