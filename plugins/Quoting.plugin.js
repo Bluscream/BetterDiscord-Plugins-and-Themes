@@ -66,7 +66,7 @@ function DCMQuotingPlugin(){
                     var content = element[ia].parentElement.parentElement;
                     if ((content.className == "body") && (checkVal(content) == ghostModId)){
                         try{content.getElementsByTagName("h2")[0].appendChild(createButton("Clients", "clickedallClients"));}catch(e){}
-						try{content.getElementsByTagName("h2")[0].appendChild(createSpan("| Quote: "));}catch(e){}
+						try{content.getElementsByTagName("h2")[0].appendChild(createSpan("|"));}catch(e){}
 						try{content.getElementsByTagName("h2")[0].appendChild(createButton("Server", "clicked", "server"));}catch(e){}
 						try{content.getElementsByTagName("h2")[0].appendChild(createButton("Channel", "clicked", "channel"));}catch(e){}
 						try{content.getElementsByTagName("h2")[0].appendChild(createButton("Client", "clicked", "client"));}catch(e){}
