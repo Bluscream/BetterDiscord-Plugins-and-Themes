@@ -55,16 +55,18 @@ GameChanger.prototype.getAuthor = function() {
 };
 GameChanger.prototype.addOwnGame = function() {
 	var ownID = BetterAPI.getOwnID();
-	var users = $(".member-username");
-    for(var i = 0 ; i < users.length ; i++) {
-		var user = $(users[i]);
-		var avatarUrl = user.closest(".member").find(".avatar-small").css("background-image");
-		if (avatarUrl.match(/\d+/) == ownID) {
-			user.parent().append(''+
-			'<div class="member-game" id="owngame">'+
-			'<span>Playing </span>'+
-			'<strong>'+localStorage.getItem('Playing')+'</strong>'+
-			'');
+	if(ownID){
+		var users = $(".member-username");
+		for(var i = 0 ; i < users.length ; i++) {
+			var user = $(users[i]);
+			var avatarUrl = user.closest(".member").find(".avatar-small").css("background-image");
+			if (avatarUrl.match(/\d+/) == ownID) {
+				user.parent().append(''+
+				'<div class="member-game" id="owngame">'+
+				'<span>Playing </span>'+
+				'<strong>'+localStorage.getItem('Playing')+'</strong>'+
+				'');
+			}
 		}
-    }
+	}
 };

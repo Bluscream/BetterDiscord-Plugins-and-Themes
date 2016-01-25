@@ -56,28 +56,23 @@ function DCMQuotingPlugin(){
 		}
         return span;
     };
-	var createEditButton = function() {
-		// <div class="btn-item" data-reactid=".0.4.$=11=2$13434-popout.0.0">Edit</div>
-	}
     var update = function(){
-        if ((typeof(document.getElementsByClassName("messages")[0]) !== 'undefined') 
+        if ((typeof(document.getElementsByClassName("messages")[0]) !== 'undefined')
             && (document.getElementsByClassName("messages")[0] !== null)
             && (window.DCMQuoting.enabled)) {
             var elements = document.getElementsByClassName("messages")[0]
-                .getElementsByTagName("div");
+				.getElementsByTagName("div");
             for (var i = 0, im = elements.length; im > i; i++) {
                 var element = elements[i]
                     .getElementsByTagName("span");
                 for (var ia = 0, ima = element.length; ima > ia; ia++) {
                     var content = element[ia].parentElement.parentElement;
                     if ((content.className == "body") && (checkVal(content) == ghostModId)) {
+                        content.getElementsByTagName("h2")[0].appendChild(createButton("Clients", "clickedallClients"));
                         content.getElementsByTagName("h2")[0].appendChild(createSpan("| Quote: "));
                         content.getElementsByTagName("h2")[0].appendChild(createButton("Server", "clicked", "server"));
                         content.getElementsByTagName("h2")[0].appendChild(createButton("Channel", "clicked", "channel"));
                         content.getElementsByTagName("h2")[0].appendChild(createButton("Client", "clicked", "client"));
-                        content.getElementsByTagName("h2")[0].appendChild(createSpan(" | "));
-                        // content.getElementsByTagName("h2")[0].appendChild(createButton("Hide", "clickedHide"));
-                        content.getElementsByTagName("h2")[0].appendChild(createButton("All clients", "clickedallClients"));
 					}
                 }
             }
@@ -97,15 +92,14 @@ DCMQuotingPlugin.prototype.getVersion = function() {
     return "0.1.8"; 
 }; 
 DCMQuotingPlugin.prototype.getAuthor = function() { 
-    return "Ghost"; //This version was modified by Bluscream.
+    return "NotGGhost"; //This version was modified by Bluscream.
 }; 
 DCMQuotingPlugin.prototype.getSettingsPanel = function() {
-	const _author = 'NotGGhost';
 	const _repo = 'Discord-Client-Modding';
 	const _path = 'blob/master/Quoting.js';
     return 'This version of "'+DCMQuotingPlugin.prototype.getName()+'" was modified by Bluscream.</br></br>\
-		If you want the original version by <a href="https://github.com/'+_author+'">'+_author+'</a>,'+
-			' get it from <a href="https://github.com/'+_author+'/'+_repo+'/'+_path+'">here</a>.'; 
+			If you want the original version by <a href="https://github.com/'+DCMQuotingPlugin.prototype.getAuthor()+'">'+DCMQuotingPlugin.prototype.getAuthor()+'</a>,\
+			&nbsp;get it from <a href="https://github.com/'+DCMQuotingPlugin.prototype.getAuthor()+'/'+_repo+'/'+_path+'">here</a>.'; 
 }; 
 var CDCMQuoting = function(){
     this.enabled = true;

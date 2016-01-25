@@ -1,5 +1,7 @@
 //META{"name":"PrivatePlugin"}*// Needs https://github.com/Bluscream/BetterDiscord-Plugins-and-Themes/blob/master/plugins/0_BetterAPI.js to work properly!
-function PrivatePlugin() {}
+function PrivatePlugin() {
+	mybotlist = ["97138137679028224","133337838942027776","132590828303548417","134390773377400832","136011222918103040","136896068397957121"];
+}
 PrivatePlugin.prototype.load = function() { 
 };
 PrivatePlugin.prototype.start = function() {
@@ -8,7 +10,7 @@ PrivatePlugin.prototype.start = function() {
 	$('textarea').removeAttr( "disabled" );
 	$('.channel-textarea').removeClass('channel-textarea-disabled');
 	$('#bd-pub-button').html('<font color="lightblue">'+BetterAPI.serverCount()+'</font> | <font color="red">'+BetterAPI.userCount()+'</font>');
-	botlist = ["136011222918103040"];
+	botlist = mybotlist;
 	setTimeout(function() {
 		var scrollPane = $(".scroller.messages").first();
 		$(scrollPane).scrollTop(999999999);
@@ -26,7 +28,7 @@ PrivatePlugin.prototype.onSwitch = function() {
 	$('textarea').removeAttr( "disabled" );
 	$('.channel-textarea').removeClass('channel-textarea-disabled');
 	$('#bd-pub-button').html('<font color="lightblue">'+BetterAPI.serverCount()+'</font> | <font color="red">'+BetterAPI.userCount()+'</font>');
-	botlist = ["136011222918103040"];
+	botlist = mybotlist;
 	setTimeout(function() {
 		var scrollPane = $(".scroller.messages").first();
         $(scrollPane).scrollTop(999999999);
@@ -37,7 +39,7 @@ PrivatePlugin.prototype.onSwitch = function() {
 PrivatePlugin.prototype.onMessage = function() {
 	$('textarea').removeAttr( "disabled" );
 	$('.channel-textarea').removeClass('channel-textarea-disabled');
-	botlist = ["136011222918103040"];
+	botlist = mybotlist;
 };
 PrivatePlugin.prototype.getName = function() {
 	return "Private";

@@ -107,30 +107,15 @@ userInfo.prototype.start = function() {
 	$('ul[data-reactid=".0.1.1.0.1.3"]').livequery(function(){
 		BetterAPI.addLink("status", "Status", "status", "lg");
 		$('#status').click(function(){
-			if(BetterAPI.getCurrentServerID() == "129022124844253184"){
-				$.jAlert({
-					'iframe': 'https://steamstat.us',
-					'size': $('#status').attr('size'),
-					'closeBtnAlt': true,
-					'closeOnClick': true
-				 });
-			} else {
-				$.jAlert({
-					'iframe': 'https://status.discordapp.com',
-					'size': $('#status').attr('size'),
-					'closeBtnAlt': true,
-					'closeOnClick': true
-				 });
-			};
+			BetterAPI.openStatusPopup();
 		});
-		BetterAPI.addLink("plus", "+", "https://discordapp.com/channels/@me", "full");
+		BetterAPI.addLink("plus", "+", "https://discordapp.com/widget?id=134680912691462144&theme=dark", "sm");
 		$('#plus').click(function(){
 			$.jAlert({
-				'iframe': $('#status').attr('href'),
-				'size': 'full',
+				'iframe': $('#plus').attr('href'),
+				'size': $('#plus').attr('size'),
 				'theme': 'black',
-				'closeBtnAlt': true,
-				'closeOnClick': true
+				'title': 'BD+ (0kdpwyLsTTT8fB2t)'
 			 });
 		});
 	});

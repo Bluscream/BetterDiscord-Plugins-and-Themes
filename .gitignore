@@ -54,3 +54,5 @@ resources
 # Private Stuff
 plugins/PrivatePlugin.js
 plugins/Z_LastPlugin.js
+plugins/Quoting_.plugin.js
+plugins/PrivatePlugin.plugin.js
