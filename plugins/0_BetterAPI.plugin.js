@@ -276,6 +276,16 @@ BetterAPI.prototype.loadCore  = function() {
 			$('div[data-reactid=".0.1.1.0.2.0"]').prepend('<input id="locationbar" style="width:80%;" value="'+window.location.href+'"/>');
 		};
 	}
+	// BetterAPI.createCharCounter();
+	BetterAPI.createCharCounter = function() {
+		if ($('.charcount-display').length <= 0) {
+			$('textarea[data-reactid^=".0.1.1.0.2.1.0.1.$"]').charcount({
+				maxLength: 2000,
+				position: 'before'
+			});
+			$('.charcount-display').css("font-size", "small");
+		}
+	}
 	// BetterAPI.visit("href");
 	BetterAPI.visit = function(href) {
 		localStorage.setItem('lastURL', window.location.href);
