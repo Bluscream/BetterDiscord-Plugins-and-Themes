@@ -8,6 +8,19 @@
 	opacity:0.77 !important;
 }
 
+.guild-channels,
+.chat,
+.help-container,
+.content,
+.private-channels,
+.guild-header header,
+.typing,
+.account,
+.links,
+.divider-red span {
+	background: transparent !important;
+}
+
 textarea {
 	background:transparent !important;
 }
@@ -43,10 +56,7 @@ textarea {
 }
 
 .links {
-	background:rgba(0,0,0,0.8) !important;
 	border-top:none !important;
-	width:290px !important;
-    margin-left:-80px !important;
 }
 
 .topic {
@@ -57,17 +67,6 @@ textarea {
 	background-size: 24px;
 	background-position: 20px;
 	background-color: transparent;
-}
-
-.guild-channels,
-.chat,
-.help-container,
-.content,
-.private-channels,
-.guild-header header,
-.typing,
-.divider-red span {
-	background: transparent !important;
 }
 
 #voice-connection {
@@ -176,10 +175,7 @@ textarea {
 
 .account {
 	border-top:none !important;
-	width:290px;
-    margin-left:-80px;
 	padding:0 15px !important;
-	background:rgba(0,0,0,0.8);
 }
 
 .account .status {
@@ -188,9 +184,6 @@ textarea {
 
 #voice-connection {
 	border-top:none !important;
-	width:290px;
-    margin-left:-83px;
-	padding:15px 20px 15px 18px !important;
 }
 
 .guild-header ul {

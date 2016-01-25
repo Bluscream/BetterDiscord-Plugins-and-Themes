@@ -35,7 +35,7 @@ BGChanger.prototype.stop = function() {
 	$('.app').css('background-image', BG_original);
 };
 BGChanger.prototype.onSwitch = function() {
-	BGChanger.changeBG();
+	// BGChanger.changeBG();
 };
 BGChanger.changeBG = function() {
 	if (BGchange == true) {
