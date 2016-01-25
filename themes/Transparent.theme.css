@@ -1,27 +1,11 @@
 //META{"name":"Transparent","description":"Just a theme to make everything transparent","author":"Blu","version":"1.0"}*//
 
-#bgimage{
-  position: fixed;
-  left: 0;
-  right: 0;
-  z-index: 1;
-  display: block;
-  width: 100%;
-  height: 100%;
-  background-size:cover !important;
-}
-#temp{	
-  -webkit-filter: blur(1px); !important;
-}
+.app-mount{ background-color:black !important; }
 
-.app{
-  position: fixed;
-  left: 0;
-  right: 0;
-  z-index: 9999;
-  margin-left: 20px;
-  margin-right: 20px;
-}
+.invite-button,
+.btn-mute,
+.btn-deafen,
+.btn-settings,
 .title-wrap, .channel-members,
 .content .flex-spacer,
 .app,
