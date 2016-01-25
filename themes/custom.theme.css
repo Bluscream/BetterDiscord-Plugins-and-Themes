@@ -1,0 +1,60 @@
+/META{"name":"Custom CSS","description":"BetterDiscord Custom CSS","author":"Bluscream","version":"1.0"}*//
+
+#connecting { height:10px;background:red; }
+#connecting * { display:none; }
+.channels-wrap { width:225px; }
+.callout-backdrop {
+   	background-color:transparent !important;
+}
+.callout-backdrop img {
+   	background-color:black !important;
+}
+.guilds-wrapper { width:65px !important; }
+.modal[data-reactid=".0.5.$=1$modal"]{
+    padding:0;
+    background-color:black !important;
+}
+.modal-image{
+    display:flex !important;
+    flex-direction: column !important;
+	align-items: stretch !important;
+    width:100% !important;
+    height:100% !important;
+}
+img[data-reactid=".0.5.$=1$modal.0.0.0"]{
+    width:auto !important;
+    height:auto !important;
+    max-width:100% !important;
+    max-height:100% !important;
+}
+iframe[class=image]{
+    width:525px  !important;
+    max-width:100% !important;
+}
+.theme-light .highlight {
+    color: #738bd7;
+    background: #f1f3fb;
+    font-weight: 600;
+    -webkit-transition: background-color .05s,color .05s;
+    transition: background-color .05s,color .05s;
+}
+
+.theme-dark .highlight {
+    color: #738bd7;
+    background: ##3C414D;
+    font-weight: 600;
+    -webkit-transition: background-color .05s,color .05s;
+    transition: background-color .05s,color .05s;
+}
+.CodeMirror {
+    display: all !important;
+    height: 400px !important;
+}
+li[data-reactid=".0.1.1.0.0.0.1.$=1$133218815222874112"],
+div[data-reactid=".0.1.1.0.1.0.0.1:$133220611790077952"],
+li[data-reactid=".0.1.1.0.0.0.1.$=1$133220611790077952"],
+div[data-reactid=".0.1.1.0.1.0.0.1:$133218815222874112"],
+li[data-reactid=".0.1.1.0.0.0.1.$=1$136900939939315712"],
+li[data-reactid=".0.1.1.0.0.0.1.$=1$137296699784691712"],
+li[data-reactid=".0.1.1.0.1.3.1"],.image-gif
+{display:none !important;}

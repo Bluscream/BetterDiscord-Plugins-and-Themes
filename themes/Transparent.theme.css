@@ -1,7 +1,31 @@
-//META{"name":"Dark Matter for BGChanger","description":"Theme edited by Bluscream to fir with background changer plugin","author":"CosmicSalad,Blu","version":"1.0"}*//
-.app {background-size:cover !important;}
-.chat-empty {opacity:0.77 !important;}
-.help-container:after{background:none !important;}
+//META{"name":"Transparent","description":"Just a theme to make everything transparent","author":"Blu","version":"1.0"}*//
+
+#bgimage{
+  position: fixed;
+  left: 0;
+  right: 0;
+  z-index: 1;
+  display: block;
+  width: 100%;
+  height: 100%;
+  background-size:cover !important;
+}
+#temp{	
+  -webkit-filter: blur(1px); !important;
+}
+
+.app{
+  position: fixed;
+  left: 0;
+  right: 0;
+  z-index: 9999;
+  margin-left: 20px;
+  margin-right: 20px;
+}
+.title-wrap, .channel-members,
+.content .flex-spacer,
+.app,
+.chat-empty,
 .guild-channels,
 .chat,
 .help-container,
@@ -12,7 +36,19 @@
 .account,
 .links,
 .divider-red span,
+.guilds-wrapper,
+.channels-wrap,
+#voice-connection,
+.chat .new-messages-bar,
+.chat .new-messages-bar:hover,
+.chat-empty,
+.chat>.content .messages .message-group .comment .markup .highlight,
+.chat .divider:not(.divider-red)>div,
+.chat .divider>span,
+.channel-textarea-inner,
 textarea {background:transparent !important;}
+
+.help-container:after{background:none !important;}
 .guild-header ul {
     opacity:0 !important;
     transition:transform .5s cubic-bezier(0.18, 0.89, 0.32, 1.28) !important;
@@ -33,34 +69,22 @@ textarea {background:transparent !important;}
 	background-position:20px;
 	background-color:transparent;
 }
-#voice-connection {background:rgba(0,0,0,0.3);}
-.guilds-wrapper, .channels-wrap {background:rgba(0,0,0,0.75);}
 .guilds-wrapper {
-	background:rgba(0,0,0,0.6) !important;
 	box-shadow:inset -10px 0px 20px -10px rgba(0,0,0,0.2);
 }
-.chat .new-messages-bar {background-color:rgba(29,101,134,.9);}
-.chat .new-messages-bar:hover {background-color:rgba(29,101,134,1);}
 .chat .new-messages-bar button:last-child {color:rgba(255,255,255,0.5);}
-.chat-empty {background:rgba(20,23,27,0.95);}
 .chat>.title-wrap>.topic {font-size:12px;}
 .chat>.content .messages .message-group:not(.has-divider) {
 	border-bottom-color:hsla(0,0%,100%,.04) !important;
 }
 .chat>.content .messages .message-group .comment .markup .highlight {
-    background-color:rgba(29,101,134,.5) !important;
     color:#ddd !important;
 }
 .chat>.content .messages .message-group .comment .markup .highlight:hover {
     background-color:rgba(29,101,134,1) !important;
     color:#fff !important;
 }
-/* Date 1px line */
-.chat .divider:not(.divider-red)>div {
-	background:rgba(0,0,0,0.9) !important;
-}
 .chat .divider>span {
-	background-color:rgba(0,0,0,0) !important;
 	font-size:12px;
 	padding:5px 20px;
 	text-transform:uppercase;
@@ -113,14 +137,8 @@ textarea {background:transparent !important;}
 .guild-header ul {
 	background:#000 !important;
 }
-.content .flex-spacer {
-	background:rgba(20,23,27,0.95);
-}
 .title-wrap {
 	border-bottom:1px solid rgba(0,0,0,0.3) !important
-}
-.title-wrap, .channel-members {
-	background:rgba(10,13,16,0.95) !important;
 }
 .account .btn {
 	background:#000;
@@ -229,11 +247,9 @@ textarea {background:transparent !important;}
 }
 .scroller-wrap .scroller::-webkit-scrollbar-track-piece {
 	border:3px solid rgba(255,255,255,0) !important;
-	background-color:rgba(0,0,0,0.3) !important;
 }
 .channel-textarea-inner {
 	border: 2px solid rgba(255,255,255,0.1) !important;
-	background:rgba(10,13,16,0.95) !important;
 }
 .typing {
 	font-size:11px;
