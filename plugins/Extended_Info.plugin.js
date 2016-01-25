@@ -18,7 +18,7 @@ userInfo.prototype.start = function() {
 		if(!avatarURL){
 			avatarURL = BetterAPI.getAvatarURLbyName(name);
 		}
-		var _label = '';
+		var _label = '<div class="text">';
 		if (avatarURL) {
 			var _label = _label + '<img src="'+avatarURL+'" style="max-width:223px;"></img>';
 		}
@@ -34,7 +34,7 @@ userInfo.prototype.start = function() {
 		if (gameByID) {	
 			var _label = _label +'<br><b>Game: </b><span style="color:blue">'+gameByID+'</span>';
 		}
-		BetterAPI.addUserLabel("UserInfoLabel", "Info", _label);
+		BetterAPI.addUserLabel("UserInfoLabel", "Info", _label+'</div>');
 		// BetterAPI.addUserButton("btn", "#UserInfo", "Info");
 		// $('#UserInfo').on("click", function () {
 			// $.jAlert({

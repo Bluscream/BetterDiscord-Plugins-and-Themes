@@ -270,6 +270,12 @@ BetterAPI.prototype.loadCore  = function() {
 			 });
 		};
 	}
+	// BetterAPI.addLocationBar();
+	BetterAPI.addLocationBar = function() {
+		if ($("#locationbar").length <= 0) {
+			$('div[data-reactid=".0.1.1.0.2.0"]').prepend('<input id="locationbar" style="width:80%;" value="'+window.location.href+'"/>');
+		};
+	}
 	// BetterAPI.visit("href");
 	BetterAPI.visit = function(href) {
 		localStorage.setItem('lastURL', window.location.href);

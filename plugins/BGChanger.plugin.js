@@ -47,7 +47,7 @@ BGChanger.changeBG = function() {
 	if (BGchange == true) {
 		if (BGrand == true){
 			bgarray = [ // Remember that the images need to be HTTPS encrypted!
-				'https://i.imgur.com/emSvYMy.gif',
+				// 'https://i.imgur.com/emSvYMy.gif',
 				'https://i.imgur.com/RktuAes.gif',
 				'https://i.imgur.com/AFWa9a4.gif',
 				'https://i.imgur.com/9mv2XGt.gif',
@@ -56,23 +56,23 @@ BGChanger.changeBG = function() {
 				'https://i.imgur.com/MlfDS2G.gif',
 				'https://i.imgur.com/Sk8uISa.gif',
 				'https://i.imgur.com/mJBEies.gif',
-				'https://i.imgur.com/W2OFM8r.gif',
-				'https://i.imgur.com/ENhKvZD.gif',
+				// 'https://i.imgur.com/W2OFM8r.gif',
+				// 'https://i.imgur.com/ENhKvZD.gif',
 				'https://i.imgur.com/NJa2qMN.gif',
-				'https://i.imgur.com/HTyT6I7.gif',
-				'https://i.imgur.com/UMGJwOh.gif',
-				'https://i.imgur.com/EAS8sXK.gif',
-				'https://i.imgur.com/LFSjvzJ.gif',
-				'https://i.imgur.com/gmuhE5e.gif',
-				'https://i.imgur.com/HufwA6q.gif',
-				'https://i.imgur.com/BEwkp5Q.gif',
-				'https://i.imgur.com/d0EfsaT.gif',
+				// 'https://i.imgur.com/HTyT6I7.gif',
+				// 'https://i.imgur.com/UMGJwOh.gif',
+				// 'https://i.imgur.com/EAS8sXK.gif',
+				// 'https://i.imgur.com/LFSjvzJ.gif',
+				// 'https://i.imgur.com/gmuhE5e.gif',
+				// 'https://i.imgur.com/HufwA6q.gif',
+				// 'https://i.imgur.com/BEwkp5Q.gif',
+				// 'https://i.imgur.com/d0EfsaT.gif',
 				'https://i.imgur.com/Yy2qNQe.gif',
-				'https://i.imgur.com/PteVvRN.gif',
+				// 'https://i.imgur.com/PteVvRN.gif',
 				'https://i.imgur.com/Nv6afLv.gif',
-				'https://i.imgur.com/PPg7DIn.gif',
-				'https://i.imgur.com/1QYu9wS.gif',
-				'https://i.imgur.com/Hd1kXIa.gif'
+				'https://i.imgur.com/PPg7DIn.gif'
+				// 'https://i.imgur.com/1QYu9wS.gif',
+				// 'https://i.imgur.com/Hd1kXIa.gif'
 			];
 			result = bgarray[Math.floor(Math.random() * bgarray.length)];
 		} else {

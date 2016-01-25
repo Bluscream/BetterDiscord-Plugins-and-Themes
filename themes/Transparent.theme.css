@@ -2,6 +2,7 @@
 
 .app-mount{ background-color:black !important; }
 
+.modal-inner,
 .invite-button,
 .btn-mute,
 .btn-deafen,
@@ -30,6 +31,9 @@
 .chat .divider:not(.divider-red)>div,
 .chat .divider>span,
 .channel-textarea-inner,
+li[data-reactid=".0.1.1.0.0.0.0"],
+#bd-pub-button,
+#locationbar,
 textarea {background:transparent !important;}
 
 .help-container:after{background:none !important;}
@@ -40,6 +44,18 @@ textarea {background:transparent !important;}
 .guild-header-open ul {opacity:1 !important;}
 .need-help-button {opacity:0.15 !important;}
 .guilds-add {opacity:0.25 !important;}
+.user-popout-options {
+	background:rgba(0,0,0,0.9) !important;
+}
+header[data-reactid$="-popout.0.0"]{
+	background:rgba(29,101,134,0.8) !important;
+}
+div[data-reactid$="-popout.0.1.0.0"]{
+	background:rgba(0,0,0,0.8) !important;
+}
+.text{
+	color:#ffffff;
+}
 .tooltip {
     background:#1D6586;
     color:#e0e0e0;
@@ -238,9 +254,15 @@ textarea {background:transparent !important;}
 .typing {
 	font-size:11px;
 }
+ul[data-reactid^=".0.1.1.0.1.0.0.1"]{
+	background:rgba(0,0,0,0.79) !important;
+}
 /* SETTINGS */
 .settings .settings-header {
 	background:#1a1d20 !important;
+}
+.settings-right{
+	background:rgba(1,1,1,1.79) !important;
 }
 .form .btn-primary {
 	background-color:#1D6586;
