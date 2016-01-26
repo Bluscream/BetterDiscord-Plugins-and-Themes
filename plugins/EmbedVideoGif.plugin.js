@@ -16,17 +16,19 @@ like you would with normal gifs
 
  ======== Changelog ========
  1.0: Initial release
+ 1.1: Scroll chat after embedding
 
 **/
 
 function EmbedVideoGif() {}
 
 EmbedVideoGif.prototype.parseChat = function() {
+	var messages = document.getElementsByClassName("messages")[0];
 	$(".message .markup > a:not(.VidGif_parsed)").each(function(i, el) {
 		var e = $(el)
-		var url = e.attr("href").replace(/http:\/\//gi,"https://");
+		var url = e.attr("href");
 		var tag1 = /.*gfycat\.com\/(\w+).*/.exec(url)
-		var tag2 = /.*imgur\.com\/(\w+).*/.exec(url)
+		var tag2 = /.*imgur\.com\/(\w+)\.gifv/.exec(url)
 		if (tag1 === null && tag2 === null) return;
 
 		var accessory = e.parents(".message .body").siblings(".accessory");
@@ -42,7 +44,9 @@ EmbedVideoGif.prototype.parseChat = function() {
 
 			var i = setInterval(function() {
 				if (accessory.find('.embed-thumbnail').length === 0) return;
+				var preH = messages.scrollHeight;
 				accessory.find('.embed-thumbnail').html(vid);
+				messages.scrollTop += messages.scrollHeight - preH;
 				clearInterval(i);
 			}, 100);
 		}
@@ -101,7 +105,7 @@ EmbedVideoGif.prototype.getDescription = function() {
 };
 
 EmbedVideoGif.prototype.getVersion = function() {
-	return "1.0";
+	return "1.1";
 };
 
 EmbedVideoGif.prototype.getAuthor = function() {
