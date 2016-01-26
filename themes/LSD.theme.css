@@ -1,0 +1,41 @@
+//META{"name":"LSD Trip","description":",ghnort4958gj8g39g8936z05j39hj0659jh03j 58hj08942h5","author":"Blu","version":"1.0"}*//
+
+.avatar-small,.avatar-large,.hljs{
+    animation-name: rotation;
+    animation-duration: 4s;
+    animation-iteration-count: infinite;
+}
+.member-username,.user-name{
+    animation-name: updown;
+    animation-duration: 4s;
+    animation-iteration-count: infinite;
+}
+.member-game{
+    animation-name: downup;
+    animation-duration: 4s;
+    animation-iteration-count: infinite;
+}
+.member-inner{
+    animation-name: colors;
+    animation-duration: 4s;
+    animation-iteration-count: infinite;
+}
+@keyframes rotation {
+    0%   {transform: rotate(360deg)}
+    100% {transform: rotate(-360deg);}
+}
+@keyframes downup {
+    0% {transform: rotateX(-360deg);}
+    100% {transform: rotateX(0deg);}
+}
+@keyframes updown {
+    0% {transform: rotateX(0deg);}
+    100% {transform: rotateX(-360deg);}
+}
+@keyframes colors {
+    0%   {color: blue;}
+    25%  {color: cyan;}
+    50%  {color: pink;}
+    75%  {color: purple;}
+    100% {color: blue;}
+}
