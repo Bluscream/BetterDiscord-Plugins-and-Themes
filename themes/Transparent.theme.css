@@ -10,11 +10,11 @@
 .chat .new-messages-bar:hover,.chat-empty,
 .chat>.content .messages .message-group .comment .markup .highlight,
 .chat .divider:not(.divider-red)>div,.chat .divider>span,
-.channel-textarea-inner,li[data-reactid=".0.1.1.0.0.0.0"],
+.channel-textarea-inner,li[data-reactid=".0.1.1.0.0.0.0"],.search-bar,
 #bd-pub-button,#locationbar,textarea,pre{background:transparent !important;}
 .app-mount{ background-color:black !important; }
-.timestamp{mix-blend-mode:difference !important}
-.message .body .markup span,.message-content span{color:white !important;text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black !important}
+.timestamp{textcolor:black !important;}
+.s_emos_scanned,.message-content span{color:white !important;text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black !important}
 .hljs{background:rgba(46, 49, 54,0.9) !important;}
 .highlighted{background:rgba(0, 175, 255,0.4) !important;}
 .help-container:after{background:none !important;}

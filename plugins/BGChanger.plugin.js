@@ -13,13 +13,18 @@ BGChanger.prototype.getAuthor = function() {
     return "Bluscream";
 };
 BGChanger.prototype.getSettingsPanel = function() {
-	$('#bgchange').livequery(function(){
-		$('#bgchange').click(function(){
-			BGChanger.changeBG();
-		});
+	// $('#bgchange').livequery(function(){
+		// $('#bgchange').click(function(){
+			// BGChanger.changeBG();
+		// });
+	// });
+    // return '<b>'+BGChanger.prototype.getName()+'</b><br><br>\
+	// <button id="bgchange">Next Background</button>';
+	$('.settings-right,.settings-inner,.settings-actions,#bd-pane').css('background','transparent');
+	BGChanger.changeBG();
+	$('.bd-psm').livequery(function(){
+			$('.bd-psm').remove();
 	});
-    return '<b>'+BGChanger.prototype.getName()+'</b><br><br>\
-	<button id="bgchange">Next Background</button>';
 };
 BGChanger.prototype.load = function() {
 	BG_original = $('.app').css('background-image');

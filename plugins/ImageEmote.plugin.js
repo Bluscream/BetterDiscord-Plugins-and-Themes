@@ -85,6 +85,12 @@ ImageEmote.prototype.attachHandler = function() {
 		if (code !== 13) return;
 
 		var text = $(this).val();
+		var _lower = text.toLowerCase();
+		// if(_lower==""){
+			
+		// }else{
+			
+		// }
 		if (!self.emoteData.hasOwnProperty(text)) return;
 
 		self.sendBase64File(text.slice(1), self.emoteData[text]);
@@ -97,6 +103,8 @@ ImageEmote.prototype.attachHandler = function() {
 	// bind handlers
 	el[0].addEventListener("keydown", this.handleKeypress, false);
 }
+
+// ImageEmote.prototype.processCommand = function(cmd) {
 
 // Function to convert base64 data to blob
 // http://stackoverflow.com/a/16245768
