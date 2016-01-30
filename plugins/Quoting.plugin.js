@@ -141,7 +141,6 @@ var CDCMQuoting = function(){
 		// var msg = msg + "```";
         return msg;
     };
-    var shiftPressed = false;
     this.resize = function(textArea){
         const oldSize = textArea.style.height;
         const newSize = textArea.scrollHeight > textArea.clientHeight ? (textArea.scrollHeight) : (textArea.value == "" ? 18 : 80);
@@ -152,8 +151,6 @@ var CDCMQuoting = function(){
                window.DCMQuoting.resize(this);
             if ((key == 13) && (!(event.shiftKey))) 
                 textArea.style.height = "18px";
-            if (key == 91)
-                shiftPressed = false;
         };
     }
     this.clicked = function(messageElement, mode){
