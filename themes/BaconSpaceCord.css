@@ -1,4 +1,4 @@
-//META{"name":"BaconSpaceCord","description":"Bacon_Space Theme","author":"Bacon_Space","version":"0.4"}*//
+//META{"name":"BaconSpaceCord","description":"Bacon_Space Theme","author":"Bacon_Space","version":"0.5"}*//
 
 form[data-reactid=".0.1.1.0.2.1.0.1"]{
 	margin: 0 !important;
@@ -27,7 +27,7 @@ form[data-reactid=".0.1.1.0.2.1.0.1"]{
 }
 
 .chat .title-wrap .topic a {
-	color: grey !important;
+	color: green !important;
 }
 
 .checkbox .checkbox-inner input[type=checkbox]:checked+span {
@@ -57,7 +57,7 @@ form[data-reactid=".0.1.1.0.2.1.0.1"]{
 }
 
 .tab-bar.SIDE .tab-bar-item:before {
-	border-left: 4px solid red !important;
+	border-left: 4px  red !important;
 }
 
 .chat>.content .messages .divider.divider-red>div {
@@ -76,13 +76,7 @@ form[data-reactid=".0.1.1.0.2.1.0.1"]{
 	background-color:yellow !important;
 }
 
-.guild-channels ul .channel-text:hover{
-	background: linear-gradient(to right, blue 85%,red) !important;
-}
 
-.tab-bar.TOP .tab-bar-item.selected {
-	border-bottom: 2px  blue !important;
-}
 
 .user-popout .user-popout-options .btn {
     background-color: yellow !important;
