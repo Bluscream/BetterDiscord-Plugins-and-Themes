@@ -8,9 +8,6 @@ form[data-reactid=".0.1.1.0.2.1.0.1"]{
 	margin: 20px 20px 30px !important;
 }
 
-#twitchcord-button-container{
-	right: 20px !important;
-}
 
 .tooltip{
 	background-color: green !important;
@@ -24,10 +21,6 @@ form[data-reactid=".0.1.1.0.2.1.0.1"]{
 	border-right-color: grey !important;
 }
 
-.divider.divider-red span {
-	color: blue !important;
-	background:transparent !important; 
-}
 
 .guild-channels ul .channel-text.selected:before{
 	border-left: 4px solid purple !important;
@@ -38,7 +31,7 @@ form[data-reactid=".0.1.1.0.2.1.0.1"]{
 }
 
 .checkbox .checkbox-inner input[type=checkbox]:checked+span {
-	background-color: blue !important;
+	background-color: green !important;
 	border-color: red !important;
 }
 
@@ -46,9 +39,6 @@ form[data-reactid=".0.1.1.0.2.1.0.1"]{
 	background:yellow !important;
 }
 
-.slider-bar-fill {
-	background:blue !important;
-}
 
 .form .control-group input[type=email]:focus, .form .control-group input[type=password]:focus, .form .control-group input[type=text]:focus, .form .control-group textarea:focus{
 	border-bottom: 2px solid blue !important;
@@ -75,11 +65,11 @@ form[data-reactid=".0.1.1.0.2.1.0.1"]{
 }
 
 .form .btn-primary{
-	background:#6441A5 !important;
+	background:blue !important;
 }
 
 .popout header{
-	background-color:#6441A5 !important;
+	background-color:green !important;
 }
 
 .chat .new-messages-bar{
@@ -107,24 +97,8 @@ form[data-reactid=".0.1.1.0.2.1.0.1"]{
  	background-color: red !important;   
 }
 
-.member-roles .member-role{
- 	color: yellow !important;    
-}
-
 .highlight {
  	color: yellow !important;   
-}
-
-.message-group .mentioned .message-text:after {
- border-left: 4px yellow !important; 
-}
-
-.chat>.content .messages .mentioned .message-text {
-    background: #737f8d !important;
-}
-
-.chat>.content .messages .message-group .comment .markup .highlight:hover {
-   background: yellow !important; 
 }
 
 .scroller-wrap .scroller::-webkit-scrollbar-thumb {
