@@ -1,4 +1,4 @@
-//META{"name":"BaconSpaceCord","description":"Bacon_Space Theme","author":"Bacon_Space","version":"0.6"}*//
+//META{"name":"BaconSpaceCord","description":"Bacon_Space Theme","author":"Bacon_Space","version":"0.7"}*//
 
 form[data-reactid=".0.1.1.0.2.1.0.1"]{
 	margin: 0 !important;
@@ -86,5 +86,5 @@ form[data-reactid=".0.1.1.0.2.1.0.1"]{
 }
 
 .scroller-wrap .scroller::-webkit-scrollbar-thumb {
-    background-color: red !important;
+    background-color: green !important;
 }
