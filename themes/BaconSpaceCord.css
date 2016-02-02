@@ -100,7 +100,7 @@ form[data-reactid=".0.1.1.0.2.1.0.1"]{
 }
 
 .user-popout .user-popout-options .btn:hover {
-    background-color: yellow !important;
+    background-color: grey !important;
 }
 
 .user-popout .user-popout-options .btn.btn-server {
@@ -108,7 +108,7 @@ form[data-reactid=".0.1.1.0.2.1.0.1"]{
 }
 
 .member-roles .member-role{
- 	color: yellow !important;    
+ 	color: grey !important;    
 }
 
 .highlight {
@@ -120,7 +120,7 @@ form[data-reactid=".0.1.1.0.2.1.0.1"]{
 }
 
 .chat>.content .messages .mentioned .message-text {
-    background: white !important;
+    background: red !important;
 }
 
 .chat>.content .messages .message-group .comment .markup .highlight:hover {
