@@ -1,4 +1,4 @@
-//META{"name":"BeamCord","description":"Changes all accents from blue to Beam Blue","author":"Bacon_Space","version":"1.0"}*//
+//META{"name":"BeamCord","description":"Changes all accents from blue to Beam Blue","author":"Bacon_Space","version":"0.2"}*//
 
 form[data-reactid=".0.1.1.0.2.1.0.1"]{
 	margin: 0 !important;
@@ -8,7 +8,7 @@ form[data-reactid=".0.1.1.0.2.1.0.1"]{
 	margin: 20px 20px 30px !important;
 }
 
-#twitchcord-button-container{
+#beamcord-button-container{
 	right: 20px !important;
 }
 
