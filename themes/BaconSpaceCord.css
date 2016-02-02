@@ -1,4 +1,4 @@
-//META{"name":"BaconSpaceCord","description":"Bacon_Space Theme","author":"Bacon_Space","version":"0.5"}*//
+//META{"name":"BaconSpaceCord","description":"Bacon_Space Theme","author":"Bacon_Space","version":"0.6"}*//
 
 form[data-reactid=".0.1.1.0.2.1.0.1"]{
 	margin: 0 !important;
@@ -41,19 +41,15 @@ form[data-reactid=".0.1.1.0.2.1.0.1"]{
 
 
 .form .control-group input[type=email]:focus, .form .control-group input[type=password]:focus, .form .control-group input[type=text]:focus, .form .control-group textarea:focus{
-	border-bottom: 2px solid blue !important;
+	border-bottom: 2px solid green !important;
 }
 
 .user-settings-modal a {
-	color: #6441A5 !important;
+	color: green !important;
 }
 
 .guilds li.active .guild-inner {
-	background:#6441A5 !important;
-}
-
-.guilds li.active .guild-inner, .guilds li:hover .guild-inner{
-	background:#6441A5 !important;
+	background:green !important;
 }
 
 .tab-bar.SIDE .tab-bar-item:before {
@@ -73,15 +69,9 @@ form[data-reactid=".0.1.1.0.2.1.0.1"]{
 }
 
 .chat .new-messages-bar{
-	background-color:yellow !important;
+	background-color:green !important;
 }
 
-
-
-.user-popout .user-popout-options .btn {
-    background-color: yellow !important;
-    border: 1px  yellow !important;
-}
 
 .user-popout .user-popout-options .btn:hover {
     background-color: grey !important;
