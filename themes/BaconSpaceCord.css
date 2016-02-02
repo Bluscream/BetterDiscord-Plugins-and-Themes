@@ -1,0 +1,132 @@
+//META{"name":"BaconSpaceCord","description":"Bacon_Space Theme","author":"Bacon_Space","version":"1.0"}*//
+
+form[data-reactid=".0.1.1.0.2.1.0.1"]{
+	margin: 0 !important;
+}
+
+.channel-textarea{
+	margin: 20px 20px 30px !important;
+}
+
+#twitchcord-button-container{
+	right: 20px !important;
+}
+
+.tooltip{
+	background-color: yellow !important;
+}
+
+.tooltip-top:after{
+	border-top-color: green !important;
+}
+
+.tooltip-right:after{
+	border-right-color: yellow !important;
+}
+
+.divider.divider-red span {
+	color: blue !important;
+	background:transparent !important; 
+}
+
+.guild-channels ul .channel-text.selected:before{
+	border-left: 4px solid purple !important;
+}
+
+.chat .title-wrap .topic a {
+	color: yellow !important;
+}
+
+.checkbox .checkbox-inner input[type=checkbox]:checked+span {
+	background-color: blue !important;
+	border-color: red !important;
+}
+
+.radio .radio-inner span:after {
+	background:yellow !important;
+}
+
+.slider-bar-fill {
+	background:blue !important;
+}
+
+.form .control-group input[type=email]:focus, .form .control-group input[type=password]:focus, .form .control-group input[type=text]:focus, .form .control-group textarea:focus{
+	border-bottom: 2px solid blue !important;
+}
+
+.user-settings-modal a {
+	color: #6441A5 !important;
+}
+
+.guilds li.active .guild-inner {
+	background:#6441A5 !important;
+}
+
+.guilds li.active .guild-inner, .guilds li:hover .guild-inner{
+	background:#6441A5 !important;
+}
+
+.tab-bar.SIDE .tab-bar-item:before {
+	border-left: 4px solid red !important;
+}
+
+.chat>.content .messages .divider.divider-red>div {
+	background:yellow !important;
+}
+
+.form .btn-primary{
+	background:#6441A5 !important;
+}
+
+.popout header{
+	background-color:#6441A5 !important;
+}
+
+.chat .new-messages-bar{
+	background-color:yellow !important;
+}
+
+.guild-channels ul .channel-text:hover{
+	background: linear-gradient(to right, blue 85%,red) !important;
+}
+
+.tab-bar.TOP .tab-bar-item.selected {
+	border-bottom: 2px  blue !important;
+}
+
+.user-popout .user-popout-options .btn {
+    background-color: yellow !important;
+    border: 1px  yellow !important;
+}
+
+.user-popout .user-popout-options .btn:hover {
+    background-color: yellow !important;
+}
+
+.user-popout .user-popout-options .btn.btn-server {
+ 	background-color: red !important;   
+}
+
+.member-roles .member-role{
+ 	color: yellow !important;    
+}
+
+.highlight {
+ 	color: yellow !important;   
+}
+
+.message-group .mentioned .message-text:after {
+ border-left: 4px yellow !important; 
+}
+
+.chat>.content .messages .mentioned .message-text {
+    background: white !important;
+}
+
+.chat>.content .messages .message-group .comment .markup .highlight:hover {
+   background: yellow !important; 
+}
+
+.scroller-wrap .scroller::-webkit-scrollbar-thumb {
+    background-color: red !important;
+}
