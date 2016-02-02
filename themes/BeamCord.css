@@ -1,4 +1,4 @@
-//META{"name":"BeamCord","description":"Changes all accents from blue to Beam Blue","author":"Bacon_Space","version":"0.2"}*//
+//META{"name":"BeamCord","description":"Changes all accents from blue to Beam Blue","author":"Bacon_Space","version":"0.3"}*//
 
 form[data-reactid=".0.1.1.0.2.1.0.1"]{
 	margin: 0 !important;
@@ -13,7 +13,7 @@ form[data-reactid=".0.1.1.0.2.1.0.1"]{
 }
 
 .tooltip{
-	background-color: blue !important;
+	background-color: green !important;
 }
 
 .tooltip-top:after{
@@ -107,24 +107,10 @@ form[data-reactid=".0.1.1.0.2.1.0.1"]{
  	background-color: transparent !important;   
 }
 
-.member-roles .member-role{
- 	color: yellow !important;    
-}
+
 
 .highlight {
  	color: yellow !important;   
-}
-
-.message-group .mentioned .message-text:after {
- border-left: 4px solid blue !important; 
-}
-
-.chat>.content .messages .mentioned .message-text {
-    background: white !important;
-}
-
-.chat>.content .messages .message-group .comment .markup .highlight:hover {
-   background: yellow !important; 
 }
 
 .scroller-wrap .scroller::-webkit-scrollbar-thumb {
