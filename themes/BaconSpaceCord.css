@@ -1,4 +1,4 @@
-//META{"name":"BaconSpaceCord","description":"Bacon_Space Theme","author":"Bacon_Space","version":"0.3"}*//
+//META{"name":"BaconSpaceCord","description":"Bacon_Space Theme","author":"Bacon_Space","version":"0.4"}*//
 
 form[data-reactid=".0.1.1.0.2.1.0.1"]{
 	margin: 0 !important;
@@ -112,15 +112,15 @@ form[data-reactid=".0.1.1.0.2.1.0.1"]{
 }
 
 .highlight {
- 	color: grey !important;   
+ 	color: yellow !important;   
 }
 
 .message-group .mentioned .message-text:after {
- border-left: 4px grey !important; 
+ border-left: 4px yellow !important; 
 }
 
 .chat>.content .messages .mentioned .message-text {
-    background: white !important;
+    background: #737f8d !important;
 }
 
 .chat>.content .messages .message-group .comment .markup .highlight:hover {
