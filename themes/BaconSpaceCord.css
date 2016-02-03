@@ -1,4 +1,4 @@
-//META{"name":"BaconSpaceCord","description":"Bacon_Space Theme","author":"Bacon_Space","version":"0.7"}*//
+/META{"name":"BaconSpaceCord","description":"Made By https://Beam.pro/Bacon_Space","author":"Bacon_Space","version":"0.9"*//
 
 form[data-reactid=".0.1.1.0.2.1.0.1"]{
 	margin: 0 !important;
@@ -17,13 +17,10 @@ form[data-reactid=".0.1.1.0.2.1.0.1"]{
 	border-top-color: green !important;
 }
 
-.tooltip-right:after{
-	border-right-color: grey !important;
-}
 
 
 .guild-channels ul .channel-text.selected:before{
-	border-left: 4px solid purple !important;
+	border-left: 4px  green !important;
 }
 
 .chat .title-wrap .topic a {
@@ -32,16 +29,12 @@ form[data-reactid=".0.1.1.0.2.1.0.1"]{
 
 .checkbox .checkbox-inner input[type=checkbox]:checked+span {
 	background-color: green !important;
-	border-color: red !important;
-}
-
-.radio .radio-inner span:after {
-	background:yellow !important;
+	border-color: green !important;
 }
 
 
 .form .control-group input[type=email]:focus, .form .control-group input[type=password]:focus, .form .control-group input[type=text]:focus, .form .control-group textarea:focus{
-	border-bottom: 2px solid green !important;
+	border-bottom: 2px green !important;
 }
 
 .user-settings-modal a {
@@ -53,7 +46,7 @@ form[data-reactid=".0.1.1.0.2.1.0.1"]{
 }
 
 .tab-bar.SIDE .tab-bar-item:before {
-	border-left: 4px  red !important;
+	border-left: 4px   !important;
 }
 
 .chat>.content .messages .divider.divider-red>div {
@@ -61,7 +54,7 @@ form[data-reactid=".0.1.1.0.2.1.0.1"]{
 }
 
 .form .btn-primary{
-	background:blue !important;
+	background:green !important;
 }
 
 .popout header{
@@ -74,12 +67,9 @@ form[data-reactid=".0.1.1.0.2.1.0.1"]{
 
 
 .user-popout .user-popout-options .btn:hover {
-    background-color: grey !important;
+    background-color: green !important;
 }
 
-.user-popout .user-popout-options .btn.btn-server {
- 	background-color: red !important;   
-}
 
 .highlight {
  	color: yellow !important;   
