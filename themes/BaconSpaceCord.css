@@ -1,0 +1,80 @@
+/META{"name":"BaconSpaceCord","description":"Made By https://Beam.pro/Bacon_Space","author":"Bacon_Space","version":"0.9"*//
+
+form[data-reactid=".0.1.1.0.2.1.0.1"]{
+	margin: 0 !important;
+}
+
+.channel-textarea{
+	margin: 20px 20px 30px !important;
+}
+
+
+.tooltip{
+	background-color: green !important;
+}
+
+.tooltip-top:after{
+	border-top-color: green !important;
+}
+
+
+
+.guild-channels ul .channel-text.selected:before{
+	border-left: 4px  green !important;
+}
+
+.chat .title-wrap .topic a {
+	color: green !important;
+}
+
+.checkbox .checkbox-inner input[type=checkbox]:checked+span {
+	background-color: green !important;
+	border-color: green !important;
+}
+
+
+.form .control-group input[type=email]:focus, .form .control-group input[type=password]:focus, .form .control-group input[type=text]:focus, .form .control-group textarea:focus{
+	border-bottom: 2px green !important;
+}
+
+.user-settings-modal a {
+	color: green !important;
+}
+
+.guilds li.active .guild-inner {
+	background:green !important;
+}
+
+.tab-bar.SIDE .tab-bar-item:before {
+	border-left: 4px   !important;
+}
+
+.chat>.content .messages .divider.divider-red>div {
+	background:yellow !important;
+}
+
+.form .btn-primary{
+	background:green !important;
+}
+
+.popout header{
+	background-color:green !important;
+}
+
+.chat .new-messages-bar{
+	background-color:green !important;
+}
+
+
+.user-popout .user-popout-options .btn:hover {
+    background-color: green !important;
+}
+
+
+.highlight {
+ 	color: yellow !important;   
+}
+
+.scroller-wrap .scroller::-webkit-scrollbar-thumb {
+    background-color: green !important;
+}
