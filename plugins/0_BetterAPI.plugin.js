@@ -47,9 +47,13 @@ BetterAPI.prototype.getSettingsPanel = function() {
 			onComplete: function(response) { alertify.success(""+response) }
 		});
 	});
+	$('#bdpreload').livequery(function(){
+		$('#bdpreload').click( function(a) { window.location.reload(); });
+	});
 	return '<b>'+BetterAPI.prototype.getName()+' Settings</b><br><br><br>\
 		Backup Localstorage:&nbsp;<button id="bdpmakebak">Backup</button><br>\
-		Restore Localstorage:&nbsp;<button id="bdprestbak">Restore</button><br>';
+		Restore Localstorage:&nbsp;<button id="bdprestbak">Restore</button><br>\
+		Reload Discord:&nbsp;<button id="bdpreload">Reload</button><br>';
 };
 BetterAPI.prototype.onSwitch = function() {
 	localStorage.setItem('URL', window.location.href);
@@ -236,7 +240,6 @@ BetterAPI.prototype.loadCore  = function() {
 					// navigate to file, will download
 					location.href = fileEntry.toURL();
 				}, false);
-
 				fileWriter.write(blob);
 			}, function() {});
 		}, function() {});
