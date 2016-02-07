@@ -35,6 +35,7 @@ ServerSort.prototype.start = function() {
 	// make list sortable
 	$(".guilds").sortable({
 		axis: 'y',
+		distance: 10,
 		items: 'li[data-reactid*=".0.1.1.0.0.0.3:"]',
 		update: function (e, ui) {
 			ServerSort.prototype.storeNewList();
@@ -81,4 +82,3 @@ ServerSort.prototype.onSwitch = function() {};
 ServerSort.prototype.getSettingsPanel = function() {
     return '';
 };
-ServerSort.prototype.getSourceURL = function() {return 'https://cdn.rawgit.com/cosmicsalad/Discord-Themes-and-Plugins/master/plugins/SortServers.plugin.js';};
