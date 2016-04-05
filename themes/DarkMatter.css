@@ -12,7 +12,7 @@
 /* Main background and settings background */
 .app,
 .callout-backdrop {
-	background:url(https://i.imgur.com/7SbtKvw.png);
+	background:url(https://i.imgur.com/MlfDS2G.gif);
 	background-size:cover !important;
 }
 
@@ -53,7 +53,7 @@ textarea {
 
 */
 
-.links,
+/*.links,*/
 .help-container {
 	display: none;
 }
@@ -278,11 +278,15 @@ textarea {
 .account {
 	z-index:9;
 	border-top:none !important;
-	width:290px;
-    margin-left:-80px;
+	/*width:290px;
+    margin-left:-80px;*/
 	padding:0 15px !important;
 	background:rgba(0,0,0,0.75);
 	height:77px;
+}
+
+.links {
+	background-color:rgba(0,0,0,0.70) !important;
 }
 
 .account .status {
@@ -1009,4 +1013,24 @@ textarea {
 .cm-s-neat span.cm-atom,
 .cm-s-neat span.cm-number {
 	color:#25ACE8;
+}
+
+/* Changes by Bluscream */
+
+.selected {
+	background:rgba(0,0,0,0.5) !important;
+}
+.selected:hover,.draggable:hover {
+	background:rgba(0,0,0,0.7) !important;
+}
+.instant-invite>.show-channel>text,.instant-invite>.show-channel>.member>span,.member>.member-inner>.member-username {
+	color:rgba(255,255,255,0.9) !important;
+}
+input,.region-select,.Select-control,.radio-inner {
+	background:rgba(255,255,255,0.7) !important;
+	background-color:rgba(255,255,255,0.7) !important;
+}
+.Select-placeholder{
+	background:rgba(255,255,255,0.8) !important;
+	background-color:rgba(255,255,255,0.8) !important;
 }

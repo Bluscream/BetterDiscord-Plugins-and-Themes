@@ -313,6 +313,7 @@ BetterAPI.prototype.injectJS  = function() {
 	$("head").append('<script src="https://cdn.rawgit.com/brandonaaron/livequery/1.1.1/jquery.livequery.js"></script>'); // 
 	// $("head").append('<script src="https://cdn.rawgit.com/flesler/jquery.scrollTo/master/jquery.scrollTo.min.js"></script>'); // 
 	$("head").append('<script src="https://cdn.rawgit.com/andreyfedoseev/jquery-ocupload/master/jquery.ocupload-min.js"></script>'); // 
+	$("head").append('<script src="https://cdn.rawgit.com/jberryman/dilly.js/master/dilly.js"></script>'); // https://github.com/jberryman/dilly.js#toc1
 };
 BetterAPI.prototype.loadAPI  = function() {
 	// BetterAPI.getCurrentServerName();
