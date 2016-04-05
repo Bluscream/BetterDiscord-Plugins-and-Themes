@@ -350,6 +350,10 @@ BetterAPI.prototype.loadAPI  = function() {
 			return null;
 		}
 	}
+	// BetterAPI.getOwnDiscriminator();
+	BetterAPI.getOwnDiscriminator = function() {
+		return $('span[data-reactid=".0.1.1.0.1.2.1.1.1"]').text();
+	}
 	// BetterAPI.getOwnName();
 	BetterAPI.getOwnName = function() {
 		return ''+$('.account').find('.username').text();
@@ -382,7 +386,7 @@ BetterAPI.prototype.loadAPI  = function() {
 	}
 	// BetterAPI.serverCount();
 	BetterAPI.serverCount = function() {
-		return $('li[data-reactid*=".0.1.1.0.0.0.3:"]').length;
+		return $('li[data-reactid*=".0.1.1.0.0.0.4:"]').length;
 	}
 	// BetterAPI.getUserIdByName("name");
 	BetterAPI.getUserIdByName = function(name) {
@@ -525,6 +529,7 @@ BetterAPI.prototype.loadAPI  = function() {
 			if(name == _name) {
 				var url = $(this).css("background-image");
 				match = url.substring(4, url.length - 1);
+				// match = match.replace('"', '');
 			}        
 		});
 		if(!match) {
@@ -533,6 +538,7 @@ BetterAPI.prototype.loadAPI  = function() {
 				if(name == _name) {
 					var url = $(this).css("background-image");
 					match = url.substring(4, url.length - 1);
+					// match = match.replace('"', '');
 				}        
 			});
 		}
@@ -610,6 +616,11 @@ BetterAPI.prototype.loadAPI  = function() {
 		}
 		return clients;
 	}
+	// BetterAPI.onlineFriendsCount();
+	BetterAPI.onlineFriendsCount = function() {
+		return $('.friends-online').text().replace(' Online', '');
+	}
+	
 	// BetterAPI.addUserLabel("divID", "label", "<html>");
 	BetterAPI.addUserLabel = function(divID, label, html) {
 		var divID = divID.startsWith("#") ? divID.substring(1) : divID;

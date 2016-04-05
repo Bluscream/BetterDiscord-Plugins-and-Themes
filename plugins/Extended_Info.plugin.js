@@ -20,7 +20,7 @@ userInfo.prototype.start = function() {
 		}
 		var _label = '<div class="text">';
 		if (avatarURL) {
-			var _label = _label + '<img src="'+avatarURL+'" style="max-width:223px;"></img>';
+			var _label = _label + '<img src='+avatarURL+' style="max-width:223px;"></img>';
 		}
 		if (name) {
 			var _label = _label + '<br><b>Name: </b>'+name+'';
@@ -95,7 +95,7 @@ userInfo.prototype.start = function() {
 			Core.prototype.alert(_title, '\
 				<TABLE BORDER="0" CELLPADDING="3" CELLSPACING="3">\
 					<TR>\
-						<TD><img width="165px" height="165px" src="'+aurl+'"></img></TD>\
+						<TD><img width="165px" height="165px" src='+aurl+'></img></TD>\
 						<TD>\
 							'+_data+'\
 						</TD>\
@@ -146,17 +146,27 @@ userInfo.prototype.start = function() {
 			$('div[data-reactid=".0.5.$=1$UserSettingsModal.0.0.1.0.$ACCOUNT.0.1.0"]').append(_label);
 		}
 	});
+	// updateMembers();
+	updateMembers = function() {
+		if((BetterAPI.userCount()) && (BetterAPI.userCount() > 0)){
+			$('.friends-online').text('');
+			$('.friends-online').html(BetterAPI.onlineFriendsCount()+' | <font color="lightblue">'+BetterAPI.serverCount()+'</font> | <font color="red">'+BetterAPI.userCount()+'</font>');
+		}else{
+			$('.friends-online').text('');
+			$('.friends-online').html(BetterAPI.onlineFriendsCount()+' | <font color="lightblue">'+BetterAPI.serverCount()+'</font>');
+		}
+	}
+	// appendMembers();
 	appendMembers = function() {
 		if ($("#totalmembers").length <= 0) {
 			$('.scroller.channel-members').prepend('\
-			<h2 id="totalmembers">\
+			<h2 id="totalmembers" style="background:none !important;">\
 				<span>Total</span>\
 				<span>—</span>\
 				<span>'+BetterAPI.userCount()+'</span>\
 			</h2>');
 		};
 	};
-	// appendMembers();
 	$('.footer').livequery(function(){
 		if($('#bdcl').length <= 0){
 			$('.footer').append(' | <a id="bdchangelog">BD Change Log</a>');
@@ -168,7 +178,8 @@ userInfo.prototype.start = function() {
 	});
 };
 userInfo.prototype.onSwitch = function() {
-	// appendMembers();
+	//appendMembers();
+	//updateMembers();
 };
 userInfo.prototype.stop = function() {
 	$('span[data-reactid=".0.4"').off('DOMNodeInserted.userInfo');
