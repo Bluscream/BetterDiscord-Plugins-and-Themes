@@ -1,3 +1,4 @@
+//META{"name":"README"}*//
 #Plugins
 
 All plugins go to ``` %appdata%\BetterDiscord\plugins\ ```
@@ -67,6 +68,7 @@ https://github.com/fabien-d/alertify.js/wiki/How-to-Use#usage
 https://github.com/craigmccoy/jquery-charcount#quick-documentation
 https://github.com/afshinm/Json-to-HTML-Table#how-to-use
 https://github.com/brandonaaron/livequery/blob/1.1.1/README.markdown#live-query
+https://github.com/jberryman/dilly.js#toc1
 ```
 
 Currently available [webSock](https://github.com/Bluscream/BetterDiscord/blob/master/plugins/0_websock.js) functions:
