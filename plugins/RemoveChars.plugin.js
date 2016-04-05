@@ -9,7 +9,6 @@ function RemoveChars() {
 		$(".message-text:not(.RemoveChars_parsed").each(function(i,el){
 			var e = $(el);var index;var text = e.text();
 			for (index = 0; index < to_remove.length; ++index) {
-				console.warn(to_remove[index]);console.info(text.indexOf(to_remove[index]));
 				if (text.indexOf(to_remove[index]) != '-1'){
 					var re = new RegExp('\\'+to_remove[index], 'g');
 					replace = text.replace(re, replace_text);
