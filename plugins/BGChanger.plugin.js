@@ -12,7 +12,7 @@ BGChanger.prototype.getVersion = function() {
 BGChanger.prototype.getAuthor = function() {
     return "Bluscream";
 };
-BGChanger.prototype.getSettingsPanel = function() {
+BGChanger.prototype.getSettingsPanel = function() { 
 	// $('#bgchange').livequery(function(){
 		// $('#bgchange').click(function(){
 			// BGChanger.changeBG();
