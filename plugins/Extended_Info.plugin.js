@@ -35,6 +35,18 @@ userInfo.prototype.start = function() {
 			var _label = _label +'<br><b>Game: </b><span style="color:blue">'+gameByID+'</span>';
 		}
 		BetterAPI.addUserLabel("UserInfoLabel", "Info", _label+'</div>');
+		$('.member-role-add').parent().css( "background-color", "rgba(0,255,0,0.4)")
+		function checkRoles(){ if($('.member-role-remove').length > 0){ return 1; }else{ return 0; } }
+		if($('.member-role-remove').length > 1 && $('#removeallroles').length < 1){
+			$('div[data-reactid^=".0.4.$=11=2$"]>.member-roles').append('<li class="member-role manipulate" style="background-color:rgba(255,0,0,0.4) !important;"><span class="name">Remove all</span><button type="button" class="member-role-remove" id="removeallroles"></button></li>');
+			$('#removeallroles').click(function(){	
+				withDelay(500)
+					.while(checkRoles)
+						.do(function(){
+							$('.member-role-remove:first').click();
+						});
+			});
+		}
 		// BetterAPI.addUserButton("btn", "#UserInfo", "Info");
 		// $('#UserInfo').on("click", function () {
 			// $.jAlert({

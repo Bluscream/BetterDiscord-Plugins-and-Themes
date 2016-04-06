@@ -1023,7 +1023,8 @@ textarea {
 .selected:hover,.draggable:hover {
 	background:rgba(0,0,0,0.7) !important;
 }
-.instant-invite>.show-channel>text,.instant-invite>.show-channel>.member>span,.member>.member-inner>.member-username {
+.instant-invite>.show-channel>text,.instant-invite>.show-channel>.member>span,
+.member>.member-inner>.member-username,.permission-actions>span {
 	color:rgba(255,255,255,0.9) !important;
 }
 input,.region-select,.Select-control,.radio-inner {

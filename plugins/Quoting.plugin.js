@@ -66,6 +66,7 @@ function DCMQuotingPlugin(){
                     var content = element[ia].parentElement.parentElement;
                     if ((content.className == "body") && (checkVal(content) == ghostModId)){
                         try{content.getElementsByTagName("h2")[0].appendChild(createButton("Clients", "clickedallClients"));}catch(e){}
+                        try{content.getElementsByTagName("h2")[0].appendChild(createButton("Pics", "clickallPics"));}catch(e){}
 						try{content.getElementsByTagName("h2")[0].appendChild(createSpan("|"));}catch(e){}
 						try{content.getElementsByTagName("h2")[0].appendChild(createButton("Server", "clicked", "server"));}catch(e){}
 						try{content.getElementsByTagName("h2")[0].appendChild(createButton("Channel", "clicked", "channel"));}catch(e){}
@@ -167,6 +168,22 @@ var CDCMQuoting = function(){
         textArea.scrollTop = textArea.scrollHeight;
     };
     this.clickedallClients = function(messageElement){
+		var quote = "";
+        var textArea = document.getElementsByTagName("textarea")[0];
+        var clients = BetterAPI.getClientUIDList();
+		for (i = 0; i < clients.length; ++i) {
+			var quote = quote + "<@" + clients[i] + "> ";
+		}
+        const oldMsg = textArea.value;
+        if ((typeof(betterDiscordIPC) !== 'undefined') && (betterDiscordIPC !== null)) { 
+            $(textArea).focus().val("").val(quote);
+        } else {
+            textArea.value = quote;
+        }
+        window.DCMQuoting.resize(textArea);
+        textArea.scrollTop = textArea.scrollHeight;
+    };
+    this.clickallPics = function(messageElement){
 		var quote = "";
         var textArea = document.getElementsByTagName("textarea")[0];
         var clients = BetterAPI.getClientUIDList();
