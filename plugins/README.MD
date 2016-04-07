@@ -22,7 +22,7 @@ BdApi.setStatus(idle_since, "game");
 Core.prototype.alert("title", "text")
 ```
 
-Currently available [BetterAPI](https://github.com/Bluscream/BetterDiscord/blob/master/plugins/0_BetterAPI.js) functions:
+Currently available [BetterAPI](https://github.com/Bluscream/BetterDiscord-Plugins-and-Themes/blob/master/plugins/0_BetterAPI.js) functions:
 ```js
 BetterAPI.log(dbg, "type", "pluginName", "msg");
 BetterAPI.appendTo("link", "Element");
@@ -71,7 +71,7 @@ https://github.com/brandonaaron/livequery/blob/1.1.1/README.markdown#live-query
 https://github.com/jberryman/dilly.js#toc1
 ```
 
-Currently available [webSock](https://github.com/Bluscream/BetterDiscord/blob/master/plugins/0_websock.js) functions:
+Currently available [webSock](https://github.com/Bluscream/BetterDiscord-Plugins-and-Themes/blob/master/plugins/0_websock.js) functions:
 ```js
 webSock.sendData(opcode,data);
 webSock.sendMessage(); //useless atm.
