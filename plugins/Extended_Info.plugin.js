@@ -130,6 +130,15 @@ userInfo.prototype.start = function() {
 				'title': 'BD+ (0kdpwyLsTTT8fB2t)'
 			 });
 		});
+		BetterAPI.addLink("link_bots", "Bots", "https://www.carbonitex.net/Discord/bots", "lg");
+		$('#link_bots').click(function(){
+			$.jAlert({
+				'iframe': $('#link_bots').attr('href'),
+				'size': $('#link_bots').attr('size'),
+				'theme': 'black',
+				'title': 'Discord Bots'
+			 });
+		});
 	});
 	$('.user-settings-modal-account').livequery(function(){
 		if ($("#userinfopanel").length <= 0) {
@@ -158,15 +167,25 @@ userInfo.prototype.start = function() {
 			$('div[data-reactid=".0.5.$=1$UserSettingsModal.0.0.1.0.$ACCOUNT.0.1.0"]').append(_label);
 		}
 	});
+	// appendUsers();
+	appendUsers = function() {
+		$('.friends-online').livequery(function(){
+			if(!BetterAPI.elemExists('#onlineservers')){
+				$('.friends-online').after('<div class="friends-online"><span style="color:lightblue !important;" id="onlineservers">0</span> Server</div>');
+			}
+			/*if(!BetterAPI.elemExists('#onlineusers')){
+				$('.friends-online').after('<div class="friends-online"><span id="onlineusers">0</span> Users</div>');
+			}*/
+		});
+	}
 	// updateMembers();
 	updateMembers = function() {
-		if((BetterAPI.userCount()) && (BetterAPI.userCount() > 0)){
-			$('.friends-online').text('');
-			$('.friends-online').html(BetterAPI.onlineFriendsCount()+' | <font color="lightblue">'+BetterAPI.serverCount()+'</font> | <font color="red">'+BetterAPI.userCount()+'</font>');
-		}else{
-			$('.friends-online').text('');
-			$('.friends-online').html(BetterAPI.onlineFriendsCount()+' | <font color="lightblue">'+BetterAPI.serverCount()+'</font>');
+		if(BetterAPI.serverCount()){
+			$('#onlineservers').text(BetterAPI.serverCount());
 		}
+		/*if(BetterAPI.userCount()){
+			$('#onlineusers').text(BetterAPI.userCount()+' Users');
+		}*/
 	}
 	// appendMembers();
 	appendMembers = function() {
@@ -188,10 +207,11 @@ userInfo.prototype.start = function() {
 			});
 		}
 	});
+	appendUsers();
+	updateMembers();
 };
 userInfo.prototype.onSwitch = function() {
-	//appendMembers();
-	//updateMembers();
+	updateMembers();
 };
 userInfo.prototype.stop = function() {
 	$('span[data-reactid=".0.4"').off('DOMNodeInserted.userInfo');

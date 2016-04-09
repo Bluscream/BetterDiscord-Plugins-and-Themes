@@ -4,8 +4,6 @@ function BetterDiscordBot() {}
 
 var saveDir = __dirname.slice(0, __dirname.indexOf("\\", __dirname.lastIndexOf('Discord') + "Discord".length + 1) + 1) + "resources"
 
-
-
 function npm(name,callback) {
 	require("child_process").exec("npm install --save " + name, {
 		cwd : saveDir
@@ -32,22 +30,58 @@ BetterDiscordBot.prototype.start = function() {
 	npm('discord.js',function(){
 		var Discord = require(saveDir + '\\node_modules\\discord.js');
 		var bot = new Discord.Client();
-		console.log("Plugin Loaded for Bot. Starting Bot.");
-		bot.login("email", "password").then(success).catch(err);
-		console.log("Logged in.");
-
+		console.log("BetterDiscordBot: Plugin Loaded for Bot. Starting Bot.");
+		// var email = localStorage.getItem('email');var pw = localStorage.getItem('password');
+		// if(!email || (email == "") || email == "undefined"){
+			// alertify.prompt("BetterDiscordBot: Enter your email.", function (e, str) {
+				// if (e) { localStorage.setItem('email', str); }
+			// }, "example@example.com");
+		// }
+		// if(!pw || (pw == "") || pw == "undefined"){
+			// alertify.prompt("BetterDiscordBot: Enter your password.", function (e, str) {
+				// if (e) { localStorage.setItem('password', str); }
+			// }, "example");
+		// }
+		// email = localStorage.getItem('email');pw = localStorage.getItem('password');
+		// bot.login(email, pw).then(success).catch(err);
+		bot.loginWithToken(localStorage.token.match(/\"(.+)\"/)[1]).then(success).catch(err);
+		console.log("BetterDiscordBot: Logged in.");
+		if(!channel){
+			var channel = ''+BetterAPI.getCurrentTextChannelID();
+		}
 		var ignoreCommands = false;
 		bot.on("message", function(message){
-		if (ignoreCommands === false) {
-				if(message.content === "#commands")
-					bot.sendMessage(channel, "Available Commands:\n**#nazimods**\n**#type**\nMade in Discord.js by @Decorater.");
-				if(message.content === "#nazimods")
-					bot.sendMessage(channel, "http://i.imgur.com/ySUKYG0.png https://abal.moe/u/nazidanny2.png https://abal.moe/u/nazidanny1.png http://i.imgur.com/MpTQmZZ.png https://cdn.discordapp.com/attachments/81384788765712384/132702701363527681/Screenshot_from_2016-01-01_203301.png");
-				if(message.content === "#type")
-					bot.startTyping(channel, err2);
-				if(message.content === ".abal")
-					bot.sendMessage(channel, "i just grabbed the logs for this entire server since its inception yesterday")
+			if(localStorage.getItem(debug)=='1'){
+				console.info('New message recieved in channel #'+channel+': '+message.content);
 			}
+			if (ignoreCommands === false) {
+				var msg = message.content; msg = msg.toLowerCase(); var prefix = '<@'+BetterAPI.getOwnID()+'> ';
+				switch(msg) {
+				 case prefix+'help':
+					bot.sendMessage(channel, '**BetterDiscordBot**\n\nPrefix: '+prefix+'\nCommands:\n`info`,`time`\n\nBy @Decorater and Bluscream.');
+					break;
+				 case prefix+'info':
+					bot.sendMessage(channel, "Credits:\n\n`Discord` by Hammer & Chisel\n`Discord.js` by hydrabolt\n`BetterDiscord` by Jiiks\n`BetterDiscord+` by Bluscream")
+					break;
+				 case prefix+'time':
+					var now = new Date();bot.sendMessage(channel, 'My local time is `'+now+'`')
+					break;
+				 default:
+					 break;
+				}
+			 }
+		});
+		bot.on("userBanned", function(server, client){
+			console.log(server);console.log(client);
+		});
+		bot.on("userUnbanned", function(server, client){
+			console.log(server);console.log(client);
+		});
+		bot.on("serverNewMember", function(server, client){
+			console.log(server);console.log(client);
+		});
+		bot.on("serverMemberRemoved", function(server, client){
+			console.log(server);console.log(client);
 		});
 
 		function err2(error){

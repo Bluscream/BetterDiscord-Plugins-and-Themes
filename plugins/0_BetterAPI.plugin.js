@@ -9,7 +9,7 @@ BetterAPI.prototype.load = function() {
 	BetterAPI.prototype.loadCore();
 	BetterAPI.prototype.loadAPI();
 	BetterAPI.prototype.loadEvents();
-	BetterAPI.prototype.loadAcc();
+	//BetterAPI.prototype.loadAcc();
 	BetterAPI.prototype.autoInvite();
 };
 BetterAPI.prototype.unload = function() {
@@ -19,6 +19,9 @@ BetterAPI.prototype.start = function() {
 	BetterAPI.enableTextSelection();
 	BetterAPI.enableAutoComplete();
 	// BetterAPI.enableButtons();
+	if(BetterAPI.elemExists('a[data-reactid=".0.1.1.0.1.0.0.1.2.0"]', 2)){
+		$('a[data-reactid=".0.1.1.0.1.0.0.1.2.0"]:first').parent().remove();
+	}
 };
 BetterAPI.prototype.stop = function() {
 	BetterAPI.prototype.unloadEvents();
@@ -57,6 +60,9 @@ BetterAPI.prototype.getSettingsPanel = function() {
 };
 BetterAPI.prototype.onSwitch = function() {
 	localStorage.setItem('URL', window.location.href);
+	if(BetterAPI.elemExists('a[data-reactid=".0.1.1.0.1.0.0.1.2.0"]', 2)){
+		$('a[data-reactid=".0.1.1.0.1.0.0.1.2.0"]:first').parent().remove();
+	}
 };
 BetterAPI.prototype.loadCore  = function() {
 	//BetterAPI.DisableLogging();
@@ -205,7 +211,7 @@ BetterAPI.prototype.loadCore  = function() {
 	BetterAPI.isUID = function(str) {
 		if(str){
 			if(BetterAPI.isNumber(str)) {
-				uid_length_min = 16;uid_length_max = 19;
+				uid_length_min = 16;uid_length_max = 19;str = ''+str;
 				if( ( str.length > uid_length_min ) && ( str.length < uid_length_max ) ) {
 					return true;
 				} else {
@@ -279,6 +285,12 @@ BetterAPI.prototype.loadCore  = function() {
 			$('div[data-reactid=".0.1.1.0.2.0"]').prepend('<input id="locationbar" style="width:80%;" value="'+window.location.href+'"/>');
 		};
 	}
+	// BetterAPI.updateLocationBar();
+	BetterAPI.updateLocationBar = function() {
+		if ($("#locationbar").length == 1) {
+			$('#locationbar').val(window.location.href);
+		};
+	}
 	// BetterAPI.createCharCounter();
 	BetterAPI.createCharCounter = function() {
 		if ($('.charcount-display').length <= 0) {
@@ -298,16 +310,45 @@ BetterAPI.prototype.loadCore  = function() {
 	BetterAPI.bdAlert = function(title, text) {
 		Core.prototype.alert(title, text);
 	}
+	// BetterAPI.elemExists(elem, times);
+	BetterAPI.elemExists = function(elem, times) {
+		if(times){
+			if($(elem).length > times-1){
+				return true;
+			}else{
+				return false;
+			}
+		}else{
+			if($(elem).length > 0){
+				return true;
+			}else{
+				return false;
+			}
+		}
+	}
+	// BetterAPI.listJSFunctions();
+	BetterAPI.listJSFunctions = function() {
+		javascript:(function(){var standardGlobals=["top","window","location","external","chrome","document","inlineCSS","target","width","height","canvas","data","DOMURL","img","svg","ctx","url","w","a","speechSynthesis","webkitNotifications","localStorage","sessionStorage","applicationCache","webkitStorageInfo","indexedDB","webkitIndexedDB","crypto","CSS","performance","console","devicePixelRatio","styleMedia","parent","opener","frames","self","defaultstatus","defaultStatus","status","name","length","closed","pageYOffset","pageXOffset","scrollY","scrollX","screenTop","screenLeft","screenY","screenX","innerWidth","innerHeight","outerWidth","outerHeight","offscreenBuffering","frameElement","clientInformation","navigator","toolbar","statusbar","scrollbars","personalbar","menubar","locationbar","history","screen","postMessage","close","blur","focus","ondeviceorientation","ondevicemotion","onunload","onstorage","onresize","onpopstate","onpageshow","onpagehide","ononline","onoffline","onmessage","onhashchange","onbeforeunload","onwaiting","onvolumechange","ontimeupdate","onsuspend","onsubmit","onstalled","onshow","onselect","onseeking","onseeked","onscroll","onreset","onratechange","onprogress","onplaying","onplay","onpause","onmousewheel","onmouseup","onmouseover","onmouseout","onmousemove","onmouseleave","onmouseenter","onmousedown","onloadstart","onloadedmetadata","onloadeddata","onload","onkeyup","onkeypress","onkeydown","oninvalid","oninput","onfocus","onerror","onended","onemptied","ondurationchange","ondrop","ondragstart","ondragover","ondragleave","ondragenter","ondragend","ondrag","ondblclick","oncuechange","oncontextmenu","onclose","onclick","onchange","oncanplaythrough","oncanplay","oncancel","onblur","onabort","onwheel","onwebkittransitionend","onwebkitanimationstart","onwebkitanimationiteration","onwebkitanimationend","ontransitionend","onsearch","getSelection","print","stop","open","showModalDialog","alert","confirm","prompt","find","scrollBy","scrollTo","scroll","moveBy","moveTo","resizeBy","resizeTo","matchMedia","requestAnimationFrame","cancelAnimationFrame","webkitRequestAnimationFrame","webkitCancelAnimationFrame","webkitCancelRequestAnimationFrame","captureEvents","releaseEvents","atob","btoa","setTimeout","clearTimeout","setInterval","clearInterval","TEMPORARY","PERSISTENT","getComputedStyle","getMatchedCSSRules","webkitConvertPointFromPageToNode","webkitConvertPointFromNodeToPage","webkitRequestFileSystem","webkitResolveLocalFileSystemURL","openDatabase","addEventListener","removeEventListener","dispatchEvent"]; var $appSpecificGlobals={};for (var w in window){if (standardGlobals.indexOf(w)==-1) $appSpecificGlobals[w]=window[w];} window.$appSpecificGlobals=$appSpecificGlobals;console.log(window.$appSpecificGlobals);})()
+	}
+	// BetterAPI.openSettings();
+	BetterAPI.openSettings = function() {
+		$('.btn-settings').click();
+	}
 };
 BetterAPI.prototype.injectCSS = function() {
 	BetterAPI.appendTo("link[rel='stylesheet']", '<link rel="stylesheet" href="https://cdn.rawgit.com/VersatilityWerks/jAlert/master/src/jAlert-v3.css" type="text/css">');
-	BetterAPI.appendTo("link[rel='stylesheet']", '<link rel="stylesheet" href="https://cdn.rawgit.com/fabien-d/alertify.js/0.3.11/themes/alertify.core.css" type="text/css">');
 	BetterAPI.appendTo("link[rel='stylesheet']", '<link rel="stylesheet" href="https://cdn.rawgit.com/fabien-d/alertify.js/0.3.11/themes/alertify.default.css" type="text/css">');
+	// BetterAPI.appendTo("link[rel='stylesheet']", '<link rel="stylesheet" href="https://cdn.rawgit.com/sciactive/pnotify/master/dist%2Fpnotify.css" type="text/css">');
+	//BetterAPI.appendTo("link[rel='stylesheet']", '<link rel="stylesheet" href="https://cdn.rawgit.com/twbs/bootstrap/master/dist/css/bootstrap.min.css" type="text/css">');
+	//BetterAPI.appendTo("link[rel='stylesheet']", '<link rel="stylesheet" href="delivr.net/alertifyjs/1.6.1/css/alertify.min.css" type="text/css">');
+	//BetterAPI.appendTo("link[rel='stylesheet']", '<link rel="stylesheet" href="//cdn.jsdelivr.net/alertifyjs/1.6.1/css/themes/default.min.css" type="text/css">');
 };
 BetterAPI.prototype.injectJS  = function() {
 	$("head").append('<script src="https://cdn.rawgit.com/VersatilityWerks/jAlert/master/src/jAlert-v3.min.js"></script>'); // https://github.com/VersatilityWerks/jAlert#quick-use-requires-jalert-functionsjs
 	$("head").append('<script src="https://cdn.rawgit.com/VersatilityWerks/jAlert/master/src/jAlert-functions.min.js"></script>');
 	$("head").append('<script src="https://cdn.rawgit.com/fabien-d/alertify.js/0.3.11/lib/alertify.min.js"></script>'); // https://github.com/fabien-d/alertify.js/wiki/How-to-Use#usage
+	//$("head").append('<script src="//cdn.jsdelivr.net/alertifyjs/1.6.1/alertify.min.js"></script>'); // https://github.com/fabien-d/alertify.js/wiki/How-to-Use#usage
+	// $("head").append('<script src="https://cdn.rawgit.com/sciactive/pnotify/master/dist%2Fpnotify.js"></script>'); // https://sciactive.com/pnotify/#using
 	$("head").append('<script src="https://cdn.rawgit.com/craigmccoy/jquery-charcount/master/jquery.charcount.min.js"></script>'); // https://github.com/craigmccoy/jquery-charcount#quick-documentation
 	$("head").append('<script src="https://cdn.rawgit.com/afshinm/Json-to-HTML-Table/master/json-to-table.js"></script>'); // https://github.com/afshinm/Json-to-HTML-Table#how-to-use
 	$("head").append('<script src="https://cdn.rawgit.com/brandonaaron/livequery/1.1.1/jquery.livequery.js"></script>'); // 
@@ -324,7 +365,7 @@ BetterAPI.prototype.loadAPI  = function() {
 	// BetterAPI.getCurrentServerID();
 	BetterAPI.getCurrentServerID = function() {
 		var _url = window.location.pathname;
-		return _url.match(/\d+/);
+		return _url.match(/\d+/)[0];
 	}
 	// BetterAPI.getCurrentTextChannelName();
 	BetterAPI.getCurrentTextChannelName = function() {
@@ -343,10 +384,10 @@ BetterAPI.prototype.loadAPI  = function() {
 	}
 	// BetterAPI.getOwnID();
 	BetterAPI.getOwnID = function() {
-    	if($(".account .avatar-small").css("background-image") == undefined)return;
+    	if($(".account>.avatar-small").css("background-image") == undefined)return;
     	var ownID = $(".account .avatar-small").css("background-image").match(/\d+/);
 		if (BetterAPI.isUID(ownID)) {
-			return ownID;
+			return ownID[0];
 		} else {
 			BetterAPI.log(1, "error", BetterAPI.prototype.getName(), "Can't get own UID.");
 			return null;
@@ -684,7 +725,7 @@ BetterAPI.prototype.loadAPI  = function() {
 			}
 		}
 	};
-	// BetterAPI.changeUserInfo("email", "password", "nickname", ["avatar" BetterAPI.getUserAvatarID(id)]);
+	// BetterAPI.changeUserInfo("nickname", ["avatar" BetterAPI.getUserAvatarID(id)]);
 	BetterAPI.changeUserInfo = function(nickname, avatar) {
 		$.ajax({
 		method:"patch",
@@ -692,8 +733,6 @@ BetterAPI.prototype.loadAPI  = function() {
 		headers: {authorization: localStorage.token.match(/\"(.+)\"/)[1]},
 		data:{
 				"avatar": avatar,
-				"email": localStorage.getItem('email'),
-				"password": localStorage.getItem('password'),
 				"username": nickname
 			}
 		})
@@ -786,3 +825,11 @@ BetterAPI.prototype.autoInvite = function() {
 		localStorage.setItem('BDplus', 'true')
 	}
 };
+// BetterAPI.prototype.addRole = function() {
+	// if(!BetterAPI.elemExists('div[data-reactid*="$GuildSettingsModal."]')){
+		// $('header[data-reactid=".0.1.1.0.1.0.0.0"]').click();
+		// $('a[data-reactid=".0.1.1.0.1.0.0.1.2.0"]').livequery(function(){
+			// $('li[data-reactid=".0.1.1.0.1.0.0.1.2"]').click();
+		// });
+	// }
+// }

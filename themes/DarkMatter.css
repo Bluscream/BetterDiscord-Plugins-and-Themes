@@ -402,7 +402,7 @@ textarea {
 }
 
 .chat .divider.divider-red>span {
-	background: rgba(240,71,71,.8) !important;
+	background: rgba(240,71,71,.4) !important;
     color: rgba(255,255,255,0.9) !important;
 }
 
@@ -1024,7 +1024,7 @@ textarea {
 	background:rgba(0,0,0,0.7) !important;
 }
 .instant-invite>.show-channel>text,.instant-invite>.show-channel>.member>span,
-.member>.member-inner>.member-username,.permission-actions>span {
+.permission-actions>span {
 	color:rgba(255,255,255,0.9) !important;
 }
 input,.region-select,.Select-control,.radio-inner {
@@ -1034,4 +1034,25 @@ input,.region-select,.Select-control,.radio-inner {
 .Select-placeholder{
 	background:rgba(255,255,255,0.8) !important;
 	background-color:rgba(255,255,255,0.8) !important;
+}
+span[data-reactid*="$PruneGuildModal"] {
+	color:rgba(0,0,0,0.8) !important;
+}
+.user-popout-options{
+	background-color:rgba(0,0,0,0.95) !important;
+}
+.user-popout-options>button[data-reactid=".0.4.$=11=2$1-popout.0.1.1"],.user-popout>header{
+	background-color:rgba(29,101,134,0.95) !important;
+}
+.member-roles>.text,.member-roles>.text>span{
+	color:rgb(255,255,255) !important;
+}
+div[data-reactid*="$UserProfileModal"],footer[data-reactid*="$UserProfileModal"]{
+	background-color:rgba(0,0,0,0.6) !important;
+}
+div[data-reactid=".0.5.$=1$UserProfileModal.0.0.0.0"]{
+	background-color:initial !important;
+}
+.charcount-display {
+	color:rgb(255,255,255) !important;
 }
