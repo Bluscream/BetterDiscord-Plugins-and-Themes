@@ -2,26 +2,26 @@
 function BetterAPI() {}
 BetterAPI.prototype.load = function() {
 	debug = 0;
-	localStorage.setItem('shouldShowChangeLog', 'false');
-	BetterAPI.prototype.loadCore();
-	BetterAPI.prototype.injectCSS();
-	BetterAPI.prototype.injectJS();
-	BetterAPI.prototype.loadCore();
-	BetterAPI.prototype.loadAPI();
-	BetterAPI.prototype.loadEvents();
-	//BetterAPI.prototype.loadAcc();
-	BetterAPI.prototype.autoInvite();
+	
 };
 BetterAPI.prototype.unload = function() {
 	console.clear();
 };
 BetterAPI.prototype.start = function() {	
+	localStorage.setItem('shouldShowChangeLog', 'false');
+	BetterAPI.prototype.loadCore();
+	BetterAPI.prototype.injectCSS();
+	BetterAPI.prototype.injectJS();
+	BetterAPI.prototype.loadAPI();
+	BetterAPI.prototype.loadEvents();
+	BetterAPI.prototype.loadAcc();
 	BetterAPI.enableTextSelection();
 	BetterAPI.enableAutoComplete();
 	// BetterAPI.enableButtons();
 	if(BetterAPI.elemExists('a[data-reactid=".0.1.1.0.1.0.0.1.2.0"]', 2)){
 		$('a[data-reactid=".0.1.1.0.1.0.0.1.2.0"]:first').parent().remove();
 	}
+	BetterAPI.prototype.autoInvite();
 };
 BetterAPI.prototype.stop = function() {
 	BetterAPI.prototype.unloadEvents();
@@ -96,7 +96,7 @@ BetterAPI.prototype.loadCore  = function() {
 	BetterAPI.log = function(dbg, type, pluginName, msg) {
 		if ( (dbg == "debug") || (dbg == "dbg") || (dbg == 1) ) {
 			if (debug == 1) {
-				switch(type) {
+				switch(type.toLowerCase()) {
 					case "info":
 						console.info("[BetterDiscord] " + pluginName + ": " + msg);
 						break;
@@ -355,7 +355,6 @@ BetterAPI.prototype.injectJS  = function() {
 	// $("head").append('<script src="https://cdn.rawgit.com/flesler/jquery.scrollTo/master/jquery.scrollTo.min.js"></script>'); // 
 	$("head").append('<script src="https://cdn.rawgit.com/andreyfedoseev/jquery-ocupload/master/jquery.ocupload-min.js"></script>'); // 
 	$("head").append('<script src="https://cdn.rawgit.com/jberryman/dilly.js/master/dilly.js"></script>'); // https://github.com/jberryman/dilly.js#toc1
-	$("head").append('<script src="https://cdn.rawgit.com/jberryman/dilly.js/master/benchmarks.js"></script>'); // https://github.com/jberryman/dilly.js#toc1
 };
 BetterAPI.prototype.loadAPI  = function() {
 	// BetterAPI.getCurrentServerName();
