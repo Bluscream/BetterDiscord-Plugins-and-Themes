@@ -40,9 +40,9 @@ var BetterDiscordLogging = {
 		userTypingStopped : false,
 		userUnbanned : true,
 		userBanned : true,
-		voiceJoin : true,
+		voiceJoin : false,
 		voiceStateUpdate : false,
-		voiceLeave : true
+		voiceLeave : false
 	}
 }
 function npm(name,callback) {
@@ -185,17 +185,17 @@ BetterDiscordBot.prototype.start = function() {
 		
 		bot.on("channelCreated", function(channel){
 			if(BetterDiscordLogging.events.channelCreated){if(debugging){BetterDiscordBot.debug('channelCreated', arguments);}
-				BetterDiscordBot.log('info', 'channelCreated', '<a href="https://discordapp.com/channels/'+channel.server.id+'/">'+channel.server.name+'</a>', '<a href="https://discordapp.com/channels/'+channel.server.id+'/'+channel.id+'">#'+channel.name+'</a>', 'Channel '+wN(channel.name)+' was created'+'.');
+				BetterDiscordBot.log('info', 'channelCreated', '<a href="https://discordapp.com/channels/'+channel.server.id+'/">'+channel.server.name+'</a>', '', 'Channel <a href="https://discordapp.com/channels/'+channel.server.id+'/'+channel.id+'">#'+channel.name+'</a> was created'+'.');
 			}
 		});
 		bot.on("channelUpdated", function(oldchannel, channel){
 			if(BetterDiscordLogging.events.channelUpdated){if(debugging){BetterDiscordBot.debug('channelUpdated', arguments);}
-				BetterDiscordBot.log('info', 'channelUpdated', '<a href="https://discordapp.com/channels/'+channel.server.id+'/">'+channel.server.name+'</a>', '<a href="https://discordapp.com/channels/'+channel.server.id+'/'+channel.id+'">#'+channel.name+'</a>', 'Channel '+wN(oldchannel.name)+' was edited to '+wN(channel.name)+'.');
+				BetterDiscordBot.log('info', 'channelUpdated', '<a href="https://discordapp.com/channels/'+channel.server.id+'/">'+channel.server.name+'</a>', '', 'Channel '+wN(oldchannel.name)+' was edited to <a href="https://discordapp.com/channels/'+channel.server.id+'/'+channel.id+'">#'+channel.name+'</a>.');
 			}
 		});
 		bot.on("channelDeleted", function(channel){
 			if(BetterDiscordLogging.events.channelDeleted){if(debugging){BetterDiscordBot.debug('channelDeleted', arguments);}
-				BetterDiscordBot.log('info', 'channelDeleted', '<a href="https://discordapp.com/channels/'+channel.server.id+'/">'+channel.server.name+'</a>', '<a href="https://discordapp.com/channels/'+channel.server.id+'/'+channel.id+'">#'+channel.name+'</a>', 'Channel '+wN(channel.name)+' was deleted'+'.');
+				BetterDiscordBot.log('info', 'channelDeleted', '<a href="https://discordapp.com/channels/'+channel.server.id+'/">'+channel.server.name+'</a>', '', 'Channel '+wN(channel.name)+' was deleted'+'.');
 			}
 		});
 		
@@ -289,7 +289,7 @@ BetterDiscordBot.prototype.start = function() {
 		}
 	});
 };
-BetterDiscordBot.log = function(level, event, server, channel, msg){
+BetterDiscordBot.log = function(level, event, savatar, server, channel, cavatar, client, msg){
 		var time = moment().format("DD.MM.YY HH:mm:ss:SSS");
 		if($('.logrow').length > 499){$('.logrow:first').remove();};
 		$('.bdserverlog').append('\
@@ -297,8 +297,11 @@ BetterDiscordBot.log = function(level, event, server, channel, msg){
 				<td class="'+level.toLowerCase()+'">'+time+'</td>\
 				<td class="'+level.toLowerCase()+'">'+level.toUpperCase()+'</td>\
 				<td class="'+level.toLowerCase()+'">'+event+'</td>\
+				<td class="'+level.toLowerCase()+'">'+savatar+'</td>\
 				<td class="'+level.toLowerCase()+'">'+server+'</td>\
 				<td class="'+level.toLowerCase()+'">'+channel+'</td>\
+				<td class="'+level.toLowerCase()+'">'+cavatar+'</td>\
+				<td class="'+level.toLowerCase()+'">'+client+'</td>\
 				<td class="'+level.toLowerCase()+'">'+msg+'</td>\
 			</tr>\
 		');
@@ -345,8 +348,11 @@ BetterDiscordBot.addLogWindow = function(){
 			<th class="tg-031e">Time</th>\
 			<th class="tg-031e">Level</th>\
 			<th class="tg-yw4l">Event</th>\
+			<th class="tg-yw4l"></th>\
 			<th class="tg-yw4l">Server</th>\
 			<th class="tg-yw4l">Channel</th>\
+			<th class="tg-yw4l">Channel</th>\
+			<th class="tg-yw4l">Client</th>\
 			<th class="tg-yw4l">Message</th>\
 		</tr>\
 </table>');
