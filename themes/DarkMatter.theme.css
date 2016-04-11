@@ -39,10 +39,10 @@ textarea {
 	background-color:rgba(0,0,0,0.3) !important;
 }
 
-.win-buttons button {
+/*.win-buttons button {
     width: 12px;
     height: 12px;
-}
+}*/
 
 /*
  _     _     _      
@@ -862,7 +862,7 @@ textarea {
 }
 
 .settings .settings-header {
-	background:rgba(0,0,0,0.88) !important;
+	background:rgba(0,0,0,0.9) !important;
 }
 
 .settings .settings-inner,

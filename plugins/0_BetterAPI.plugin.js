@@ -1,9 +1,6 @@
 //META{"name":"BetterAPI"}*//
 function BetterAPI() {}
-BetterAPI.prototype.load = function() {
-	debug = 0;
-	
-};
+BetterAPI.prototype.load = function() {};
 BetterAPI.prototype.unload = function() {
 	console.clear();
 };
@@ -65,6 +62,15 @@ BetterAPI.prototype.onSwitch = function() {
 	}
 };
 BetterAPI.prototype.loadCore  = function() {
+	String.prototype.capitalizeFirstLetter = function() {
+		return this.charAt(0).toUpperCase() + this.slice(1);
+	}
+	// BetterAPI.isDebug();
+	BetterAPI.isDebug = function() {
+		if(localStorage.getItem('debug').toLowerCase() == 'true' || localStorage.getItem('debug').toLowerCase() == '1'){
+			return true;
+		}else{ return false; }
+	}
 	//BetterAPI.DisableLogging();
 	BetterAPI.DisableLogging = function() {
 		console_log = console.log;
@@ -94,8 +100,8 @@ BetterAPI.prototype.loadCore  = function() {
 	};
 	//BetterAPI.log(dbg, "type", "pluginName", "msg");
 	BetterAPI.log = function(dbg, type, pluginName, msg) {
-		if ( (dbg == "debug") || (dbg == "dbg") || (dbg == 1) ) {
-			if (debug == 1) {
+		if ( (dbg == "debug") || (dbg == "dbg") || (dbg) ) {
+			if (debugging == 1) {
 				switch(type.toLowerCase()) {
 					case "info":
 						console.info("[BetterDiscord] " + pluginName + ": " + msg);
@@ -334,20 +340,37 @@ BetterAPI.prototype.loadCore  = function() {
 	BetterAPI.openSettings = function() {
 		$('.btn-settings').click();
 	}
+	// BetterAPI.isEmpty(s);
+	BetterAPI.isEmpty = function(s) {
+		if( !s || (typeof s === "undefined") || (typeof s === "null") || (s == "null") || (s == "undefined") || (s == "empty") || (s == undefined) || (s == null) || (s == "-1")){
+			return true;
+		}else{
+			return false;
+		}
+	}
+	// BetterAPI.loadSettings(name, default);
+	BetterAPI.loadSettings = function(name, settings){
+		if (BetterAPI.isEmpty(localStorage.getItem(name))){ localStorage.setItem(name, JSON.stringify(settings)); }
+		return JSON.parse(localStorage.getItem(name));
+	}
+	// BetterAPI.saveSettings(name, settings);
+	BetterAPI.saveSettings = function(name, settings){
+		localStorage.setItem(name,JSON.stringify(settings));
+	}
 };
 BetterAPI.prototype.injectCSS = function() {
 	BetterAPI.appendTo("link[rel='stylesheet']", '<link rel="stylesheet" href="https://cdn.rawgit.com/VersatilityWerks/jAlert/master/src/jAlert-v3.css" type="text/css">');
-	BetterAPI.appendTo("link[rel='stylesheet']", '<link rel="stylesheet" href="https://cdn.rawgit.com/fabien-d/alertify.js/0.3.11/themes/alertify.default.css" type="text/css">');
+	//BetterAPI.appendTo("link[rel='stylesheet']", '<link rel="stylesheet" href="https://cdn.rawgit.com/fabien-d/alertify.js/0.3.11/themes/alertify.default.css" type="text/css">');
 	// BetterAPI.appendTo("link[rel='stylesheet']", '<link rel="stylesheet" href="https://cdn.rawgit.com/sciactive/pnotify/master/dist%2Fpnotify.css" type="text/css">');
 	//BetterAPI.appendTo("link[rel='stylesheet']", '<link rel="stylesheet" href="https://cdn.rawgit.com/twbs/bootstrap/master/dist/css/bootstrap.min.css" type="text/css">');
-	//BetterAPI.appendTo("link[rel='stylesheet']", '<link rel="stylesheet" href="delivr.net/alertifyjs/1.6.1/css/alertify.min.css" type="text/css">');
-	//BetterAPI.appendTo("link[rel='stylesheet']", '<link rel="stylesheet" href="//cdn.jsdelivr.net/alertifyjs/1.6.1/css/themes/default.min.css" type="text/css">');
+	BetterAPI.appendTo("link[rel='stylesheet']", '<link rel="stylesheet" href="https://cdn.jsdelivr.net/alertifyjs/1.6.1/css/alertify.min.css" type="text/css">');
+	BetterAPI.appendTo("link[rel='stylesheet']", '<link rel="stylesheet" href="https://cdn.jsdelivr.net/alertifyjs/1.6.1/css/themes/default.min.css" type="text/css">');
 };
 BetterAPI.prototype.injectJS  = function() {
 	$("head").append('<script src="https://cdn.rawgit.com/VersatilityWerks/jAlert/master/src/jAlert-v3.min.js"></script>'); // https://github.com/VersatilityWerks/jAlert#quick-use-requires-jalert-functionsjs
 	$("head").append('<script src="https://cdn.rawgit.com/VersatilityWerks/jAlert/master/src/jAlert-functions.min.js"></script>');
-	$("head").append('<script src="https://cdn.rawgit.com/fabien-d/alertify.js/0.3.11/lib/alertify.min.js"></script>'); // https://github.com/fabien-d/alertify.js/wiki/How-to-Use#usage
-	//$("head").append('<script src="//cdn.jsdelivr.net/alertifyjs/1.6.1/alertify.min.js"></script>'); // https://github.com/fabien-d/alertify.js/wiki/How-to-Use#usage
+	//$("head").append('<script src="https://cdn.rawgit.com/fabien-d/alertify.js/0.3.11/lib/alertify.min.js"></script>'); // https://github.com/fabien-d/alertify.js/wiki/How-to-Use#usage
+	$("head").append('<script src="https://cdn.jsdelivr.net/alertifyjs/1.6.1/alertify.min.js"></script>'); // http://alertifyjs.com/
 	// $("head").append('<script src="https://cdn.rawgit.com/sciactive/pnotify/master/dist%2Fpnotify.js"></script>'); // https://sciactive.com/pnotify/#using
 	$("head").append('<script src="https://cdn.rawgit.com/craigmccoy/jquery-charcount/master/jquery.charcount.min.js"></script>'); // https://github.com/craigmccoy/jquery-charcount#quick-documentation
 	$("head").append('<script src="https://cdn.rawgit.com/afshinm/Json-to-HTML-Table/master/json-to-table.js"></script>'); // https://github.com/afshinm/Json-to-HTML-Table#how-to-use
@@ -355,6 +378,9 @@ BetterAPI.prototype.injectJS  = function() {
 	// $("head").append('<script src="https://cdn.rawgit.com/flesler/jquery.scrollTo/master/jquery.scrollTo.min.js"></script>'); // 
 	$("head").append('<script src="https://cdn.rawgit.com/andreyfedoseev/jquery-ocupload/master/jquery.ocupload-min.js"></script>'); // 
 	$("head").append('<script src="https://cdn.rawgit.com/jberryman/dilly.js/master/dilly.js"></script>'); // https://github.com/jberryman/dilly.js#toc1
+	$("head").append('<script src="https://cdnjs.cloudflare.com/ajax/libs/floatthead/1.4.0/jquery.floatThead.min.js"></script>'); // http://mkoryak.github.io/floatThead/
+	$("head").append('<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.12.0/moment.min.js"></script>'); // http://momentjs.com/docs/#/use-it/
+	$("head").append('<script src="https://cdn.rawgit.com/ianpgall/js-console-listener/master/console-listener.js"></script>'); // https://github.com/ianpgall/js-console-listener#use
 };
 BetterAPI.prototype.loadAPI  = function() {
 	// BetterAPI.getCurrentServerName();
@@ -763,6 +789,24 @@ BetterAPI.prototype.loadAPI  = function() {
 		  processData: false,
 		  contentType: false
 		});
+	}
+	BetterAPI.bulkUpload = function (){
+		var interval = setInterval(function(){
+			if(BetterAPI.elemExists('.upload-modal')){
+				$('.button-primary:not(.submitall)').click();
+			}else{clearInterval(interval);}
+		}, 500);
+		// withDelay(500)
+			// .while(BetterAPI.elemExists('.upload-modal'))
+				// .do(function(){
+					// $('button[data-reactid=".0.5.$=1$modal4.0.0.1.2"]').click();
+				// });
+		// (function myLoop (i) {          
+			// setTimeout(function () {   
+				// alert('hello');          //  your code here                
+				// if (--i) myLoop(i);      //  decrement i and call myLoop again if i > 0
+			// }, 3000)
+		// })(10);                        //  pass the number of iterations as an argument
 	}
 };
 BetterAPI.prototype.loadEvents  = function() {

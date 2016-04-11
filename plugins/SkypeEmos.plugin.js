@@ -43,7 +43,6 @@ SkypeEmos.settings_updateSetting = function(checkbox) {
 		cb.prop("checked", enabled);
 		SkypeEmos.settings[id] = enabled;
 		SkypeEmos.prototype.saveSettings()
-		console.log("id",enabled)
 }
 
 SkypeEmos.settings_construct = function() {
@@ -105,7 +104,7 @@ SkypeEmos.settings_construct = function() {
 	
 	SkypeEmos.settingsButton = $("<div/>", {
 		class: "tab-bar-item",
-		text: "Skype-Emos",
+		text: "Skype Emotes",
 		id: "se-settings-new",
 		click: function(event){event.stopImmediatePropagation();show_Settings()}
 	});
@@ -141,7 +140,6 @@ SkypeEmos.settings_construct = function() {
 									$("#se-settings-new").removeClass("selected");
 									SkypeEmos.settingsPanel.hide();
 								});
-								console.log("[SkypeEmos] Settings tab attached after "+tabBarAttempts+" tries")
 								}
 							},50);
 						
@@ -165,7 +163,7 @@ String.prototype.replaceAll = function(str1, str2, ignore)
 SkypeEmos.settingsArray = {
 	"Enable Skype Emotes in Messages": { "id": "emote-enable", "info": "Enable Message Parsing","default":true, "implemented": true },
     "Show Skype Emo list":          { "id": "emote-list", "info": "Shows the Skype Emo list","default":true,"implemented": true },
-    "Show Emo Names":             { "id": "emote-tooltip", "info": "Shows the Emo Names","default":true, "implemented": false  },
+    "Show Emo Names":             { "id": "emote-tooltip", "info": "Shows the Emo Names","default":true, "implemented": true  },
 }
 SkypeEmos.emotelist = {":cat_cleaning:":{"url":"https://i.gyazo.com/da52bad9d25dcf64f1e9cec667f22e26.gif","type":"gif"}};
 SkypeEmos.isReady = false;
@@ -180,26 +178,18 @@ SkypeEmos.prototype.load = function() {
 			img.onload = function() {
 				var index = preloadImages.list.indexOf(this);
 				if (index !== -1) {
-					// remove image from the array once it's loaded
-					// for memory consumption reasons
 					preloadImages.list.splice(index, 1);
-					if(preloadImages.list.length==0){
-							console.log("[SkypeEmo] Emotes Preloaded")
-					}
 				}
 			}
 			preloadImages.list.push(img);
 			img.src = SkypeEmos.emotelist[emote].url;
 		}
-		console.log("[Skype-Emos] Preloading "+preloadImages.list.length+" emote(s)")
 	}
 	$.getJSON("https://megamit.github.io/BetterDiscordSkypeEmotes/data/skypeemotedata.json", function(list){
 		SkypeEmos.emotelist = list;
 		SkypeEmos.isReady=true;
 		preloadImages()
-		console.log("[Skype-Emos] Ready");
 	}).fail(function(xhr,status,error){
-		console.log("[Skype-Emos] Error Loading emotelist '"+status+":"+error+"'. Using fallback");
 		SkypeEmos.isReady=true;
 	});
 	$('head').append(
@@ -244,7 +234,6 @@ SkypeEmos.prototype.start = function() {
 		var chat_retry = setInterval(function(){
 				chat_tries++;
 				$(".chat").each ( function () {
-					console.log("[SkypeEmos] Chat listener attached after "+chat_tries+" tries")
 					clearInterval(chat_retry);
 					observer.observe (this, { childList: true, characterData: true, attributes: false, subtree: true });
 				});
@@ -252,8 +241,8 @@ SkypeEmos.prototype.start = function() {
 			if(SkypeEmos.settings["emote-list"])SkypeEmos.emote_list_construct();
 			
 			SkypeEmos.settings_construct();
-			console.log("[Skype-Emos] Started.")
 	},100);
+	console.log("[Skype-Emos] Started.");
 };
 
 SkypeEmos.emote_list_construct = function() {
@@ -262,7 +251,6 @@ SkypeEmos.emote_list_construct = function() {
 		quick_tries++;
 		var quick_tabs = $(".emote-menu-tab");
 		if(quick_tabs.length>1){
-			console.log("[SkypeEmos] Quick tab inserted after "+quick_tries+" tries")
 			clearInterval(quick_retry);
 			$("#emote-menu-header").css("height","60px");
 			$("#emote-menu>.scroller-wrap>.scroller").append(
@@ -277,7 +265,6 @@ SkypeEmos.emote_list_construct = function() {
 						var duration = emote.steps*SkypeEmos.speedMultiplier;
 						 return $("<div class = 'qsprite-wrapper' ></div>").append(
 							$("<div class='qsprite s_emo_sprite20' style='animation-timing-function: steps("+css_size+"); animation-duration: "+duration+"s; background-image: url(\""+emote.url+"\") '></div>").click(function(){
-								console.log(key);
 								$(".channel-textarea-inner textarea").val($(".channel-textarea-inner textarea").val()+key);
 							})
 						 );
