@@ -1,3 +1,4 @@
+//META{"name":"Hide Offline Users","description":"Simple CSS for hiding the offline users.","author":"Bluscream","version":"1.0"}*//
 h2[data-reactid=".0.1.1.0.2.1.1.0.0.1:$offline"]{
     display:none;
 }
