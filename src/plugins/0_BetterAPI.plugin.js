@@ -50,10 +50,10 @@ BetterAPI.prototype.getSettingsPanel = function() {
 	$('#bdpreload').livequery(function(){
 		$('#bdpreload').click( function(a) { window.location.reload(); });
 	});
-	return '<b>'+BetterAPI.prototype.getName()+' Settings</b><br><br><br>\
-		Backup Localstorage:&nbsp;<button id="bdpmakebak">Backup</button><br>\
-		Restore Localstorage:&nbsp;<button id="bdprestbak">Restore</button><br>\
-		Reload Discord:&nbsp;<button id="bdpreload">Reload</button><br>';
+	return '<b>'+BetterAPI.prototype.getName()+' Settings</b><br><br><br>'+
+		'Backup Localstorage:&nbsp;<button id="bdpmakebak">Backup</button><br>'+
+		'Restore Localstorage:&nbsp;<button id="bdprestbak">Restore</button><br>'+
+		'Reload Discord:&nbsp;<button id="bdpreload">Reload</button><br>';
 };
 BetterAPI.prototype.onSwitch = function() {
 	localStorage.setItem('URL', window.location.href);
@@ -722,11 +722,11 @@ BetterAPI.prototype.loadAPI  = function() {
 	BetterAPI.addLink = function(divID, text, href, size) {
         var divID = divID.startsWith("#") ? divID.substring(1) : divID;
         if ($("#" + divID).length <= 0) {
-			$('ul[data-reactid=".0.1.1.0.1.3"]').append('\
-				<li id="'+divID+'" href="'+href+'" size="'+size+'">\
-					<a >'+text+'</a>\
-				</li>\
-			');
+			$('ul[data-reactid=".0.1.1.0.1.3"]').append(''+
+				'<li id="'+divID+'" href="'+href+'" size="'+size+'">'+
+					'<a >'+text+'</a>'+
+				'</li>'+
+			'');
 		}
 	};
 	// BetterAPI.addUserButton("btn", "divID", "text");

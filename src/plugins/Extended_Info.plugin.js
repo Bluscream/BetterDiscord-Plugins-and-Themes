@@ -20,22 +20,22 @@ userInfo.prototype.start = function() {
 		}
 		var _label = '<div class="text">';
 		if (avatarURL) {
-			var _label = _label + '<img src='+avatarURL+' style="max-width:223px;"></img>';
+			_label = _label + '<img src='+avatarURL+' style="max-width:223px;"></img>';
 		}
 		if (name) {
-			var _label = _label + '<br><b>Name: </b>'+name+'';
+			_label = _label + '<br><b>Name: </b>'+name+'';
 		}
 		if (BetterAPI.isUID(id)) {
-			var _label = _label + '<br><b>UID: </b><span style="color:darkgrey">'+id+'</span>';
+			_label = _label + '<br><b>UID: </b><span style="color:darkgrey">'+id+'</span>';
 		}
 		if (avatarID) {
-			var _label = _label + '<br><b>AID: </b><span style="font-size:x-small">'+avatarID+'</span>';
+			_label = _label + '<br><b>AID: </b><span style="font-size:x-small">'+avatarID+'</span>';
 		}
 		if (gameByID) {	
-			var _label = _label +'<br><b>Game: </b><span style="color:blue">'+gameByID+'</span>';
+			_label = _label +'<br><b>Game: </b><span style="color:blue">'+gameByID+'</span>';
 		}
 		BetterAPI.addUserLabel("UserInfoLabel", "Info", _label+'</div>');
-		$('.member-role-add').parent().css( "background-color", "rgba(0,255,0,0.4)")
+		$('.member-role-add').parent().css( "background-color", "rgba(0,255,0,0.4)");
 		function checkRoles(){ if($('.member-role-remove').length > 0){ return 1; }else{ return 0; } }
 		if($('.member-role-remove').length > 1 && $('#removeallroles').length < 1){
 			$('div[data-reactid^=".0.4.$=11=2$"]>.member-roles').append('<li class="member-role manipulate" style="background-color:rgba(255,0,0,0.4) !important;"><span class="name">Remove all</span><button type="button" class="member-role-remove" id="removeallroles"></button></li>');
@@ -126,16 +126,14 @@ userInfo.prototype.start = function() {
 			if(tcid){ _data = _data+'<b>Active Text Channel ID: </b>'+tcid+'<br>'; }
 			if(vc){ _data = _data+'<br><b>Active Voice Channel: </b>'+vc+'<br>'; }
 			if(uc){ _data = _data+'<br><b>Users: </b>Total: <b>'+uc+'</b> Online: <font color="green">'+onuc+'</font> Offline: <font color="red">'+offuc+'</font>'; }
-			Core.prototype.alert(_title, '\
-				<TABLE BORDER="0" CELLPADDING="3" CELLSPACING="3">\
-					<TR>\
-						<TD><img width="165px" height="165px" src='+aurl+'></img></TD>\
-						<TD>\
-							'+_data+'\
-						</TD>\
-					</TR>\
-				</TABLE>\
-			');
+			Core.prototype.alert(_title, ''+
+				'<TABLE BORDER="0" CELLPADDING="3" CELLSPACING="3">'+
+					'<TR>'+
+						'<TD><img width="165px" height="165px" src='+aurl+'></img></TD>'+
+						'<TD>'+_data+'</TD>'+
+					'</TR>'+
+				'</TABLE>'+
+			'');
 		});
 	});
 	if(bot){
@@ -148,49 +146,49 @@ userInfo.prototype.start = function() {
 				}
 				var roles = bot.servers.get('id', BetterAPI.getCurrentServerID()).roles;
 				//, function(error,users){roles = users}
-				$('body').append('<div class="bd-roles" id="bdroles" style="\
-					position:fixed !important;\
-					min-width:80% !important;\
-					max-width:80% !important;\
-					min-height:0 !important;\
-					height:80%;\
-					max-height:80% !important;\
-					left:10% !important;\
-					top:10% !important;\
-					z-index:9999999 !important;\
-					margin: auto;\
-					border: 1px solid #323232;\
-					box-shadow: 0 0 5px 3px rgba(30,30,30,.5);\
-					color: #EBEBEB;\
-					background-color: rgba(46,49,54,0.9) !important;">\
-					<div class="bd-alert-header">\
-						<span>BetterDiscord Roles List</span>\
-						<div class="bd-alert-closebtn" onclick="$(this).parent().parent().remove();">×</div>\
-					</div>\
-					<div class="bd-alert-body" id="bdrolesbody" style="overflow:auto;height:100%;"></div>\
-				</div>');
-				$('#bdrolesbody').append('<table id="tg-yv9oF" class="bdbanlist tg" cellspacing="0" cellpadding="0" style="\
-					min-width:100% !important;\
-					max-width:100% !important;\
-					max-height:100% !important;\
-					overflow: auto;\
-				">\
-					<tr>\
-						<th class="tg-031e">#</th>\
-						<th class="tg-031e">Name</th>\
-						<th class="tg-yw4l">ID</th>\
-						<th class="tg-yw4l">Permissions</th>\
-					</tr>\
-				</table>');
+				$('body').append('<div class="bd-roles" id="bdroles" style="'+
+					'position:fixed !important;'+
+					'min-width:80% !important;'+
+					'max-width:80% !important;'+
+					'min-height:0 !important;'+
+					'height:80%;'+
+					'max-height:80% !important;'+
+					'left:10% !important;'+
+					'top:10% !important;'+
+					'z-index:9999999 !important;'+
+					'margin: auto;'+
+					'border: 1px solid #323232;'+
+					'box-shadow: 0 0 5px 3px rgba(30,30,30,.5);'+
+					'color: #EBEBEB;'+
+					'background-color: rgba(46,49,54,0.9) !important;">'+
+					'<div class="bd-alert-header">'+
+						'<span>BetterDiscord Roles List</span>'+
+						'<div class="bd-alert-closebtn" onclick="$(this).parent().parent().remove();">×</div>'+
+					'</div>'+
+					'<div class="bd-alert-body" id="bdrolesbody" style="overflow:auto;height:100%;"></div>'+
+				'</div>');
+				$('#bdrolesbody').append('<table id="tg-yv9oF" class="bdbanlist tg" cellspacing="0" cellpadding="0" style="'+
+					'min-width:100% !important;'+
+					'max-width:100% !important;'+
+					'max-height:100% !important;'+
+					'overflow: auto;'+
+				'">'+
+					'<tr>'+
+						'<th class="tg-031e">#</th>'+
+						'<th class="tg-031e">Name</th>'+
+						'<th class="tg-yw4l">ID</th>'+
+						'<th class="tg-yw4l">Permissions</th>'+
+					'</tr>'+
+				'</table>');
 				$.each(roles, function(i){
-					$('.bdbanlist').append('\
-						<tr class="banrow" count="'+roles[i].position+'">\
-							<td>'+roles[i].position+'</td>\
-							<td style="color:'+roles[i].colorAsHex()+'">'+roles[i].name+'</td>\
-							<td>'+roles[i].id+'</td>\
-							<td>'+roles[i].permissions+'</td>\
-						</tr>\
-					');
+					$('.bdbanlist').append(''+
+						'<tr class="banrow" count="'+roles[i].position+'">'+
+							'<td>'+roles[i].position+'</td>'+
+							'<td style="color:'+roles[i].colorAsHex()+'">'+roles[i].name+'</td>'+
+							'<td>'+roles[i].id+'</td>'+
+							'<td>'+roles[i].permissions+'</td>'+
+						'</tr>'+
+					'');
 				});
 			});
 		});
@@ -229,19 +227,19 @@ userInfo.prototype.start = function() {
 			var _label = '';
 			if (BetterAPI.isUID(id)) {
 				// var _label = _label + '<b>Unique ID: </b><span style="color:darkgrey">'+id+'</span>';
-				var _label = _label + '<div class="control-group" data-reactid=".0.5.$=1$UserSettingsModal.0.0.1.0.$ACCOUNT.0.1.0.1" id="userinfopanel">\
-					<label data-reactid=".0.5.$=1$UserSettingsModal.0.0.1.0.$ACCOUNT.0.1.0.0.0" for="settings-username">\
-						<span data-reactid=".0.5.$=1$UserSettingsModal.0.0.1.0.$ACCOUNT.0.1.0.0.0.0">Unique ID</span>\
-					</label>\
-					<input data-reactid=".0.5.$=1$UserSettingsModal.0.0.1.0.$ACCOUNT.0.1.0.0.1" id="settings-username" type="text" value="'+id+'" disabled></div>'
+				_label = _label + '<div class="control-group" data-reactid=".0.5.$=1$UserSettingsModal.0.0.1.0.$ACCOUNT.0.1.0.1" id="userinfopanel">'+
+					'<label data-reactid=".0.5.$=1$UserSettingsModal.0.0.1.0.$ACCOUNT.0.1.0.0.0" for="settings-username">'+
+						'<span data-reactid=".0.5.$=1$UserSettingsModal.0.0.1.0.$ACCOUNT.0.1.0.0.0.0">Unique ID</span>'+
+					'</label>'+
+					'<input data-reactid=".0.5.$=1$UserSettingsModal.0.0.1.0.$ACCOUNT.0.1.0.0.1" id="settings-username" type="text" value="'+id+'" disabled></div>';
 			}
 			if (avatarID) {
 				// var _label = _label + '<br><br><b>Avatar ID: </b><span>'+avatarID+'</span>';
-				var _label = _label + '<div class="control-group" data-reactid=".0.5.$=1$UserSettingsModal.0.0.1.0.$ACCOUNT.0.1.0.1" id="userinfopanel">\
-					<label data-reactid=".0.5.$=1$UserSettingsModal.0.0.1.0.$ACCOUNT.0.1.0.0.0" for="settings-username">\
-						<span data-reactid=".0.5.$=1$UserSettingsModal.0.0.1.0.$ACCOUNT.0.1.0.0.0.0">Avatar ID</span>\
-					</label>\
-					<input data-reactid=".0.5.$=1$UserSettingsModal.0.0.1.0.$ACCOUNT.0.1.0.0.1" id="settings-username" type="text" value="'+avatarID+'" disabled></div>'
+				_label = _label + '<div class="control-group" data-reactid=".0.5.$=1$UserSettingsModal.0.0.1.0.$ACCOUNT.0.1.0.1" id="userinfopanel">'+
+					'<label data-reactid=".0.5.$=1$UserSettingsModal.0.0.1.0.$ACCOUNT.0.1.0.0.0" for="settings-username">'+
+						'<span data-reactid=".0.5.$=1$UserSettingsModal.0.0.1.0.$ACCOUNT.0.1.0.0.0.0">Avatar ID</span>'+
+					'</label>'+
+					'<input data-reactid=".0.5.$=1$UserSettingsModal.0.0.1.0.$ACCOUNT.0.1.0.0.1" id="settings-username" type="text" value="'+avatarID+'" disabled></div>'
 			}
 			$('div[data-reactid=".0.5.$=1$UserSettingsModal.0.0.1.0.$ACCOUNT.0.1.0"]').append(_label);
 		}
@@ -269,12 +267,12 @@ userInfo.prototype.start = function() {
 	// appendMembers();
 	appendMembers = function() {
 		if ($("#totalmembers").length <= 0) {
-			$('.scroller.channel-members').prepend('\
-			<h2 id="totalmembers" style="background:none !important;">\
-				<span>Total</span>\
-				<span>—</span>\
-				<span>'+BetterAPI.userCount()+'</span>\
-			</h2>');
+			$('.scroller.channel-members').prepend(''+
+			'<h2 id="totalmembers" style="background:none !important;">'+
+				'<span>Total</span>'+
+				'<span>—</span>'+
+				'<span>'+BetterAPI.userCount()+'</span>'+
+			'</h2>');
 		};
 	};
 	$('.markdown-modal-footer').livequery(function(){

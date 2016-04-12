@@ -94,9 +94,9 @@ DCMQuotingPlugin.prototype.getAuthor = function() {
 DCMQuotingPlugin.prototype.getSettingsPanel = function() { 
 	const _repo = 'Discord-Client-Modding';
 	const _path = 'blob/master/Quoting.js';
-    return 'This version of "'+DCMQuotingPlugin.prototype.getName()+'" was modified by Bluscream.</br></br>\
-			If you want the original version by <a href="https://github.com/'+DCMQuotingPlugin.prototype.getAuthor()+'">'+DCMQuotingPlugin.prototype.getAuthor()+'</a>,\
-			&nbsp;get it from <a href="https://github.com/'+DCMQuotingPlugin.prototype.getAuthor()+'/'+_repo+'/'+_path+'">here</a>.'; 
+    return 'This version of "'+DCMQuotingPlugin.prototype.getName()+'" was modified by Bluscream.</br></br>'+
+			'If you want the original version by <a href="https://github.com/'+DCMQuotingPlugin.prototype.getAuthor()+'">'+DCMQuotingPlugin.prototype.getAuthor()+'</a>,'+
+			'&nbsp;get it from <a href="https://github.com/'+DCMQuotingPlugin.prototype.getAuthor()+'/'+_repo+'/'+_path+'">here</a>.'; 
 };
 var CDCMQuoting = function(){
     this.enabled = true;

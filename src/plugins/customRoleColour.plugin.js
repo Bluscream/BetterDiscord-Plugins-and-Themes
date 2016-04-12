@@ -1,9 +1,9 @@
-//META{"name":"crr"}*//
+//META{"name":"customRoleColor"}*//
 
-function crr() {}
+function customRoleColor() {}
 
-crr.prototype.start = function () {
-    this.crrMt = new MutationObserver(function(mutations) {
+customRoleColor.prototype.start = function () {
+    this.customRoleColorMt = new MutationObserver(function(mutations) {
         if($(".roles").length > 0) {
             if($("#ccpicker").length < 1) {
                 
@@ -49,36 +49,36 @@ crr.prototype.start = function () {
             }
         }
     });
-    this.crrMt.observe(document, {childList:true, subtree:true})
+    this.customRoleColorMt.observe(document, {childList:true, subtree:true})
 };
-crr.prototype.stop = function () {
-	this.crrMt.disconnect();
+customRoleColor.prototype.stop = function () {
+	this.customRoleColorMt.disconnect();
 };
 
-crr.prototype.load = function () {
+customRoleColor.prototype.load = function () {
     //Called when plugin is loaded
 };
 
-crr.prototype.unload = function () {
+customRoleColor.prototype.unload = function () {
     //Called when plugin is unloaded
 };
 
-crr.prototype.getName = function () {
+customRoleColor.prototype.getName = function () {
     return "Custom Role Colours";
 };
 
-crr.prototype.getDescription = function () {
+customRoleColor.prototype.getDescription = function () {
     return "Set custom role colours";
 };
 
-crr.prototype.getVersion = function () {
+customRoleColor.prototype.getVersion = function () {
     return "1.0";
 };
 
-crr.prototype.getAuthor = function () {
+customRoleColor.prototype.getAuthor = function () {
     return "Jiiks, Pohky";
 };
 
-crr.prototype.getSettingsPanel = function () {
+customRoleColor.prototype.getSettingsPanel = function () {
     return '';
 };
