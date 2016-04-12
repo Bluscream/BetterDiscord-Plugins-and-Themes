@@ -1,5 +1,16 @@
 //META{"name":"customGamePlugin"}*//
 
+/*
+ * #####################READ THIS!################################
+ * #####################READ THIS!################################
+ *
+ * This plugin is discontinued and no longer works due to Discord having custom game title built in and is kept for archiving purposes only.
+ *
+ * #####################READ THIS!################################
+ * #####################READ THIS!################################
+*/
+
+
 function customGamePlugin() {}
 
 customGamePlugin.prototype.load = function() {
@@ -9,6 +20,7 @@ customGamePlugin.prototype.unload = function() {
 };
 
 customGamePlugin.prototype.start = function() {
+	return;
     var self = this;
     this.enabled = true;
     this.interval = setInterval(function() {
@@ -18,6 +30,7 @@ customGamePlugin.prototype.start = function() {
 };
 
 customGamePlugin.prototype.stop = function() {
+	return;
     var gp = this.game;
     this.game = "";
     this.setPlaying();
