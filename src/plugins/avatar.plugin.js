@@ -29,7 +29,8 @@ var AvatarHover  = function() {
 	};
 
 	this.unload = function() {
-		this.saveSettings();
+		var e = document.getElementById("AvatarHover"); 
+		if(e) e.parentNode.removeChild(e);
 	};
 
 	this.start = function() {

@@ -1,9 +1,19 @@
 //META{"name":"userInfo"}*// Needs https://github.com/Bluscream/BetterDiscord-Plugins-and-Themes/blob/master/plugins/0_BetterAPI.js to work properly!
 function userInfo() {}
-userInfo.prototype.load = function() {
+userInfo.prototype.getName = function() {
+	return "Extended Info";
 };
-userInfo.prototype.unload = function() {
+userInfo.prototype.getDescription = function() {
+	return "Adds functionality to see more information.";
 };
+userInfo.prototype.getVersion = function() {
+	return "1.0";
+};
+userInfo.prototype.getAuthor = function() {
+	return "Bluscream";
+};
+userInfo.prototype.update = function() {};
+userInfo.prototype.load = function() {};
 userInfo.prototype.start = function() {
     $('span[data-reactid=".0.4"]').on('DOMNodeInserted', '.popout', function() {
 		var name = $(".user-popout").find(".username").text();
@@ -101,7 +111,7 @@ userInfo.prototype.start = function() {
 			}
 			var sname = BetterAPI.getCurrentServerName();
 			var sid = BetterAPI.getCurrentServerID();
-			var sinfo = bot.servers.get('id', sid);
+			if(bot){ var sinfo = bot.servers.get('id', sid); } 
 			if(sinfo){
 				sowner = sinfo.owner.username;
 				sregion = sinfo.region.capitalizeFirstLetter();
@@ -296,17 +306,4 @@ userInfo.prototype.stop = function() {
 	$('#serverinfobutton').remove();
 	$('.settings-panel').off('DOMNodeInserted.user-settings-modal-account');
 };
-userInfo.prototype.update = function() {
-};
-userInfo.prototype.getName = function() {
-	return "Extended Info";
-};
-userInfo.prototype.getDescription = function() {
-	return "Adds functionality to see more information.";
-};
-userInfo.prototype.getVersion = function() {
-	return "1.0";
-};
-userInfo.prototype.getAuthor = function() {
-	return "Bluscream";
-};
+userInfo.prototype.unload = function() {};
