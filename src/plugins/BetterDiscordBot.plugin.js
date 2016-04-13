@@ -49,15 +49,8 @@ var BetterDiscordLogging = {
 		voiceLeave : false
 	}
 };
-function npm(name, callback) {
-	require("child_process").exec("npm install --save " + name, {
-		cwd : saveDir
-	}, function (e, f, g) {
-		console.log(e, f, g);
-		callback();
-	});
-}BetterDiscordBot.prototype.loadlib = function (name) {};
-BetterDiscordBot.prototype.load = function () {
+BetterDiscordBot.prototype.loadlib = function(name) {};
+BetterDiscordBot.prototype.load = function() {
 	BetterAPI.appendTo("link[rel='stylesheet']", '<link rel="stylesheet" href="https://cdn.rawgit.com/Bluscream/BetterDiscord/master/table.css" type="text/css">');
 	$("head").append('<script src="https://cdn.rawgit.com/Bluscream/BetterDiscord/master/table.js"></script>');
 	BetterDiscordBotting = BetterAPI.loadSettings('BetterDiscordBotting', BetterDiscordBotting);
@@ -88,7 +81,7 @@ BetterDiscordBot.prototype.start = function () {
 		}
 		$('#bdlog').toggle();
 	});
-	npm('discord.js', function () {
+	BetterAPI.npm('discord.js', function () {
 		var Discord = require(saveDir + '\\node_modules\\discord.js');
 		bot = new Discord.Client();
 		console.log("BetterDiscordBot: Plugin Loaded for Bot. Starting Bot.");

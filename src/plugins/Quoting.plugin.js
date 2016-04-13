@@ -123,12 +123,12 @@ var CDCMQuoting = function(){
 			var uid = '@'+username;
 		}
 		if (mode == "client") {
-			var msg = msg + "`[" + time + "]` " + uid + " said:\n";
+			msg = msg + "`[" + time + "]` " + uid + " said:\n";
 		} else if (mode == "channel") {
-			var msg = msg + "`[" + time + "]` " + uid + " said in <#"+channel+">:\n";
+			msg = msg + "`[" + time + "]` " + uid + " said in <#"+channel+">:\n";
 		} else if (mode == "server") {
-			var msg = msg + "`[" + time + "]` " + uid + " said in <#"+channel+"> on **"+server+"**:\n";
-		} else {var msg = msg + "`[" + time + "]` \"" + uid + "\" said:\n";}
+			msg = msg + "`[" + time + "]` " + uid + " said in <#"+channel+"> on **"+server+"**:\n";
+		} else {msg = msg + "`[" + time + "]` \"" + username + "\" said:\n";}
         var index;
         for (index = 0; index < comments.length; ++index) {
             var text = ">" + comments[index].getElementsByClassName("markup")[0]
@@ -208,7 +208,6 @@ var CDCMQuoting = function(){
     };
 };
 window.DCMQuoting = new CDCMQuoting();
-//TODO: http://stackoverflow.com/questions/4386300/javascript-dom-how-to-remove-all-events-of-a-dom-object 
 function removeAllEvents(node, event) {
     window.DCMQuoting.enabled = false;
 };

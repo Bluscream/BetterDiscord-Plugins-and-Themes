@@ -19,13 +19,6 @@ ServerSort.prototype.getAuthor = function() {
 };
 
 ServerSort.prototype.start = function() {
-
-	var script = document.createElement('script');
-	script.type = 'text/javascript';
-	script.src = 'https://raw.githubusercontent.com/cosmicsalad/Discord-Themes-and-Plugins/master/lib/jquery-ui.min.js';
-	$("head").append(script);
-	console.log("server sort loaded");
-
 	//set var for accurate server list
 	var serverList = $('.guilds li[data-reactid*=".0.1.1.0.0.0.3:"]');
 
