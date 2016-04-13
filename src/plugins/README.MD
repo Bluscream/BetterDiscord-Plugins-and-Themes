@@ -1,4 +1,5 @@
 //META{"name":"README"}*//
+https://github.com/Bluscream/BetterDiscord-Plugins-and-Themes/blob/master/src/plugins/
 #Plugins
 
 All plugins go to ``` %appdata%\BetterDiscord\plugins\ ```
@@ -101,8 +102,17 @@ webSock.setStatus(game, idle);
 
 If you are using the BetterAPI you can also use the functions and events of the following libraries:
 
+```
 https://github.com/VersatilityWerks/jAlert#quick-use-requires-jalert-functionsjs
 http://alertifyjs.com/
 https://github.com/craigmccoy/jquery-charcount#quick-documentation
 https://github.com/jberryman/dilly.js#toc1
 http://momentjs.com/docs/#/use-it/
+```
+
+You can also use your own dependencies or libraries; just use;
+```js
+BetterAPI.requireCSS(uri, elemID);
+BetterAPI.requireJS(href, elemID, function);
+```
+This functions will check if the CSS/JS was already loaded by another plugin with 2-3 checks.
