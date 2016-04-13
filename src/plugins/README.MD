@@ -89,11 +89,6 @@ BetterAPI.addServerButton("divID", "text", "before/after");
 BetterAPI.addUserButton("btn", "divID", "text");
 BetterAPI.addUserLabel("divID", "label", "<html>");
 BetterAPI.addUserLink(divID, id1, href1, text1, [id2, href2, text2]);
-https://github.com/VersatilityWerks/jAlert#quick-use-requires-jalert-functionsjs
-http://alertifyjs.com/
-https://github.com/craigmccoy/jquery-charcount#quick-documentation
-https://github.com/jberryman/dilly.js#toc1
-http://momentjs.com/docs/#/use-it/
 ```
 
 Currently available [webSock](https://github.com/Bluscream/BetterDiscord-Plugins-and-Themes/blob/master/src/plugins/0_websock.plugin.js) functions:
@@ -103,3 +98,11 @@ webSock.sendMessage(); //useless atm.
 webSock.sendHeartbeat();
 webSock.setStatus(game, idle);
 ```
+
+If you are using the BetterAPI you can also use the functions and events of the following libraries:
+
+https://github.com/VersatilityWerks/jAlert#quick-use-requires-jalert-functionsjs
+http://alertifyjs.com/
+https://github.com/craigmccoy/jquery-charcount#quick-documentation
+https://github.com/jberryman/dilly.js#toc1
+http://momentjs.com/docs/#/use-it/
