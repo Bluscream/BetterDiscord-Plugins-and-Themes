@@ -19,7 +19,7 @@ BetterAPI.prototype.start = function() {
 	BetterAPI.prototype.overRides();
 	BetterAPI.prototype.loadAPI();
 	// BetterAPI.prototype.loadEvents();
-	BetterAPI.prototype.loadAcc();
+	//BetterAPI.prototype.loadAcc();
 	BetterAPI.enableTextSelection();
 	BetterAPI.enableAutoComplete();
 	// BetterAPI.enableButtons();
@@ -60,6 +60,30 @@ BetterAPI.prototype.onSwitch = function() {
 BetterAPI.prototype.overRides  = function() {
 	String.prototype.capitalizeFirstLetter = function() {
 		return this.charAt(0).toUpperCase() + this.slice(1);
+	};
+	BdWSocket.prototype.onMessage = function (e) {
+		var packet, data, type;
+		try {
+			packet = JSON.parse(e.data);
+			data = packet.d;
+			type = packet.t;
+		} catch (err) {
+			utils.err(err);
+			return;
+		}
+		switch (type) {
+			case "READY":
+				bdSocket.interval = setInterval(function(){bdws.send({
+					op: 1,
+					d: Date.now()
+				});}, data.heartbeat_interval);
+				utils.log("Socket Ready");
+				pluginModule.socketEvent(type, data);
+				break;
+			default:
+				pluginModule.socketEvent(type, data);
+				break;
+		}
 	};
 	$.ajax = function(_ajax){
 		var protocol = location.protocol,
@@ -122,22 +146,28 @@ BetterAPI.prototype.loadCore  = function() {
 		}else{ localStorage.setItem('debug', '1'); }
 	};
 	//BetterAPI.update();
-	BetterAPI.update = function(url) {
+	BetterAPI.update = function(name, url) {
 		$.ajax({
 			url: url,
 			type: 'GET',
 			success: function(res) {
 				var text = res.responseText;
-				$.each(text.split('\n'), function(index, value) {
-					console.log(index+': '+value);
+				Core.prototype.alert('New Plugin update!',''+
+					'A new update is available for <b>'+name+'<b><br>'+
+					'<br>'+
+					'Click <a onClick="BetterAPI.openURL(\'http://betterdiscord.net/ghdl?url='+url+'\')">here</a> to download the update.<br>'+
+					'Save the downloaded file to "'+process.env.APPDATA+'\BetterDiscord\\plugins\\"'+
+				'');
+				// $.each(text.split('\n'), function(index, value) {
+					//console.log(index+': '+value);
 					// if( this.replace(/["']/g, "") == searchField ) {
 						// fieldIndex = index;
 					// }
-				});
+				// });
 			}
 		});
 	};
-	//BetterAPI.clearDir(path);
+// BetterAPI.clearDir(path);
 	BetterAPI.clearDir = function(path) {
 		$.jAlert({
 			  'title': 'Are you sure?',
@@ -155,7 +185,7 @@ BetterAPI.prototype.loadCore  = function() {
 		 });
 		//process.env.appdata'+\BetterDiscord\plugins'
 	};
-	//BetterAPI.DisableLogging();
+// BetterAPI.DisableLogging();
 	BetterAPI.DisableLogging = function() {
 		console_log = console.log;
 		console_info = console.info;
@@ -170,7 +200,7 @@ BetterAPI.prototype.loadCore  = function() {
 		window.console.debug = function() {};
 		window.console.count = function() {};
 	};
-	//BetterAPI.EnableLogging();
+// BetterAPI.EnableLogging();
 	BetterAPI.EnableLogging = function() {
 		if(!console_log){
 			return;
@@ -381,7 +411,7 @@ BetterAPI.prototype.loadCore  = function() {
 			$('#locationbar').val(window.location.href);
 		}
 	};
-	// BetterAPI.createCharCounter();
+// BetterAPI.createCharCounter();
 	BetterAPI.createCharCounter = function() {
 		if ($('.charcount-display').length <= 0) {
 			$('textarea[data-reactid^=".0.1.1.0.2.1.0.1.$"]').charcount({
@@ -400,7 +430,7 @@ BetterAPI.prototype.loadCore  = function() {
 	BetterAPI.openURL = function(href) {
 		require("shell").openExternal(href);
 	};
-	// BetterAPI.bdAlert('content');
+	// BetterAPI.bdAlert("title", "text");
 	BetterAPI.bdAlert = function(title, text) {
 		Core.prototype.alert(title, text);
 	};
@@ -464,32 +494,93 @@ BetterAPI.prototype.loadCore  = function() {
 			}
 		});
 	};
+	// BetterAPI.getFileHash(path);
+	BetterAPI.getFileHash = function(path){
+		var fs = require('fs');
+		var crypto = require('crypto');
+		var fd = fs.createReadStream(path);
+		var hash = crypto.createHash('sha1');
+		hash.setEncoding('hex');
+		fd.on('end', function() {
+			hash.end();
+			console.log(hash.read());
+			return hash.read();
+		});
+		// read all file and pipe it (write it) to the hash object
+		fd.pipe(hash);//console.log(fd);
+	};
+	// BetterAPI.npm(name, callback);
+	BetterAPI.npm = function(name, callback){
+		require("child_process").exec("npm install --save " + name, {
+			cwd : saveDir
+		}, function (e, f, g) {
+			if(BetterAPI.isDebug()){ console.log(e, f, g); }
+			console.info('NPM Module \''+name+'\' is ready.')
+			callback();
+		});
+	};
+	// BetterAPI.requireCSS(uri, elemID);
+	BetterAPI.requireCSS = function(uri, elemID){
+		if(!BetterAPI.elemExists($('link[href="'+uri+'"]'))){
+			if(elemID){
+				if(!BetterAPI.elemExists($('#'+elemID))){
+					$("<link/>",{ type: "text/css", rel: "stylesheet", href: uri, id: elemID }).appendTo($("head"));
+				}
+			}else{
+				$("<link/>",{ type: "text/css", rel: "stylesheet", href: uri }).appendTo($("head"));
+			}
+		}
+	};
+	// BetterAPI.requireJS(href, elemID, function);
+	BetterAPI.requireJS = function(href, elemID, func){
+		if(!BetterAPI.elemExists($('script[src="'+href+'"]'))){
+			if(elemID){
+				if(!BetterAPI.elemExists($('#'+elemID))){
+					if(func){
+						try{ eval(func);if(BetterAPI.isDebug()){ console.log("Not appending "+elemID+" because it's function is already defined."); }
+						}catch(e){ $("<script/>",{ type: "text/javascript", src: href, id: elemID }).appendTo($("head")); }
+					}else{
+						$("<script/>",{ type: "text/javascript", src: href, id: elemID }).appendTo($("head"));
+					}
+				}else{if(BetterAPI.isDebug()){ console.log("Not appending "+elemID+" because it's element is already defined."); }}
+			}else{
+				if(func){
+					try{ eval(func);if(BetterAPI.isDebug()){ console.log("Not appending script because its function is already defined."); }
+					}catch(e){ $("<script/>",{ type: "text/javascript", src: href }).appendTo($("head")); }
+				}else{
+					$("<script/>",{ type: "text/javascript", src: href }).appendTo($("head"));
+				}
+			}
+		}
+	};
 };
 BetterAPI.prototype.injectCSS = function() {
-	BetterAPI.appendTo("link[rel='stylesheet']", '<link rel="stylesheet" href="https://cdn.rawgit.com/VersatilityWerks/jAlert/master/src/jAlert-v3.css" type="text/css">');
-	//BetterAPI.appendTo("link[rel='stylesheet']", '<link rel="stylesheet" href="https://cdn.rawgit.com/fabien-d/alertify.js/0.3.11/themes/alertify.default.css" type="text/css">');
-	// BetterAPI.appendTo("link[rel='stylesheet']", '<link rel="stylesheet" href="https://cdn.rawgit.com/sciactive/pnotify/master/dist%2Fpnotify.css" type="text/css">');
-	//BetterAPI.appendTo("link[rel='stylesheet']", '<link rel="stylesheet" href="https://cdn.rawgit.com/twbs/bootstrap/master/dist/css/bootstrap.min.css" type="text/css">');
-	BetterAPI.appendTo("link[rel='stylesheet']", '<link rel="stylesheet" href="https://cdn.jsdelivr.net/alertifyjs/1.6.1/css/alertify.min.css" type="text/css">');
-	BetterAPI.appendTo("link[rel='stylesheet']", '<link rel="stylesheet" href="https://cdn.jsdelivr.net/alertifyjs/1.6.1/css/themes/default.min.css" type="text/css">');
+	BetterAPI.requireCSS("https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.0-beta.1/jquery-ui.min.css", "JQueryUICSS");
+	BetterAPI.requireCSS("https://cdn.rawgit.com/VersatilityWerks/jAlert/master/src/jAlert-v3.css", "jAlertCSS");
+	//BetterAPI.requireCSS("https://cdn.rawgit.com/fabien-d/alertify.js/0.3.11/themes/alertify.default.css");
+	//BetterAPI.requireCSS("https://cdn.rawgit.com/sciactive/pnotify/master/dist%2Fpnotify.css");
+	//BetterAPI.requireCSS("https://cdn.rawgit.com/twbs/bootstrap/master/dist/css/bootstrap.min.css");
+	BetterAPI.requireCSS("https://cdn.jsdelivr.net/alertifyjs/1.6.1/css/alertify.min.css");
+	BetterAPI.requireCSS("https://cdn.jsdelivr.net/alertifyjs/1.6.1/css/themes/default.min.css");
 };
 BetterAPI.prototype.injectJS  = function() {
-	$("head").append('<script src="https://cdn.rawgit.com/VersatilityWerks/jAlert/master/src/jAlert-v3.min.js" type="text/javascript"></script>'); // https://github.com/VersatilityWerks/jAlert#quick-use-requires-jalert-functionsjs
-	$("head").append('<script src="https://cdn.rawgit.com/VersatilityWerks/jAlert/master/src/jAlert-functions.min.js" type="text/javascript"></script>');
-	//$("head").append('<script src="https://cdn.rawgit.com/fabien-d/alertify.js/0.3.11/lib/alertify.min.js"></script>'); // https://github.com/fabien-d/alertify.js/wiki/How-to-Use#usage
-	$("head").append('<script src="https://cdn.jsdelivr.net/alertifyjs/1.6.1/alertify.min.js" type="text/javascript"></script>'); // http://alertifyjs.com/
-	// $("head").append('<script src="https://cdn.rawgit.com/sciactive/pnotify/master/dist%2Fpnotify.js"></script>'); // https://sciactive.com/pnotify/#using
-	$("head").append('<script src="https://cdn.rawgit.com/craigmccoy/jquery-charcount/master/jquery.charcount.min.js" type="text/javascript"></script>'); // https://github.com/craigmccoy/jquery-charcount#quick-documentation
-	$("head").append('<script src="https://cdn.rawgit.com/afshinm/Json-to-HTML-Table/master/json-to-table.js" type="text/javascript"></script>'); // https://github.com/afshinm/Json-to-HTML-Table#how-to-use
-	$("head").append('<script src="https://cdn.rawgit.com/brandonaaron/livequery/1.1.1/jquery.livequery.js" type="text/javascript"></script>'); // 
-	// $("head").append('<script src="https://cdn.rawgit.com/flesler/jquery.scrollTo/master/jquery.scrollTo.min.js" type="text/javascript"></script>'); // 
-	$("head").append('<script src="https://cdn.rawgit.com/andreyfedoseev/jquery-ocupload/master/jquery.ocupload-min.js" type="text/javascript"></script>'); // 
-	$("head").append('<script src="https://cdn.rawgit.com/jberryman/dilly.js/master/dilly.js" type="text/javascript"></script>'); // https://github.com/jberryman/dilly.js#toc1
-	$("head").append('<script src="https://cdnjs.cloudflare.com/ajax/libs/floatthead/1.4.0/jquery.floatThead.min.js" type="text/javascript"></script>'); // http://mkoryak.github.io/floatThead/
-	$("head").append('<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.12.0/moment.min.js" type="text/javascript"></script>'); // http://momentjs.com/docs/#/use-it/
-	$("head").append('<script src="https://cdn.rawgit.com/ianpgall/js-console-listener/master/console-listener.js" type="text/javascript"></script>'); // https://github.com/ianpgall/js-console-listener#use
-	$("head").append('<script src="https://cdnjs.cloudflare.com/ajax/libs/dragula/3.6.3/dragula.min.js" id="DragulaPluginJS" type="text/javascript"></script>');
-	$("head").append('<script src="https://raw.githubusercontent.com/cosmicsalad/Discord-Themes-and-Plugins/master/lib/jquery-ui.min.js" type="text/javascript"></script>');
+	BetterAPI.requireJS("https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0-beta1/jquery.min.js", "JQueryJS", "$"); // 
+	BetterAPI.requireJS("https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.0-beta.1/jquery-ui.min.js", "JQueryUIJS"); //
+	BetterAPI.requireJS("https://cdn.rawgit.com/brandonaaron/livequery/1.1.1/jquery.livequery.js", "LiveQueryJS"); // 
+	BetterAPI.requireJS("https://cdn.rawgit.com/VersatilityWerks/jAlert/master/src/jAlert-v3.min.js", "JAlertJS", "$.jAlert"); // https://github.com/VersatilityWerks/jAlert#quick-use-requires-jalert-functionsjs
+	BetterAPI.requireJS("https://cdn.rawgit.com/VersatilityWerks/jAlert/master/src/jAlert-functions.min.js", "JAlertfuncJS");
+	BetterAPI.requireJS("https://cdn.jsdelivr.net/alertifyjs/1.6.1/alertify.min.js", "AlertifyJS","alertify"); // http://alertifyjs.com/
+	BetterAPI.requireJS("https://cdn.rawgit.com/craigmccoy/jquery-charcount/master/jquery.charcount.min.js", "CharcountJS"); // https://github.com/craigmccoy/jquery-charcount#quick-documentation
+	BetterAPI.requireJS("https://cdnjs.cloudflare.com/ajax/libs/dragula/3.6.3/dragula.min.js", "DragulaJS");
+	BetterAPI.requireJS("https://cdn.rawgit.com/jberryman/dilly.js/master/dilly.js", "withDelayJS", "withDelay"); // https://github.com/jberryman/dilly.js#toc1
+	BetterAPI.requireJS("https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.12.0/moment.min.js", "momentJS", "moment"); // http://momentjs.com/docs/#/use-it/
+	//BetterAPI.requireJS("https://cdn.rawgit.com/flesler/jquery.scrollTo/master/jquery.scrollTo.min.js"); // 
+	//BetterAPI.requireJS("https://cdn.rawgit.com/andreyfedoseev/jquery-ocupload/master/jquery.ocupload-min.js"); // 
+	//BetterAPI.requireJS("https://cdnjs.cloudflare.com/ajax/libs/floatthead/1.4.0/jquery.floatThead.min.js"); // http://mkoryak.github.io/floatThead/
+	//BetterAPI.requireJS("https://cdn.rawgit.com/ianpgall/js-console-listener/master/console-listener.js"); // https://github.com/ianpgall/js-console-listener#use
+	//BetterAPI.requireJS("https://cdn.rawgit.com/fabien-d/alertify.js/0.3.11/lib/alertify.min.js"); // https://github.com/fabien-d/alertify.js/wiki/How-to-Use#usage
+	//BetterAPI.requireJS("https://cdn.rawgit.com/sciactive/pnotify/master/dist%2Fpnotify.js"); // https://sciactive.com/pnotify/#using
+	//BetterAPI.requireJS("https://cdn.rawgit.com/afshinm/Json-to-HTML-Table/master/json-to-table.js"); // https://github.com/afshinm/Json-to-HTML-Table#how-to-use
 };
 BetterAPI.prototype.loadAPI  = function() {
 	// BetterAPI.getCurrentServerName();
@@ -884,6 +975,7 @@ BetterAPI.prototype.loadAPI  = function() {
 		var blob = new Blob([byteArray], {type: contentType});
 		return blob;
 	};
+// BetterAPI.sendImage("imgName", "data:imgData", "channelID");
 	BetterAPI.sendImage = function(imgName, imgData, cID) {
 		var imageBlob = b64toBlob(imgData);
 		var fd = new FormData();
@@ -899,6 +991,7 @@ BetterAPI.prototype.loadAPI  = function() {
 		  contentType: false
 		});
 	};
+// BetterAPI.bulkUpload();
 	BetterAPI.bulkUpload = function (){
 		var interval = setInterval(function(){
 			if(BetterAPI.elemExists('.upload-modal')){
