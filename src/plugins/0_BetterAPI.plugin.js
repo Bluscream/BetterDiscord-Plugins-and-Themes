@@ -567,7 +567,7 @@ BetterAPI.prototype.injectJS  = function() {
 	BetterAPI.requireJS("https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0-beta1/jquery.min.js", "JQueryJS", "$"); // 
 	BetterAPI.requireJS("https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.0-beta.1/jquery-ui.min.js", "JQueryUIJS"); //
 	BetterAPI.requireJS("https://cdn.rawgit.com/brandonaaron/livequery/1.1.1/jquery.livequery.js", "LiveQueryJS"); // 
-	BetterAPI.requireJS("https://cdn.rawgit.com/VersatilityWerks/jAlert/master/src/jAlert-v3.min.js", "JAlertJS", "$.jAlert"); // https://github.com/VersatilityWerks/jAlert#quick-use-requires-jalert-functionsjs
+	BetterAPI.requireJS("https://cdn.rawgit.com/VersatilityWerks/jAlert/master/src/jAlert-v3.min.js", "JAlertJS"); // https://github.com/VersatilityWerks/jAlert#quick-use-requires-jalert-functionsjs
 	BetterAPI.requireJS("https://cdn.rawgit.com/VersatilityWerks/jAlert/master/src/jAlert-functions.min.js", "JAlertfuncJS");
 	BetterAPI.requireJS("https://cdn.jsdelivr.net/alertifyjs/1.6.1/alertify.min.js", "AlertifyJS","alertify"); // http://alertifyjs.com/
 	BetterAPI.requireJS("https://cdn.rawgit.com/craigmccoy/jquery-charcount/master/jquery.charcount.min.js", "CharcountJS"); // https://github.com/craigmccoy/jquery-charcount#quick-documentation
