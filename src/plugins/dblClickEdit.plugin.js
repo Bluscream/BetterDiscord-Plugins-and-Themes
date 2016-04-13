@@ -1,11 +1,6 @@
 //META{"name":"dblClickEdit"}*//
-
-var dblClickEdit = function () {};
-
-dblClickEdit.prototype.onMessage = function () {
-};
-dblClickEdit.prototype.onSwitch = function () {
-};
+dblClickEdit = function () {};
+dblClickEdit.prototype.load = function () {};
 dblClickEdit.prototype.start = function () {
     $(document).on("dblclick.dce", function(e) {
         var target = $(e.target);
@@ -23,13 +18,10 @@ dblClickEdit.prototype.start = function () {
         }
     });
 };
-
-dblClickEdit.prototype.load = function () {};
-dblClickEdit.prototype.unload = function () {
-    $(document).off("dblclick.dce");
-};
 dblClickEdit.prototype.stop = function () {
     $(document).off("dblclick.dce");
+};
+dblClickEdit.prototype.unload = function () {
 };
 dblClickEdit.prototype.getSettingsPanel = function () {
     return "";
