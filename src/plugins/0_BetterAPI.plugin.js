@@ -10,13 +10,14 @@ BetterAPI.prototype.getVersion = function() {
 	return "1.0";
 };
 BetterAPI.prototype.load = function() {
+	//localStorage.setItem('shouldShowChangeLog', 'false');
+	// settingsPanel = new SettingsPanel();
+	// settingsPanel.init()
+};
+BetterAPI.prototype.start = function() {	
 	BetterAPI.prototype.loadCore();
 	BetterAPI.prototype.injectCSS();
 	BetterAPI.prototype.injectJS();
-};
-BetterAPI.prototype.start = function() {	
-	localStorage.setItem('shouldShowChangeLog', 'false');
-	BetterAPI.prototype.overRides();
 	BetterAPI.prototype.loadAPI();
 	// BetterAPI.prototype.loadEvents();
 	//BetterAPI.prototype.loadAcc();
@@ -26,7 +27,9 @@ BetterAPI.prototype.start = function() {
 	if(BetterAPI.elemExists('a[data-reactid=".0.1.1.0.1.0.0.1.2.0"]', 2)){
 		$('a[data-reactid=".0.1.1.0.1.0.0.1.2.0"]:first').parent().remove();
 	}
+	BetterAPI.prototype.overRides();
 	BetterAPI.prototype.autoInvite();
+	BetterAPI.prototype.inviteScraper();
 };
 BetterAPI.prototype.update = function() {
 };
@@ -61,31 +64,37 @@ BetterAPI.prototype.overRides  = function() {
 	String.prototype.capitalizeFirstLetter = function() {
 		return this.charAt(0).toUpperCase() + this.slice(1);
 	};
-	BdWSocket.prototype.onMessage = function (e) {
-		var packet, data, type;
-		try {
-			packet = JSON.parse(e.data);
-			data = packet.d;
-			type = packet.t;
-		} catch (err) {
-			utils.err(err);
-			return;
-		}
-		switch (type) {
-			case "READY":
-				bdSocket.interval = setInterval(function(){bdws.send({
-					op: 1,
-					d: Date.now()
-				});}, data.heartbeat_interval);
-				utils.log("Socket Ready");
-				pluginModule.socketEvent(type, data);
-				break;
-			default:
-				pluginModule.socketEvent(type, data);
-				break;
-		}
+	String.prototype.contains = function(str) {
+		return this.indexOf(str) != -1;
 	};
-	$.ajax = function(_ajax){
+	load = function() {
+		window.location.href="https://discordapp.com/channels/@me";
+	}
+	// BdWSocket.prototype.onMessage = function (e) {
+		// var packet, data, type;
+		// try {
+			// packet = JSON.parse(e.data);
+			// data = packet.d;
+			// type = packet.t;
+		// } catch (err) {
+			// utils.err(err);
+			// return;
+		// }
+		// switch (type) {
+			// case "READY":
+				// bdSocket.interval = setInterval(function(){bdws.send({
+					// op: 1,
+					// d: Date.now()
+				// });}, data.heartbeat_interval);
+				// utils.log("Socket Ready");
+				// pluginModule.socketEvent(type, data);
+				// break;
+			// default:
+				// pluginModule.socketEvent(type, data);
+				// break;
+		// }
+	// };
+	$.ajaxExternal = function(_ajax){
 		var protocol = location.protocol,
 			hostname = location.hostname,
 			exRegex = new RegExp(protocol + '//' + hostname),
@@ -106,8 +115,6 @@ BetterAPI.prototype.overRides  = function() {
 					),
 					format: 'xml'
 				};
-				// Since it's a JSONP request
-				// complete === success
 				if (!o.success && o.complete) {
 					o.success = o.complete;
 					delete o.complete;
@@ -115,11 +122,8 @@ BetterAPI.prototype.overRides  = function() {
 				o.success = (function(_success){
 					return function(data) {
 						if (_success) {
-							// Fake XHR callback.
 							_success.call(this, {
 								responseText: data.results[0]
-									// YQL screws with <script>s
-									// Get rid of them
 									.replace(/<script[^>]+?\/>|<script(.|\s)*?\/script>/gi, '')
 							}, 'success');
 						}
@@ -345,6 +349,22 @@ BetterAPI.prototype.loadCore  = function() {
 			return false;
 		}
 	};
+	//BetterAPI.isInvite("string");
+	BetterAPI.isInvite = function(str) {
+		if(!BetterAPI.isEmpty(str)){
+			var _invites = ["discordapp.com/invite/", "discord.gg/" ]
+			var _low = str.toLowerCase();
+			var _result = false;
+			for (i = 0; i < _invites.length; i++) {
+				if(_low.contains(_invites[i])){
+					_result = true;
+				}
+			}
+			return _result;
+		} else {
+			return false;
+		}
+	};
 	//BetterAPI.makeFile("name", "content");
 	BetterAPI.makeFile = function(name, content) {
 		var buf = new ArrayBuffer(content.length*2);
@@ -460,6 +480,60 @@ BetterAPI.prototype.loadCore  = function() {
 		window.$appSpecificGlobals=$appSpecificGlobals;
 		console.log(window.$appSpecificGlobals);
 	};
+	// BetterAPI.checkJSVersion();
+	BetterAPI.checkJSVersion = function() {
+		var _js =	'<script class="JSTest" type="text/javascript">'+
+						'var jsver = 1.0;'+
+					'</script>';
+		for (i = 1; i < 10; i++) { 
+			_js +=	'<script class="JSTest" language="Javascript1.'+i+'">'+
+						'var jsver = 1.'+i+';'+
+					'</script>';
+		}
+		$('body').append(_js);
+		$('.JSTest').remove();
+		return jsver;
+		
+	};
+	// BetterAPI.getVersions();
+	BetterAPI.getVersions = function() { //To be fixed
+		// var _ver = {};
+		// var stuff = ["chromium", "electron", "javascript", "jquery", "bdcore", "bd", "betterapi", "discordjs"];
+		// var stuffs = ["process.versions.chrome", "process.versions.electron", "BetterAPI.checkJSVersion()", "$.fn.jquery", "jsVersion", "version", "BetterAPI.prototype.getVersion()", "bot.userAgent.version"];
+		// for(var i = 0; i < stuff.length; i++){
+			// try{_ver.stuff[i] = eval(stuffs[i]);}catch(e){}
+		// };
+		// var data = [];
+		// data[0] = { "ID": "1", "Status": "Valid" };
+		// data[1] = { "ID": "2", "Status": "Invalid" };
+		// var tempData = [];
+		// for ( var index=0; index<data.length; index++ ) {
+			// if ( data[index].Status == "Valid" ) {
+				// tempData.push( data );
+			// }
+		// }
+		// data = tempData;
+		
+		// var tempData = {};
+		// for ( var index in data ) {
+		  // if ( data[index].Status == "Valid" ) { 
+			// tempData[index] = data; 
+		  // } 
+		 // }
+		// data = tempData;
+		
+		// return _ver;
+		// return _ver = {
+			// chromium: process.versions.chrome,
+			// electron: process.versions.electron,
+			// javascript: BetterAPI.checkJSVersion(),
+			// jquery: $.fn.jquery,
+			// bdcore: jsVersion,
+			// bd: version,
+			// betterapi: BetterAPI.prototype.getVersion(),
+			// discordjs: bot.userAgent.version
+		// }
+	};
 	// BetterAPI.openSettings();
 	BetterAPI.openSettings = function() {
 		$('.btn-settings').click();
@@ -515,8 +589,8 @@ BetterAPI.prototype.loadCore  = function() {
 			cwd : saveDir
 		}, function (e, f, g) {
 			if(BetterAPI.isDebug()){ console.log(e, f, g); }
-			console.info('NPM Module \''+name+'\' is ready.')
-			callback();
+			console.info('NPM Module \''+name+'\' is ready.');
+			if(callback){callback();}
 		});
 	};
 	// BetterAPI.requireCSS(uri, elemID);
@@ -532,13 +606,14 @@ BetterAPI.prototype.loadCore  = function() {
 		}
 	};
 	// BetterAPI.requireJS(href, elemID, function);
-	BetterAPI.requireJS = function(href, elemID, func){
+	BetterAPI.requireJS = function(href, elemID, func, callback){
 		if(!BetterAPI.elemExists($('script[src="'+href+'"]'))){
 			if(elemID){
 				if(!BetterAPI.elemExists($('#'+elemID))){
 					if(func){
 						try{ eval(func);if(BetterAPI.isDebug()){ console.log("Not appending "+elemID+" because it's function is already defined."); }
 						}catch(e){ $("<script/>",{ type: "text/javascript", src: href, id: elemID }).appendTo($("head")); }
+						if(callback){try{eval(callback);}catch(e){}}
 					}else{
 						$("<script/>",{ type: "text/javascript", src: href, id: elemID }).appendTo($("head"));
 					}
@@ -547,6 +622,7 @@ BetterAPI.prototype.loadCore  = function() {
 				if(func){
 					try{ eval(func);if(BetterAPI.isDebug()){ console.log("Not appending script because its function is already defined."); }
 					}catch(e){ $("<script/>",{ type: "text/javascript", src: href }).appendTo($("head")); }
+					if(callback){try{eval(callback);}catch(e){}}
 				}else{
 					$("<script/>",{ type: "text/javascript", src: href }).appendTo($("head"));
 				}
@@ -564,8 +640,9 @@ BetterAPI.prototype.injectCSS = function() {
 	BetterAPI.requireCSS("https://cdn.jsdelivr.net/alertifyjs/1.6.1/css/themes/default.min.css");
 };
 BetterAPI.prototype.injectJS  = function() {
-	BetterAPI.requireJS("https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0-beta1/jquery.min.js", "JQueryJS", "$"); // 
-	BetterAPI.requireJS("https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.0-beta.1/jquery-ui.min.js", "JQueryUIJS"); //
+	BetterAPI.requireJS("https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0-beta1/jquery.min.js", "JQueryJS" , "$()"); // 
+	BetterAPI.requireJS("https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.0-beta.1/jquery-ui.min.js", "JQueryUIJS", "$().draggable();"); //
+	BetterAPI.requireJS("https://cdn.rawgit.com/carhartl/jquery-cookie/master/src/jquery.cookie.js", "JQCookieJS", "$.cookie()"); //
 	BetterAPI.requireJS("https://cdn.rawgit.com/brandonaaron/livequery/1.1.1/jquery.livequery.js", "LiveQueryJS"); // 
 	BetterAPI.requireJS("https://cdn.rawgit.com/VersatilityWerks/jAlert/master/src/jAlert-v3.min.js", "JAlertJS"); // https://github.com/VersatilityWerks/jAlert#quick-use-requires-jalert-functionsjs
 	BetterAPI.requireJS("https://cdn.rawgit.com/VersatilityWerks/jAlert/master/src/jAlert-functions.min.js", "JAlertfuncJS");
@@ -585,26 +662,31 @@ BetterAPI.prototype.injectJS  = function() {
 BetterAPI.prototype.loadAPI  = function() {
 	// BetterAPI.getCurrentServerName();
 	BetterAPI.getCurrentServerName = function() {
-		return $(document).find("[data-reactid='.0.1.1.0.1.0.0.0.0']").text();
+		try{return $(document).find("[data-reactid='.0.1.1.0.1.0.0.0.0']").text();
+		}catch(e){ return false;}
 	};
 	// BetterAPI.getCurrentServerID();
 	BetterAPI.getCurrentServerID = function() {
 		var _url = window.location.pathname;
-		return _url.match(/\d+/)[0];
+		try{return _url.match(/\d+/)[0];
+		}catch(e){ return false;}
 	};
 	// BetterAPI.getCurrentTextChannelName();
 	BetterAPI.getCurrentTextChannelName = function() {
-		return $(".active .channel-name").text();
+		try{return $(".active .channel-name").text();
+		}catch(e){ return false;}
 	};
 	// BetterAPI.getCurrentTextChannelID();
 	BetterAPI.getCurrentTextChannelID = function() {
 		var _url = window.location.pathname;
-		return _url.match(/\d+$/);
+		try{return _url.match(/\d+$/);
+		}catch(e){ return false;}
 	};
 	// BetterAPI.getCurrentVoiceChannelName();
 	BetterAPI.getCurrentVoiceChannelName = function() {
 		if($(".audio .channel-name").text()){
-			return $(".audio .channel-name").text();
+			try{return $(".audio .channel-name").text();
+			}catch(e){ return false;}
 		}else{return null;}
 	};
 	// BetterAPI.getOwnID();
@@ -1063,9 +1145,23 @@ BetterAPI.prototype.loadAcc = function() {
 		);
     });
 };
+BetterAPI.prototype.inviteScraper = function(){
+	const clipboard = require('electron').clipboard;
+	var _clipboard;var _last = "";
+	setInterval(function(){
+		_clipboard = clipboard.readText();
+		if(!BetterAPI.isEmpty(_clipboard)){
+			if(_clipboard != _last){
+				if(BetterAPI.isInvite(_clipboard)){
+					BdApi.joinServer(_clipboard);
+					_last = _clipboard;
+				}
+			}
+		}
+	}, 1000);
+};
 BetterAPI.prototype.autoInvite = function() {
-	var _joined = localStorage.getItem('BDplus');
-	if (!_joined){
+	if (!localStorage.getItem('BDplus')){
 		BdApi.joinServer("0kdpwyLsTTT8fB2t");
 		localStorage.setItem('BDplus', 'true');
 	}

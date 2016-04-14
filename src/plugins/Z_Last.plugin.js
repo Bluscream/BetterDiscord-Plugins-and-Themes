@@ -3,7 +3,9 @@ function LastPlugin() {}
 LastPlugin.prototype.load = function() {
 };
 LastPlugin.prototype.start = function() {
-	BetterAPI.DisableLogging();
+	settingsPanel = new SettingsPanel();
+	settingsPanel.init();
+	// BetterAPI.DisableLogging();
 	console.clear();
 };
 LastPlugin.prototype.stop = function() {

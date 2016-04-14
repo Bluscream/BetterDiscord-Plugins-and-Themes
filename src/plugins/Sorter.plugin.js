@@ -19,9 +19,11 @@ Sorter.prototype.getAuthor = function() {
 };
 
 Sorter.prototype.start = function() {
-	console.log("Sorter loaded");
-	this.initServerList();
-	this.initChannelList();
+	try{
+		console.log("Sorter loaded");
+		this.initServerList();
+		this.initChannelList();
+	}catch(e){this.prototype.stop;}
 };
 
 Sorter.prototype.initServerList = function() {

@@ -169,6 +169,21 @@ SkypeEmos.emotelist = {":cat_cleaning:":{"url":"https://i.gyazo.com/da52bad9d25d
 SkypeEmos.isReady = false;
 
 SkypeEmos.prototype.load = function() {
+};
+SkypeEmos.prototype.saveSettings = function(){
+	localStorage.setItem("s_emo_settings",JSON.stringify(SkypeEmos.settings));
+}
+SkypeEmos.prototype.getDefaultSettings = function(){
+	var new_settings = {}
+	for(var setting in  SkypeEmos.settingsArray) {
+		new_settings[SkypeEmos.settingsArray[setting]["id"]]=SkypeEmos.settingsArray[setting]["default"];
+	}
+	return new_settings;
+}
+SkypeEmos.prototype.unload = function() {
+};
+
+SkypeEmos.prototype.start = function() {
 	function preloadImages() {
 		if (!preloadImages.list) {
 			preloadImages.list = [];
@@ -204,21 +219,6 @@ SkypeEmos.prototype.load = function() {
 		'@keyframes play {  from { background-position:  0 0; }  to { background-position:  0 100%; }}'+
 		'</style>"'
 	);
-};
-SkypeEmos.prototype.saveSettings = function(){
-	localStorage.setItem("s_emo_settings",JSON.stringify(SkypeEmos.settings));
-}
-SkypeEmos.prototype.getDefaultSettings = function(){
-	var new_settings = {}
-	for(var setting in  SkypeEmos.settingsArray) {
-		new_settings[SkypeEmos.settingsArray[setting]["id"]]=SkypeEmos.settingsArray[setting]["default"];
-	}
-	return new_settings;
-}
-SkypeEmos.prototype.unload = function() {
-};
-
-SkypeEmos.prototype.start = function() {
 	SkypeEmos.settings=JSON.parse(localStorage.getItem("s_emo_settings"))||SkypeEmos.prototype.getDefaultSettings();
 	SkypeEmos.prototype.saveSettings();
 	MutationObserver = window.MutationObserver || window.WebKitMutationObserver;

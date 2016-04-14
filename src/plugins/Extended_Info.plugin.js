@@ -15,6 +15,7 @@ userInfo.prototype.getAuthor = function() {
 userInfo.prototype.update = function() {};
 userInfo.prototype.load = function() {};
 userInfo.prototype.start = function() {
+	BetterAPI.requireJS("https://cdn.rawgit.com/brandonaaron/livequery/1.1.1/jquery.livequery.js", "LiveQueryJS");
     $('span[data-reactid=".0.4"]').on('DOMNodeInserted', '.popout', function() {
 		var name = $(".user-popout").find(".username").text();
 		id = BetterAPI.getUserIdByName(name);
@@ -92,16 +93,18 @@ userInfo.prototype.start = function() {
 			// $('.button-primary').after('&nbsp;<button type="submit" class="button button-primary submitall" data-reactid=".0.5.$=1$modal11.0.0.1.2" onclick="BetterAPI.bulkUpload();"><span data-reactid=".0.5.$=1$modal11.0.0.1.2.0">Upload all</span></button>');
 		// }
 	// });
-	$('button[data-reactid=".0.5.$=1$modal1.0.0.1.0"]').livequery(function(){
+	try{$('button[data-reactid=".0.5.$=1$modal1.0.0.1.0"]').livequery(function(){
 		if(!BetterAPI.elemExists('.submitall')){
 			$('.button-primary').after('&nbsp;<button type="submit" class="button button-primary submitall" data-reactid=".0.5.$=1$modal11.0.0.1.2" onclick="BetterAPI.bulkUpload();"><span data-reactid=".0.5.$=1$modal11.0.0.1.2.0">Upload all</span></button>');
 		}
 	});
-	$('ul[data-reactid=".0.1.1.0.1.0.0.1"]').livequery(function(){
+	}catch(e){}
+	try{$('ul[data-reactid=".0.1.1.0.1.0.0.1"]').livequery(function(){
 		BetterAPI.addServerButton("serverinfobutton", "Server Info", "before");
 		if(bot){BetterAPI.addServerButton("serverrolesbutton", "Server Roles", "after");}
 	});
-	$("#serverinfobutton").livequery(function(){
+	}catch(e){}
+	try{$("#serverinfobutton").livequery(function(){
 		$("#serverinfobutton").click(function(){
 			var _data = "";
 			var _title = "Server Information";
@@ -146,8 +149,9 @@ userInfo.prototype.start = function() {
 			'');
 		});
 	});
+	}catch(e){}
 	if(bot){
-		$("#serverrolesbutton").livequery(function(){
+		try{$("#serverrolesbutton").livequery(function(){
 			$("#serverrolesbutton").click(function(){
 				var _title = "Roles";
 				var _sname = BetterAPI.getCurrentServerName();
@@ -202,8 +206,9 @@ userInfo.prototype.start = function() {
 				});
 			});
 		});
+		}catch(e){}
 	}
-	$('ul[data-reactid=".0.1.1.0.1.3"]').livequery(function(){
+	try{$('ul[data-reactid=".0.1.1.0.1.3"]').livequery(function(){
 		BetterAPI.addLink("status", "Status", "status", "lg");
 		$('#status').click(function(){
 			BetterAPI.openStatusPopup();
@@ -227,7 +232,8 @@ userInfo.prototype.start = function() {
 			 });
 		});
 	});
-	$('.user-settings-modal-account').livequery(function(){
+	}catch(e){}
+	try{$('.user-settings-modal-account').livequery(function(){
 		if ($("#userinfopanel").length <= 0) {
 			id = BetterAPI.getOwnID();
 			avatarID = BetterAPI.getOwnAvatarID();
@@ -254,9 +260,10 @@ userInfo.prototype.start = function() {
 			$('div[data-reactid=".0.5.$=1$UserSettingsModal.0.0.1.0.$ACCOUNT.0.1.0"]').append(_label);
 		}
 	});
+	}catch(e){}
 	// appendUsers();
 	appendUsers = function() {
-		$('.friends-online').livequery(function(){
+		try{$('.friends-online').livequery(function(){
 			if(!BetterAPI.elemExists('#onlineservers')){
 				$('.friends-online').after('<div class="friends-online"><span style="color:lightblue !important;" id="onlineservers">0</span> Server</div>');
 			}
@@ -264,6 +271,7 @@ userInfo.prototype.start = function() {
 				$('.friends-online').after('<div class="friends-online"><span id="onlineusers">0</span> Users</div>');
 			}*/
 		});
+		}catch(e){}
 	}
 	// updateMembers();
 	updateMembers = function() {
@@ -285,7 +293,7 @@ userInfo.prototype.start = function() {
 			'</h2>');
 		};
 	};
-	$('.markdown-modal-footer').livequery(function(){
+	try{$('.markdown-modal-footer').livequery(function(){
 		if($('#bdcl').length <= 0){
 			$('.markdown-modal-footer').append(' | <a id="bdchangelog">BD Change Log</a>');
 			$('#bdchangelog').click(function(){
@@ -294,6 +302,7 @@ userInfo.prototype.start = function() {
 			});
 		}
 	});
+	}catch(e){}
 	appendUsers();
 	updateMembers();
 };

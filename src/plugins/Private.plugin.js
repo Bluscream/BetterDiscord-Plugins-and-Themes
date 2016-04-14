@@ -16,9 +16,10 @@ PrivatePlugin.prototype.start = function() {
 	/*$('div[data-reactid=".0.1.1.0.2.0"]').livequery(function(){
 		BetterAPI.addLocationBar();
 	});*/
-	$('.channel.btn-friends').livequery(function(){
-		$('header[data-reactid$="$Direct Messages"]').html('PM\'s - <a onclick="PrivatePlugin.clearDMs();">Clear all</a>')
+	try{$('.channel.btn-friends').livequery(function(){
+		$('header[data-reactid$="$Direct Messages"]').html('PM\'s - <a onclick="$(\'.close\').click();">Clear all</a>')
 	});
+	}catch(e){}
 };
 PrivatePlugin.prototype.stop = function() {
 	$('span[data-reactid=".0.4"').off('DOMNodeInserted.userInfo');
@@ -82,7 +83,7 @@ PrivatePlugin.checkServerCount = function() {
 	}
 }
 PrivatePlugin.clearDMs = function() {
-	$('a[data-reactid^=".0.1.1.0.1.0.1.0.1.$=1$"]').each(function(i,el){
-		$(el).find('.close').click();
+	$('.close').each(function(i,el){
+		$(el).click();
 	});
 }
