@@ -1,6 +1,6 @@
 //META{"name":"EncryptedText"}*//
 
-var BetterAPI = BetterAPI || bdplugins.BetterAPI.plugin.constructor;var exports = function() {};
+var BetterAPI = BetterAPI || bdplugins.BetterAPI.plugin.constructor;
 
 var EncryptedText = function() {};
 
@@ -157,4 +157,4 @@ EncryptedText.sendTextMessage = function(text) {
 	  contentType: false
 	});
 };
-exports.EncryptedText = EncryptedText;
+// exports.EncryptedText = EncryptedText;
