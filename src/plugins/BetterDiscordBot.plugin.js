@@ -51,6 +51,7 @@ var BetterDiscordLogging = {
 };
 BetterDiscordBot.prototype.loadlib = function(name) {};
 BetterDiscordBot.prototype.load = function() {
+	if(BdApi.getPlugin('BetterAPI') === null){ return; }
 	BetterDiscordBotting = BetterAPI.loadSettings('BetterDiscordBotting', BetterDiscordBotting);
 	BetterDiscordLogging = BetterAPI.loadSettings('BetterDiscordLogging', BetterDiscordLogging);
 };
@@ -66,6 +67,15 @@ BetterDiscordBot.prototype.onSwitch = function () {
 	}
 };
 BetterDiscordBot.prototype.start = function () {
+	var _require = ['BetterAPI', '']
+	if(BdApi.getPlugin(_require[0]) === null){
+		Core.prototype.alert('Requirement not found!',''+
+			'A requirement is missing: <b>'+_require[0]+'<b><br>'+
+			'<br>'+
+			'Click <a onClick="require(\'shell\').openExternal(\'http://betterdiscord.net/ghdl?url='+url+'\')">here</a> to download the plugin.<br>'+
+			'Save the downloaded file to "'+process.env.APPDATA+'\BetterDiscord\\plugins\\".'+
+		'');
+	};_require = null;
 	BetterAPI.requireCSS("https://cdn.rawgit.com/Bluscream/BetterDiscord/master/table.css", "tableCSS");
 	BetterAPI.requireJS("https://cdn.rawgit.com/Bluscream/BetterDiscord/master/table.js", "tableJS");
 	debugging = BetterAPI.isDebug();
@@ -421,7 +431,7 @@ BetterDiscordBot.log = function (level, event, server, channel, msg) {
 	if ($('.logrow').length > 499) {
 		$('.logrow:first').remove();
 	}
-	$('.bdserverlog').append('' + '<tr class="logrow">' + '<td class="' + level.toLowerCase() + '">' + time + '</td>' + '<td class="' + level.toLowerCase() + '">' + level.toUpperCase() + '</td>' + '<td class="' + level.toLowerCase() + '">' + event + '</td>' + '<td class="' + level.toLowerCase() + '">' + server + '</td>' + '<td class="' + level.toLowerCase() + '">' + channel + '</td>' + '<td class="' + level.toLowerCase() + '">' + msg + '</td>' + '</tr>' + '');
+	$('.bdserverlog').append('' + '<tr class="logrow '+level.toLowerCase()+'">' + '<td class="' + level.toLowerCase() + '">' + time + '</td>' + '<td class="' + level.toLowerCase() + '">' + level.toUpperCase() + '</td>' + '<td class="' + level.toLowerCase() + '">' + event + '</td>' + '<td class="' + level.toLowerCase() + '">' + server + '</td>' + '<td class="' + level.toLowerCase() + '">' + channel + '</td>' + '<td class="' + level.toLowerCase() + '">' + msg + '</td>' + '</tr>' + '');
 	if (BetterDiscordLogging.settings.autoscroll && $('#bdlog').is(":visible")) {
 		$("#bdlogbody").scrollTop($("#bdlogbody")[0].scrollHeight);
 	}
@@ -439,7 +449,24 @@ wID = function (str) {
 	return '#' + str;
 };
 BetterDiscordBot.addLogWindow = function () {
-	$('body').append('<div class="bd-table" id="bdlog" style="' + 'position:fixed !important;' + 'min-width:80% !important;' + 'max-width:80% !important;' + 'min-height:0 !important;' + 'height:80% !important;' + 'max-height:80% !important;' + 'left:10% !important;' + 'top:10% !important;' + 'z-index:9999999 !important;' + 'background-color: rgba(46,49,54,0.9) !important;' + 'margin: auto;' + 'border: 1px solid #323232;' + 'box-shadow: 0 0 5px 3px rgba(30,30,30,.5);' + 'color: #EBEBEB;' + 'display:none;">' + '<div class="bd-alert-header">' + '<span>BetterDiscord Log</span>' + '<span onclick="BetterDiscordLogging.settings.autoscroll = !BetterDiscordLogging.settings.autoscroll;">(Autoscroll)</span>' + '<span onClick="BetterDiscordBot.log(\'debug\', \'testEvent\', \'Test Server\', \'This is a test log message.\');">[Test]</span>' + '<div class="bd-alert-closebtn" onclick="$(this).parent().parent().hide();">×</div>' + '</div>' + '<div class="bd-alert-body" id="bdlogbody" style="overflow:auto;height:100%;"></div>' + '</div>');
+	$('body').append('<div class="bd-table" id="bdlog" style="' +
+	'position:fixed !important;' + 'min-width:80% !important;' +
+	'max-width:80% !important;' + 'min-height:0 !important;' +
+	'height:80% !important;' + 'max-height:80% !important;' +
+	'left:10% !important;' + 'top:10% !important;' +
+	'z-index:9999999 !important;' + 'background-color: rgba(46,49,54,0.9) !important;' +
+	'margin: auto;' + 'border: 1px solid #323232;' + 'box-shadow: 0 0 5px 3px rgba(30,30,30,.5);' +
+	'color: #EBEBEB;' + 'display:none;">' + '<div class="bd-alert-header">' + '<span>BetterDiscord Log</span>' +
+		'<span onclick="BetterDiscordLogging.settings.autoscroll = !BetterDiscordLogging.settings.autoscroll;">(Autoscroll)</span>' +
+		'<span onClick="$(\'.logrow.debug\').toggle();">[DEBUG]</span>' +
+		'<span onClick="$(\'.logrow.info\').toggle();">[INFO]</span>' +
+		'<span onClick="$(\'.logrow.warn\').toggle();">[WARN]</span>' +
+		'<span onClick="$(\'.logrow.error\').toggle();">[ERROR]</span>' +
+		'<span onClick="BetterDiscordBot.log(\'debug\', \'testEvent\', \'Test Server\', \'Test Channel\', \'This is a test log message.\');">+</span>' +
+		'<span onClick="$(\'.logrow\').remove();">-</span>' +
+		'<div class="bd-alert-closebtn" onclick="$(this).parent().parent().hide();">×</div>' + '</div>' +
+		'<div class="bd-alert-body" id="bdlogbody" style="overflow:auto;height:100%;"></div>' +
+	'</div>');
 	$('#bdlogbody').append('<table id="tg-yv9oF" class="bdserverlog tg" cellspacing="0" cellpadding="0" style="' + 'min-width:100% !important;' + 'max-width:100% !important;' + 'max-height:100% !important;' + 'overflow: auto;' + '">' + '<tr>' + '<th class="tg-031e">Time</th>' + '<th class="tg-031e">Level</th>' + '<th class="tg-yw4l">Event</th>' + '<th class="tg-yw4l">Server</th>' + '<th class="tg-yw4l">Channel</th>' + '<th class="tg-yw4l">Message</th>' + '</tr>' + '</table>');
 };
 BetterDiscordBot.debug = function (event, argu) {

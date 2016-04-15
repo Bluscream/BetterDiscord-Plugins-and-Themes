@@ -52,8 +52,10 @@ function DCMQuotingPlugin(){
 		}
         return button;
     };
-    //Still no good way to get all messages with BetterDiscord (afaik meaning I'm probably wrong)... copy OP whilst using a mod id (mod id = expected amount of ghosts scripted installed + 2)
-    var update = function(){
+                        //try{content.getElementsByTagName("h2")[0].appendChild(createButton("Clients", "clickedallClients"));}catch(e){}
+                        //try{content.getElementsByTagName("h2")[0].appendChild(createButton("Pics", "clickallPics"));}catch(e){}
+						//try{content.getElementsByTagName("h2")[0].appendChild(createSpan("|"));}catch(e){}
+		var update = function(){
         if ((typeof(document.getElementsByClassName("messages")[0]) !== 'undefined') 
             && (document.getElementsByClassName("messages")[0] !== null)
             && (window.DCMQuoting.enabled)) {
@@ -65,12 +67,9 @@ function DCMQuotingPlugin(){
                 for (var ia = 0, ima = element.length; ima > ia; ia++) {
                     var content = element[ia].parentElement.parentElement;
                     if ((content.className == "body") && (checkVal(content) == ghostModId)){
-                        //try{content.getElementsByTagName("h2")[0].appendChild(createButton("Clients", "clickedallClients"));}catch(e){}
-                        //try{content.getElementsByTagName("h2")[0].appendChild(createButton("Pics", "clickallPics"));}catch(e){}
-						//try{content.getElementsByTagName("h2")[0].appendChild(createSpan("|"));}catch(e){}
-						try{content.getElementsByTagName("h2")[0].appendChild(createButton("Server", "clicked", "server"));}catch(e){}
-						try{content.getElementsByTagName("h2")[0].appendChild(createButton("Channel", "clicked", "channel"));}catch(e){}
-						try{content.getElementsByTagName("h2")[0].appendChild(createButton("Client", "clicked", "client"));}catch(e){}
+						try{$(content).find('h2').append(createButton("Server", "clicked", "server"));}catch(e){}
+						try{$(content).find('h2').append(createButton("Channel", "clicked", "channel"));}catch(e){}
+						try{$(content).find('h2').append(createButton("Client", "clicked", "client"));}catch(e){}
 					}
                 }
             }

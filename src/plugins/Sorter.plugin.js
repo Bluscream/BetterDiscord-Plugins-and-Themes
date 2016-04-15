@@ -19,11 +19,16 @@ Sorter.prototype.getAuthor = function() {
 };
 
 Sorter.prototype.start = function() {
-	try{
-		console.log("Sorter loaded");
-		this.initServerList();
-		this.initChannelList();
-	}catch(e){this.prototype.stop;}
+
+	var script = document.createElement('script');
+	script.type = 'text/javascript';
+	script.src = 'https://raw.githubusercontent.com/cosmicsalad/Discord-Themes-and-Plugins/master/lib/jquery-ui.min.js';
+	$("head").append(script);
+	console.log("Sorter loaded");
+
+	this.initServerList();
+	this.initChannelList();
+
 };
 
 Sorter.prototype.initServerList = function() {
