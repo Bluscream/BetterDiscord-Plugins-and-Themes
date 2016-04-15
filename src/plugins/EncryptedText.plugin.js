@@ -7,7 +7,7 @@ function EncryptedText() {
 			var base64 = _text.split('[!e]')[1];
 			base64 = EncryptedText.decodeBase64(base64);
 			if(!base64 || base64 == "undefined") return;
-			e.html(_text.replace(_text,'<img width="16px" src="https://ptb.discordapp.com/assets/86c36b8437a0bc80cf310733f54257c2.svg" /> '+base64));
+			e.html(_text.replace(_text,'<img width="16px" src="/assets/86c36b8437a0bc80cf310733f54257c2.svg"/> '+base64));
 		}).addClass("EncryptedText_parsed")
 	}
 }
