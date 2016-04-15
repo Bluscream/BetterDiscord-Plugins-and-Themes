@@ -23,10 +23,19 @@ EncryptedText.prototype.onSwitch = function() {
 EncryptedText.prototype.onMessage = function() {
 	this.parseChat();
 };
-
-EncryptedText.prototype.stop = function() {
-	this.parseChat();
+EncryptedText.prototype.observer = function(e) {
+    if (e.target.getAttribute('class') != null) {
+        if (e.target.getAttribute('class').indexOf('comment') != -1) {
+            if (e.addedNodes.length > 0) {
+                if (e.addedNodes[0].className.indexOf('message') != 1) {
+                    this.parseChat();
+                }
+            }
+        }
+    }
 };
+
+EncryptedText.prototype.stop = function() {};
 
 EncryptedText.prototype.unload = function() {};
 
