@@ -1179,3 +1179,4 @@ BetterAPI.prototype.stop = function() {
 };
 BetterAPI.prototype.unload = function() {};
 //exports.mainclass=BetterAPI;
+exports.BetterAPI = BetterAPI;
