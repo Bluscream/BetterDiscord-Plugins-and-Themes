@@ -1,35 +1,39 @@
 //META{"name":"EncryptedText"}*//
-function EncryptedText() {
-	this.parseChat = function(){
-		$(".message-text>.markup>span:not(.EncryptedText_parsed").each(function(i,el){
-			var e = $(el); var _text = e.text();var base64;
-			if(_text.startsWith('[!o]')){
-				try{base64 = _text.split('[!o]')[1];}catch(e){return;}
-				try{base64 = EncryptedText.decodeBase64(base64);}catch(e){return;}
-				if(base64){
-					if(!BetterAPI.isEmpty(base64)){
-						e.html(_text.replace(_text,'<img width="16px" src="/assets/d72f52ce6c418c5c8fd5faac0e8c36ff.svg"/> '+base64));
-					}
+
+var BetterAPI = BetterAPI || bdplugins.BetterAPI.plugin.constructor;var exports = function() {};
+
+var EncryptedText = function() {};
+
+EncryptedText.prototype.parseChat = function(){
+	$(".message-text>.markup>span:not(.EncryptedText_parsed").each(function(i,el){
+		var e = $(el); var _text = e.text();var base64;var decoded;
+		if(_text.startsWith('[!o]')){
+			try{base64 = _text.split('[!o]')[1];}catch(e){return;}
+			try{decoded = EncryptedText.decodeBase64(base64);}catch(e){return;}
+			if(decoded){
+				if(!BetterAPI.isEmpty(decoded)){
+					e.attr('title', base64);e.html(_text.replace(_text,'<img width="16px" src="/assets/d72f52ce6c418c5c8fd5faac0e8c36ff.svg"/> '+decoded));
 				}
 			}
-			if(_text.startsWith('[!e]')){
-				try{base64 = _text.split('[!e]')[1];}catch(e){return;}
-				try{base64 = EncryptedText.decryptBase64(base64);}catch(e){return;}
-				if(base64){
-					if(!BetterAPI.isEmpty(base64)){
-						e.html(_text.replace(_text,'<img width="16px" src="/assets/86c36b8437a0bc80cf310733f54257c2.svg"/> '+base64));
-					}
+		}
+		if(_text.startsWith('[!e]')){
+			try{base64 = _text.split('[!e]')[1];}catch(e){return;}
+			try{decoded = EncryptedText.decryptBase64(base64);}catch(e){return;}
+			if(decoded){
+				if(!BetterAPI.isEmpty(decoded)){
+					e.attr('title', base64);e.html(_text.replace(_text,'<img width="16px" src="/assets/86c36b8437a0bc80cf310733f54257c2.svg"/> '+decoded));
 				}
 			}
-		}).addClass("EncryptedText_parsed");
-	};
-}
+		}
+	}).addClass("EncryptedText_parsed");
+};
+
 EncryptedText.prototype.load = function() {};
 
 EncryptedText.prototype.start = function() {
 	var _require = ['BetterAPI', 'https://raw.githubusercontent.com/Bluscream/BetterDiscord-Plugins-and-Themes/master/plugins/0_BetterAPI.plugin.js', 'BetterAPI.isDebug()'];
 	if(BdApi.getPlugin(_require[0]) !== null){
-		try{eval(_require[2])
+		try{eval(_require[2]);
 		}catch(e){
 			Core.prototype.alert('Requirement not started!',''+
 				'A requirement is not started: <b>'+_require[0]+'<b><br>'+
@@ -153,3 +157,5 @@ EncryptedText.sendTextMessage = function(text) {
 	  contentType: false
 	});
 };
+
+exports.EncryptedText = EncryptedText;
