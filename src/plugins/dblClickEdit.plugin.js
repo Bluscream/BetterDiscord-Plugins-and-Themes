@@ -1,5 +1,5 @@
 //META{"name":"dblClickEdit"}*//
-dblClickEdit = function () {};
+dblClickEdit = function () {};//trigger
 dblClickEdit.prototype.load = function () {};
 dblClickEdit.prototype.start = function () {
     $(document).on("dblclick.dce", function(e) {
