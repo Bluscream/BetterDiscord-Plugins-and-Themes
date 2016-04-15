@@ -18,7 +18,6 @@ EncryptedText.prototype.parseChat = function(){
 		}
 		if(_text.startsWith('[!e]')){
 			try{base64 = _text.split('[!e]')[1];}catch(e){return;}
-<<<<<<< HEAD
 			try{decoded = EncryptedText.decryptBase64(base64);}catch(e){return;}
 			if(decoded){
 				if(!BetterAPI.isEmpty(decoded)){
