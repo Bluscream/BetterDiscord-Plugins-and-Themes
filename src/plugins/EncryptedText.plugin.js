@@ -5,15 +5,6 @@ function EncryptedText() {
 			var e = $(el); var _text = e.text();var base64;
 			if(_text.startsWith('[!o]')){
 				try{base64 = _text.split('[!o]')[1];}catch(e){return;}
-				try{base64 = EncryptedText.decryptBase64(base64);}catch(e){return;}
-				if(base64){
-					if(!BetterAPI.isEmpty(base64)){
-						e.html(_text.replace(_text,'<img width="16px" src="/assets/86c36b8437a0bc80cf310733f54257c2.svg"/> '+base64));
-					}
-				}
-			}
-			if(_text.startsWith('[!e]')){
-				try{base64 = _text.split('[!e]')[1];}catch(e){return;}
 				try{base64 = EncryptedText.decodeBase64(base64);}catch(e){return;}
 				if(base64){
 					if(!BetterAPI.isEmpty(base64)){
@@ -21,15 +12,49 @@ function EncryptedText() {
 					}
 				}
 			}
-
+			if(_text.startsWith('[!e]')){
+				try{base64 = _text.split('[!e]')[1];}catch(e){return;}
+				try{base64 = EncryptedText.decryptBase64(base64);}catch(e){return;}
+				if(base64){
+					if(!BetterAPI.isEmpty(base64)){
+						e.html(_text.replace(_text,'<img width="16px" src="/assets/86c36b8437a0bc80cf310733f54257c2.svg"/> '+base64));
+					}
+				}
+			}
 		}).addClass("EncryptedText_parsed");
 	};
 }
 EncryptedText.prototype.load = function() {};
 
 EncryptedText.prototype.start = function() {
-	BetterAPI.requireJS('https://cdn.rawgit.com/sytelus/CryptoJS/master/rollups/aes.js', 'AESJS', 'CryptoJS.AES.encrypt("Message", "Secret Passphrase");');
-	this.attachHandler();this.parseChat();
+	var _require = ['BetterAPI', 'https://raw.githubusercontent.com/Bluscream/BetterDiscord-Plugins-and-Themes/master/plugins/0_BetterAPI.plugin.js', 'BetterAPI.isDebug()'];
+	if(BdApi.getPlugin(_require[0]) !== null){
+		try{eval(_require[2])
+		}catch(e){
+			Core.prototype.alert('Requirement not started!',''+
+				'A requirement is not started: <b>'+_require[0]+'<b><br>'+
+				'<br>'+
+				'Click <a onClick="'+
+					'$(\'.btn-settings\').click();'+
+					'setTimeout(function(){ $(\'#bd-settings-new\').click();'+
+					'setTimeout(function(){ $(\'#'+_require[0]+'\').prop(\'checked\', true);'+
+					' }, 750); }, 500);'+
+				'">here</a> to enable it.<br>'+
+			'');
+			return null;
+		}
+		BetterAPI.requireJS('https://cdn.rawgit.com/sytelus/CryptoJS/master/rollups/aes.js', 'AESJS', 'CryptoJS.AES.encrypt("Message", "Secret Passphrase");');
+		this.attachHandler();this.parseChat();
+	}else{
+		Core.prototype.alert('Required plugin not found!',''+
+			'A requirement is missing: <b>'+_require[0]+'</b><br>'+
+			'<br>'+
+			'Click <a style=""href="#" onClick="require(\'shell\').openExternal(\'http://betterdiscord.net/ghdl?url='+_require[1]+'\')">here</a> to download the plugin.<br>'+
+			'Save the downloaded file to "'+process.env.APPDATA+'\BetterDiscord\\plugins\\".'+
+		'');
+		return null;
+	}
+_require = null;
 };
 
 EncryptedText.prototype.onSwitch = function() {
@@ -81,7 +106,7 @@ EncryptedText.prototype.attachHandler = function() {
 		try{var val = $('.channel-textarea textarea').val();
 			if(val.startsWith('/o ')){
 				text = val.split('/o ');
-				text = EncryptedText.encryptBase64(text[1]);
+				text = EncryptedText.encodeBase64(text[1]);
 				text = '[!o]'+text;
 				EncryptedText.sendTextMessage(text);
 				$(this).val("");
@@ -90,7 +115,7 @@ EncryptedText.prototype.attachHandler = function() {
 			}
 			if(val.startsWith('/e ')){
 				text = val.split('/e ');
-				text = EncryptedText.encodeBase64(text[1]);
+				text = EncryptedText.encryptBase64(text[1]);
 				text = '[!e]'+text;
 				EncryptedText.sendTextMessage(text);
 				$(this).val("");
@@ -99,8 +124,6 @@ EncryptedText.prototype.attachHandler = function() {
 			}
 		}catch(e){}
 	};
-
-	// bind handlers
 	el[0].addEventListener("keydown", this.handleKeypress, false);
 };
 
