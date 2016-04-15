@@ -1,5 +1,5 @@
 //META{"name":"BetterAPI"}*//
-function BetterAPI() {}
+var BetterAPI = function() {}
 BetterAPI.prototype.getName = function() {
 	return "BetterAPI";
 };
@@ -1177,6 +1177,5 @@ BetterAPI.prototype.autoInvite = function() {
 BetterAPI.prototype.stop = function() {
 	BetterAPI.prototype.unloadEvents();
 };
-BetterAPI.prototype.unload = function() {
-	console.clear();
-};
+BetterAPI.prototype.unload = function() {};
+exports.mainclass=BetterAPI;
