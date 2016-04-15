@@ -99,7 +99,7 @@ AutoEmbed.prototype.getSettingsPanel = function() {
 AutoEmbed.prototype.load = function() {};
 AutoEmbed.prototype.unload = function() {};
 AutoEmbed.prototype.start = function() {
-    this.parseChat()
+    this.parseChat();
 };
 AutoEmbed.prototype.stop = function() {
     $(".AutoEmbed").remove();
