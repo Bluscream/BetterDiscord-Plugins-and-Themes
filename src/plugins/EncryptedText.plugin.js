@@ -7,7 +7,7 @@ function EncryptedText() {
 			var base64 = _text.split('[!e]')[1];
 			base64 = EncryptedText.decodeBase64(base64);
 			if(!base64 || base64 == "undefined") return;
-			e.text(_text.replace(_text,base64));
+			e.html(_text.replace(_text,'<img width="16px" src="https://ptb.discordapp.com/assets/86c36b8437a0bc80cf310733f54257c2.svg" /> '+base64));
 		}).addClass("EncryptedText_parsed")
 	}
 }
@@ -56,7 +56,7 @@ EncryptedText.prototype.attachHandler = function() {
 		if(!$(this).val().startsWith('/e ')) return;
 		var text = $(this).val().split('/e ');
 		text = EncryptedText.encodeBase64(text[1]);
-		text = '[!e]'+text;console.log(text);
+		text = '[!e]'+text;
 		// var utext = text.split('[!e]');
 		// utext = EncryptedText.decodeBase64(utext[1]);console.log(text);
 		EncryptedText.sendTextMessage(text);
