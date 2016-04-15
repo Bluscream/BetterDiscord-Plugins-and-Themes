@@ -4,16 +4,22 @@ function EncryptedText() {
 		$(".message-text>.markup>span:not(.EncryptedText_parsed").each(function(i,el){
 			var e = $(el); var _text = e.text();var base64;
 			if(_text.startsWith('[!o]')){
-				base64 = _text.split('[!o]')[1];
+				try{base64 = _text.split('[!o]')[1];}catch(e){return;}
 				try{base64 = EncryptedText.decryptBase64(base64);}catch(e){return;}
-				if(!base64 || base64 == "undefined") return;
-				e.html(_text.replace(_text,'<img width="16px" src="/assets/86c36b8437a0bc80cf310733f54257c2.svg"/> '+base64));
+				if(base64){
+					if(!BetterAPI.isEmpty(base64)){
+						e.html(_text.replace(_text,'<img width="16px" src="/assets/86c36b8437a0bc80cf310733f54257c2.svg"/> '+base64));
+					}
+				}
 			}
 			if(_text.startsWith('[!e]')){
-				base64 = _text.split('[!e]')[1];
+				try{base64 = _text.split('[!e]')[1];}catch(e){return;}
 				try{base64 = EncryptedText.decodeBase64(base64);}catch(e){return;}
-				if(!base64 || base64 == "undefined") return;
-				e.html(_text.replace(_text,'<img width="16px" src="/assets/d72f52ce6c418c5c8fd5faac0e8c36ff.svg"/> '+base64));
+				if(base64){
+					if(!BetterAPI.isEmpty(base64)){
+						e.html(_text.replace(_text,'<img width="16px" src="/assets/d72f52ce6c418c5c8fd5faac0e8c36ff.svg"/> '+base64));
+					}
+				}
 			}
 
 		}).addClass("EncryptedText_parsed");
@@ -22,7 +28,7 @@ function EncryptedText() {
 EncryptedText.prototype.load = function() {};
 
 EncryptedText.prototype.start = function() {
-	BetterAPI.requireJS('//cdn.rawgit.com/sytelus/CryptoJS/master/rollups/aes.js', 'AESJS', 'CryptoJS.AES.encrypt("Message", "Secret Passphrase");');
+	BetterAPI.requireJS('https://cdn.rawgit.com/sytelus/CryptoJS/master/rollups/aes.js', 'AESJS', 'CryptoJS.AES.encrypt("Message", "Secret Passphrase");');
 	this.attachHandler();this.parseChat();
 };
 
@@ -67,7 +73,7 @@ EncryptedText.prototype.getAuthor = function() {
 EncryptedText.prototype.attachHandler = function() {
 	var el = $('.channel-textarea textarea');
 	if (el.length == 0) return;
-	var self = this;var val;
+	var val;
 	this.handleKeypress = function (e) {
 		var code = e.keyCode || e.which;
 		if(code !== 13) return;
@@ -101,10 +107,10 @@ EncryptedText.prototype.attachHandler = function() {
 EncryptedText.prototype.getSettingsPanel = function() {};
 
 EncryptedText.encryptBase64 = function(str) {
-	return CryptoJS.AES.encrypt(str, "QWxsb3dzIHlvdSB0byBzZW5kIGVuY3J5cHRlZCB0ZXh0cw==");
+	return CryptoJS.AES.encrypt(str, "QWxsb3dzIHlvdSB0byBzZW5kIGVuY3J5cHRlZCB0ZXh0cw==").toString();
 };
 EncryptedText.decryptBase64 = function(str) {
-	return CryptoJS.AES.decrypt(str, "QWxsb3dzIHlvdSB0byBzZW5kIGVuY3J5cHRlZCB0ZXh0cw==");
+	return CryptoJS.AES.decrypt(str, "QWxsb3dzIHlvdSB0byBzZW5kIGVuY3J5cHRlZCB0ZXh0cw==").toString(CryptoJS.enc.Utf8);
 };
 
 EncryptedText.encodeBase64 = function(str) { return btoa(str); };
