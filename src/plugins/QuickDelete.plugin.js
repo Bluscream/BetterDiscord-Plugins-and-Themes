@@ -72,4 +72,5 @@ QuickDelete.prototype.getAuthor = function() {
     return "confuseh";
 };
 
-exports.QuickDelete = QuickDelete;
+// UNCOMMENT NEXT LINE FOR PLUGIN TO WORK IN ALPHA LOADER
+// exports.QuickDelete = QuickDelete;
