@@ -34,8 +34,20 @@ EncryptedText.prototype.parseChat = function(){
 					}
 				}catch(e){return;}
 			}
+			if(!decoded){
+				try{
+					_decoded = EncryptedText.decryptBase64(base64);/*console.log('Decoded: '+_decoded)*/
+					if(_decoded){
+						if(!BetterAPI.isEmpty(_decoded)){
+							decoded = 'DEFAULT > '+_decoded;
+						}
+					}
+				}catch(e){return;}
+			}
 			if(decoded){
-				e.attr('title', base64);e.html(_text.replace(_text,'<img width="16px" src="/assets/86c36b8437a0bc80cf310733f54257c2.svg"/> '+decoded));
+				if(!BetterAPI.isEmpty(decoded)){
+					e.attr('title', base64);e.html(_text.replace(_text,'<img width="16px" src="/assets/86c36b8437a0bc80cf310733f54257c2.svg"/> '+decoded));
+				}
 			}
 		}
 	}).addClass("EncryptedText_parsed");
