@@ -10,6 +10,8 @@ QuickDelete.prototype.convert = function() {
 };
 
 QuickDelete.prototype.deleteMessage = function() {
+	var backdrop = $('span[data-reactid=".0.5"]');
+	backdrop.css('visibility', 'hidden');
 	var parent = $(this).parents('div.message');
 	parent.find('div.btn-option:not(.remove_msg)').trigger("click");
 	var popout = $(".option-popout");
@@ -27,6 +29,14 @@ QuickDelete.prototype.observer = function(e) {
 				if (e.addedNodes[0].className.indexOf('message') != 1) {
 	        		this.convert();
 				}
+			}
+		}
+	}
+	if (e.removedNodes.length > 0) {
+		if (e.removedNodes[0].className == "callout-backdrop") {
+			var backdrop = $('span[data-reactid=".0.5"]');
+			if (backdrop.css('visibility') == "hidden") {
+				backdrop.css('visibility', 'visible');
 			}
 		}
 	}
