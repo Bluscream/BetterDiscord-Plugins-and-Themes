@@ -2,13 +2,19 @@
 
 var BetterAPI = BetterAPI || bdplugins.BetterAPI.plugin.constructor;
 
-var EncryptedText = function() {};
+var EncryptedText = function() {
+	this.loadDatabase();
+};
+
+var _settings = {
+	"default":"QWxsb3dzIHlvdSB0byBzZW5kIGVuY3J5cHRlZCB0ZXh0cw=="
+}
 
 EncryptedText.prototype.parseChat = function(){
 	$(".message-text>.markup>span:not(.EncryptedText_parsed").each(function(i,el){
-		var e = $(el); var _text = e.text();var base64;var decoded;
+		var e = $(el); var _text = e.text();var base64;var _decoded;var decoded;var key;
 		if(_text.startsWith('[!o]')){
-			try{base64 = _text.split('[!o]')[1];}catch(e){return;}
+			try{base64 = _text.split(/\[!o\](.+)?/)[1];}catch(e){return;}
 			try{decoded = EncryptedText.decodeBase64(base64);}catch(e){return;}
 			if(decoded){
 				if(!BetterAPI.isEmpty(decoded)){
@@ -17,12 +23,19 @@ EncryptedText.prototype.parseChat = function(){
 			}
 		}
 		if(_text.startsWith('[!e]')){
-			try{base64 = _text.split('[!e]')[1];}catch(e){return;}
-			try{decoded = EncryptedText.decryptBase64(base64);}catch(e){return;}
+			try{base64 = _text.split(/\[!e\](.+)?/)[1];}catch(e){return;}
+			for (var key in EncryptedText.keyStore) {
+				try{
+					_decoded = EncryptedText.decryptBase64(base64, EncryptedText.keyStore[key]);/*console.log('Decoded: '+_decoded)*/
+					if(_decoded){
+						if(!BetterAPI.isEmpty(_decoded)){
+							decoded = key.toUpperCase()+' > '+_decoded;
+						}
+					}
+				}catch(e){return;}
+			}
 			if(decoded){
-				if(!BetterAPI.isEmpty(decoded)){
-					e.attr('title', base64);e.html(_text.replace(_text,'<img width="16px" src="/assets/86c36b8437a0bc80cf310733f54257c2.svg"/> '+decoded));
-				}
+				e.attr('title', base64);e.html(_text.replace(_text,'<img width="16px" src="/assets/86c36b8437a0bc80cf310733f54257c2.svg"/> '+decoded));
 			}
 		}
 	}).addClass("EncryptedText_parsed");
@@ -118,8 +131,13 @@ EncryptedText.prototype.attachHandler = function() {
 				e.stopPropagation();
 			}
 			if(val.startsWith('/e ')){
-				text = val.split('/e ');
-				text = EncryptedText.encryptBase64(text[1]);
+				text = val.split(/\/e\s(.+)?/)[1];
+				var _text = text.split(/\s(.+)?/);
+				if(EncryptedText.keyStore.hasOwnProperty(_text[0])){
+					text = EncryptedText.encryptBase64(_text[1], EncryptedText.keyStore[_text[0]]);
+				}else{
+					text = EncryptedText.encryptBase64(text[1]);
+				}
 				text = '[!e]'+text;
 				EncryptedText.sendTextMessage(text);
 				$(this).val("");
@@ -131,13 +149,81 @@ EncryptedText.prototype.attachHandler = function() {
 	el[0].addEventListener("keydown", this.handleKeypress, false);
 };
 
-EncryptedText.prototype.getSettingsPanel = function() {};
+EncryptedText.prototype.getSettingsPanel = function() {
+	var self = this;
+	var settings = $('<div class="form"></div>');
+	settings.append('<h1 style="font-weight: bold">Key database:</h1>');
 
-EncryptedText.encryptBase64 = function(str) {
-	return CryptoJS.AES.encrypt(str, "QWxsb3dzIHlvdSB0byBzZW5kIGVuY3J5cHRlZCB0ZXh0cw==").toString();
+	var rowHtml = "";
+	rowHtml += '<div class="control-group EncryptedText-inputgroup">';
+	rowHtml += '	<input style="width: 40%;" type="text" name="name" placeholder="Name">';
+	rowHtml += '	<input style="width: 40%;" type="text" name="data" placeholder="Data">';
+	rowHtml += '</div><br>';
+
+	for (var key in EncryptedText.keyStore) {
+		if (!EncryptedText.keyStore.hasOwnProperty(key)) continue;
+		var row = $(rowHtml);
+		row.find('input[name="name"]').val(key);
+		row.find('input[name="data"]').val(EncryptedText.keyStore[key]);
+		settings.append(row);
+	}
+
+	settings.append(rowHtml);
+
+	var addButton = $('<button type="button" class="btn btn-primary">Add Row</div>')
+		.click(function() {
+			$(this).before(rowHtml);
+		});
+
+	var saveButton = $('<button type="button" class="btn btn-primary">Save</div>')
+		.click(function() {
+			EncryptedText.keyStore = {};
+			settings.find('.EncryptedText-inputgroup').each(function(i, el) {
+				var $e = $(el);
+				var key = $e.find('input[name="name"]').val();
+				var data = $e.find('input[name="data"]').val();
+				if (key.trim() === "" || data.trim() === "") return;
+				EncryptedText.keyStore[key] = data;
+			});
+
+			self.saveDatabase();
+
+			var $b = $(this).text('Saved!');
+			setTimeout(function() {$b.text('Save');}, 1000);
+		});
+
+	settings.append(addButton);
+	settings.append(saveButton);
+	return settings;
 };
-EncryptedText.decryptBase64 = function(str) {
-	return CryptoJS.AES.decrypt(str, "QWxsb3dzIHlvdSB0byBzZW5kIGVuY3J5cHRlZCB0ZXh0cw==").toString(CryptoJS.enc.Utf8);
+
+EncryptedText.prototype.saveDatabase = function() {
+	window.localStorage.keyStore = btoa(JSON.stringify(EncryptedText.keyStore));
+};
+
+EncryptedText.prototype.loadDatabase = function() {
+	if (window.localStorage.hasOwnProperty("keyStore")) {
+		var data = window.localStorage.keyStore;
+		EncryptedText.keyStore = JSON.parse(atob(data));
+	} else {
+		EncryptedText.keyStore = _settings;
+	}
+};
+
+
+EncryptedText.encryptBase64 = function(str, key) {
+	if(key){
+		return CryptoJS.AES.encrypt(str, key).toString();
+	}else{
+		return CryptoJS.AES.encrypt(str, "QWxsb3dzIHlvdSB0byBzZW5kIGVuY3J5cHRlZCB0ZXh0cw==").toString();
+	}
+};
+EncryptedText.decryptBase64 = function(str, key) {
+	if(key){
+		return CryptoJS.AES.decrypt(str, key).toString(CryptoJS.enc.Utf8);
+	}else{
+		return CryptoJS.AES.decrypt(str, "QWxsb3dzIHlvdSB0byBzZW5kIGVuY3J5cHRlZCB0ZXh0cw==").toString(CryptoJS.enc.Utf8);
+	}
 };
 
 EncryptedText.encodeBase64 = function(str) { return btoa(str); };
