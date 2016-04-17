@@ -9,11 +9,8 @@ On the settings panel of the plugin you can manage your `<KEYALIAS>`'es.
 
 ##Chat Commands
 
-``` /ad ```
-`Sends infos how to decrypt into the current channel.`
-
-``` /o <TEXT> ```
-`Hashes <TEXT> into BASE64.`
-
-``` /e <KEYALIAS> <TEXT> ```
-`Enrypts <TEXT> with the key returned by <KEYALIAS> to AES256.`
+Command | Description
+----------------|--------------
+`/ad`  |  Sends infos how to decrypt into the current channel.
+`/o <TEXT>`  |  Hashes <TEXT> into BASE64.
+`/e <KEYALIAS> <TEXT>`  |  Enrypts <TEXT> with the key returned by <KEYALIAS> to AES256.
