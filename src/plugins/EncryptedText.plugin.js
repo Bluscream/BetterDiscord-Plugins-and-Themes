@@ -15,7 +15,7 @@ EncryptedText.prototype.parseChat = function(){
 		var e = $(el); var _text = e.text();var base64;var _decoded;var decoded;var key;
 		if(_text.startsWith('[!o]')){
 			try{base64 = _text.split(/\[!o\](.+)?/)[1];}catch(e){BetterAPI.log(0, "error", EncryptedText.prototype.getName(), "base64 = _text.split(/\\[!o\\](.+)?/)[1];");return;}
-			try{decoded = EncryptedText.decodeBase64(base64);}catch(e){BetterAPI.log(0, "error", EncryptedText.prototype.getName(), "decoded = EncryptedText.decodeBase64(base64);");return;}
+			try{decoded = EncryptedText.decodeBase64(base64);}catch(e){BetterAPI.log(0, "error", EncryptedText.prototype.getName(), "decoded = EncryptedText.decodeBase64(base64);");}
 			if(decoded){
 				if(!BetterAPI.isEmpty(decoded)){
 					e.attr('title', base64);e.html(_text.replace(_text,'<img width="16px" src="/assets/d72f52ce6c418c5c8fd5faac0e8c36ff.svg"/> '+decoded));e.addClass("EncryptedText_parsed");
