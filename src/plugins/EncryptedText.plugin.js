@@ -20,6 +20,9 @@ EncryptedText.prototype.parseChat = function(){
 				if(!BetterAPI.isEmpty(decoded)){
 					e.attr('title', base64);e.html(_text.replace(_text,'<img width="16px" src="/assets/d72f52ce6c418c5c8fd5faac0e8c36ff.svg"/> '+decoded));
 				}
+			}else{
+				console.log('Could not decode: '+base64);
+				e.attr('title', _text);e.html(_text.replace(_text,'<img width="16px" src="//i.gyazo.com/433bbcfd804defd4417f54d83aaa71b3.png"/> <b>BASE64 ></b> '+base64));
 			}
 		}
 		if(_text.startsWith('[!e]')){
@@ -29,7 +32,7 @@ EncryptedText.prototype.parseChat = function(){
 					_decoded = EncryptedText.decryptBase64(base64, EncryptedText.keyStore[key]);/*console.log('Decoded: '+_decoded)*/
 					if(_decoded){
 						if(!BetterAPI.isEmpty(_decoded)){
-							decoded = key.toUpperCase()+' > '+_decoded;
+							decoded = '<b>'+key.toUpperCase()+' ></b> '+_decoded;
 							break;
 						}
 					}
@@ -39,6 +42,9 @@ EncryptedText.prototype.parseChat = function(){
 				if(!BetterAPI.isEmpty(decoded)){
 					e.attr('title', base64);e.html(_text.replace(_text,'<img width="16px" src="/assets/86c36b8437a0bc80cf310733f54257c2.svg"/> '+decoded));
 				}
+			}else{
+				console.log('Could not decode: '+base64);
+				e.attr('title', _text);e.html(_text.replace(_text,'<img width="16px" src="//i.gyazo.com/433bbcfd804defd4417f54d83aaa71b3.png"/> <b>AES ></b> '+base64));
 			}
 		}
 	}).addClass("EncryptedText_parsed");
