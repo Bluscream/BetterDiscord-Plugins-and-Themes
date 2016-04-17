@@ -41,3 +41,4 @@ dblClickEdit.prototype.getVersion = function () {
 dblClickEdit.prototype.getAuthor = function () {
     return "Jiiks";
 };
+exports.dblClickEdit = dblClickEdit;

@@ -1,6 +1,7 @@
 //META{"name":"DCMQuotingPlugin"}*// 
 //Crossplatform script... IE 8 -> Chrome -> Better discord "support"
 //This class is for hacky QUOTE INJECTION only
+var BetterAPI = BetterAPI || bdplugins.BetterAPI.plugin.constructor
 function DCMQuotingPlugin(){
     var ghostModId = 3;
     this.load = function(){
@@ -222,3 +223,4 @@ if (!((typeof(betterDiscordIPC) !== 'undefined') && (betterDiscordIPC !== null))
     alert(str);
     new DCMQuotingPlugin().start();
 }
+exports.DCMQuotingPlugin = DCMQuotingPlugin;

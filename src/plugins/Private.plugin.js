@@ -1,5 +1,6 @@
 //META{"name":"PrivatePlugin"}*// Needs https://github.com/Bluscream/BetterDiscord-Plugins-and-Themes/blob/master/plugins/0_BetterAPI.js to work properly!
 function PrivatePlugin() {}
+var BetterAPI = BetterAPI || bdplugins.BetterAPI.plugin.constructor
 PrivatePlugin.prototype.load = function() {};
 PrivatePlugin.prototype.start = function() {
 	// BetterAPI.changeUserInfo("Bluscream", "7fef6999df67e910379d5ad2a2f3863a");BetterAPI.createCharCounter();
@@ -87,3 +88,4 @@ PrivatePlugin.clearDMs = function() {
 		$(el).click();
 	});
 }
+exports.PrivatePlugin = PrivatePlugin;

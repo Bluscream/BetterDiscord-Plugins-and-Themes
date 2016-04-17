@@ -1,4 +1,4 @@
-//META{"name":"DCMQuotingPlugin"}*// 
+var BetterAPI=BetterAPI||bdplugins.BetterAPI.plugin.constructor
 function DCMQuotingPlugin(){var ghostModId=3;this.load=function(){};this.start=function(){inject();};this.unload=function(){removeAllEvents(document,"DOMNodeInsertedIntoDocument");removeAllEvents(document,"DOMNodeInserted");};this.stop=function(){removeAllEvents(document,"DOMNodeInsertedIntoDocument");removeAllEvents(document,"DOMNodeInserted");};var checkVal=function(a){if(typeof a=="undefined")
 return 300;if(typeof a.getElementsByTagName("h2")[0]=="undefined")
 return 300;return a.getElementsByTagName("h2")[0].childNodes.length;};var inject=function(){window.DCMQuoting.enabled=true;document.addEventListener("DOMNodeInsertedIntoDocument",function(){update();},false);document.addEventListener("DOMNodeInserted",function(){update();},false);};var createSpan=function(text){var span=document.createElement("span");span.setAttribute("style","display:inline-block;font-size:big");span.innerText=text;span.className="timestamp";return span;}
@@ -22,3 +22,4 @@ window.DCMQuoting.resize(textArea);textArea.scrollTop=textArea.scrollHeight;};th
 messageElement=messageElement.parentElement;var comments=messageElement.getElementsByClassName("comment")[0].getElementsByClassName("message");$(message).css('display','none');};};window.DCMQuoting=new CDCMQuoting();function removeAllEvents(node,event){window.DCMQuoting.enabled=false;};function getSelectedCount(textArea){var options=textArea.options,count=0;for(var i=0;i<options.length;i++)
 if(options[i].selected)count++;return count;}
 if(!((typeof(betterDiscordIPC)!=='undefined')&&(betterDiscordIPC!==null))){var str="Warning: This Discord Quoting script is designed to work in BetterDiscord only!\nHOWEVER it is still trying to load\n\n(Discord Client Modding is deprecated)";console.log(str);alert(str);new DCMQuotingPlugin().start();}
+exports.DCMQuotingPlugin=DCMQuotingPlugin;

@@ -1,5 +1,6 @@
 //META{"name":"BGChanger"}*//
 function BGChanger() {}
+var BetterAPI = BetterAPI || bdplugins.BetterAPI.plugin.constructor
 BGChanger.prototype.getName = function() {
     return "Background Changer";
 };
@@ -115,3 +116,4 @@ BGChanger.changeBG = function() {
 		result = null;
 	}
 };
+exports.BGChanger = BGChanger;

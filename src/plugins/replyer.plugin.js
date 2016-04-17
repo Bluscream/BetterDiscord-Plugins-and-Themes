@@ -2,6 +2,7 @@
 
 function Replyer(){}
 
+var BetterAPI = BetterAPI || bdplugins.BetterAPI.plugin.constructor
 Replyer.prototype.getName = function() {
     return "Replyer";
 };
@@ -57,3 +58,4 @@ Replyer.prototype.stop = function() {};
 Replyer.prototype.getSettingsPanel = function() {
 	return null;
 };
+exports.Replyer = Replyer;

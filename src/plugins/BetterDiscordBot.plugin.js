@@ -1,7 +1,8 @@
 //META{"name":"BetterDiscordBot"}*//
 function BetterDiscordBot() {
 	'use strict';
-}var saveDir = __dirname.slice(0, __dirname.indexOf("\\", __dirname.lastIndexOf('Discord') + "Discord".length + 1) + 1) + "resources";
+}
+var BetterAPI = BetterAPI || bdplugins.BetterAPI.plugin.constructor
 var debugging = false;
 var bot = true;
 var BetterDiscordBotting = {
@@ -101,10 +102,14 @@ BetterDiscordBot.prototype.start = function () {
 		toggleLog = function() {
 			$('#bdlog').toggle();
 		};
-		BetterAPI.npm('superagent');BetterAPI.npm('ws');BetterAPI.npm('unpipe');
-			BetterAPI.npm('discord.js', function () {
+	var saveDir = __dirname.replace('plugins', 'resources');
+//	var saveDir = __dirname.slice(0, __dirname.indexOf("\\", __dirname.lastIndexOf('Discord') + "Discord".length + 1) + 1) + "resources";
+	console.log('__dirname: '+__dirname);
+	console.log('SaveDir: '+saveDir);
+		BetterAPI.npm('superagent', saveDir);BetterAPI.npm('ws', saveDir);BetterAPI.npm('unpipe', saveDir);
+			BetterAPI.npm('discord.js', saveDir, function () {
 				var Discord = require(saveDir + '\\node_modules\\discord.js');
-				bot = new Discord.Client();
+				BetterDiscordBot.bot = bot = new Discord.Client();
 				console.log("BetterDiscordBot: Plugin Loaded for Bot. Starting Bot.");
 				bot.loginWithToken(localStorage.token.match(/\"(.+)\"/)[1]).then(success).catch (err);
 				console.log("BetterDiscordBot: Logged in.");
@@ -534,3 +539,4 @@ BetterDiscordBot.prototype.getVersion = function () {
 BetterDiscordBot.prototype.getAuthor = function () {
 	return "Bluscream, Decorater";
 };
+exports.BetterDiscordBot = BetterDiscordBot;

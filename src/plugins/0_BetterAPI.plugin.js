@@ -583,8 +583,8 @@ BetterAPI.prototype.loadCore  = function() {
 		// read all file and pipe it (write it) to the hash object
 		fd.pipe(hash);//console.log(fd);
 	};
-	// BetterAPI.npm(name, callback);
-	BetterAPI.npm = function(name, callback){
+	// BetterAPI.npm(name, saveDir, callback);
+	BetterAPI.npm = function(name, saveDir, callback){
 		require("child_process").exec("npm install --save " + name, {
 			cwd : saveDir
 		}, function (e, f, g) {
@@ -1191,4 +1191,5 @@ BetterAPI.prototype.stop = function() {
 	BetterAPI.prototype.unloadEvents();
 };
 BetterAPI.prototype.unload = function() {};
-// exports.BetterAPI = BetterAPI;
+window.BetterAPI = bdplugins.BetterAPI;
+exports.BetterAPI = BetterAPI;

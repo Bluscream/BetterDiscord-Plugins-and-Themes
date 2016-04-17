@@ -1,5 +1,6 @@
 //META{"name":"searchPlugin"}*//
 
+var BetterAPI = BetterAPI || bdplugins.BetterAPI.plugin.constructor
 function searchPlugin() {
 	//construction
 	var self = this;
@@ -196,3 +197,4 @@ function searchPlugin() {
 	this.init();
 }
 searchPlugin.prototype.search = function(){searchPlugin.prototype.self.search.apply(searchPlugin.prototype.self,arguments); }
+exports.searchPlugin = searchPlugin;

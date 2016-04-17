@@ -82,3 +82,4 @@ crr.prototype.getAuthor = function () {
 crr.prototype.getSettingsPanel = function () {
     return '';
 };
+exports.crr = crr;

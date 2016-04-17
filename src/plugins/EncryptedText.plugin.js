@@ -164,6 +164,7 @@ EncryptedText.prototype.attachHandler = function() {
 						if (!EncryptedText.keyStore.hasOwnProperty(key) || key === undefined || key == "undefined") continue;
 						if(i == 1){_keys = key;i = 0;}else{ _keys = _keys+"/"+key; }
 					}
+					$('.jAlert').remove();$('.ja_wrap').remove();
 					alert('Encrypted Text Plugin Syntax', '/e &lt;'+_keys+'&gt; &lt;MESSAGE>&gt;');
 					e.preventDefault();
 					return;
@@ -260,4 +261,4 @@ EncryptedText.sendTextMessage = function(text) {
 	  contentType: false
 	});
 };
-// exports.EncryptedText = EncryptedText;
+exports.EncryptedText = EncryptedText;

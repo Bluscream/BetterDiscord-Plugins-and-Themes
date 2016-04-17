@@ -15,7 +15,9 @@ userInfo.prototype.getAuthor = function() {
 userInfo.prototype.update = function() {};
 userInfo.prototype.load = function() {};
 userInfo.prototype.start = function() {
-	var _require = ['BetterAPI', 'https://raw.githubusercontent.com/Bluscream/BetterDiscord-Plugins-and-Themes/master/plugins/0_BetterAPI.plugin.js', 'BetterAPI.isDebug()'];
+	var BetterAPI = BetterAPI || bdplugins.BetterAPI.plugin.constructor
+	var bot = bot || bdplugins.BetterDiscordBot.plugin.constructor.bot
+	var _require = ['BetterAPI', 'https://raw.githubusercontent.com/Bluscream/BetterDiscord-Plugins-and-Themes/master/plugins/0_BetterAPI.plugin.js', 'window.BetterAPI.constructor.isDebug()'];
 	if(BdApi.getPlugin(_require[0]) !== null){
 		try{eval(_require[2])
 		}catch(e){
@@ -31,19 +33,19 @@ userInfo.prototype.start = function() {
 			'');
 			return null;
 		}
-		BetterAPI.requireJS("https://cdn.rawgit.com/brandonaaron/livequery/1.1.1/jquery.livequery.js", "LiveQueryJS");
+		window.BetterAPI.constructor.requireJS("https://cdn.rawgit.com/brandonaaron/livequery/1.1.1/jquery.livequery.js", "LiveQueryJS");
 		$('span[data-reactid=".0.4"]').on('DOMNodeInserted', '.popout', function() {
 			var name = $(".user-popout").find(".username").text();
-			id = BetterAPI.getUserIdByName(name);
-			avatarID = BetterAPI.getUserAvatarID(id);
-			avatarURL = BetterAPI.getAvatarURL(id);
+			id = window.BetterAPI.constructor.getUserIdByName(name);
+			avatarID = window.BetterAPI.constructor.getUserAvatarID(id);
+			avatarURL = window.BetterAPI.constructor.getAvatarURL(id);
 			nameByID = BdApi.getUserNameById(id);
-			gameByID = BetterAPI.getUserGameByID(id);
+			gameByID = window.BetterAPI.constructor.getUserGameByID(id);
 			if(!avatarID){
-				avatarID = BetterAPI.getUserAvatarIDbyName(name);
+				avatarID = window.BetterAPI.constructor.getUserAvatarIDbyName(name);
 			}
 			if(!avatarURL){
-				avatarURL = BetterAPI.getAvatarURLbyName(name);
+				avatarURL = window.BetterAPI.constructor.getAvatarURLbyName(name);
 			}
 			var _label = '<div class="text">';
 			if (avatarURL) {
@@ -52,7 +54,7 @@ userInfo.prototype.start = function() {
 			if (name) {
 				_label = _label + '<br><b>Name: </b>'+name+'';
 			}
-			if (BetterAPI.isUID(id)) {
+			if (window.BetterAPI.constructor.isUID(id)) {
 				_label = _label + '<br><b>UID: </b><span style="color:darkgrey">'+id+'</span>';
 			}
 			if (avatarID) {
@@ -61,7 +63,7 @@ userInfo.prototype.start = function() {
 			if (gameByID) {	
 				_label = _label +'<br><b>Game: </b><span style="color:blue">'+gameByID+'</span>';
 			}
-			BetterAPI.addUserLabel("UserInfoLabel", "Info", _label+'</div>');
+			window.BetterAPI.constructor.addUserLabel("UserInfoLabel", "Info", _label+'</div>');
 			$('.member-role-add').parent().css( "background-color", "rgba(0,255,0,0.4)");
 			function checkRoles(){ if($('.member-role-remove').length > 0){ return 1; }else{ return 0; } }
 			if($('.member-role-remove').length > 1 && $('#removeallroles').length < 1){
@@ -74,7 +76,7 @@ userInfo.prototype.start = function() {
 							});
 				});
 			}
-			// BetterAPI.addUserButton("btn", "#UserInfo", "Info");
+			// window.BetterAPI.constructor.addUserButton("btn", "#UserInfo", "Info");
 			// $('#UserInfo').on("click", function () {
 				// $.jAlert({
 					// 'title': name +'\'s Info',
@@ -96,28 +98,28 @@ userInfo.prototype.start = function() {
 					// 'btns': [ {
 						// 'text': 'Copy',
 						// 'class': 'btn_copy',
-						// 'onClick': function(e, btn) { new Clipboard('ja_body'); BetterAPI.log(1, "log", userInfo.prototype.getName()+": ",'Copied \"'+$('.ja_body').html()+'\" to clipboard.'); },
+						// 'onClick': function(e, btn) { new Clipboard('ja_body'); window.BetterAPI.constructor.log(1, "log", userInfo.prototype.getName()+": ",'Copied \"'+$('.ja_body').html()+'\" to clipboard.'); },
 					// }, {
 						// 'text': 'Close'
 					// } ]
 				// });
-				// BetterAPI.log(0, "info", userInfo.prototype.getName()+": "+name+'\'s Info', "\n\nName: \""+name+"\"\nUID: \""+id+"\"");
+				// window.BetterAPI.constructor.log(0, "info", userInfo.prototype.getName()+": "+name+'\'s Info', "\n\nName: \""+name+"\"\nUID: \""+id+"\"");
 			// });
 		});
 		// $('.footer').on('DOMNodeInserted', 'button[data-reactid=".0.5.$=1$modal1.0.0.1.0"]', function() {
-			// if(!BetterAPI.elemExists('.submitall')){
-				// $('.button-primary').after('&nbsp;<button type="submit" class="button button-primary submitall" data-reactid=".0.5.$=1$modal11.0.0.1.2" onclick="BetterAPI.bulkUpload();"><span data-reactid=".0.5.$=1$modal11.0.0.1.2.0">Upload all</span></button>');
+			// if(!window.BetterAPI.constructor.elemExists('.submitall')){
+				// $('.button-primary').after('&nbsp;<button type="submit" class="button button-primary submitall" data-reactid=".0.5.$=1$modal11.0.0.1.2" onclick="window.BetterAPI.constructor.bulkUpload();"><span data-reactid=".0.5.$=1$modal11.0.0.1.2.0">Upload all</span></button>');
 			// }
 		// });
 		try{$('button[data-reactid=".0.5.$=1$modal1.0.0.1.0"]').livequery(function(){
-			if(!BetterAPI.elemExists('.submitall')){
-				$('.button-primary').after('&nbsp;<button type="submit" class="button button-primary submitall" data-reactid=".0.5.$=1$modal11.0.0.1.2" onclick="BetterAPI.bulkUpload();"><span data-reactid=".0.5.$=1$modal11.0.0.1.2.0">Upload all</span></button>');
+			if(!window.BetterAPI.constructor.elemExists('.submitall')){
+				$('.button-primary').after('&nbsp;<button type="submit" class="button button-primary submitall" data-reactid=".0.5.$=1$modal11.0.0.1.2" onclick="window.BetterAPI.constructor.bulkUpload();"><span data-reactid=".0.5.$=1$modal11.0.0.1.2.0">Upload all</span></button>');
 			}
 		});
 		}catch(e){}
 		try{$('ul[data-reactid=".0.1.1.0.1.0.0.1"]').livequery(function(){
-			BetterAPI.addServerButton("serverinfobutton", "Server Info", "before");
-			if(bot){BetterAPI.addServerButton("serverrolesbutton", "Server Roles", "after");}
+			window.BetterAPI.constructor.addServerButton("serverinfobutton", "Server Info", "before");
+			if(bot){window.BetterAPI.constructor.addServerButton("serverrolesbutton", "Server Roles", "after");}
 		});
 		}catch(e){}
 		try{$("#serverinfobutton").livequery(function(){
@@ -128,25 +130,25 @@ userInfo.prototype.start = function() {
 				if (!$('.bd-alert').length <= 0) {
 					$('.bd-alert').remove();
 				}
-				var sname = BetterAPI.getCurrentServerName();
-				var sid = BetterAPI.getCurrentServerID();
+				var sname = window.BetterAPI.constructor.getCurrentServerName();
+				var sid = window.BetterAPI.constructor.getCurrentServerID();
 				if(bot){ var sinfo = bot.servers.get('id', sid); } 
 				if(sinfo){
 					sowner = sinfo.owner.username;
 					sregion = sinfo.region.capitalizeFirstLetter();
 				}
 				if(sid){
-					var aurl = BetterAPI.getAvatarURL(''+sid);
+					var aurl = window.BetterAPI.constructor.getAvatarURL(''+sid);
 				}
-				var tcn = BetterAPI.getCurrentTextChannelName();
-				var tcid = BetterAPI.getCurrentTextChannelID();
-				var vc = BetterAPI.getCurrentVoiceChannelName();
+				var tcn = window.BetterAPI.constructor.getCurrentTextChannelName();
+				var tcid = window.BetterAPI.constructor.getCurrentTextChannelID();
+				var vc = window.BetterAPI.constructor.getCurrentVoiceChannelName();
 				if(sinfo.memberCount){ uc = sinfo.memberCount;
-				}else{ uc = BetterAPI.userCount(); }
+				}else{ uc = window.BetterAPI.constructor.userCount(); }
 				if(sinfo.members.length){ onuc = sinfo.members.length;
-				}else{ onuc = BetterAPI.onlineUserCount(); }
+				}else{ onuc = window.BetterAPI.constructor.onlineUserCount(); }
 				if(sinfo.members.length){ offuc = sinfo.memberCount-sinfo.members.length;
-				}else{ offuc = BetterAPI.offlineUserCount(); }
+				}else{ offuc = window.BetterAPI.constructor.offlineUserCount(); }
 				if(sname){ _title = 'Server Information - '+sname; _data = _data+'<b>Name: </b>'+sname+'<br>';	}
 				if(sid){ _data = _data+'<b>Server ID: </b>'+sid+'<br>'; }
 				if(sowner){ _data = _data+'<b>Server Owner: </b>'+sowner+'<br>'; }
@@ -170,11 +172,11 @@ userInfo.prototype.start = function() {
 			try{$("#serverrolesbutton").livequery(function(){
 				$("#serverrolesbutton").click(function(){
 					var _title = "Roles";
-					var _sname = BetterAPI.getCurrentServerName();
+					var _sname = window.BetterAPI.constructor.getCurrentServerName();
 					if(_sname){
 						_title = _sname+" - Roles";
 					}
-					var roles = bot.servers.get('id', BetterAPI.getCurrentServerID()).roles;
+					var roles = bot.servers.get('id', window.BetterAPI.constructor.getCurrentServerID()).roles;
 					//, function(error,users){roles = users}
 					$('body').append('<div class="bd-roles" id="bdroles" style="'+
 						'position:fixed !important;'+
@@ -225,11 +227,11 @@ userInfo.prototype.start = function() {
 			}catch(e){}
 		}
 		try{$('ul[data-reactid=".0.1.1.0.1.3"]').livequery(function(){
-			BetterAPI.addLink("status", "Status", "status", "lg");
+			window.BetterAPI.constructor.addLink("status", "Status", "status", "lg");
 			$('#status').click(function(){
-				BetterAPI.openStatusPopup();
+				window.BetterAPI.constructor.openStatusPopup();
 			});
-			BetterAPI.addLink("plus", "+", "https://discordapp.com/widget?id=134680912691462144&theme=dark", "sm");
+			window.BetterAPI.constructor.addLink("plus", "+", "https://discordapp.com/widget?id=134680912691462144&theme=dark", "sm");
 			$('#plus').click(function(){
 				$.jAlert({
 					'iframe': $('#plus').attr('href'),
@@ -238,7 +240,7 @@ userInfo.prototype.start = function() {
 					'title': 'BD+ (0kdpwyLsTTT8fB2t)'
 				 });
 			});
-			BetterAPI.addLink("link_bots", "Bots", "https://www.carbonitex.net/Discord/bots", "lg");
+			window.BetterAPI.constructor.addLink("link_bots", "Bots", "https://www.carbonitex.net/Discord/bots", "lg");
 			$('#link_bots').click(function(){
 				$.jAlert({
 					'iframe': $('#link_bots').attr('href'),
@@ -251,13 +253,13 @@ userInfo.prototype.start = function() {
 		}catch(e){}
 		try{$('.user-settings-modal-account').livequery(function(){
 			if ($("#userinfopanel").length <= 0) {
-				id = BetterAPI.getOwnID();
-				avatarID = BetterAPI.getOwnAvatarID();
+				id = window.BetterAPI.constructor.getOwnID();
+				avatarID = window.BetterAPI.constructor.getOwnAvatarID();
 				if(!avatarID){
-					avatarID = BetterAPI.getUserAvatarIDbyName(name);
+					avatarID = window.BetterAPI.constructor.getUserAvatarIDbyName(name);
 				}
 				var _label = '';
-				if (BetterAPI.isUID(id)) {
+				if (window.BetterAPI.constructor.isUID(id)) {
 					// var _label = _label + '<b>Unique ID: </b><span style="color:darkgrey">'+id+'</span>';
 					_label = _label + '<div class="control-group" data-reactid=".0.5.$=1$UserSettingsModal.0.0.1.0.$ACCOUNT.0.1.0.1" id="userinfopanel">'+
 						'<label data-reactid=".0.5.$=1$UserSettingsModal.0.0.1.0.$ACCOUNT.0.1.0.0.0" for="settings-username">'+
@@ -280,10 +282,10 @@ userInfo.prototype.start = function() {
 		// appendUsers();
 		appendUsers = function() {
 			try{$('.friends-online').livequery(function(){
-				if(!BetterAPI.elemExists('#onlineservers')){
+				if(!window.BetterAPI.constructor.elemExists('#onlineservers')){
 					$('.friends-online').after('<div class="friends-online"><span style="color:lightblue !important;" id="onlineservers">0</span> Server</div>');
 				}
-				/*if(!BetterAPI.elemExists('#onlineusers')){
+				/*if(!window.BetterAPI.constructor.elemExists('#onlineusers')){
 					$('.friends-online').after('<div class="friends-online"><span id="onlineusers">0</span> Users</div>');
 				}*/
 			});
@@ -291,11 +293,11 @@ userInfo.prototype.start = function() {
 		}
 		// updateMembers();
 		updateMembers = function() {
-			if(BetterAPI.serverCount()){
-				$('#onlineservers').text(BetterAPI.serverCount());
+			if(window.BetterAPI.constructor.serverCount()){
+				$('#onlineservers').text(window.BetterAPI.constructor.serverCount());
 			}
-			/*if(BetterAPI.userCount()){
-				$('#onlineusers').text(BetterAPI.userCount()+' Users');
+			/*if(window.BetterAPI.constructor.userCount()){
+				$('#onlineusers').text(window.BetterAPI.constructor.userCount()+' Users');
 			}*/
 		}
 		// appendMembers();
@@ -305,7 +307,7 @@ userInfo.prototype.start = function() {
 				'<h2 id="totalmembers" style="background:none !important;">'+
 					'<span>Total</span>'+
 					'<span>—</span>'+
-					'<span>'+BetterAPI.userCount()+'</span>'+
+					'<span>'+window.BetterAPI.constructor.userCount()+'</span>'+
 				'</h2>');
 			};
 		};
@@ -342,3 +344,4 @@ userInfo.prototype.stop = function() {
 	$('.settings-panel').off('DOMNodeInserted.user-settings-modal-account');
 };
 userInfo.prototype.unload = function() {};
+exports.userInfo = userInfo;
