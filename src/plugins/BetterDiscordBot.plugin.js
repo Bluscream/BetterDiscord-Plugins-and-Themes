@@ -185,7 +185,11 @@ BetterDiscordBot.prototype.start = function () {
 							BetterDiscordBot.debug('disconnected', arguments);
 						}
 						BetterDiscordBot.log('info', 'disconnected', '', '', 'Client got disconnected.');
-						console.log("BetterDiscordBot: Client disconnected.");
+						console.log("BetterDiscordBot: Client disconnected. Auto reconnecting...");
+						var _int = setInterval(function(){
+							bot.loginWithToken(localStorage.token.match(/\"(.+)\"/)[1]).then(clearInterval(_int)).catch (err);
+						}, 5000);
+						
 					}
 				});
 				bot.on("raw", function (data) {

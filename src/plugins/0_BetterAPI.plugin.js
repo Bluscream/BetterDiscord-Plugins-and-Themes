@@ -219,7 +219,7 @@ BetterAPI.prototype.loadCore  = function() {
 	//BetterAPI.log(dbg, "type", "pluginName", "msg");
 	BetterAPI.log = function(dbg, type, pluginName, msg) {
 		if ( (dbg == "debug") || (dbg == "dbg") || (dbg) ) {
-			if (debugging == 1) {
+			if (BetterAPI.isDebug()) {
 				switch(type.toLowerCase()) {
 					case "info":
 						console.info("[BetterDiscord] " + pluginName + ": " + msg);
@@ -660,6 +660,19 @@ BetterAPI.prototype.injectJS  = function() {
 	//BetterAPI.requireJS("https://cdn.rawgit.com/afshinm/Json-to-HTML-Table/master/json-to-table.js"); // https://github.com/afshinm/Json-to-HTML-Table#how-to-use
 };
 BetterAPI.prototype.loadAPI  = function() {
+	// BetterAPI.getAllImages();
+	BetterAPI.getAllImages = function() {
+			$('.attachment-image>a').each(function( i, e ) {
+				try{
+					var a = $("<a>")
+						.attr("href", $(e).attr('href'))
+						.attr("download", "img.png")
+						.appendTo("body");
+					a[0].click();
+					a.remove();
+				}catch(e){}
+			});
+	};
 	// BetterAPI.getCurrentServerName();
 	BetterAPI.getCurrentServerName = function() {
 		try{return $(document).find("[data-reactid='.0.1.1.0.1.0.0.0.0']").text();

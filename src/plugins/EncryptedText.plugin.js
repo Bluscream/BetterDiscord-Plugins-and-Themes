@@ -14,8 +14,8 @@ EncryptedText.prototype.parseChat = function(){
 	$(".message-text>.markup>span:not(.EncryptedText_parsed").each(function(i,el){
 		var e = $(el); var _text = e.text();var base64;var _decoded;var decoded;var key;
 		if(_text.startsWith('[!o]')){
-			try{base64 = _text.split(/\[!o\](.+)?/)[1];}catch(e){return;}
-			try{decoded = EncryptedText.decodeBase64(base64);}catch(e){return;}
+			try{base64 = _text.split(/\[!o\](.+)?/)[1];}catch(e){BetterAPI.log(0, "error", EncryptedText.prototype.getName(), "base64 = _text.split(/\\[!o\\](.+)?/)[1];");return;}
+			try{decoded = EncryptedText.decodeBase64(base64);}catch(e){BetterAPI.log(0, "error", EncryptedText.prototype.getName(), "decoded = EncryptedText.decodeBase64(base64);");return;}
 			if(decoded){
 				if(!BetterAPI.isEmpty(decoded)){
 					e.attr('title', base64);e.html(_text.replace(_text,'<img width="16px" src="/assets/d72f52ce6c418c5c8fd5faac0e8c36ff.svg"/> '+decoded));
@@ -23,26 +23,17 @@ EncryptedText.prototype.parseChat = function(){
 			}
 		}
 		if(_text.startsWith('[!e]')){
-			try{base64 = _text.split(/\[!e\](.+)?/)[1];}catch(e){return;}
+			try{base64 = _text.split(/\[!e\](.+)?/)[1];}catch(e){BetterAPI.log(0, "error", EncryptedText.prototype.getName(), "base64 = _text.split(/\\[!e\\](.+)?/)[1];");return;}
 			for (var key in EncryptedText.keyStore) {
 				try{
 					_decoded = EncryptedText.decryptBase64(base64, EncryptedText.keyStore[key]);/*console.log('Decoded: '+_decoded)*/
 					if(_decoded){
 						if(!BetterAPI.isEmpty(_decoded)){
 							decoded = key.toUpperCase()+' > '+_decoded;
+							break;
 						}
 					}
-				}catch(e){return;}
-			}
-			if(!decoded){
-				try{
-					_decoded = EncryptedText.decryptBase64(base64);/*console.log('Decoded: '+_decoded)*/
-					if(_decoded){
-						if(!BetterAPI.isEmpty(_decoded)){
-							decoded = 'DEFAULT > '+_decoded;
-						}
-					}
-				}catch(e){return;}
+				}catch(e){BetterAPI.log(0, "error", EncryptedText.prototype.getName(), "_decoded = EncryptedText.decryptBase64(base64, EncryptedText.keyStore[key]);");return;}
 			}
 			if(decoded){
 				if(!BetterAPI.isEmpty(decoded)){
@@ -147,16 +138,22 @@ EncryptedText.prototype.attachHandler = function() {
 				var _text = text.split(/\s(.+)?/);
 				if(EncryptedText.keyStore.hasOwnProperty(_text[0])){
 					text = EncryptedText.encryptBase64(_text[1], EncryptedText.keyStore[_text[0]]);
+					text = '[!e]'+text;
+					EncryptedText.sendTextMessage(text);
+					$(this).val("");
+					e.preventDefault();
+					e.stopPropagation();
 				}else{
-					text = EncryptedText.encryptBase64(text[1]);
+					var _keys = "";var i = 1;
+					for (var key in EncryptedText.keyStore) {
+						if (!EncryptedText.keyStore.hasOwnProperty(key) || key === undefined || key == "undefined") continue;
+						if(i == 1){_keys = key;i = 0;}else{ _keys = _keys+"/"+key; }
+					}
+					alert('Encrypted Text Plugin Syntax', '/e &lt;'+_keys+'&gt; &lt;MESSAGE>&gt;');
+					e.preventDefault();
 				}
-				text = '[!e]'+text;
-				EncryptedText.sendTextMessage(text);
-				$(this).val("");
-				e.preventDefault();
-				e.stopPropagation();
 			}
-		}catch(e){}
+		}catch(e){ BetterAPI.log(0, "error", EncryptedText.prototype.getName(), "Could not find textarea!"); }
 	};
 	el[0].addEventListener("keydown", this.handleKeypress, false);
 };
@@ -224,18 +221,10 @@ EncryptedText.prototype.loadDatabase = function() {
 
 
 EncryptedText.encryptBase64 = function(str, key) {
-	if(key){
-		return CryptoJS.AES.encrypt(str, key).toString();
-	}else{
-		return CryptoJS.AES.encrypt(str, "QWxsb3dzIHlvdSB0byBzZW5kIGVuY3J5cHRlZCB0ZXh0cw==").toString();
-	}
+	if(key){ return CryptoJS.AES.encrypt(str, key).toString(); }
 };
 EncryptedText.decryptBase64 = function(str, key) {
-	if(key){
-		return CryptoJS.AES.decrypt(str, key).toString(CryptoJS.enc.Utf8);
-	}else{
-		return CryptoJS.AES.decrypt(str, "QWxsb3dzIHlvdSB0byBzZW5kIGVuY3J5cHRlZCB0ZXh0cw==").toString(CryptoJS.enc.Utf8);
-	}
+	if(key){ return CryptoJS.AES.decrypt(str, key).toString(CryptoJS.enc.Utf8); }
 };
 
 EncryptedText.encodeBase64 = function(str) { return btoa(str); };
