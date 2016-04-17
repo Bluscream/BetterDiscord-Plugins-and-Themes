@@ -131,7 +131,7 @@ EncryptedText.prototype.attachHandler = function() {
 		var text;
 		try{var val = $('.channel-textarea textarea').val();
 			if(val == '/ad'){
-				EncryptedText.sendTextMessage(':lock: To decrypt the encrypted messages you need the **EncryptedText** Plugin for _BetterDiscord_ :lock:\nhttp://betterdiscord.net/ghdl?url=https://raw.githubusercontent.com/Bluscream/BetterDiscord-Plugins-and-Themes/master/plugins/EncryptedText.plugin.js');
+				EncryptedText.sendTextMessage(':lock: To decrypt the encrypted messages you need the **EncryptedText** Plugin for _BetterDiscord_ :lock:\nhttp://betterdiscord.net/ghdl?url=https://raw.githubusercontent.com/Bluscream/BetterDiscord-Plugins-and-Themes/indev/plugins/EncryptedText.plugin.js');
 				$(this).val("");
 				e.preventDefault();
 				e.stopPropagation();
