@@ -5,13 +5,15 @@ dblClickEdit.prototype.start = function () {
     $(document).on("dblclick.dce", function(e) {
         var target = $(e.target);
         if(target.parents(".message").length > 0) {
+			var m = document.getElementsByClassName("messages")[0];
+			var preH = m.scrollHeight;
             var msg = target.parents(".message").first();
             var opt = msg.find(".btn-option");
             opt.click();
-    
             var popout = $(".option-popout");
             if(popout.children().length == 2) {
                 popout.children().first().click();
+				setTimeout(function(){ m.scrollTop=preH; }, 25);
             } else {
                 popout.hide();
             }
