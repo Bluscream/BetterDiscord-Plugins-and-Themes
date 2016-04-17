@@ -2,7 +2,7 @@
 
 ##Settings
 
-On the settings panel of the plugin you can manage your <KEYALIAS>'es.
+On the settings panel of the plugin you can manage your `<KEYALIAS>`'es.
 
 ![Preview](https://i.gyazo.com/54c3e1279f4dd07a863c9711dfa65eb2.gif)
 
