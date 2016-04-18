@@ -1,28 +1,36 @@
 //META{"name":"BetterDiscordBot"}*//
 var BetterDiscordBot = function() {
+	vers = {};
 	BotCommands = {
-		'help': 'bot.sendMessage(message.channel,'+
-			'"**BetterDiscordBot** by @Decorater and Bluscream.\n'+
-			'\n'+
-			'Prefix: " + prefix + "\n'+
-			'Commands:`info`,`time`,`version`,`ping`");',
+		'help': 'var coms = "";'+
+			'for (var key in BetterDiscordBot.botcommands) {'+
+				'if (!BetterDiscordBot.botcommands.hasOwnProperty(key)){continue;}'+
+				'coms = coms + "`"+key+"` ";'+
+			'}'+
+			'bot.sendMessage(message.channel,'+
+			'"**BetterDiscordBot** by @Decorater and Bluscream.\\n'+
+			'\\n'+
+			'Prefix: "+prefix+"\\n'+
+			'Commands: "+coms);',
 		'info': 'bot.sendMessage(message.channel,'+
-			'"Credits:\n\n`Discord` by Hammer & Chisel\n'+
-			'`Discord.js` by hydrabolt\n'+
-			'`BetterDiscord` by Jiiks\n'+
+			'"Credits:\\n\\n`Discord` by Hammer & Chisel\\n'+
+			'`Discord.js` by hydrabolt\\n'+
+			'`BetterDiscord` by Jiiks\\n'+
 			'`BetterDiscord+` by Bluscream");',
-		'version': 'bot.sendMessage(message.channel,'+
-			'"Discord `0.0.287` **|**'+
-			' BetterDiscord `0.2.7` (JS `1.61`) **|**'+
-			' Discord.js `" + require("discord.js/package").version + "` **|**'+
-			' BetterDiscordBot `" + BetterDiscordBot.prototype.getVersion() + "`");',
+		'version': 'var coms = "";'+
+			'for (var key in process.versions) {'+
+				'if (!process.versions.hasOwnProperty(key)){continue;}'+
+				'coms = coms + key.capitalizeFirstLetter()+": "+process.versions[key]+"\\n";'+
+			'}'+
+			'bot.sendMessage(message.channel,'+
+			'"```"+coms+"```");',
 		'ping': 'var sendMSG;'+
 			'if(BetterAPI.elemExists(".voice-connection-quality-fine")){'+
-				'sendMSG = "Voice connection quality is fine.";'+
+				'sendMSG = ":white_check_mark: Voice connection quality is fine.";'+
 			'};'+
-			'if(!BetterAPI.isempty(sendMSG)){ bot.sendMessage(message.channel, sendMSG); }',
+			'if(!BetterAPI.isEmpty(sendMSG)){ bot.sendMessage(message.channel, sendMSG); }',
 		'time': 'bot.sendMessage(message.channel, "My local time is `" + now + "`");',
-		'finger': 'bot.sendMessage(message.channel, "echo \"Ohh, yeah i like that :3\"");'
+		'finger': 'bot.sendMessage(message.channel, "echo \\"Ohh, yeah i like that :3\\"");'
 	};
 	this.loadDatabase();
 };
@@ -185,6 +193,15 @@ BetterDiscordBot.prototype.start = function () {
 		toggleLog = function() {
 			$('#bdlog').toggle();
 		};
+		// try{if(!BetterAPI.isEmpty(process.versions.chrome)){process.versions["chromium"] = ''+process.versions.chrome;}}catch(e){}
+		try{if(!BetterAPI.isEmpty(process.versions.electron)){process.versions["Electron"] = ''+process.versions.electron;}}catch(e){}
+		try{if(!BetterAPI.isEmpty(BetterAPI.checkJSVersion())){process.versions["Javascript"] = ''+BetterAPI.checkJSVersion();}}catch(e){}
+		try{if(!BetterAPI.isEmpty($.fn.jquery)){process.versions["JQuery"] = ''+$.fn.jquery;}}catch(e){}
+		try{if(!BetterAPI.isEmpty(jsVersion)){process.versions["BetterDiscord CORE"] = ''+jsVersion;}}catch(e){}
+		try{if(!BetterAPI.isEmpty(version)){process.versions["BetterDiscord"] = ''+version;}}catch(e){}
+		try{if(!BetterAPI.isEmpty(bdplugins.BetterAPI.plugin.getVersion())){process.versions["BetterAPI"] = ''+bdplugins.BetterAPI.plugin.getVersion();}}catch(e){}
+		try{if(!BetterAPI.isEmpty(bot.userAgent.version)){process.versions["Discord.JS"] = ''+bot.userAgent.version;}}catch(e){}
+		console.info(process.versions);
 	var saveDir = __dirname.replace('plugins', 'resources');
 //	var saveDir = __dirname.slice(0, __dirname.indexOf("\\", __dirname.lastIndexOf('Discord') + "Discord".length + 1) + 1) + "resources";
 	console.log('__dirname: '+__dirname);
@@ -645,4 +662,4 @@ BetterDiscordBot.prototype.getVersion = function () {
 BetterDiscordBot.prototype.getAuthor = function () {
 	return "Bluscream, Decorater";
 };
-exports.BetterDiscordBot = BetterDiscordBot;
+try{exports.BetterDiscordBot = BetterDiscordBot;}catch(e){console.warn('Using old version, not exporting functions.')}
