@@ -237,7 +237,12 @@ BetterDiscordBot.prototype.start = function () {
 								var command = key.toLowerCase();
 								var action = BetterDiscordBot.botcommands[key];
 								if(msg.startsWith(command)){
-									try{eval(action);}catch(e){Core.prototype.alert('BetterDiscordBot - Error', 'Bot is unable to process command <span style="color:orange"><b>'+command+'</b></span>.<br><br>Error Message: <span style="color:red">'+e+'</span><br><br>Action:<br><br>'+action);}
+									try{
+										eval(action);
+										if (BetterDiscordBotting.settings.debug) {
+											console.info('Command \''+command+'\' was used in channel #' + message.channel.name + ' on server ' + wS(message.channel.server.name)+'.');
+										}
+									}catch(e){Core.prototype.alert('BetterDiscordBot - Error', 'Bot is unable to process command <span style="color:orange"><b>'+command+'</b></span>.<br><br>Error Message: <span style="color:red">'+e+'</span><br><br>Action:<br><br>'+action);}
 								}
 							}
 						}
