@@ -3,8 +3,8 @@ var QuickDelete = function() {}
 QuickDelete.prototype.convert = function() {
 	$('div.message-text').each(function(i,el) {
 		var current_msg = $(el);
-		if (current_msg.find('div.btn-option').length == 1) {
-			current_msg.find('div.btn-option').after('<div class="btn-option remove_msg" style="padding-right: 10px; background: url(\'https://puu.sh/ocvtl/fd550eab78.png\') 50% no-repeat;"></div>');
+		if (current_msg.find('div.btn-option').length == 1 && current_msg.find('div.remove_msg').length == 0) {
+			current_msg.find('div.btn-option').after('<div class="remove_msg" style="visibility: hidden;padding-right: 10px; background: url(\'https://puu.sh/ocvtl/fd550eab78.png\') 50% no-repeat; width: 16px; height: 16px; background-size: 16px 16px; cursor: pointer; float: right;"></div>');
 		}
 	});
 };
@@ -13,7 +13,7 @@ QuickDelete.prototype.deleteMessage = function() {
 	var backdrop = $('span[data-reactid=".0.5"]');
 	backdrop.css('visibility', 'hidden');
 	var parent = $(this).parents('div.message');
-	parent.find('div.btn-option:not(.remove_msg)').trigger("click");
+	parent.find('div.btn-option').trigger("click");
 	var popout = $(".option-popout");
 	popout.children().last().trigger("click");
 	popout.hide();
@@ -55,14 +55,20 @@ QuickDelete.prototype.onMessage = function() {
 
 QuickDelete.prototype.start = function() {
 	this.convert();
-	$(document).on("click", "div.btn-option.remove_msg", this.deleteMessage);
+	$(document).on("click", "div.remove_msg", this.deleteMessage);
+	$(document).on("mouseover", "div.message", function() {
+		$(this).find('div.remove_msg').css('visibility', 'visible');
+	});
+	$(document).on("mouseleave", "div.message", function() {
+		$(this).find('div.remove_msg').css('visibility', 'hidden');
+	});
 };
 
 QuickDelete.prototype.stop = function() {
-	$(document).off("click", "div.btn-option.remove_msg")
-	for (var i = $('div.btn-option.remove_msg').length - 1; i >= 0; i--) {
-		$('div.btn-option.remove_msg').eq(i).remove();
-	}
+	$(document).off("click", "div.remove_msg");
+	$(document).off("mouseover", "div.message");
+	$(document).off("mouseleave", "div.message");
+	$('div.remove_msg').eq(i).remove();
 };
 
 QuickDelete.prototype.update = function() {};
@@ -75,12 +81,11 @@ QuickDelete.prototype.getDescription = function() {
 };
 
 QuickDelete.prototype.getVersion = function() {
-    return "1.0";
+    return "1.1";
 };
 
 QuickDelete.prototype.getAuthor = function() {
     return "confuseh";
 };
 
-// UNCOMMENT NEXT LINE FOR PLUGIN TO WORK IN ALPHA LOADER
-// exports.QuickDelete = QuickDelete;
+try{exports.QuickDelete = QuickDelete;}catch(e){console.warn('Using old version, not exporting functions.');}
