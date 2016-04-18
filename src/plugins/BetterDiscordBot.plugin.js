@@ -202,8 +202,9 @@ BetterDiscordBot.prototype.start = function () {
 		try{if(!BetterAPI.isEmpty(bdplugins.BetterAPI.plugin.getVersion())){process.versions["BetterAPI"] = ''+bdplugins.BetterAPI.plugin.getVersion();}}catch(e){}
 		try{if(!BetterAPI.isEmpty(bot.userAgent.version)){process.versions["Discord.JS"] = ''+bot.userAgent.version;}}catch(e){}
 		console.info(process.versions);
-	var saveDir = __dirname.replace('plugins', 'resources');
-//	var saveDir = __dirname.slice(0, __dirname.indexOf("\\", __dirname.lastIndexOf('Discord') + "Discord".length + 1) + 1) + "resources";
+	var saveDir = __dirname.replace('resources\\atom.asar\\renderer\\lib', 'resources');
+	// var saveDir = __dirname.replace('plugins', 'resources');
+	// var saveDir = __dirname.slice(0, __dirname.indexOf("\\", __dirname.lastIndexOf('Discord') + "Discord".length + 1) + 1) + "resources";
 	console.log('__dirname: '+__dirname);
 	console.log('SaveDir: '+saveDir);
 		BetterAPI.npm('superagent', saveDir);BetterAPI.npm('ws', saveDir);BetterAPI.npm('unpipe', saveDir);
