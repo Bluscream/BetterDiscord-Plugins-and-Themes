@@ -13,7 +13,7 @@ dblClickEdit.prototype.start = function () {
             var popout = $(".option-popout");
             if(popout.children().length == 2) {
                 popout.children().first().click();
-				setTimeout(function(){ m.scrollTop=preH; }, 25);
+				setTimeout(function(){ m.scrollTop=preH; }, 125);
             } else {
                 popout.hide();
             }
