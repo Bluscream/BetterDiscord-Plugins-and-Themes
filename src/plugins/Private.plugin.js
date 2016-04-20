@@ -1,26 +1,56 @@
-//META{"name":"PrivatePlugin"}*// Needs https://github.com/Bluscream/BetterDiscord-Plugins-and-Themes/blob/master/plugins/0_BetterAPI.js to work properly!
-function PrivatePlugin() {}
-var BetterAPI = BetterAPI || bdplugins.BetterAPI.plugin.constructor
+//META{"name":"PrivatePlugin"}*//
+function PrivatePlugin() {
+	this.getName = function() { return "Private"; };
+	this.getDescription = function() { return "No information given."; };
+	this.getVersion = function() { return "1.0"; };
+	this.getAuthor = function() { return "Bluscream"; };
+}
 PrivatePlugin.prototype.load = function() {};
 PrivatePlugin.prototype.start = function() {
-	// BetterAPI.changeUserInfo("Bluscream", "7fef6999df67e910379d5ad2a2f3863a");BetterAPI.createCharCounter();
-	$('.emoji:not(.emote)').addClass('emote');
-	$('textarea').removeAttr( "disabled" );
-	$('.channel-textarea').removeClass('channel-textarea-disabled');
-	$('div[data-reactid=".0.1.1.0.0.0.3:$134680912691462144.0.0.0"]').click();
-	setTimeout(function() {
-		var scrollPane = $(".scroller.messages").first();
-		$(scrollPane).scrollTop(999999999);
-		var scrollPane = $(".scroller.channel-members").first();
-        $(scrollPane).scrollTop(0);
-	}, 1000);
-	/*$('div[data-reactid=".0.1.1.0.2.0"]').livequery(function(){
-		BetterAPI.addLocationBar();
-	});*/
-	try{$('.channel.btn-friends').livequery(function(){
-		$('header[data-reactid$="$Direct Messages"]').html('PM\'s - <a onclick="$(\'.close\').click();">Clear all</a>')
-	});
-	}catch(e){}
+	var _require = ['BetterAPI', 'https://raw.githubusercontent.com/Bluscream/BetterDiscord-Plugins-and-Themes/master/plugins/0_BetterAPI.plugin.js', 'BetterAPI.isDebug()'];
+	if(BdApi.getPlugin(_require[0]) !== null){
+		try{eval(_require[2]);
+		}catch(e){
+			Core.prototype.alert('Private Plugin - Requirement not started!',''+
+				'A requirement is not started: <b>'+_require[0]+'<b><br>'+
+				'<br>'+
+				'Click <a onClick="'+
+					'$(\'.btn-settings\').click();'+
+					'setTimeout(function(){ $(\'#bd-settings-new\').click();'+
+					'setTimeout(function(){ $(\'#'+_require[0]+'\').prop(\'checked\', true);'+
+					' }, 750); }, 750);'+
+				'">here</a> to enable it.<br>'+
+			'');
+			return null;
+		}
+		// BetterAPI.changeUserInfo("Bluscream", "7fef6999df67e910379d5ad2a2f3863a");BetterAPI.createCharCounter();
+		$('.emoji:not(.emote)').addClass('emote');
+		$('textarea').removeAttr( "disabled" );
+		$('.channel-textarea').removeClass('channel-textarea-disabled');
+		$('div[data-reactid=".0.1.1.0.0.0.3:$134680912691462144.0.0.0"]').click();
+		setTimeout(function() {
+			var scrollPane = $(".scroller.messages").first();
+			$(scrollPane).scrollTop(999999999);
+			var scrollPane = $(".scroller.channel-members").first();
+			$(scrollPane).scrollTop(0);
+		}, 1000);
+		/*$('div[data-reactid=".0.1.1.0.2.0"]').livequery(function(){
+			BetterAPI.addLocationBar();
+		});*/
+		try{$('.channel.btn-friends').livequery(function(){
+			$('header[data-reactid$="$Direct Messages"]').html('PM\'s - <a onclick="$(\'.close\').click();">Clear all</a>')
+		});
+		}catch(e){}
+	}else{
+		Core.prototype.alert('Required plugin not found!',''+
+			'A requirement is missing: <b>'+_require[0]+'</b><br>'+
+			'<br>'+
+			'Click <a style=""href="#" onClick="require(\'shell\').openExternal(\'http://betterdiscord.net/ghdl?url='+_require[1]+'\')">here</a> to download the plugin.<br>'+
+			'Save the downloaded file to "'+process.env.APPDATA+'\BetterDiscord\\plugins\\".'+
+		'');
+		return null;
+	}
+	_require = null;
 };
 PrivatePlugin.prototype.stop = function() {
 	$('span[data-reactid=".0.4"').off('DOMNodeInserted.userInfo');
@@ -44,18 +74,6 @@ PrivatePlugin.prototype.onMessage = function() {
 	$('textarea').removeAttr( "disabled" );
 	$('.channel-textarea').removeClass('channel-textarea-disabled');
 	//PrivatePlugin.updateCount();PrivatePlugin.checkServerCount();
-};
-PrivatePlugin.prototype.getName = function() {
-	return "Private";
-};
-PrivatePlugin.prototype.getDescription = function() {
-	return "No information given.";
-};
-PrivatePlugin.prototype.getVersion = function() {
-	return "1.0";
-};
-PrivatePlugin.prototype.getAuthor = function() {
-	return "Bluscream";
 };
 PrivatePlugin.updateCount = function() {
 	servers = localStorage.getItem('servers');
@@ -88,4 +106,4 @@ PrivatePlugin.clearDMs = function() {
 		$(el).click();
 	});
 }
-exports.PrivatePlugin = PrivatePlugin;
+try{exports.PrivatePlugin = PrivatePlugin;}catch(e){console.warn('Using old version, not exporting functions.')}

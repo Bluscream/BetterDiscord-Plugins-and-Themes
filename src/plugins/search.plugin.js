@@ -2,7 +2,10 @@
 
 var BetterAPI = BetterAPI || bdplugins.BetterAPI.plugin.constructor
 function searchPlugin() {
-	//construction
+	this.getName = function(){return "Search"};
+	this.getDescription = function(){return "The return of [CTRL]+[F]! until at least discord devs decide to add it."};
+	this.getVersion = function(){return "1.0"};
+	this.getAuthor = function(){return "Megamit/Mitchell"};
 	var self = this;
 	if (searchPlugin.prototype.self) return searchPlugin.prototype.self;
 	else (searchPlugin.prototype.self = self)
@@ -15,6 +18,7 @@ function searchPlugin() {
 		self.cancelFlag = false;
 	}
 	this.stop = function(){};
+	this.onMessage = function(){};
 	this.start = function(){
 		window.addEventListener('keydown', function(e){if(e.ctrlKey&&e.which==70){self.displaySearchbar()}} );
 	};
@@ -188,13 +192,9 @@ function searchPlugin() {
 			self.cancelFlag = false;
 		},50)
 	}
-	this.getName = function(){return "Search"};
-	this.getDescription = function(){return "The return of [CTRL]+[F]! until at least discord devs decide to add it."};
-	this.getVersion = function(){return "1.0"};
-	this.getAuthor = function(){return "Megamit/Mitchell"};
 	this.load = function(){};
 	this.unload = function(){};
 	this.init();
 }
 searchPlugin.prototype.search = function(){searchPlugin.prototype.self.search.apply(searchPlugin.prototype.self,arguments); }
-exports.searchPlugin = searchPlugin;
+try{exports.searchPlugin = searchPlugin;}catch(e){console.warn('Using old version, not exporting functions.')}

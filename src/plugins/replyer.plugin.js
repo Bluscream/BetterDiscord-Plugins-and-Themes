@@ -1,28 +1,23 @@
 //META{"name":"Replyer"}*//
 
-function Replyer(){}
+function Replyer(){
+	this.getName = function() { return "Replyer"; };
+	this.getDescription = function() { return "Reply to people with a button."; };
+	this.getVersion = function() { return "1.0"; };
+	this.getAuthor = function() { return "CosmicSalad"; };
+}
 
 var BetterAPI = BetterAPI || bdplugins.BetterAPI.plugin.constructor
-Replyer.prototype.getName = function() {
-    return "Replyer";
-};
 
-Replyer.prototype.getDescription = function() {
-    return "Reply to people with a button";
+Replyer.prototype.load = function() {
+	Replyer.prototype.addReply();
 };
-
-Replyer.prototype.getVersion = function() {
-    return "1.0";
-};
-
-Replyer.prototype.getAuthor = function() {
-    return "CosmicSalad";
-};
-
 Replyer.prototype.start = function() {
 	Replyer.prototype.addReply();
 	console.log('Replyer started.')
 };
+Replyer.prototype.stop = function() {};
+Replyer.prototype.unload = function() {};
 
 Replyer.prototype.onMessage = function() {
 	Replyer.prototype.addReply();
@@ -50,12 +45,5 @@ Replyer.prototype.addReply = function(e) {
 	});
 };	
 
-Replyer.prototype.load = function() {
-	Replyer.prototype.addReply();
-};
-Replyer.prototype.unload = function() {};
-Replyer.prototype.stop = function() {};
-Replyer.prototype.getSettingsPanel = function() {
-	return null;
-};
-exports.Replyer = Replyer;
+Replyer.prototype.getSettingsPanel = function() {return null;};
+try{exports.Replyer = Replyer;}catch(e){console.warn('Using old version, not exporting functions.')}

@@ -1,6 +1,12 @@
 //META{"name":"crr"}*//
+function crr() {
+	this.getName = function() { return "Custom Role Colours"; };
+	this.getDescription = function() { return "Set custom role colours."; };
+	this.getVersion = function() { return "1.0"; };
+	this.getAuthor = function() { return "Jiiks, Pohky"; }
+}
 
-function crr() {}
+crr.prototype.load = function () {};
 
 crr.prototype.start = function () {
     this.crrMt = new MutationObserver(function(mutations) {
@@ -55,31 +61,10 @@ crr.prototype.stop = function () {
 	this.crrMt.disconnect();
 };
 
-crr.prototype.load = function () {
-    //Called when plugin is loaded
-};
-
-crr.prototype.unload = function () {
-    //Called when plugin is unloaded
-};
-
-crr.prototype.getName = function () {
-    return "Custom Role Colours";
-};
-
-crr.prototype.getDescription = function () {
-    return "Set custom role colours";
-};
-
-crr.prototype.getVersion = function () {
-    return "1.0";
-};
-
-crr.prototype.getAuthor = function () {
-    return "Jiiks, Pohky";
-};
+crr.prototype.unload = function () {};
+crr.prototype.onMessage = function () {};
 
 crr.prototype.getSettingsPanel = function () {
     return '';
 };
-exports.crr = crr;
+try{exports.crr = crr;}catch(e){console.warn('Using old version, not exporting functions.')}

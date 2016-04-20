@@ -3,10 +3,12 @@
 //This class is for hacky QUOTE INJECTION only
 var BetterAPI = BetterAPI || bdplugins.BetterAPI.plugin.constructor
 function DCMQuotingPlugin(){
+	this.getName = function() { return "Quoting"; };
+	this.getDescription = function() { return "Quoting from Discord Client Modding ported by NotGGhost."; };
+	this.getVersion = function() { return "0.1.7"; };
+	this.getAuthor = function() { return "NotGGhost";/*This version was modified by Bluscream.*/ };
     var ghostModId = 3;
-    this.load = function(){
-        //inject();
-    };
+    this.load = function(){};
     this.start = function(){
         inject();
     };
@@ -18,6 +20,7 @@ function DCMQuotingPlugin(){
         removeAllEvents(document, "DOMNodeInsertedIntoDocument");
         removeAllEvents(document, "DOMNodeInserted");
     };
+	this.onMessage = function() {};
     var checkVal = function(a){
         if (typeof a == "undefined")
             return 300;
@@ -77,20 +80,7 @@ function DCMQuotingPlugin(){
         }
     };
 };
-DCMQuotingPlugin.prototype.onSwitch = function() { 
-};
-DCMQuotingPlugin.prototype.getName = function() { 
-    return "Quoting"; 
-}; 
-DCMQuotingPlugin.prototype.getDescription = function() { 
-    return "Quoting from Discord Client Modding ported by NotGGhost"; 
-}; 
-DCMQuotingPlugin.prototype.getVersion = function() { 
-    return "0.1.7"; 
-}; 
-DCMQuotingPlugin.prototype.getAuthor = function() { 
-    return "NotGGhost"; //This version was modified by Bluscream.
-}; 
+DCMQuotingPlugin.prototype.onSwitch = function() {};
 DCMQuotingPlugin.prototype.getSettingsPanel = function() { 
 	const _repo = 'Discord-Client-Modding';
 	const _path = 'blob/master/Quoting.js';
@@ -223,4 +213,4 @@ if (!((typeof(betterDiscordIPC) !== 'undefined') && (betterDiscordIPC !== null))
     alert(str);
     new DCMQuotingPlugin().start();
 }
-exports.DCMQuotingPlugin = DCMQuotingPlugin;
+try{exports.DCMQuotingPlugin = DCMQuotingPlugin;}catch(e){console.warn('Using old version, not exporting functions.')}

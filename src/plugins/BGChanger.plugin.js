@@ -1,18 +1,11 @@
 //META{"name":"BGChanger"}*//
-function BGChanger() {}
+function BGChanger() {
+	this.getName = function() { return "Background Changer"; };
+	this.getDescription = function() { return "Changes your background from a array."; };
+	this.getVersion = function() { return "1.0"; };
+	this.getAuthor = function() { return "Bluscream"; };
+}
 var BetterAPI = BetterAPI || bdplugins.BetterAPI.plugin.constructor
-BGChanger.prototype.getName = function() {
-    return "Background Changer";
-};
-BGChanger.prototype.getDescription = function() {
-    return "Changes your background from a array.";
-};
-BGChanger.prototype.getVersion = function() {
-    return "1.0";
-};
-BGChanger.prototype.getAuthor = function() {
-    return "Bluscream";
-};
 BGChanger.prototype.getSettingsPanel = function() {
 	// $('#bgchange').livequery(function(){
 		// $('#bgchange').click(function(){
@@ -33,8 +26,6 @@ BGChanger.prototype.load = function() {
 	BGrand = true;	BGimg = 'https://i.imgur.com/MlfDS2G.gif';
 	BGblur = false;
 };
-BGChanger.prototype.unload = function() {
-};
 BGChanger.prototype.start = function() {
 	BGChanger.changeBG();
 };
@@ -46,9 +37,9 @@ BGChanger.prototype.stop = function() {
 		$('.app').css('background-image', BG_original);
 	}
 };
-BGChanger.prototype.onSwitch = function() {
-	// BGChanger.changeBG();
-};
+BGChanger.prototype.unload = function() {};
+BGChanger.prototype.onMessage = function() {};
+BGChanger.prototype.onSwitch = function() {/*BGChanger.changeBG();*/};
 BGChanger.changeBG = function() {
 	if (BGchange == true) {
 		if (BGrand == true){

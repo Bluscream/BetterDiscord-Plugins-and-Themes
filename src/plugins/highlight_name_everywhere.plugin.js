@@ -1,6 +1,10 @@
 //META{"name":"ehln"}*//
-
-function ehln() {}
+function ehln() {
+	this.getName = function() { return "Highlight Name"; };
+	this.getDescription = function() { return "Highlights Lines containing Name"; };
+	this.getVersion = function() { return "0.0.1"; };
+	this.getAuthor = function() { return "Pohky"; };
+}
 
 ehln.prototype.highlight = function () {
 	var stufftohighlight = [$('span.username').text(), "bluscream", "betterdiscord+", "bd+"];
@@ -53,17 +57,5 @@ ehln.prototype.getSettingsPanel = function () {
 	return html.join('\n');
 };
 
-ehln.prototype.getName = function () {
-    return "Highlight Name";
-};
-ehln.prototype.getDescription = function () {
-    return "Highlights Lines containing Name";
-};
-ehln.prototype.getVersion = function () {
-    return "0.0.1";
-};
-ehln.prototype.getAuthor = function () {
-    return "Pohky";
-};
 try{exports.ehln = ehln;}catch(e){console.warn('Using old version, not exporting functions.');}
 
