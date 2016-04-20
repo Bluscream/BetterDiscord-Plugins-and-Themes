@@ -1,75 +1,17 @@
-//META{"name":"BetterAPI"}*//
-var BetterAPI = function() {}
-BetterAPI.prototype.getName = function() {
-	return "BetterAPI";
-};
-BetterAPI.prototype.getDescription = function() {
-	return "Enhances the BetterDiscord Plugin API.";
-};
-BetterAPI.prototype.getVersion = function() {
-	return "1.0";
-};
-BetterAPI.prototype.load = function() {
-	//localStorage.setItem('shouldShowChangeLog', 'false');
-	// settingsPanel = new SettingsPanel();
-	// settingsPanel.init()
-};
-BetterAPI.prototype.start = function() {	
-	BetterAPI.prototype.loadCore();
-	BetterAPI.prototype.injectCSS();
-	BetterAPI.prototype.injectJS();
-	BetterAPI.prototype.loadAPI();
-	// BetterAPI.prototype.loadEvents();
-	//BetterAPI.prototype.loadAcc();
-	BetterAPI.enableTextSelection();
-	BetterAPI.enableAutoComplete();
-	// BetterAPI.enableButtons();
-	if(BetterAPI.elemExists('a[data-reactid=".0.1.1.0.1.0.0.1.2.0"]', 2)){
-		$('a[data-reactid=".0.1.1.0.1.0.0.1.2.0"]:first').parent().remove();
-	}
-	BetterAPI.prototype.overRides();
-	BetterAPI.prototype.autoInvite();
-	BetterAPI.prototype.inviteScraper();
-};
-BetterAPI.prototype.update = function() {
-};
-BetterAPI.prototype.getAuthor = function() {
-	return "Bluscream";
-};
-BetterAPI.prototype.getSettingsPanel = function() {
-	$('#bdpmakebak').livequery(function(){
-		$('#bdpmakebak').click( function() { BetterAPI.makeFile('bdbackup.txt', BetterAPI.getBackup()); });
-	});
-	$('#bdprestbak').livequery(function(){
-		$('#bdprestbak').upload({
-			name: 'bdprestbakform',
-			onComplete: function(response) { alertify.success(""+response); }
-		});
-	});
-	$('#bdpreload').livequery(function(){
-		$('#bdpreload').click( function() { window.location.reload(); });
-	});
-	return '<b>'+BetterAPI.prototype.getName()+' Settings</b><br><br><br>'+
-		'Backup Localstorage:&nbsp;<button id="bdpmakebak">Backup</button><br>'+
-		'Restore Localstorage:&nbsp;<button id="bdprestbak">Restore</button><br>'+
-		'Reload Discord:&nbsp;<button id="bdpreload">Reload</button><br>';
-};
-BetterAPI.prototype.onSwitch = function() {
-	localStorage.setItem('URL', window.location.href);
-	if(BetterAPI.elemExists('a[data-reactid=".0.1.1.0.1.0.0.1.2.0"]', 2)){
-		$('a[data-reactid=".0.1.1.0.1.0.0.1.2.0"]:first').parent().remove();
-	}
-};
-BetterAPI.prototype.overRides  = function() {
+(BetterAPI = function() {
+//	'String'.capitalizeFirstLetter();
 	String.prototype.capitalizeFirstLetter = function() {
 		return this.charAt(0).toUpperCase() + this.slice(1);
 	};
+//	'String'.contains(str);
 	String.prototype.contains = function(str) {
 		return this.indexOf(str) != -1;
 	};
+//	load();
 	load = function() {
 		window.location.href="https://discordapp.com/channels/@me";
-	}
+	};
+//	dWSocket.prototype.onMessage(e);
 	// BdWSocket.prototype.onMessage = function (e) {
 		// var packet, data, type;
 		// try {
@@ -94,6 +36,7 @@ BetterAPI.prototype.overRides  = function() {
 				// break;
 		// }
 	// };
+//	$.ajaxExternal(ajaxdata);
 	$.ajaxExternal = function(_ajax){
 		var protocol = location.protocol,
 			hostname = location.hostname,
@@ -132,11 +75,8 @@ BetterAPI.prototype.overRides  = function() {
 			}
 			return _ajax.apply(this, arguments);
 		};
-	};
-};
-BetterAPI.prototype.loadCore  = function() {
-
-	// BetterAPI.isDebug();
+	}
+//	BetterAPI.isDebug();
 	BetterAPI.isDebug = function() {
 		if(localStorage.getItem('debug')){
 			if(localStorage.getItem('debug').toLowerCase() == 'true' || localStorage.getItem('debug').toLowerCase() == '1'){
@@ -144,12 +84,12 @@ BetterAPI.prototype.loadCore  = function() {
 			}else{ return false; }
 		}else{ localStorage.setItem('debug', '0');return false;	}
 	};
-	// BetterAPI.toggleDebug();
+//	BetterAPI.toggleDebug();
 	BetterAPI.toggleDebug = function() {
 		if(BetterAPI.isDebug()){ localStorage.setItem('debug', '0');		
 		}else{ localStorage.setItem('debug', '1'); }
 	};
-	//BetterAPI.update();
+//	BetterAPI.update();
 	BetterAPI.update = function(name, url) {
 		$.ajax({
 			url: url,
@@ -170,8 +110,8 @@ BetterAPI.prototype.loadCore  = function() {
 				// });
 			}
 		});
-	};
-// BetterAPI.clearDir(path);
+	}
+//	BetterAPI.clearDir(path);
 	BetterAPI.clearDir = function(path) {
 		$.jAlert({
 			  'title': 'Are you sure?',
@@ -189,7 +129,7 @@ BetterAPI.prototype.loadCore  = function() {
 		 });
 		//process.env.appdata'+\BetterDiscord\plugins'
 	};
-// BetterAPI.DisableLogging();
+//	BetterAPI.DisableLogging();
 	BetterAPI.DisableLogging = function() {
 		console_log = console.log;
 		console_info = console.info;
@@ -204,7 +144,7 @@ BetterAPI.prototype.loadCore  = function() {
 		window.console.debug = function() {};
 		window.console.count = function() {};
 	};
-// BetterAPI.EnableLogging();
+//	BetterAPI.EnableLogging();
 	BetterAPI.EnableLogging = function() {
 		if(!console_log){
 			return;
@@ -216,7 +156,7 @@ BetterAPI.prototype.loadCore  = function() {
 		window.console.debug = console_debug;
 		window.console.count = console_count;
 	};
-	//BetterAPI.log(dbg, "type", "pluginName", "msg");
+//	BetterAPI.log(dbg, "type", "pluginName", "msg");
 	BetterAPI.log = function(dbg, type, pluginName, msg) {
 		if ( (dbg == "debug") || (dbg == "dbg") || (dbg) ) {
 			if (BetterAPI.isDebug()) {
@@ -254,7 +194,7 @@ BetterAPI.prototype.loadCore  = function() {
 			}
 		}	
 	};
-	//BetterAPI.appendTo("link", "Element");
+//	BetterAPI.appendTo("link", "Element");
 	BetterAPI.appendTo = function(link, Element){
 		var $head = $("head");
 		var $headlinklast = $head.find( link + ":last");
@@ -265,7 +205,7 @@ BetterAPI.prototype.loadCore  = function() {
 		   $head.append(Element);
 		}
 	};
-	//BetterAPI.enableTextSelection();
+//	BetterAPI.enableTextSelection();
 	BetterAPI.enableTextSelection = function() {
 		function ats(){
 			var styles='*,p,div{user-select:text !important;-moz-user-select:text !important;-webkit-user-select:text !important;}';
@@ -290,7 +230,7 @@ BetterAPI.prototype.loadCore  = function() {
 			atswp();
 		}
 	};
-	//BetterAPI.enableAutoComplete();
+//	BetterAPI.enableAutoComplete();
 	BetterAPI.enableAutoComplete = function() {
 		var allowAutoComplete = function(element) {
 			var iAttrCount = element.attributes.length;
@@ -314,7 +254,7 @@ BetterAPI.prototype.loadCore  = function() {
 			}
 		}
 	};
-	//BetterAPI.enableButtons();
+//	BetterAPI.enableButtons();
 	BetterAPI.enableButtons = function() {
 		var buttons = document.getElementsByTagName('button');
 		for (var i = 0; i < buttons.length; i++)
@@ -322,16 +262,16 @@ BetterAPI.prototype.loadCore  = function() {
 			buttons[i].removeAttr('disabled');
 		}
 	};
-	//BetterAPI.isNumber("string");
+//	BetterAPI.isNumber("string");
 	BetterAPI.isNumber = function(str) {
 		if(/^\d+$/.test(str)) {
 			return true;
 		} else {
-			BetterAPI.log(1, "error", BetterAPI.prototype.getName(), "\""+str+"\" is not a valid number.");
+			BetterAPI.log(1, "error", BetterAPI.getName(), "\""+str+"\" is not a valid number.");
 			return false;
 		}
 	};
-	//BetterAPI.isUID("string");
+//	BetterAPI.isUID("string");
 	BetterAPI.isUID = function(str) {
 		if(str){
 			if(BetterAPI.isNumber(str)) {
@@ -339,7 +279,7 @@ BetterAPI.prototype.loadCore  = function() {
 				if( ( str.length > uid_length_min ) && ( str.length < uid_length_max ) ) {
 					return true;
 				} else {
-					BetterAPI.log(1, "error", BetterAPI.prototype.getName(), "\""+str+"\" is not between "+uid_length_min+" and "+uid_length_max+" chars.");
+					BetterAPI.log(1, "error", BetterAPI.getName(), "\""+str+"\" is not between "+uid_length_min+" and "+uid_length_max+" chars.");
 					return false;
 				}
 			} else {
@@ -349,7 +289,7 @@ BetterAPI.prototype.loadCore  = function() {
 			return false;
 		}
 	};
-	//BetterAPI.isInvite("string");
+//	BetterAPI.isInvite("string");
 	BetterAPI.isInvite = function(str) {
 		if(!BetterAPI.isEmpty(str)){
 			var _invites = ["discordapp.com/invite/", "discord.gg/" ]
@@ -365,7 +305,7 @@ BetterAPI.prototype.loadCore  = function() {
 			return false;
 		}
 	};
-	//BetterAPI.makeFile("name", "content");
+//	BetterAPI.makeFile("name", "content");
 	BetterAPI.makeFile = function(name, content) {
 		var buf = new ArrayBuffer(content.length*2);
 		var bufView = new Uint16Array(buf);
@@ -391,7 +331,7 @@ BetterAPI.prototype.loadCore  = function() {
 		}, function() {});
 		}, function() {});
 	};
-	//BetterAPI.getBackup();
+//	BetterAPI.getBackup();
 	BetterAPI.getBackup = function() {
 		var i = 0,
 		content = '',
@@ -401,7 +341,7 @@ BetterAPI.prototype.loadCore  = function() {
 		}
 		return content;
 	};
-	// BetterAPI.openStatusPopup();
+//	BetterAPI.openStatusPopup();
 	BetterAPI.openStatusPopup = function() {
 		if(BetterAPI.getCurrentServerID() == "129022124844253184"){
 			$.jAlert({
@@ -419,19 +359,19 @@ BetterAPI.prototype.loadCore  = function() {
 			 });
 		}
 	};
-	// BetterAPI.addLocationBar();
+//	BetterAPI.addLocationBar();
 	BetterAPI.addLocationBar = function() {
 		if ($("#locationbar").length <= 0) {
 			$('div[data-reactid=".0.1.1.0.2.0"]').prepend('<input id="locationbar" style="width:80%;" value="'+window.location.href+'"/>');
 		}
 	};
-	// BetterAPI.updateLocationBar();
+//	BetterAPI.updateLocationBar();
 	BetterAPI.updateLocationBar = function() {
 		if ($("#locationbar").length == 1) {
 			$('#locationbar').val(window.location.href);
 		}
 	};
-// BetterAPI.createCharCounter();
+//	BetterAPI.createCharCounter();
 	BetterAPI.createCharCounter = function() {
 		if ($('.charcount-display').length <= 0) {
 			$('textarea[data-reactid^=".0.1.1.0.2.1.0.1.$"]').charcount({
@@ -441,20 +381,20 @@ BetterAPI.prototype.loadCore  = function() {
 			$('.charcount-display').css("font-size", "small");
 		}
 	};
-	// BetterAPI.visit("href");
+//	BetterAPI.visit("href");
 	BetterAPI.visit = function(href) {
 		localStorage.setItem('lastURL', window.location.href);
 		window.location.href = href;
 	};
-	// BetterAPI.openURL("href");
+//	BetterAPI.openURL("href");
 	BetterAPI.openURL = function(href) {
 		require("shell").openExternal(href);
 	};
-	// BetterAPI.bdAlert("title", "text");
+//	BetterAPI.bdAlert("title", "text");
 	BetterAPI.bdAlert = function(title, text) {
 		Core.prototype.alert(title, text);
 	};
-	// BetterAPI.elemExists(elem, times);
+//	BetterAPI.elemExists(elem, times);
 	BetterAPI.elemExists = function(elem, times) {
 		if(times){
 			if($(elem).length > times-1){
@@ -470,7 +410,7 @@ BetterAPI.prototype.loadCore  = function() {
 			}
 		}
 	};
-	// BetterAPI.listJSFunctions();
+//	BetterAPI.listJSFunctions();
 	BetterAPI.listJSFunctions = function() {
 		var standardGlobals=["top","window","location","external","chrome","document","inlineCSS","target","width","height","canvas","data","DOMURL","img","svg","ctx","url","w","a","speechSynthesis","webkitNotifications","localStorage","sessionStorage","applicationCache","webkitStorageInfo","indexedDB","webkitIndexedDB","crypto","CSS","performance","console","devicePixelRatio","styleMedia","parent","opener","frames","self","defaultstatus","defaultStatus","status","name","length","closed","pageYOffset","pageXOffset","scrollY","scrollX","screenTop","screenLeft","screenY","screenX","innerWidth","innerHeight","outerWidth","outerHeight","offscreenBuffering","frameElement","clientInformation","navigator","toolbar","statusbar","scrollbars","personalbar","menubar","locationbar","history","screen","postMessage","close","blur","focus","ondeviceorientation","ondevicemotion","onunload","onstorage","onresize","onpopstate","onpageshow","onpagehide","ononline","onoffline","onmessage","onhashchange","onbeforeunload","onwaiting","onvolumechange","ontimeupdate","onsuspend","onsubmit","onstalled","onshow","onselect","onseeking","onseeked","onscroll","onreset","onratechange","onprogress","onplaying","onplay","onpause","onmousewheel","onmouseup","onmouseover","onmouseout","onmousemove","onmouseleave","onmouseenter","onmousedown","onloadstart","onloadedmetadata","onloadeddata","onload","onkeyup","onkeypress","onkeydown","oninvalid","oninput","onfocus","onerror","onended","onemptied","ondurationchange","ondrop","ondragstart","ondragover","ondragleave","ondragenter","ondragend","ondrag","ondblclick","oncuechange","oncontextmenu","onclose","onclick","onchange","oncanplaythrough","oncanplay","oncancel","onblur","onabort","onwheel","onwebkittransitionend","onwebkitanimationstart","onwebkitanimationiteration","onwebkitanimationend","ontransitionend","onsearch","getSelection","print","stop","open","showModalDialog","alert","confirm","prompt","find","scrollBy","scrollTo","scroll","moveBy","moveTo","resizeBy","resizeTo","matchMedia","requestAnimationFrame","cancelAnimationFrame","webkitRequestAnimationFrame","webkitCancelAnimationFrame","webkitCancelRequestAnimationFrame","captureEvents","releaseEvents","atob","btoa","setTimeout","clearTimeout","setInterval","clearInterval","TEMPORARY","PERSISTENT","getComputedStyle","getMatchedCSSRules","webkitConvertPointFromPageToNode","webkitConvertPointFromNodeToPage","webkitRequestFileSystem","webkitResolveLocalFileSystemURL","openDatabase","addEventListener","removeEventListener","dispatchEvent"];
 		var $appSpecificGlobals={};
@@ -480,7 +420,7 @@ BetterAPI.prototype.loadCore  = function() {
 		window.$appSpecificGlobals=$appSpecificGlobals;
 		console.log(window.$appSpecificGlobals);
 	};
-	// BetterAPI.checkJSVersion();
+//	BetterAPI.checkJSVersion();
 	BetterAPI.checkJSVersion = function() {
 		var _js =	'<script class="JSTest" type="text/javascript">'+
 						'var jsver = 1.0;'+
@@ -495,11 +435,11 @@ BetterAPI.prototype.loadCore  = function() {
 		return jsver;
 		
 	};
-	// BetterAPI.getVersions();
+//	BetterAPI.getVersions();
 	BetterAPI.getVersions = function() { //To be fixed
 		// var _ver = {};
 		// var stuff = ["chromium", "electron", "javascript", "jquery", "bdcore", "bd", "betterapi", "discordjs"];
-		// var stuffs = ["process.versions.chrome", "process.versions.electron", "BetterAPI.checkJSVersion()", "$.fn.jquery", "jsVersion", "version", "BetterAPI.prototype.getVersion()", "bot.userAgent.version"];
+		// var stuffs = ["process.versions.chrome", "process.versions.electron", "BetterAPI.checkJSVersion()", "$.fn.jquery", "jsVersion", "version", "BetterAPI.getVersion()", "bot.userAgent.version"];
 		// for(var i = 0; i < stuff.length; i++){
 			// try{_ver.stuff[i] = eval(stuffs[i]);}catch(e){}
 		// };
@@ -530,15 +470,15 @@ BetterAPI.prototype.loadCore  = function() {
 			// jquery: $.fn.jquery,
 			// bdcore: jsVersion,
 			// bd: version,
-			// betterapi: BetterAPI.prototype.getVersion(),
+			// betterapi: BetterAPI.getVersion(),
 			// discordjs: bot.userAgent.version
 		// }
 	};
-	// BetterAPI.openSettings();
+//	BetterAPI.openSettings();
 	BetterAPI.openSettings = function() {
 		$('.btn-settings').click();
 	};
-	// BetterAPI.isEmpty(s);
+//	BetterAPI.isEmpty(s);
 	BetterAPI.isEmpty = function(s) {
 		if( !s || (typeof s === "undefined") || (typeof s === null) || (s == "null") || (s == "undefined") || (s == "empty") || (s == "-1")){
 			return true;
@@ -546,16 +486,16 @@ BetterAPI.prototype.loadCore  = function() {
 			return false;
 		}
 	};
-	// BetterAPI.loadSettings(name, default);
+//	BetterAPI.loadSettings(name, default);
 	BetterAPI.loadSettings = function(name, settings){
 		if (BetterAPI.isEmpty(localStorage.getItem(name))){ localStorage.setItem(name, JSON.stringify(settings)); }
 		return JSON.parse(localStorage.getItem(name));
 	};
-	// BetterAPI.saveSettings(name, settings);
+//	BetterAPI.saveSettings(name, settings);
 	BetterAPI.saveSettings = function(name, settings){
 		localStorage.setItem(name,JSON.stringify(settings));
 	};
-	// BetterAPI.fileExists(path);
+//	BetterAPI.fileExists(path);
 	BetterAPI.fileExists = function(path){
 		var fs = require('fs');
 		fs.access(path, fs.F_OK, function(err) {
@@ -568,7 +508,7 @@ BetterAPI.prototype.loadCore  = function() {
 			}
 		});
 	};
-	// BetterAPI.getFileHash(path);
+//	BetterAPI.getFileHash(path);
 	BetterAPI.getFileHash = function(path){
 		var fs = require('fs');
 		var crypto = require('crypto');
@@ -583,7 +523,7 @@ BetterAPI.prototype.loadCore  = function() {
 		// read all file and pipe it (write it) to the hash object
 		fd.pipe(hash);//console.log(fd);
 	};
-	// BetterAPI.npm(name, saveDir, callback);
+//	BetterAPI.npm(name, saveDir, callback);
 	BetterAPI.npm = function(name, saveDir, callback){
 		require("child_process").exec("npm install --save " + name, {
 			cwd : saveDir
@@ -593,7 +533,7 @@ BetterAPI.prototype.loadCore  = function() {
 			if(callback){callback();}
 		});
 	};
-	// BetterAPI.requireCSS(uri, elemID);
+//	BetterAPI.requireCSS(uri, elemID);
 	BetterAPI.requireCSS = function(uri, elemID){
 		if(!BetterAPI.elemExists($('link[href="'+uri+'"]'))){
 			if(elemID){
@@ -605,22 +545,22 @@ BetterAPI.prototype.loadCore  = function() {
 			}
 		}
 	};
-	// BetterAPI.requireJS(href, elemID, function);
+//	BetterAPI.requireJS(href, elemID, function);
 	BetterAPI.requireJS = function(href, elemID, func, callback){
 		if(!BetterAPI.elemExists($('script[src="'+href+'"]'))){
 			if(elemID){
 				if(!BetterAPI.elemExists($('#'+elemID))){
 					if(func){
-						try{ eval(func);if(BetterAPI.isDebug()){ console.log("Not appending "+elemID+" because it's function is already defined."); }
+						try{ eval(func);if(BetterAPI.isDebug()){ console.info("Not appending "+elemID+" because it's function is already defined."); }
 						}catch(e){ $("<script/>",{ type: "text/javascript", src: href, id: elemID }).appendTo($("head")); }
 						if(callback){try{eval(callback);}catch(e){}}
 					}else{
 						$("<script/>",{ type: "text/javascript", src: href, id: elemID }).appendTo($("head"));
 					}
-				}else{if(BetterAPI.isDebug()){ console.log("Not appending "+elemID+" because it's element is already defined."); }}
+				}else{if(BetterAPI.isDebug()){ console.info("Not appending "+elemID+" because it's element is already defined."); }}
 			}else{
 				if(func){
-					try{ eval(func);if(BetterAPI.isDebug()){ console.log("Not appending script because its function is already defined."); }
+					try{ eval(func);if(BetterAPI.isDebug()){ console.info('Not appending script '+href+' because its function is already defined.'); }
 					}catch(e){ $("<script/>",{ type: "text/javascript", src: href }).appendTo($("head")); }
 					if(callback){try{eval(callback);}catch(e){}}
 				}else{
@@ -629,8 +569,6 @@ BetterAPI.prototype.loadCore  = function() {
 			}
 		}
 	};
-};
-BetterAPI.prototype.injectCSS = function() {
 	BetterAPI.requireCSS("https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.0-beta.1/jquery-ui.min.css", "JQueryUICSS");
 	BetterAPI.requireCSS("https://cdn.rawgit.com/VersatilityWerks/jAlert/master/src/jAlert-v3.css", "jAlertCSS");
 	//BetterAPI.requireCSS("https://cdn.rawgit.com/fabien-d/alertify.js/0.3.11/themes/alertify.default.css");
@@ -638,8 +576,6 @@ BetterAPI.prototype.injectCSS = function() {
 	//BetterAPI.requireCSS("https://cdn.rawgit.com/twbs/bootstrap/master/dist/css/bootstrap.min.css");
 	BetterAPI.requireCSS("https://cdn.jsdelivr.net/alertifyjs/1.6.1/css/alertify.min.css");
 	BetterAPI.requireCSS("https://cdn.jsdelivr.net/alertifyjs/1.6.1/css/themes/default.min.css");
-};
-BetterAPI.prototype.injectJS  = function() {
 	BetterAPI.requireJS("https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0-beta1/jquery.min.js", "JQueryJS" , "$()"); // 
 	BetterAPI.requireJS("https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.0-beta.1/jquery-ui.min.js", "JQueryUIJS", "$().draggable();"); //
 	BetterAPI.requireJS("https://cdn.rawgit.com/carhartl/jquery-cookie/master/src/jquery.cookie.js", "JQCookieJS", "$.cookie()"); //
@@ -658,9 +594,7 @@ BetterAPI.prototype.injectJS  = function() {
 	//BetterAPI.requireJS("https://cdn.rawgit.com/fabien-d/alertify.js/0.3.11/lib/alertify.min.js"); // https://github.com/fabien-d/alertify.js/wiki/How-to-Use#usage
 	//BetterAPI.requireJS("https://cdn.rawgit.com/sciactive/pnotify/master/dist%2Fpnotify.js"); // https://sciactive.com/pnotify/#using
 	//BetterAPI.requireJS("https://cdn.rawgit.com/afshinm/Json-to-HTML-Table/master/json-to-table.js"); // https://github.com/afshinm/Json-to-HTML-Table#how-to-use
-};
-BetterAPI.prototype.loadAPI  = function() {
-	// BetterAPI.getAllImages();
+//	BetterAPI.getAllImages();
 	BetterAPI.getAllImages = function() {
 			$('.attachment-image>a').each(function( i, e ) {
 				try{
@@ -673,85 +607,85 @@ BetterAPI.prototype.loadAPI  = function() {
 				}catch(e){}
 			});
 	};
-	// BetterAPI.getCurrentServerName();
+//	BetterAPI.getCurrentServerName();
 	BetterAPI.getCurrentServerName = function() {
 		try{return $(document).find("[data-reactid='.0.1.1.0.1.0.0.0.0']").text();
 		}catch(e){ return false;}
 	};
-	// BetterAPI.getCurrentServerID();
+//	BetterAPI.getCurrentServerID();
 	BetterAPI.getCurrentServerID = function() {
 		var _url = window.location.pathname;
 		try{return _url.match(/\d+/)[0];
 		}catch(e){ return false;}
 	};
-	// BetterAPI.getCurrentTextChannelName();
+//	BetterAPI.getCurrentTextChannelName();
 	BetterAPI.getCurrentTextChannelName = function() {
 		try{return $(".active .channel-name").text();
 		}catch(e){ return false;}
 	};
-	// BetterAPI.getCurrentTextChannelID();
+//	BetterAPI.getCurrentTextChannelID();
 	BetterAPI.getCurrentTextChannelID = function() {
 		var _url = window.location.pathname;
 		try{return _url.match(/\d+$/);
 		}catch(e){ return false;}
 	};
-	// BetterAPI.getCurrentVoiceChannelName();
+//	BetterAPI.getCurrentVoiceChannelName();
 	BetterAPI.getCurrentVoiceChannelName = function() {
 		if($(".audio .channel-name").text()){
 			try{return $(".audio .channel-name").text();
 			}catch(e){ return false;}
 		}else{return null;}
 	};
-	// BetterAPI.getOwnID();
+//	BetterAPI.getOwnID();
 	BetterAPI.getOwnID = function() {
-    	if($(".account>.avatar-small").css("background-image") === undefined)return;
-    	var ownID = $(".account .avatar-small").css("background-image").match(/\d+/);
+		if($(".account>.avatar-small").css("background-image") === undefined)return;
+		var ownID = $(".account .avatar-small").css("background-image").match(/\d+/);
 		if (BetterAPI.isUID(ownID)) {
 			return ownID[0];
 		} else {
-			BetterAPI.log(1, "error", BetterAPI.prototype.getName(), "Can't get own UID.");
+			BetterAPI.log(1, "error", BetterAPI.getName(), "Can't get own UID.");
 			return null;
 		}
 	};
-	// BetterAPI.getOwnDiscriminator();
+//	BetterAPI.getOwnDiscriminator();
 	BetterAPI.getOwnDiscriminator = function() {
 		return $('span[data-reactid=".0.1.1.0.1.2.1.1.1"]').text();
 	};
-	// BetterAPI.getOwnName();
+//	BetterAPI.getOwnName();
 	BetterAPI.getOwnName = function() {
 		return ''+$('.account').find('.username').text();
 	};
-	// BetterAPI.getOwnAvatarID();
+//	BetterAPI.getOwnAvatarID();
 	BetterAPI.getOwnAvatarID = function() {
 		var avatar = ''+$(".account .avatar-small").css("background-image");
 		return avatar.split("/").pop(-1).slice(0, -5);
 	};
-	// BetterAPI.getOwnAvatarURL();
+//	BetterAPI.getOwnAvatarURL();
 	BetterAPI.getOwnAvatarURL = function() {
 		var avatar = ''+$(".account .avatar-small").css("background-image");
 		return avatar.substring(4, avatar.length - 1);
 	};
-	// BetterAPI.userCount();
+//	BetterAPI.userCount();
 	BetterAPI.userCount = function() {
 		num = 0;
 		[].slice.call($('span[data-reactid^=".0.1.1.0.2.1.1.0.0.1"][data-reactid$=".2"]')).forEach(function (i) {
 			num = num + parseInt($(i).text());
-        });
+		});
 		return num;
 	};	
-	// BetterAPI.onlineUserCount();
+//	BetterAPI.onlineUserCount();
 	BetterAPI.onlineUserCount = function() {
 		return parseInt($('span[data-reactid$="$online.2"]').text());
 	};
-	// BetterAPI.offlineUserCount();
+//	BetterAPI.offlineUserCount();
 	BetterAPI.offlineUserCount = function() {
 		return parseInt($('span[data-reactid$="$offline.2').text());
 	};
-	// BetterAPI.serverCount();
+//	BetterAPI.serverCount();
 	BetterAPI.serverCount = function() {
 		return $('li[data-reactid*=".0.1.1.0.0.0.4:"]').length;
 	};
-	// BetterAPI.getUserIdByName("name");
+//	BetterAPI.getUserIdByName("name");
 	BetterAPI.getUserIdByName = function(name) {
 		var nick = "";
 		var match = "";		
@@ -766,7 +700,7 @@ BetterAPI.prototype.loadAPI  = function() {
 			}
 		}
 		if (match === "") {
-            [].slice.call($('.message-group')).forEach(function (message) {
+			[].slice.call($('.message-group')).forEach(function (message) {
 				var user = $(message).find(".user-name");
 				var username = user.text();
 				var comment = $(user).parents(".comment");
@@ -780,13 +714,13 @@ BetterAPI.prototype.loadAPI  = function() {
 		}
 		match = ""+match;	
 		if(BetterAPI.isUID(match)) {
-			BetterAPI.log(1, "log", BetterAPI.prototype.getName(), "UID of \""+nick+"\" is \""+match+"\" with a length of "+match.length+" chars.");
+			BetterAPI.log(1, "log", BetterAPI.getName(), "UID of \""+nick+"\" is \""+match+"\" with a length of "+match.length+" chars.");
 			return match;
 		} else {
 			return null;
 		}
 	};
-	// BetterAPI.getUserNameById("id");
+//	BetterAPI.getUserNameById("id");
 	BetterAPI.getUserNameById = function(id) {
 		var match = "";
 		var users = $(".avatar-small");
@@ -813,7 +747,7 @@ BetterAPI.prototype.loadAPI  = function() {
 			return null;
 		}
 	};
-	// BetterAPI.getUserGameByID("id");
+//	BetterAPI.getUserGameByID("id");
 	BetterAPI.getUserGameByID = function(id) {
 		var match = "";
 		var users = $(".avatar-small");
@@ -840,7 +774,7 @@ BetterAPI.prototype.loadAPI  = function() {
 			return null;
 		}
 	};
-	// BetterAPI.getUserAvatarID(id);
+//	BetterAPI.getUserAvatarID(id);
 	BetterAPI.getUserAvatarID = function(id) {
 		var match = null;
 		$(".avatar-small").each(function(){ 
@@ -861,7 +795,7 @@ BetterAPI.prototype.loadAPI  = function() {
 		}
 		return match;
 	};
-	// BetterAPI.getUserAvatarIDbyName("name");
+//	BetterAPI.getUserAvatarIDbyName("name");
 	BetterAPI.getUserAvatarIDbyName = function(name) {
 		var match = null;
 		$(".avatar-small").each(function(){ 
@@ -884,7 +818,7 @@ BetterAPI.prototype.loadAPI  = function() {
 		}
 		return match;
 	};
-	// BetterAPI.getAvatarURLbyName("name");
+//	BetterAPI.getAvatarURLbyName("name");
 	BetterAPI.getAvatarURLbyName = function(name) {
 		var match = null;
 		$(".avatar-small").each(function(){ 
@@ -907,7 +841,7 @@ BetterAPI.prototype.loadAPI  = function() {
 		}
 		return match;
 	};
-	// BetterAPI.getAvatarURL(id);
+//	BetterAPI.getAvatarURL(id);
 	BetterAPI.getAvatarURL = function(id) {
 		var match = null;
 		$(".avatar-small").each(function(){ 
@@ -928,7 +862,7 @@ BetterAPI.prototype.loadAPI  = function() {
 		}
 		return match;
 	};
-	// BetterAPI.getClientList();
+//	BetterAPI.getClientList();
 	BetterAPI.getClientList = function() {
 		var list = {};
 		var clients = [];
@@ -949,10 +883,10 @@ BetterAPI.prototype.loadAPI  = function() {
 			};
 			list.clients.push(clients3);
 		}
-		BetterAPI.log(1, "log", BetterAPI.prototype.getName(), "Got clientlist of #"+BetterAPI.getCurrentTextChannelName()+" in \""+BetterAPI.getCurrentServerName()+"\" with a total of "+clients.length+" clients");
+		BetterAPI.log(1, "log", BetterAPI.getName(), "Got clientlist of #"+BetterAPI.getCurrentTextChannelName()+" in \""+BetterAPI.getCurrentServerName()+"\" with a total of "+clients.length+" clients");
 		return list.clients;
 	};
-	// BetterAPI.getClientNameList();
+//	BetterAPI.getClientNameList();
 	BetterAPI.getClientNameList = function() {
 		var clients = [];
 		var _clients = $(".user-name, .member-username");
@@ -964,7 +898,7 @@ BetterAPI.prototype.loadAPI  = function() {
 		}
 		return clients;
 	};
-	// BetterAPI.getClientUIDList();
+//	BetterAPI.getClientUIDList();
 	BetterAPI.getClientUIDList = function() {
 		var clients = [];
 		var _clients = $(".avatar-small, .avatar-large");
@@ -979,15 +913,15 @@ BetterAPI.prototype.loadAPI  = function() {
 		}
 		return clients;
 	};
-	// BetterAPI.onlineFriendsCount();
+//	BetterAPI.onlineFriendsCount();
 	BetterAPI.onlineFriendsCount = function() {
 		return $('.friends-online').text().replace(' Online', '');
 	};
 	
-	// BetterAPI.addUserLabel("divID", "label", "<html>");
+//	BetterAPI.addUserLabel("divID", "label", "<html>");
 	BetterAPI.addUserLabel = function(divID, label, html) {
 		divID = divID.startsWith("#") ? divID.substring(1) : divID;
-        if ($("#" + divID).length <= 0) {$('.user-popout-options').prepend(''+
+		if ($("#" + divID).length <= 0) {$('.user-popout-options').prepend(''+
 			'<div id="'+divID+'"class="roles-container">'+
 				'<span class="label">'+label+'</span>'+
 				'<ul class="member-roles">'+
@@ -997,10 +931,10 @@ BetterAPI.prototype.loadAPI  = function() {
 		}
 		$(divID).length = 1;
 	};
-	// BetterAPI.addUserLink(divID, id1, href1, text1, [id2, href2, text2]);
+//	BetterAPI.addUserLink(divID, id1, href1, text1, [id2, href2, text2]);
 	BetterAPI.addUserLink = function(divID, id1, href1, text1, id2, href2, text2) {
-        divID = divID.startsWith("#") ? divID.substring(1) : divID;
-        if ($("#" + divID).length <= 0) {
+		divID = divID.startsWith("#") ? divID.substring(1) : divID;
+		if ($("#" + divID).length <= 0) {
 			if (id2 == "0" || href2 == "0" || text2 == "0") {
 				$('.user-popout-options').append(''+
 				'<div id="'+divID+'" style="font-size:x-small;padding-top:5px;">'+
@@ -1013,10 +947,10 @@ BetterAPI.prototype.loadAPI  = function() {
 			}
 		}
 	};
-	// BetterAPI.addLink("divID", "text", "href", "size");
+//	BetterAPI.addLink("divID", "text", "href", "size");
 	BetterAPI.addLink = function(divID, text, href, size) {
-        divID = divID.startsWith("#") ? divID.substring(1) : divID;
-        if ($("#" + divID).length <= 0) {
+		divID = divID.startsWith("#") ? divID.substring(1) : divID;
+		if ($("#" + divID).length <= 0) {
 			$('ul[data-reactid=".0.1.1.0.1.3"]').append(''+
 				'<li id="'+divID+'" href="'+href+'" size="'+size+'">'+
 					'<a >'+text+'</a>'+
@@ -1024,14 +958,14 @@ BetterAPI.prototype.loadAPI  = function() {
 			'');
 		}
 	};
-	// BetterAPI.addUserButton("btn", "divID", "text");
+//	BetterAPI.addUserButton("btn", "divID", "text");
 	BetterAPI.addUserButton = function(type, divID, text) {
-        divID = divID.startsWith("#") ? divID.substring(1) : divID;
-        if ($("#" + divID).length <= 0) {
+		divID = divID.startsWith("#") ? divID.substring(1) : divID;
+		if ($("#" + divID).length <= 0) {
 			$('.user-popout-options').append('<button class="'+type+'" id="'+divID+'">'+text+'</button>');
 		}
 	};
-	// BetterAPI.addServerButton("divID", "text", "before/after");
+//	BetterAPI.addServerButton("divID", "text", "before/after");
 	BetterAPI.addServerButton = function(divID, text, pos) {
 		if(pos == "before"){
 			divID = divID.startsWith("#") ? divID.substring(1) : divID;
@@ -1045,7 +979,7 @@ BetterAPI.prototype.loadAPI  = function() {
 			}
 		}
 	};
-	// BetterAPI.changeUserInfo("nickname", ["avatar" BetterAPI.getUserAvatarID(id)]);
+//	BetterAPI.changeUserInfo("nickname", ["avatar" BetterAPI.getUserAvatarID(id)]);
 	BetterAPI.changeUserInfo = function(nickname, avatar) {
 		$.ajax({
 		method:"patch",
@@ -1070,7 +1004,7 @@ BetterAPI.prototype.loadAPI  = function() {
 		var blob = new Blob([byteArray], {type: contentType});
 		return blob;
 	};
-// BetterAPI.sendImage("imgName", "data:imgData", "channelID");
+//	BetterAPI.sendImage("imgName", "data:imgData", "channelID");
 	BetterAPI.sendImage = function(imgName, imgData, cID) {
 		var imageBlob = b64toBlob(imgData);
 		var fd = new FormData();
@@ -1086,7 +1020,7 @@ BetterAPI.prototype.loadAPI  = function() {
 		  contentType: false
 		});
 	};
-// BetterAPI.bulkUpload();
+//	BetterAPI.bulkUpload();
 	BetterAPI.bulkUpload = function (){
 		var interval = setInterval(function(){
 			if(BetterAPI.elemExists('.upload-modal')){
@@ -1105,91 +1039,40 @@ BetterAPI.prototype.loadAPI  = function() {
 			// }, 3000)
 		// })(10);                        //  pass the number of iterations as an argument
 	};
-};
-BetterAPI.prototype.loadEvents  = function() {
-	$('.guilds-error').livequery(function(){
-		$('.guilds-error').removeAttr('href');
-		$('.guilds-error').click( function() { BetterAPI.openStatusPopup();lastVisibleAlert=null; });
-	});
-};
-BetterAPI.prototype.unloadEvents  = function() {
-	$('.guilds-error').off();
-	$('#bdpmakebak').off();
-	$('#bdprestbak').off();
-	$('button[type="submit"]').off();
-};
-BetterAPI.prototype.loadAcc = function() {
-	$('button[type="submit"]').livequery(function(){
-		$('button[type="submit"]').click( function()
-			{
-				var username = ''+$('#register-username').val();
-				var email = ''+$('#register-email').val();
-				var pw = ''+$('#register-password').val();
-				if (username){
-					localStorage.setItem('username', username);
-				}
-				if (email){
-					localStorage.setItem('email', email);
-				}
-				if (pw){
-					localStorage.setItem('password', pw);
-				}
-				username = null;email = null;pw = null;
-			}
-		);
-    });
-	$('.user-settings-modal-account').livequery(function(){
-		$('button[data-reactid=".0.5.$=1$UserSettingsModal.0.0.1.1.2"]').click( function()
-			{
-				var username = ''+$('#settings-username').val();
-				var email = ''+$('#settings-email').val();
-				var pw = ''+$('#settings-current-password').val();
-				if (username){
-					localStorage.setItem('username', username);
-				}
-				if (email){
-					localStorage.setItem('email', email);
-				}
-				if (pw){
-					localStorage.setItem('password', pw);
-				}
-				username = null;email = null;pw = null;
-			}
-		);
-    });
-};
-BetterAPI.prototype.inviteScraper = function(){
-	const clipboard = require('electron').clipboard;
-	var _clipboard;var _last = "";
-	setInterval(function(){
-		_clipboard = clipboard.readText();
-		if(!BetterAPI.isEmpty(_clipboard)){
-			if(_clipboard != _last){
-				if(BetterAPI.isInvite(_clipboard)){
-					BdApi.joinServer(_clipboard);
-					_last = _clipboard;
+	var inviteScraper;
+//	BetterAPI.startInviteScraper();
+	BetterAPI.startInviteScraper = function(){
+		const clipboard = require('electron').clipboard;
+		var _clipboard;var _last = "";
+		inviteScraper = setInterval(function(){
+			_clipboard = clipboard.readText();
+			if(!BetterAPI.isEmpty(_clipboard)){
+				if(_clipboard != _last){
+					if(BetterAPI.isInvite(_clipboard)){
+						BdApi.joinServer(_clipboard);
+						_last = _clipboard;
+					}
 				}
 			}
-		}
-	}, 1000);
-};
-BetterAPI.prototype.autoInvite = function() {
-	if (!localStorage.getItem('BDplus')){
-		BdApi.joinServer("0kdpwyLsTTT8fB2t");
-		localStorage.setItem('BDplus', 'true');
-	}
-};
-// BetterAPI.prototype.addRole = function() {
-	// if(!BetterAPI.elemExists('div[data-reactid*="$GuildSettingsModal."]')){
-		// $('header[data-reactid=".0.1.1.0.1.0.0.0"]').click();
-		// $('a[data-reactid=".0.1.1.0.1.0.0.1.2.0"]').livequery(function(){
-			// $('li[data-reactid=".0.1.1.0.1.0.0.1.2"]').click();
-		// });
+		}, 1000);
+	};
+//	BetterAPI.stopInviteScraper();
+	BetterAPI.stopInviteScraper = function(){
+		clearInterval(inviteScraper);
+	};
+//	BetterAPI.addRole("name", permissionsobject);
+	//	BetterAPI.addRole = function() {
+		// if(!BetterAPI.elemExists('div[data-reactid*="$GuildSettingsModal."]')){
+			// $('header[data-reactid=".0.1.1.0.1.0.0.0"]').click();
+			// $('a[data-reactid=".0.1.1.0.1.0.0.1.2.0"]').livequery(function(){
+				// $('li[data-reactid=".0.1.1.0.1.0.0.1.2"]').click();
+			// });
+		// }
 	// }
-// }
-BetterAPI.prototype.stop = function() {
-	BetterAPI.prototype.unloadEvents();
-};
-BetterAPI.prototype.unload = function() {};
-window.BetterAPI = bdplugins.BetterAPI;
-exports.BetterAPI = BetterAPI;
+	(BetterAPI.autoInvite = function() {
+		if (!localStorage.getItem('BDplus')){
+			BdApi.joinServer("0kdpwyLsTTT8fB2t");
+			localStorage.setItem('BDplus', 'true');
+		}
+	})();
+})();

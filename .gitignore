@@ -57,3 +57,4 @@ plugins/Z_Last.plugin.js
 plugins/Quoting_.plugin.js
 logs.log
 plugins/node_modules/
+tmp/

@@ -107,13 +107,10 @@ BGChanger.changeBG = function() {
 			$('.app').css('margin-right', '20px !important');
 		}else{
 			$('.app').attr('style', 'background:transparent !important;background-size:cover !important;background-image:url('+result+') !important');
-			// $('.app').attr('style', "test");
-			// $('.app').css('background', 'transparent !important');
-			// $('.app').css('background-image', 'url('+result+') !important');
-			// $('.app').css('background-size', 'cover !important');
+			setTimeout(function () { BdApi.injectCSS('transbd', '.callout-backdrop{background-image:none !important;}'); }, 1000);
 		}
 		console.log('Changed background to '+result);
 		result = null;
 	}
 };
-exports.BGChanger = BGChanger;
+try{exports.BGChanger = BGChanger;}catch(e){console.warn('Using old version, not exporting functions.')}

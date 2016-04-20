@@ -57,7 +57,7 @@ EncryptedText.prototype.start = function() {
 	if(BdApi.getPlugin(_require[0]) !== null){
 		try{eval(_require[2]);
 		}catch(e){
-			Core.prototype.alert('Requirement not started!',''+
+			Core.prototype.alert(EncryptedText.prototype.getName()+' - Requirement not started!',''+
 				'A requirement is not started: <b>'+_require[0]+'<b><br>'+
 				'<br>'+
 				'Click <a onClick="'+
