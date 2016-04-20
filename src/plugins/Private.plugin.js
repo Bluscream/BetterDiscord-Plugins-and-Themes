@@ -41,6 +41,13 @@ PrivatePlugin.prototype.start = function() {
 			$('header[data-reactid$="$Direct Messages"]').html('PM\'s - <a onclick="$(\'.close\').click();">Clear all</a>')
 		});
 		}catch(e){}
+		$('.server-info.server-name>span').livequery(function(){
+			$('.server-info.server-name>span').each( function(i,e) { $(e).text($(e).text().replace(' by undefined', '')) });
+			$('.server-info.server-region>span').each( function(i,e) { $(e).text($(e).text().capitalizeFirstLetter()) });
+		});
+		$('#bd-pub-button').livequery(function(){
+			$('#bd-pub-button').text($('#bd-pub-button').text().capitalizeFirstLetter());
+		});
 	}else{
 		Core.prototype.alert('Required plugin not found!',''+
 			'A requirement is missing: <b>'+_require[0]+'</b><br>'+
