@@ -171,8 +171,13 @@ BetterDiscordBot.prototype.start = function () {
 								lastBotUser = message.author.id;lastBotChannel = message.channel.id;
 							}
 						}
+						if(message.channel.id == 170645365845000192){
+							var msg = message.content.toLowerCase();
+							if(!msg.startsWith('[!e]') && !msg.startsWith('[!o]')){
+								bot.deleteMessage(message);
+							}
+						}
 					}
-					
 					// if (message.author.id == BetterAPI.getOwnID()) {
 						// var msg = message.content.toLowerCase();
 						// if(msg == '!explain'){
