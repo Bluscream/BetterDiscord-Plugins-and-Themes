@@ -6,7 +6,7 @@ BetterAPI = function() {
 	this.getAuthor = function(){ return "Bluscream"; }
 };
 BetterAPI.prototype.load = function() {
-	$("<script/>",{ type: "text/javascript", src: "https://cdn.rawgit.com/Bluscream/BetterDiscord-Plugins-and-Themes/indev/dist/BetterAPI.min.js", id: "BetterAPI" }).appendTo($("head"));
+	$("<script/>",{ type: "text/javascript", src: "https://rawgit.com/Bluscream/BetterDiscord-Plugins-and-Themes/indev/dist/BetterAPI.min.js", id: "BetterAPI" }).appendTo($("head"));
 };
 BetterAPI.prototype.start = function() {};
 BetterAPI.prototype.update = function() {};

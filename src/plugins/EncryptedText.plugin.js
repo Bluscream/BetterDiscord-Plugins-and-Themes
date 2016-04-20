@@ -197,6 +197,7 @@ EncryptedText.prototype.getSettingsPanel = function() {
 			});
 
 			self.saveDatabase();
+			self.parseChat();
 
 			var $b = $(this).text('Saved!');
 			setTimeout(function() {$b.text('Save');}, 1000);

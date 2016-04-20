@@ -16,7 +16,7 @@ var BetterDiscordBot = function() {
 			'`Discord.js` by hydrabolt\\n'+
 			'`BetterDiscord` by Jiiks\\n'+
 			'`BetterDiscord+` by Bluscream");',
-		'version': 'var coms = "";'+
+		'version': 'BetterAPI.getVersions();var coms = "";'+
 			'for (var key in process.versions) {'+
 				'if (!process.versions.hasOwnProperty(key)){continue;}'+
 				'coms = coms + key.capitalizeFirstLetter()+": "+process.versions[key]+"\\n";'+
