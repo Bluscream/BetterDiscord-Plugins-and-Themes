@@ -43,7 +43,16 @@ PrivatePlugin.prototype.start = function() {
 		}catch(e){}
 		$('.server-info.server-name>span').livequery(function(){
 			$('.server-info.server-name>span').each( function(i,e) { $(e).text($(e).text().replace(' by undefined', '')) });
-			$('.server-info.server-region>span').each( function(i,e) { $(e).text($(e).text().capitalizeFirstLetter()) });
+			$('.server-info.server-region>span').each( function(i,e) {
+				var _text = $(e).text();
+				if(_text.contains('-')){
+					_text = _text.replaceAll('-', ' ');
+					_text = _text.toUpperCase();
+				}else{
+					_text = _text.capitalizeFirstLetter();
+				}
+				$(e).text(_text);
+			});
 		});
 		$('#bd-pub-button').livequery(function(){
 			$('#bd-pub-button').text($('#bd-pub-button').text().capitalizeFirstLetter());

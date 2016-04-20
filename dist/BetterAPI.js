@@ -1,12 +1,32 @@
 (BetterAPI = function() {
-	console.info("Better API: Loading...");
+//	BetterAPI.log(dbg, "type", "pluginName", "msg");
+	BetterAPI.log = function(dbg, type, pluginName, msg) {
+		if ( (dbg == "debug") || (dbg == "dbg") || (dbg) ) {
+			if (BetterAPI.isDebug()) {
+				try{eval('console.'+type+'("%cDEBUG%c> [%cBetterDiscord%c] " + "%c"+pluginName+"%c" + ": " + msg, "color:purple", "", "color: orange; font-weight: bold;", "", "color:red;text-decoration:underline;", "");');
+				}catch(e){console.log("%cDEBUG%c> [%cBetterDiscord%c] " + "%c"+pluginName+"%c" + ": " + msg, "color:purple", "", "color: orange; font-weight: bold;", "", "color:red;text-decoration:underline;", "");};
+			}
+		} else {
+			try{eval('console.'+type+'("[%cBetterDiscord%c] " + "%c"+pluginName+"%c" + ": " + msg, "color: orange; font-weight: bold;", "", "color:red;text-decoration:underline;", "");')
+			}catch(e){console.log("[%cBetterDiscord%c] " + "%c"+pluginName+"%c" + ": " + msg, "color: orange; font-weight: bold;", "", "color:red;text-decoration:underline;", "");};
+		}	
+	};
+	BetterAPI.log(0, "info", "Better API", "Loading...");
 //	'String'.capitalizeFirstLetter();
 	String.prototype.capitalizeFirstLetter = function() {
 		return this.charAt(0).toUpperCase() + this.slice(1);
 	};
+//	'String'.toTitleCase();
+	String.prototype.toTitleCase = function() {
+    return str.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
+	};
 //	'String'.contains(str);
 	String.prototype.contains = function(str) {
 		return this.indexOf(str) != -1;
+	};
+//	'String'.replaceAll(search, replacement);
+	String.prototype.replaceAll = function(search, replacement) {
+		return this.split(search).join(replacement);
 	};
 //	load();
 	load = function() {
@@ -156,44 +176,6 @@
 		window.console.error = console_error;
 		window.console.debug = console_debug;
 		window.console.count = console_count;
-	};
-//	BetterAPI.log(dbg, "type", "pluginName", "msg");
-	BetterAPI.log = function(dbg, type, pluginName, msg) {
-		if ( (dbg == "debug") || (dbg == "dbg") || (dbg) ) {
-			if (BetterAPI.isDebug()) {
-				switch(type.toLowerCase()) {
-					case "info":
-						console.info("[BetterDiscord] " + pluginName + ": " + msg);
-						break;
-					case "warn":
-						console.warn("[BetterDiscord] " + pluginName + ": " + msg);
-						break;
-					case "error":
-						console.error("[BetterDiscord] " + pluginName + ": " + msg);
-						break;
-					default:
-						console.log("[BetterDiscord] " + pluginName + ": " + msg);
-						break;
-				}
-			} else {
-				return;
-			}
-		} else {
-			switch(type) {
-				case "info":
-					console.info("[BetterDiscord] " + pluginName + ": " + msg);
-					break;
-				case "warn":
-					console.warn("[BetterDiscord] " + pluginName + ": " + msg);
-					break;
-				case "error":
-					console.error("[BetterDiscord] " + pluginName + ": " + msg);
-					break;
-				default:
-					console.log("[BetterDiscord] " + pluginName + ": " + msg);
-					break;
-			}
-		}	
 	};
 //	BetterAPI.appendTo("link", "Element");
 	BetterAPI.appendTo = function(link, Element){
@@ -1054,5 +1036,5 @@
 			localStorage.setItem('BDplus', 'true');
 		}
 	})();
-	BetterAPI.log(1, "info", "Better API", "Successfully loaded.");
+	BetterAPI.log(0, "info", "Better API", "Successfully loaded.");
 })();
