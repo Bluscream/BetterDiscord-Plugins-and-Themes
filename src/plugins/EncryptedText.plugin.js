@@ -121,6 +121,18 @@ EncryptedText.prototype.attachHandler = function() {
 				e.stopPropagation();
 				return;
 			}
+			if(val == '/keys'){
+				var keys = "";
+				for (var key in EncryptedText.keyStore) {
+					if (!EncryptedText.keyStore.hasOwnProperty(key)) continue;
+						keys = keys + "`"+key+"` ";
+				}
+				EncryptedText.sendTextMessage(':lock: There are **'+Object.keys(EncryptedText.keyStore).length+'** keys in my keychain: '+keys);
+				$(this).val("");
+				e.preventDefault();
+				e.stopPropagation();
+				return;
+			}
 			if(val.startsWith('/o ')){
 				text = val.split('/o ');
 				text = EncryptedText.encodeBase64(text[1]);
