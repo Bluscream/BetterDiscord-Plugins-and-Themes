@@ -1,6 +1,5 @@
 //META{"name":"searchPlugin"}*//
 
-var BetterAPI = BetterAPI || bdplugins.BetterAPI.plugin.constructor
 function searchPlugin() {
 	this.getName = function(){return "Search"};
 	this.getDescription = function(){return "The return of [CTRL]+[F]! until at least discord devs decide to add it."};

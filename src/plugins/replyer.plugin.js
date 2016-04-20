@@ -7,7 +7,6 @@ function Replyer(){
 	this.getAuthor = function() { return "CosmicSalad"; };
 }
 
-var BetterAPI = BetterAPI || bdplugins.BetterAPI.plugin.constructor
 
 Replyer.prototype.load = function() {
 	Replyer.prototype.addReply();

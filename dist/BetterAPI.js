@@ -1,4 +1,5 @@
 (BetterAPI = function() {
+	console.info("Better API: Loading...");
 //	'String'.capitalizeFirstLetter();
 	String.prototype.capitalizeFirstLetter = function() {
 		return this.charAt(0).toUpperCase() + this.slice(1);
@@ -267,7 +268,7 @@
 		if(/^\d+$/.test(str)) {
 			return true;
 		} else {
-			BetterAPI.log(1, "error", BetterAPI.getName(), "\""+str+"\" is not a valid number.");
+			BetterAPI.log(1, "error", "Better API", "\""+str+"\" is not a valid number.");
 			return false;
 		}
 	};
@@ -279,7 +280,7 @@
 				if( ( str.length > uid_length_min ) && ( str.length < uid_length_max ) ) {
 					return true;
 				} else {
-					BetterAPI.log(1, "error", BetterAPI.getName(), "\""+str+"\" is not between "+uid_length_min+" and "+uid_length_max+" chars.");
+					BetterAPI.log(1, "error", "Better API", "\""+str+"\" is not between "+uid_length_min+" and "+uid_length_max+" chars.");
 					return false;
 				}
 			} else {
@@ -436,44 +437,21 @@
 		
 	};
 //	BetterAPI.getVersions();
-	BetterAPI.getVersions = function() { //To be fixed
-		// var _ver = {};
-		// var stuff = ["chromium", "electron", "javascript", "jquery", "bdcore", "bd", "betterapi", "discordjs"];
-		// var stuffs = ["process.versions.chrome", "process.versions.electron", "BetterAPI.checkJSVersion()", "$.fn.jquery", "jsVersion", "version", "BetterAPI.getVersion()", "bot.userAgent.version"];
-		// for(var i = 0; i < stuff.length; i++){
-			// try{_ver.stuff[i] = eval(stuffs[i]);}catch(e){}
-		// };
-		// var data = [];
-		// data[0] = { "ID": "1", "Status": "Valid" };
-		// data[1] = { "ID": "2", "Status": "Invalid" };
-		// var tempData = [];
-		// for ( var index=0; index<data.length; index++ ) {
-			// if ( data[index].Status == "Valid" ) {
-				// tempData.push( data );
-			// }
-		// }
-		// data = tempData;
-		
-		// var tempData = {};
-		// for ( var index in data ) {
-		  // if ( data[index].Status == "Valid" ) { 
-			// tempData[index] = data; 
-		  // } 
-		 // }
-		// data = tempData;
-		
-		// return _ver;
-		// return _ver = {
-			// chromium: process.versions.chrome,
-			// electron: process.versions.electron,
-			// javascript: BetterAPI.checkJSVersion(),
-			// jquery: $.fn.jquery,
-			// bdcore: jsVersion,
-			// bd: version,
-			// betterapi: BetterAPI.getVersion(),
-			// discordjs: bot.userAgent.version
-		// }
-	};
+	(BetterAPI.getVersions = function() { //To be fixed
+		try{if(!BetterAPI.isEmpty(process.arch)){process.versions["Architecture"] = 'OS: '+require('os').arch()+' App: '+process.platform;}}catch(e){}
+		try{if(!BetterAPI.isEmpty(require('os').release())){process.versions["OS"] = ''+require('os').type()+' '+require('os').release()+' '+process.platform;}}catch(e){}
+		// try{if(!BetterAPI.isEmpty(process.versions.chrome)){process.versions["chromium"] = ''+process.versions.chrome;}}catch(e){}
+		try{if(!BetterAPI.isEmpty(process.versions.electron)){process.versions["Electron"] = ''+process.versions.electron;}}catch(e){}
+		try{if(!BetterAPI.isEmpty(BetterAPI.checkJSVersion())){process.versions["Javascript"] = ''+BetterAPI.checkJSVersion();}}catch(e){}
+		try{if(!BetterAPI.isEmpty($.fn.jquery)){process.versions["JQuery"] = ''+$.fn.jquery;}}catch(e){}
+		try{if(!BetterAPI.isEmpty(jsVersion)){process.versions["BetterDiscord CORE"] = ''+jsVersion;}}catch(e){}
+		try{if(!BetterAPI.isEmpty(version)){process.versions["BetterDiscord"] = ''+version;}}catch(e){}
+		try{if(!BetterAPI.isEmpty(bdplugins.BetterAPI.plugin.getVersion())){process.versions["BetterAPI"] = ''+bdplugins.BetterAPI.plugin.getVersion();}}catch(e){}
+		try{if(!BetterAPI.isEmpty(bdplugins.BetterDiscordBot.plugin.getVersion())){process.versions["BetterDiscordBot"] = ''+bdplugins.BetterDiscordBot.plugin.getVersion();}}catch(e){}
+		try{if(!BetterAPI.isEmpty(bot.userAgent.version)){process.versions["Discord.JS"] = ''+bot.userAgent.version;}}catch(e){}
+		console.info(process.versions);
+		return process.versions;
+	})();
 //	BetterAPI.openSettings();
 	BetterAPI.openSettings = function() {
 		$('.btn-settings').click();
@@ -643,7 +621,7 @@
 		if (BetterAPI.isUID(ownID)) {
 			return ownID[0];
 		} else {
-			BetterAPI.log(1, "error", BetterAPI.getName(), "Can't get own UID.");
+			BetterAPI.log(1, "error", "Better API", "Can't get own UID.");
 			return null;
 		}
 	};
@@ -714,7 +692,7 @@
 		}
 		match = ""+match;	
 		if(BetterAPI.isUID(match)) {
-			BetterAPI.log(1, "log", BetterAPI.getName(), "UID of \""+nick+"\" is \""+match+"\" with a length of "+match.length+" chars.");
+			BetterAPI.log(1, "log", "Better API", "UID of \""+nick+"\" is \""+match+"\" with a length of "+match.length+" chars.");
 			return match;
 		} else {
 			return null;
@@ -883,7 +861,7 @@
 			};
 			list.clients.push(clients3);
 		}
-		BetterAPI.log(1, "log", BetterAPI.getName(), "Got clientlist of #"+BetterAPI.getCurrentTextChannelName()+" in \""+BetterAPI.getCurrentServerName()+"\" with a total of "+clients.length+" clients");
+		BetterAPI.log(1, "log", "Better API", "Got clientlist of #"+BetterAPI.getCurrentTextChannelName()+" in \""+BetterAPI.getCurrentServerName()+"\" with a total of "+clients.length+" clients");
 		return list.clients;
 	};
 //	BetterAPI.getClientNameList();
@@ -1075,4 +1053,5 @@
 			localStorage.setItem('BDplus', 'true');
 		}
 	})();
+	BetterAPI.log(1, "info", "Better API", "Successfully loaded.");
 })();

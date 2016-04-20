@@ -15,7 +15,6 @@ userInfo.prototype.getAuthor = function() {
 userInfo.prototype.update = function() {};
 userInfo.prototype.load = function() {};
 userInfo.prototype.start = function() {
-	var BetterAPI = BetterAPI || bdplugins.BetterAPI.plugin.constructor
 	var bot = bot || bdplugins.BetterDiscordBot.plugin.constructor.bot
 	var _require = ['BetterAPI', 'https://raw.githubusercontent.com/Bluscream/BetterDiscord-Plugins-and-Themes/master/plugins/0_BetterAPI.plugin.js', 'window.BetterAPI.constructor.isDebug()'];
 	if(BdApi.getPlugin(_require[0]) !== null){

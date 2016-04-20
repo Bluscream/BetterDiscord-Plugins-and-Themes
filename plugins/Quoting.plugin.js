@@ -1,5 +1,4 @@
-//META{"name":"DCMQuotingPlugin"}*// 
-var BetterAPI=BetterAPI||bdplugins.BetterAPI.plugin.constructor
+//META{"name":"DCMQuotingPlugin"}*//
 function DCMQuotingPlugin(){this.getName=function(){return"Quoting";};this.getDescription=function(){return"Quoting from Discord Client Modding ported by NotGGhost.";};this.getVersion=function(){return"0.1.7";};this.getAuthor=function(){return"NotGGhost";};var ghostModId=3;this.load=function(){};this.start=function(){inject();};this.unload=function(){removeAllEvents(document,"DOMNodeInsertedIntoDocument");removeAllEvents(document,"DOMNodeInserted");};this.stop=function(){removeAllEvents(document,"DOMNodeInsertedIntoDocument");removeAllEvents(document,"DOMNodeInserted");};this.onMessage=function(){};var checkVal=function(a){if(typeof a=="undefined")
 return 300;if(typeof a.getElementsByTagName("h2")[0]=="undefined")
 return 300;return a.getElementsByTagName("h2")[0].childNodes.length;};var inject=function(){window.DCMQuoting.enabled=true;document.addEventListener("DOMNodeInsertedIntoDocument",function(){update();},false);document.addEventListener("DOMNodeInserted",function(){update();},false);};var createSpan=function(text){var span=document.createElement("span");span.setAttribute("style","display:inline-block;font-size:big");span.innerText=text;span.className="timestamp";return span;}

@@ -1,5 +1,4 @@
 //META{"name":"searchPlugin"}*//
-var BetterAPI=BetterAPI||bdplugins.BetterAPI.plugin.constructor
 function searchPlugin(){this.getName=function(){return"Search"};this.getDescription=function(){return"The return of [CTRL]+[F]! until at least discord devs decide to add it."};this.getVersion=function(){return"1.0"};this.getAuthor=function(){return"Megamit/Mitchell"};var self=this;if(searchPlugin.prototype.self)return searchPlugin.prototype.self;else(searchPlugin.prototype.self=self)
 this.log=function(){var args=Array.prototype.slice.call(arguments);args.unshift("%c["+self.getName()+"]",'font-weight: bold;color: green;');console.log.apply(console,args);}
 this.init=function(){self.cancelFlag=false;}

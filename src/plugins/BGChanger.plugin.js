@@ -5,7 +5,6 @@ function BGChanger() {
 	this.getVersion = function() { return "1.0"; };
 	this.getAuthor = function() { return "Bluscream"; };
 }
-var BetterAPI = BetterAPI || bdplugins.BetterAPI.plugin.constructor
 BGChanger.prototype.getSettingsPanel = function() {
 	// $('#bgchange').livequery(function(){
 		// $('#bgchange').click(function(){
