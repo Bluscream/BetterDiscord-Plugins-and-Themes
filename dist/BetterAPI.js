@@ -437,9 +437,10 @@
 		
 	};
 //	BetterAPI.getVersions();
-	(BetterAPI.getVersions = function() { //To be fixed
-		try{if(!BetterAPI.isEmpty(process.arch)){process.versions["Architecture"] = 'OS > '+require('os').arch()+' | App > '+process.platform;}}catch(e){}
-		try{if(!BetterAPI.isEmpty(require('os').release())){process.versions["OS"] = ''+require('os').type()+' '+require('os').release();}}catch(e){}
+	(BetterAPI.getVersions = function() {
+		try{if(!BetterAPI.isEmpty(process.arch)){process.versions["OSArch"] = ''+require('os').arch();}}catch(e){}
+		try{if(!BetterAPI.isEmpty(process.arch)){process.versions["AppArch"] = ''+process.platform;}}catch(e){}
+		try{if(!BetterAPI.isEmpty(require('os').release())){process.versions["OS"] = ''+require('os').type().replace('_', ' ')+' '+require('os').release();}}catch(e){}
 		// try{if(!BetterAPI.isEmpty(process.versions.chrome)){process.versions["chromium"] = ''+process.versions.chrome;}}catch(e){}
 		try{if(!BetterAPI.isEmpty(process.versions.electron)){process.versions["Electron"] = ''+process.versions.electron;}}catch(e){}
 		try{if(!BetterAPI.isEmpty(BetterAPI.checkJSVersion())){process.versions["Javascript"] = ''+BetterAPI.checkJSVersion();}}catch(e){}

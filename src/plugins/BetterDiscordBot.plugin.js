@@ -118,11 +118,10 @@ BetterDiscordBot.prototype.start = function () {
 		var saveDir = __dirname.replace('resources\\atom.asar\\renderer\\lib', 'resources');
 		// var saveDir = __dirname.replace('plugins', 'resources');
 		// var saveDir = __dirname.slice(0, __dirname.indexOf("\\", __dirname.lastIndexOf('Discord') + "Discord".length + 1) + 1) + "resources";
-		console.log('__dirname: '+__dirname);
-		console.log('SaveDir: '+saveDir);
-		BetterAPI.npm('superagent', saveDir);BetterAPI.npm('ws', saveDir);BetterAPI.npm('unpipe', saveDir);
+		BetterAPI.npm('path', saveDir);
 			BetterAPI.npm('discord.js', saveDir, function () {
-				var Discord = require(saveDir + '\\node_modules\\discord.js');
+				var path = require('path');
+				var Discord = require(path.join(saveDir, "node_modules", "discord.js"));//saveDir + '\\node_modules\\discord.js
 				BetterDiscordBot.bot = bot = new Discord.Client();
 				console.log("BetterDiscordBot: Plugin Loaded for Bot. Starting Bot.");
 				bot.loginWithToken(localStorage.token.match(/\"(.+)\"/)[1]).then(success).catch (err);
