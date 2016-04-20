@@ -24,7 +24,7 @@ BetterAPI.prototype.getSettingsPanel = function() {
 	$('#bdpreload').livequery(function(){
 		$('#bdpreload').click( function() { window.location.reload(); });
 	});
-	return '<b>'+BetterAPI.prototype.getName()+' Settings</b><br><br><br>'+
+	return '<b>BetterAPI Settings</b><br><br><br>'+
 		'Backup Localstorage:&nbsp;<button id="bdpmakebak">Backup</button><br>'+
 		'Restore Localstorage:&nbsp;<button id="bdprestbak">Restore</button><br>'+
 		'Reload Discord:&nbsp;<button id="bdpreload">Reload</button><br>';

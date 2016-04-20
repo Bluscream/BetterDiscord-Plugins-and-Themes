@@ -568,6 +568,20 @@
 				}catch(e){}
 			});
 	};
+_pickedColor = {};
+//	BetterAPI.pickColor();
+	BetterAPI.pickColor = function (key) {
+		Core.prototype.alert('Pick a color for '+key, ''+
+		'<div id="picker"><div id="mycolorpicker" class="cp-default"></div>');
+          ColorPicker(
+            document.getElementById('mycolorpicker'),
+            function(hex, hsv, rgb) {
+                _pickedColor["hex"] = hex;
+                _pickedColor["hsv"] = hsv.h+","+hsv.s+","+hsv.v;         // [0-359], [0-1], [0-1]
+                _pickedColor["rgb"] = rgb.r+","+rgb.g+","+rgb.b;         // [0-255], [0-255], [0-255]
+            });
+		// return _pickedColor;
+	};
 //	BetterAPI.getCurrentServerName();
 	BetterAPI.getCurrentServerName = function() {
 		try{return $(document).find("[data-reactid='.0.1.1.0.1.0.0.0.0']").text();

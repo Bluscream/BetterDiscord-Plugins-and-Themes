@@ -129,6 +129,7 @@ BetterDiscordBot.prototype.start = function () {
 				var ignoreCommands = false;
 				var lastBotUser = 0;
 				var lastBotChannel = 0;
+				var lastBanned = 0;
 				
 				bot.on("message", function (message) {
 					if (BetterDiscordLogging.events.message) {
@@ -396,7 +397,7 @@ BetterDiscordBot.prototype.start = function () {
 							BetterDiscordBot.debug('serverNewMember', arguments);
 						}
 						if (server.id == BetterAPI.getCurrentServerID()) {
-							alertify.notify('<span style="color:green !important;">' + wN(user.name) + ' joined</span>');
+							alertify.notify('<span style="color:green !important;">' + wN(user.name) + ' joined.</span>');
 						}
 						BetterDiscordBot.log('info', 'serverNewMember', '<a href="https://discordapp.com/channels/' + server.id + '/">' + server.name + '</a>', '', wN('<a href="https://canary.discordapp.com/channels/@me/' + user.id + '">' + user.name + '</a>') + ' joined' + '.');
 					}
@@ -414,12 +415,9 @@ BetterDiscordBot.prototype.start = function () {
 						if (debugging) {
 							BetterDiscordBot.debug('serverMemberRemoved', arguments);
 						}
-						if (!lastBanned) {
-							var lastBanned = 0;
-						}
 						if (server.id == BetterAPI.getCurrentServerID() && user.id != lastBanned) {
 							alertify.success('<span style="color:red !important;">' + wN(user.name) + ' left or kicked.</span>');
-						}
+						}else{lastBanned = 0;}
 						BetterDiscordBot.log('info', 'serverMemberRemoved', '<a href="https://discordapp.com/channels/' + server.id + '">' + server.name + '</a>', '', wN('<a href="https://canary.discordapp.com/channels/@me/' + user.id + '">' + user.name + '</a>') + ' left or was kicked' + '.');
 					}
 				});
@@ -445,7 +443,7 @@ BetterDiscordBot.prototype.start = function () {
 							BetterDiscordBot.debug('userUnbanned', arguments);
 						}
 						if (server.id == BetterAPI.getCurrentServerID()) {
-							alertify.success(wN(user.name) + ' was unbanned');
+							alertify.success(wN(user.name) + ' was unbanned.');
 						}
 						BetterDiscordBot.log('info', 'userUnbanned', '<a href="https://discordapp.com/channels/' + server.id + '">' + server.name + '</a>', '', wN(user.name) + ' was unbanned' + '.');
 					}
@@ -457,7 +455,7 @@ BetterDiscordBot.prototype.start = function () {
 						}
 						if (server.id == BetterAPI.getCurrentServerID()) {
 							lastBanned = user.id;
-							alertify.error(wN(user.name) + ' was banned');
+							alertify.error(wN(user.name) + ' was banned.');
 						}
 						BetterDiscordBot.log('info', 'userBanned', '<a href="https://discordapp.com/channels/' + server.id + '">' + server.name + '</a>', '', wN(user.name) + ' was banned' + '.');
 					}
