@@ -1,11 +1,11 @@
 //META{"name":"EncryptedText"}*//
-
-var BetterAPI = BetterAPI || bdplugins.BetterAPI.plugin.constructor;
-
 var EncryptedText = function() {
+	this.getName = function(){ return "Encrypted Text"; }
+	this.getDescription = function(){ return "Allows you to send encrypted texts."; }
+	this.getVersion = function(){ return "1.3.3.7"; }
+	this.getAuthor = function(){ return "EhsanKia, Bluscream, confuseh"; }
 	this.loadDatabase();
 };
-
 var _settings = {
 	"default":"QWxsb3dzIHlvdSB0byBzZW5kIGVuY3J5cHRlZCB0ZXh0cw=="
 }
@@ -14,22 +14,22 @@ EncryptedText.prototype.parseChat = function(){
 	$(".message-text>.markup>span:not(.EncryptedText_parsed").each(function(i,el){
 		var e = $(el); var _text = e.text();var base64;var _decoded;var decoded;var key;
 		if(_text.startsWith('[!o]')){
-			try{base64 = _text.split(/\[!o\](.+)?/)[1];}catch(e){BetterAPI.log(0, "error", EncryptedText.prototype.getName(), "base64 = _text.split(/\\[!o\\](.+)?/)[1];");return;}
-			try{decoded = EncryptedText.decodeBase64(base64);}catch(e){BetterAPI.log(0, "error", EncryptedText.prototype.getName(), "decoded = EncryptedText.decodeBase64(base64);");}
+			try{base64 = _text.split(/\[!o\](.+)?/)[1];}catch(e){return;}
+			try{decoded = EncryptedText.decodeBase64(base64);}catch(e){}
 			if(decoded){
 				if(!BetterAPI.isEmpty(decoded)){
 					e.attr('title', base64);e.html(_text.replace(_text,'<img width="16px" src="/assets/d72f52ce6c418c5c8fd5faac0e8c36ff.svg"/> '+decoded));e.addClass("EncryptedText_parsed");
 				}
 			}else{
-				console.warn('Could not decode BASE64: '+base64);
+				BetterAPI.log(0, "error", "Encrypted Text", 'Could not decode BASE64: '+base64);
 				e.attr('title', _text);e.html(_text.replace(_text,'<img width="16px" src="//i.gyazo.com/433bbcfd804defd4417f54d83aaa71b3.png"/> <b>[BASE64]</b> '+base64));
 			}
 		}
 		if(_text.startsWith('[!e]')){
-			try{base64 = _text.split(/\[!e\](.+)?/)[1];}catch(e){BetterAPI.log(0, "error", EncryptedText.prototype.getName(), "base64 = _text.split(/\\[!e\\](.+)?/)[1];");return;}
+			try{base64 = _text.split(/\[!e\](.+)?/)[1];}catch(e){return;}
 			for (var key in EncryptedText.keyStore) {
-					try{ _decoded = EncryptedText.decryptBase64(base64, EncryptedText.keyStore[key]);/*console.log('Decoded: '+_decoded)*/
-					}catch(e){BetterAPI.log(0, "error", EncryptedText.prototype.getName(), "Unable to decrypt \""+base64+"\" with key "+key);continue;}
+					try{ _decoded = EncryptedText.decryptBase64(base64, EncryptedText.keyStore[key]);
+					}catch(e){BetterAPI.log(0, "warn", "Encrypted Text", "Unable to decrypt \""+base64+"\" with key \'"+key+"\'.");continue;}
 					if(_decoded){
 						if(!BetterAPI.isEmpty(_decoded)){
 							decoded = '<b>'+key.toUpperCase()+' ></b> '+_decoded;
@@ -43,7 +43,7 @@ EncryptedText.prototype.parseChat = function(){
 					e.attr('title', base64);e.html(_text.replace(_text,'<img width="16px" src="/assets/86c36b8437a0bc80cf310733f54257c2.svg"/> '+decoded));e.addClass("EncryptedText_parsed");
 				}
 			}else{
-				console.warn('Could not decode AES: '+base64);
+				BetterAPI.log(0, "warn", "Encrypted Text", 'Could not decode AES: '+base64);
 				e.attr('title', _text);e.html(_text.replace(_text,'<img width="16px" src="//i.gyazo.com/433bbcfd804defd4417f54d83aaa71b3.png"/> <b>[AES]</b> '+base64));
 			}
 		}
@@ -104,22 +104,6 @@ EncryptedText.prototype.observer = function(e) {
 EncryptedText.prototype.stop = function() {};
 
 EncryptedText.prototype.unload = function() {};
-
-EncryptedText.prototype.getName = function() {
-	return "Encrypted Text";
-};
-
-EncryptedText.prototype.getDescription = function() {
-	return "Allows you to send encrypted texts";
-};
-
-EncryptedText.prototype.getVersion = function() {
-	return "1";
-};
-
-EncryptedText.prototype.getAuthor = function() {
-	return "EhsanKia, Bluscream";
-};
 
 EncryptedText.prototype.attachHandler = function() {
 	var el = $('.channel-textarea textarea');
