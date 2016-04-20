@@ -63,6 +63,7 @@ crr.prototype.stop = function () {
 
 crr.prototype.unload = function () {};
 crr.prototype.onMessage = function () {};
+crr.prototype.onSwitch = function () {};
 
 crr.prototype.getSettingsPanel = function () {
     return '';

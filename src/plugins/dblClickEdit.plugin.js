@@ -29,8 +29,8 @@ dblClickEdit.prototype.start = function () {
 dblClickEdit.prototype.stop = function () {
     $(document).off("dblclick.dce");
 };
-dblClickEdit.prototype.unload = function () {
-};
+dblClickEdit.prototype.unload = function () {};
+dblClickEdit.prototype.onSwitch = function () {};
 
 dblClickEdit.prototype.getSettingsPanel = function () {
     return "";
