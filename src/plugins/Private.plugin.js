@@ -48,8 +48,11 @@ PrivatePlugin.prototype.start = function() {
 				if(_text.contains('-')){
 					_text = _text.replaceAll('-', ' ');
 					_text = _text.toUpperCase();
-				}else{
-					_text = _text.capitalizeFirstLetter();
+				}else{ _text = _text.capitalizeFirstLetter(); }
+				if(_text.contains('VIP')){
+					_text = _text.replace('VIP', '');
+					var p = $(e).parent().parent().find('.server-name>span');
+					$(p).html($(p).html()+' <img src="/assets/e4d52f4d69d7bba67e5fd70ffe26b70d.svg" width="16px"/>');
 				}
 				$(e).text(_text);
 			});
