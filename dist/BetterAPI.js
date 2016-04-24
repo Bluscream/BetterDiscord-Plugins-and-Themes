@@ -4,14 +4,14 @@
 		if ( (dbg == "debug") || (dbg == "dbg") || (dbg) ) {
 			if (BetterAPI.isDebug()) {
 				try{eval('console.'+type+'("%cDEBUG%c> [%cBetterDiscord%c] " + "%c"+pluginName+"%c" + ": " + msg, "color:purple", "", "color: orange; font-weight: bold;", "", "color:red;text-decoration:underline;", "");');
-				}catch(e){console.log("%cDEBUG%c> [%cBetterDiscord%c] " + "%c"+pluginName+"%c" + ": " + msg, "color:purple", "", "color: orange; font-weight: bold;", "", "color:red;text-decoration:underline;", "");};
+				}catch(e){console.log("%cDEBUG%c> [%cBetterDiscord%c] " + "%c"+pluginName+"%c" + ": " + msg, "color:purple", "", "color: orange; font-weight: bold;", "", "color:red;text-decoration:underline;", "");}
 			}
 		} else {
-			try{eval('console.'+type+'("[%cBetterDiscord%c] " + "%c"+pluginName+"%c" + ": " + msg, "color: orange; font-weight: bold;", "", "color:red;text-decoration:underline;", "");')
-			}catch(e){console.log("[%cBetterDiscord%c] " + "%c"+pluginName+"%c" + ": " + msg, "color: orange; font-weight: bold;", "", "color:red;text-decoration:underline;", "");};
+			try{eval('console.'+type+'("[%cBetterDiscord%c] " + "%c"+pluginName+"%c" + ": " + msg, "color: orange; font-weight: bold;", "", "color:red;text-decoration:underline;", "");');
+			}catch(e){console.log("[%cBetterDiscord%c] " + "%c"+pluginName+"%c" + ": " + msg, "color: orange; font-weight: bold;", "", "color:red;text-decoration:underline;", "");}
 		}	
 	};
-	try{bot = BetterDiscordBot.constructor.bot;}catch(e){BetterAPI.log(0, "warn", "Better API", "BetterDiscordBot not found!");};
+	try{bot = BetterDiscordBot.constructor.bot;}catch(e){BetterAPI.log(0, "warn", "Better API", "BetterDiscordBot not found!");}
 	BetterAPI.log(0, "info", "Better API", "Loading...");
 //	'String'.capitalizeFirstLetter();
 	String.prototype.capitalizeFirstLetter = function() {
@@ -97,7 +97,7 @@
 			}
 			return _ajax.apply(this, arguments);
 		};
-	}
+	};
 //	BetterAPI.isDebug();
 	BetterAPI.isDebug = function() {
 		if(localStorage.getItem('debug')){
@@ -132,7 +132,7 @@
 				// });
 			}
 		});
-	}
+	};
 //	BetterAPI.clearDir(path);
 	BetterAPI.clearDir = function(path) {
 		$.jAlert({
@@ -276,7 +276,7 @@
 //	BetterAPI.isInvite("string");
 	BetterAPI.isInvite = function(str) {
 		if(!BetterAPI.isEmpty(str)){
-			var _invites = ["discordapp.com/invite/", "discord.gg/" ]
+			var _invites = ["discordapp.com/invite/", "discord.gg/", "discord.me/" ];
 			var _low = str.toLowerCase();
 			var _result = false;
 			for (i = 0; i < _invites.length; i++) {
@@ -440,13 +440,13 @@
 	(BetterAPI.getUptime = function(formatted) {
 		var uptime = {};
 		if(formatted){
-			try{uptime["OS"] = ''+new Date(Math.round(require("os").uptime()) * 1000).toISOString().substr(11, 8)}catch(e){};
-			try{uptime["App"] = ''+new Date(Math.round(process.uptime()) * 1000).toISOString().substr(11, 8)}catch(e){};
-			try{uptime["Bot"] = ''+new Date(bot.uptime).toISOString().substr(11, 8)}catch(e){};
+			try{uptime["OS"] = ''+new Date(Math.round(require("os").uptime()) * 1000).toISOString().substr(11, 8);}catch(e){}
+			try{uptime["App"] = ''+new Date(Math.round(process.uptime()) * 1000).toISOString().substr(11, 8);}catch(e){}
+			try{uptime["Bot"] = ''+new Date(bot.uptime).toISOString().substr(11, 8);}catch(e){}
 		}else{
-			try{uptime["OS"] = ''+Math.round(require("os").uptime())}catch(e){};
-			try{uptime["App"] = ''+Math.round(process.uptime())}catch(e){};
-			try{uptime["Bot"] = ''+bot.uptime}catch(e){};
+			try{uptime["OS"] = ''+Math.round(require("os").uptime());}catch(e){}
+			try{uptime["App"] = ''+Math.round(process.uptime());}catch(e){}
+			try{uptime["Bot"] = ''+bot.uptime;}catch(e){}
 		}
 		return uptime;
 	})();
@@ -464,9 +464,9 @@
 	};
 //	BetterAPI.loadSettings(name, default, base64);
 	BetterAPI.loadSettings = function(name, settings, base64){
-		if(base64){ );
+		if(base64){
 			if (BetterAPI.isEmpty(localStorage.getItem(name))){ localStorage.setItem(name, btoa(JSON.stringify(settings))); }
-			var name = window.localStorage[name];return JSON.parse(atob(name));
+			name = window.localStorage[name];return JSON.parse(atob(name));
 		}else{
 			if (BetterAPI.isEmpty(localStorage.getItem(name))){ localStorage.setItem(name, JSON.stringify(settings)); }
 			return JSON.parse(localStorage.getItem(name));
@@ -1041,7 +1041,7 @@ _pickedColor = {};
 	var inviteScraper;
 //	BetterAPI.startInviteScraper();
 	BetterAPI.startInviteScraper = function(){
-		const clipboard = require('electron').clipboard;
+		var clipboard = require('electron').clipboard;
 		var _clipboard;var _last = "";
 		inviteScraper = setInterval(function(){
 			_clipboard = clipboard.readText();

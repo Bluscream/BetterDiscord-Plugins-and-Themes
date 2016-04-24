@@ -9,7 +9,7 @@ if(lastMessage[key].hasOwnProperty(message.channel.id)){bot.deleteMessage(lastMe
 if(!BetterDiscordBot.botcommands.hasOwnProperty(key))continue;var command=key.toLowerCase();var action=BetterDiscordBot.botcommands[key];if(cmd==command){try{eval(action);BetterAPI.saveSettings("lastMessage",lastMessage,true);}catch(e){console.error('Bot is unable to process command '+command+'\n\n.Error Message: '+e+'\n\nAction:\n\n'+action);Core.prototype.alert('BetterDiscordBot - Error','Bot is unable to process command <span style="color:orange"><b>'+command+'</b></span>.<br><br>Error Message: <span style="color:red">'+e+'</span><br><br>Action:<br><br>'+action);}}}
 if(message.channel.server){if(cmd=='serverinfo'){if(!lastMessage["serverinfo"]){lastMessage["serverinfo"]={};}
 if(lastMessage.serverinfo.hasOwnProperty(message.channel.id)){bot.deleteMessage(lastMessage.serverinfo[message.channel.id]);}
-var server=message.channel.server;sname=server.name;sid=server.id;sowner='<@'+server.owner.id+'>#'+server.owner.discriminator;sregion=server.region.capitalizeFirstLetter();sroles=server.roles;sicon=server.icon;if(sicon){aurl='https://cdn.discordapp.com/icons/'+sid+'/'+sicon+'.jpg';}
+var server=message.channel.server;sname=server.name;sid=server.id;sowner='<@'+server.owner.id+'>#'+server.owner.discriminator;sregion=server.region.capitalizeFirstLetter();sroles=server.roles;sicon=server.icon;uc=0;onuc=0;offuc=0;if(sicon){aurl='https://cdn.discordapp.com/icons/'+sid+'/'+sicon+'.jpg';}
 if(server.memberCount){uc=server.memberCount;}
 if(server.members.length){onuc=server.members.length;}
 if(server.members.length){offuc=server.memberCount-server.members.length;}

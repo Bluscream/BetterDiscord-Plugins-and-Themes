@@ -234,7 +234,7 @@ BetterDiscordBot.prototype.start = function () {
 									sowner = '<@'+server.owner.id+'>#'+server.owner.discriminator;
 									sregion = server.region.capitalizeFirstLetter();
 									sroles = server.roles;
-									sicon = server.icon;
+									sicon = server.icon;uc = 0;onuc = 0;offuc = 0;
 									if(sicon){ aurl = 'https://cdn.discordapp.com/icons/'+sid+'/'+sicon+'.jpg'; }
 									if(server.memberCount){ uc = server.memberCount; }
 									if(server.members.length){ onuc = server.members.length; }
