@@ -11,6 +11,7 @@
 			}catch(e){console.log("[%cBetterDiscord%c] " + "%c"+pluginName+"%c" + ": " + msg, "color: orange; font-weight: bold;", "", "color:red;text-decoration:underline;", "");};
 		}	
 	};
+	try{bot = BetterDiscordBot.constructor.bot;}catch(e){BetterAPI.log(0, "warn", "Better API", "BetterDiscordBot not found!");};
 	BetterAPI.log(0, "info", "Better API", "Loading...");
 //	'String'.capitalizeFirstLetter();
 	String.prototype.capitalizeFirstLetter = function() {
@@ -434,6 +435,20 @@
 		try{if(!BetterAPI.isEmpty(bot.userAgent.version)){process.versions["Discord.JS"] = ''+bot.userAgent.version;}}catch(e){}
 		console.info(process.versions);
 		return process.versions;
+	})();
+//	BetterAPI.getUptime();
+	(BetterAPI.getUptime = function(formatted) {
+		var uptime = {};
+		if(formatted){
+			try{uptime["OS"] = ''+new Date(Math.round(require("os").uptime()) * 1000).toISOString().substr(11, 8)}catch(e){};
+			try{uptime["App"] = ''+new Date(Math.round(process.uptime()) * 1000).toISOString().substr(11, 8)}catch(e){};
+			try{uptime["Bot"] = ''+new Date(bot.uptime).toISOString().substr(11, 8)}catch(e){};
+		}else{
+			try{uptime["OS"] = ''+Math.round(require("os").uptime())}catch(e){};
+			try{uptime["App"] = ''+Math.round(process.uptime())}catch(e){};
+			try{uptime["Bot"] = ''+bot.uptime}catch(e){};
+		}
+		return uptime;
 	})();
 //	BetterAPI.openSettings();
 	BetterAPI.openSettings = function() {

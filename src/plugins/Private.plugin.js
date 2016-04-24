@@ -25,22 +25,24 @@ PrivatePlugin.prototype.start = function() {
 		}
 		// BetterAPI.changeUserInfo("Bluscream", "7fef6999df67e910379d5ad2a2f3863a");BetterAPI.createCharCounter();
 		$('.emoji:not(.emote)').addClass('emote');
-		$('textarea').removeAttr( "disabled" );
+		$('*').removeAttr( "disabled" );
 		$('.channel-textarea').removeClass('channel-textarea-disabled');
-		$('div[data-reactid=".0.1.1.0.0.0.3:$134680912691462144.0.0.0"]').click();
+		// $('div[data-reactid=".0.1.1.0.0.0.3:$134680912691462144.0.0.0"]').click();
 		setTimeout(function() {
 			var scrollPane = $(".scroller.messages").first();
 			$(scrollPane).scrollTop(999999999);
 			var scrollPane = $(".scroller.channel-members").first();
 			$(scrollPane).scrollTop(0);
-		}, 1000);
+		}, 100);
 		/*$('div[data-reactid=".0.1.1.0.2.0"]').livequery(function(){
 			BetterAPI.addLocationBar();
 		});*/
-		try{$('.channel.btn-friends').livequery(function(){
-			$('header[data-reactid$="$Direct Messages"]').html('PM\'s - <a onclick="$(\'.close\').click();">Clear all</a>')
-		});
-		}catch(e){}
+		if(BetterAPI.elemExists('header[data-reactid$="$Direct Messages"]')){
+			$('header[data-reactid$="$Direct Messages"]').html('PM\'s - <a onclick="$(\'.close\').click();">Clear all</a>');
+		}
+		if(BetterAPI.elemExists("#bd-pub-button")){
+			$('#bd-pub-button').text($('#bd-pub-button').text().capitalizeFirstLetter());
+		}
 		$('.server-info.server-name>span').livequery(function(){
 			$('.server-info.server-name>span').each( function(i,e) { $(e).text($(e).text().replace(' by undefined', '')) });
 			$('.server-info.server-region>span').each( function(i,e) {
@@ -51,14 +53,13 @@ PrivatePlugin.prototype.start = function() {
 				}else{ _text = _text.capitalizeFirstLetter(); }
 				if(_text.contains('VIP')){
 					_text = _text.replace('VIP', '');
-					var p = $(e).parent().parent().find('.server-name>span');
-					$(p).html($(p).html()+' <img src="/assets/e4d52f4d69d7bba67e5fd70ffe26b70d.svg" width="16px"/>');
+					var p = $(e).parent().parent().find('.server-name').find('span');
+					var _html = $(p).text();
+					$(p).wrap('<div style="color:gold"></div>');
+					$(p).append(' <img src="/assets/e4d52f4d69d7bba67e5fd70ffe26b70d.svg" width="16px"></img>');
 				}
 				$(e).text(_text);
 			});
-		});
-		$('#bd-pub-button').livequery(function(){
-			$('#bd-pub-button').text($('#bd-pub-button').text().capitalizeFirstLetter());
 		});
 	}else{
 		Core.prototype.alert('Required plugin not found!',''+
@@ -78,7 +79,7 @@ PrivatePlugin.prototype.stop = function() {
 PrivatePlugin.prototype.unload = function() {
 };
 PrivatePlugin.prototype.onSwitch = function() {
-	$('textarea').removeAttr( "disabled" );
+	$('*').removeAttr( "disabled" );
 	$('.channel-textarea').removeClass('channel-textarea-disabled');
 	//BetterAPI.createCharCounter();BetterAPI.updateLocationBar();
 	setTimeout(function() {
@@ -87,11 +88,16 @@ PrivatePlugin.prototype.onSwitch = function() {
 		var scrollPane = $(".scroller.channel-members").first();
         $(scrollPane).scrollTop(0);
 	}, 1000);
-	$('header[data-reactid$="$Direct Messages"]').html('PM\'s - <a onclick="PrivatePlugin.clearDMs();">Clear all</a>');
+	if(BetterAPI.elemExists('header[data-reactid$="$Direct Messages"]')){
+		$('header[data-reactid$="$Direct Messages"]').html('PM\'s - <a onclick="$(\'.close\').click();">Clear all</a>');
+	}
+	if(BetterAPI.elemExists('#bd-pub-button')){
+		$('#bd-pub-button').text($('#bd-pub-button').text().capitalizeFirstLetter());
+	}
 };
 PrivatePlugin.prototype.onMessage = function() {
-	$('textarea').removeAttr( "disabled" );
-	$('.channel-textarea').removeClass('channel-textarea-disabled');
+	// $('textarea').removeAttr( "disabled" );
+	// $('.channel-textarea').removeClass('channel-textarea-disabled');
 	//PrivatePlugin.updateCount();PrivatePlugin.checkServerCount();
 };
 PrivatePlugin.updateCount = function() {
