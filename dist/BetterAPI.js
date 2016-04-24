@@ -462,14 +462,23 @@
 			return false;
 		}
 	};
-//	BetterAPI.loadSettings(name, default);
-	BetterAPI.loadSettings = function(name, settings){
-		if (BetterAPI.isEmpty(localStorage.getItem(name))){ localStorage.setItem(name, JSON.stringify(settings)); }
-		return JSON.parse(localStorage.getItem(name));
+//	BetterAPI.loadSettings(name, default, base64);
+	BetterAPI.loadSettings = function(name, settings, base64){
+		if(base64){ );
+			if (BetterAPI.isEmpty(localStorage.getItem(name))){ localStorage.setItem(name, btoa(JSON.stringify(settings))); }
+			var name = window.localStorage[name];return JSON.parse(atob(name));
+		}else{
+			if (BetterAPI.isEmpty(localStorage.getItem(name))){ localStorage.setItem(name, JSON.stringify(settings)); }
+			return JSON.parse(localStorage.getItem(name));
+		}
 	};
-//	BetterAPI.saveSettings(name, settings);
-	BetterAPI.saveSettings = function(name, settings){
-		localStorage.setItem(name,JSON.stringify(settings));
+//	BetterAPI.saveSettings(name, settings, base64);
+	BetterAPI.saveSettings = function(name, settings, base64){
+		if(base64){
+			localStorage.setItem(name, btoa(JSON.stringify(settings)));
+		}else{
+			localStorage.setItem(name,JSON.stringify(settings));
+		}
 	};
 //	BetterAPI.fileExists(path);
 	BetterAPI.fileExists = function(path){

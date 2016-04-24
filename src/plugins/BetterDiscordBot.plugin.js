@@ -10,32 +10,54 @@ var BetterDiscordBot = function() {
 			'"**BetterDiscordBot** by @Decorater and Bluscream.\\n'+
 			'\\n'+
 			'Prefix: "+prefix+"\\n'+
-			'Commands: "+coms);',
+			'Commands: "+coms, {}, function(e,m) {'+
+				'lastMessage["help"][m.channel.id] = m;'+
+				'bot.deleteMessage(m, { wait: 120000 });'+
+			'});',
 		'info': 'bot.sendMessage(message.channel,'+
 			'"Credits:\\n\\n`Discord` by Hammer & Chisel\\n'+
 			'`Discord.js` by hydrabolt\\n'+
 			'`BetterDiscord` by Jiiks\\n'+
-			'`BetterDiscord+` by Bluscream");',
+			'`BetterDiscord+` by Bluscream", {}, function(e,m) {'+
+				'lastMessage["info"][m.channel.id] = m;'+
+				'bot.deleteMessage(m, { wait: 120000 });'+
+			'});',
 		'version': 'BetterAPI.getVersions();var coms = "";'+
 			'for (var key in process.versions) {'+
 				'if (!process.versions.hasOwnProperty(key)){continue;}'+
 				'coms = coms + key.capitalizeFirstLetter()+": "+process.versions[key]+"\\n";'+
 			'}'+
 			'bot.sendMessage(message.channel,'+
-			'"```"+coms+"```");',
+			'"```"+coms+"```", {}, function(e,m) {'+
+				'lastMessage["version"][m.channel.id] = m;'+
+				'bot.deleteMessage(m, { wait: 120000 });'+
+			'});',
 		'ping': 'var sendMSG;'+
 			'if(BetterAPI.elemExists(".voice-connection-quality-fine")){'+
 				'sendMSG = ":white_check_mark: Voice connection quality is fine.";'+
 			'};'+
-			'if(!BetterAPI.isEmpty(sendMSG)){ bot.sendMessage(message.channel, sendMSG); }',
-		'time': 'bot.sendMessage(message.channel, "My local time is `" + now + "`");',
-		'finger': 'bot.sendMessage(message.channel, "echo \\"Ohh, yeah i like that :3\\"");',
-		'uptime': 'var _data = "**Uptime**\\n\\n";var _uptime = BetterAPI.getUptime();'+
-			'for (var key in _uptime) {'+
-				'if (!_uptime.hasOwnProperty(key)){continue;}'+
-				'_data = _data + "`"+key+"`: "+_uptime[key];'+
-			'}'+
-			'bot.sendMessage(message.channel, _data);',
+			'if(!BetterAPI.isEmpty(sendMSG)){ bot.sendMessage(message.channel, sendMSG, {}, function(e,m) {'+
+				'lastMessage["ping"][m.channel.id] = m;'+
+				'bot.deleteMessage(m, { wait: 120000 });'+
+			'});}',
+		'time': 'bot.sendMessage(message.channel, "My local time is `" + now + "`", {}, function(e,m) {'+
+				'lastMessage["time"][m.channel.id] = m;'+
+				'bot.deleteMessage(m, { wait: 120000 });'+
+			'});',
+		'finger': 'bot.sendMessage(message.channel, "echo \\"Ohh, yeah i like that :3\\"", {}, function(e,m) {'+
+				'lastMessage["finger"][m.channel.id] = m;'+
+				'bot.deleteMessage(m, { wait: 120000 });'+
+			'});',
+		'uptime': 'var _data = "**Uptime**\\n\\n";var _uptime = BetterAPI.getUptime(1);'+
+				'for (var key in _uptime) {'+
+					'if (!_uptime.hasOwnProperty(key)){continue;}'+
+						'_data = _data + "`"+key+"`: "+_uptime[key]+"\\n";'+
+				'}'+
+				'bot.sendMessage(message.channel, _data, {}, function(e,m) {'+
+					'lastMessage["uptime"][m.channel.id] = m;'+ 
+					'bot.deleteMessage(m, { wait: 120000 });'+
+					// 'setTimeout(function(){ lastMessage["uptime"][m.channel.id] = 0;bot.deleteMessage(m); }, 120000); '+
+			'});',
 		// 'serverinfo': '',
 		// 'channelinfo': '',
 		// 'userinfo': '',
@@ -44,6 +66,7 @@ var BetterDiscordBot = function() {
 };
 var debugging = false;
 var bot = true;
+var lastMessage = {};
 var BetterDiscordBotting = {
 	settings : {
 		enabled : true,
@@ -154,32 +177,61 @@ BetterDiscordBot.prototype.start = function () {
 						var msg = message.content.toLowerCase();
 						var _continue = false;
 						if(msg.startsWith(prefix)){
-							console.info(message);
+							// console.info(message);
+							BetterAPI.loadSettings("lastMessage", lastMessage, true);
 							msg = msg.split(prefix)[1];
 							args = msg.split(' ');
 							cmd = args.shift();
+							console.info('Command \''+cmd+'\' with arguments \''+args+'\' was issued by '+message.author.name+' in channel #' + message.channel.name + ' on server ' + wS(message.channel.server.name)+'.');
 							for (var key in BetterDiscordBot.botcommands) {
+								if(!lastMessage[key]){lastMessage[key] = {};}
+								if(lastMessage[key].hasOwnProperty(message.channel.id)){
+									bot.deleteMessage(lastMessage[key][message.channel.id]);
+								}
 								if (!BetterDiscordBot.botcommands.hasOwnProperty(key)) continue;
 								var command = key.toLowerCase();
 								var action = BetterDiscordBot.botcommands[key];
 								if(cmd == command){
 									try{
 										eval(action);
-										if (BetterDiscordBotting.settings.debug) {
-											console.info('Command \''+command+'\' was used in channel #' + message.channel.name + ' on server ' + wS(message.channel.server.name)+'.');
-										}
+										BetterAPI.saveSettings("lastMessage", lastMessage, true);
 									}catch(e){
 										console.error('Bot is unable to process command '+command+'\n\n.Error Message: '+e+'\n\nAction:\n\n'+action);
 										Core.prototype.alert('BetterDiscordBot - Error', 'Bot is unable to process command <span style="color:orange"><b>'+command+'</b></span>.<br><br>Error Message: <span style="color:red">'+e+'</span><br><br>Action:<br><br>'+action);
 									}
 								}
 							}
+							// var BetterAPI.getSub = function(){
+								// try{
+									// if(arguments.length == 3){
+										// if(arguments[0]){
+											// if(!BetterAPI.isEmpty(arguments[0])){
+												// if(arguments[1]){
+													// if(!BetterAPI.isEmpty(arguments[1])){
+														// if(arguments[2]){
+															// if(!BetterAPI.isEmpty(arguments[2])){
+																// return arguments[0][arguments[1][arguments[2]]];
+															// }
+														// }
+													// }
+												// }
+											// }
+										// }
+									// }else{
+										// return false;
+									// }
+								// }catch(e){return false;}
+							// }
 							if(message.channel.server){
 								if(cmd == 'serverinfo'){
+									if(!lastMessage["serverinfo"]){lastMessage["serverinfo"] = {};}
+									if(lastMessage.serverinfo.hasOwnProperty(message.channel.id)){
+										bot.deleteMessage(lastMessage.serverinfo[message.channel.id]);
+									}
 									var server = message.channel.server;
 									sname = server.name;
 									sid = server.id;
-									sowner = '<@'+server.owner.id+'>';
+									sowner = '<@'+server.owner.id+'>#'+server.owner.discriminator;
 									sregion = server.region.capitalizeFirstLetter();
 									sroles = server.roles;
 									sicon = server.icon;
@@ -205,11 +257,41 @@ BetterDiscordBot.prototype.start = function () {
 									if(offuc){ _data +='`Offline users`: '+offuc+'\n'; }
 									if(_data != 'NaN'){
 										bot.sendMessage(message.channel, _data, {}, function(e,m) {
-											bot.deleteMessage(m, { wait: 30000 });
+											lastMessage["serverinfo"][m.channel.id] = m;
+											BetterAPI.saveSettings("lastMessage", lastMessage, true);
+											bot.deleteMessage(m, { wait: 120000 });
 										});
 									}
 								}
+								if(cmd == 'serverroles'){
+									if(!lastMessage["serverroles"]){lastMessage["serverroles"] = {};}
+									if(lastMessage.serverroles.hasOwnProperty(message.channel.id)){
+										bot.deleteMessage(lastMessage.serverroles[message.channel.id]);
+									}
+									var sroles = message.channel.server.roles;
+									var _data = '**Server Roles**\n\n';
+									if(sroles){
+										for (var i = 0; i < sroles.length; i++) {
+											_srole = sroles[i];
+											if(_srole.name == "@everyone"){continue;}
+											_data += '#'+_srole.position+': Name: `' + _srole.name+'` ID: '+sroles[i].id;
+											if(_srole.color != 0)_data += ' Color: #'+_srole.color;
+											_data += ' Permissions: '+_srole.permissions+'\n';
+										}
+									}
+									if(_data != 'NaN'){
+										bot.sendMessage(message.channel, _data, {}, function(e,m) {
+											lastMessage["serverroles"][m.channel.id] = m;
+											BetterAPI.saveSettings("lastMessage", lastMessage, true);
+											bot.deleteMessage(m, { wait: 120000 });
+										});
+									}else{console.error('_data is empty!');}
+								}
 								if(cmd == 'channelinfo'){
+									if(!lastMessage["channelinfo"]){lastMessage["channelinfo"] = {};}
+									if(lastMessage.channelinfo.hasOwnProperty(message.channel.id)){
+										bot.deleteMessage(lastMessage.channelinfo[message.channel.id]);
+									}
 									var channel = message.channel;
 									var _data = '**Channel Information**\n\n';
 									if(channel.id){
@@ -218,13 +300,18 @@ BetterDiscordBot.prototype.start = function () {
 									}
 									if(_data != 'NaN'){
 										bot.sendMessage(message.channel, _data, {}, function(e,m) {
-											bot.deleteMessage(m, { wait: 30000 });
+											lastMessage["channelinfo"][m.channel.id] = m;
+											BetterAPI.saveSettings("lastMessage", lastMessage, true);
+											bot.deleteMessage(m, { wait: 120000 });
 										});
 									}
 								}
 							}
 							if(cmd == 'userinfo'){
-								console.log(message.content);
+								if(!lastMessage["userinfo"]){lastMessage["userinfo"] = {};}
+								if(lastMessage.userinfo.hasOwnProperty(message.channel.id)){
+									bot.deleteMessage(lastMessage.userinfo[message.channel.id]);
+								}
 								if(args.length < 1){
 									var user = message.author;
 								}else{
@@ -243,7 +330,9 @@ BetterDiscordBot.prototype.start = function () {
 								if(user.game){if(user.game.name){_data += '`Playing`: '+user.game.name+'\n';}}
 								if(_data != 'NaN'){
 									bot.sendMessage(message.channel, _data, {}, function(e,m) {
-										bot.deleteMessage(m, { wait: 30000 });
+										lastMessage["userinfo"][m.channel.id] = m;
+											BetterAPI.saveSettings("lastMessage", lastMessage, true);
+										bot.deleteMessage(m, { wait: 120000 });
 									});
 								}
 							}
@@ -548,7 +637,7 @@ BetterDiscordBot.prototype.start = function () {
 			return null;
 	}
 	_require = null;
-}
+};
 BetterDiscordBot.prototype.onSwitch = function () {
 	if (!BetterAPI.elemExists('#bdlogbutton')) {
 		$('span[style="background-image:url(\'/assets/cfb80ab4c0c135cdcb4dbcf0db124c4d.svg\');"]').parent().before('<button id="bdlogbutton" type="button"><span style="background-image:url(\'https://cdn3.iconfinder.com/data/icons/file-format-2/512/log_.log_file_file_format_document_extension_format-128.png\');color:white;"></span></button>');
@@ -694,4 +783,4 @@ BetterDiscordBot.prototype.getAuthor = function () {
 };
 BetterDiscordBot.prototype.onMessage = function () {};
 try{exports.BetterDiscordBot = BetterDiscordBot;}catch(e){console.warn('Using old version, not exporting functions.');}
-try{exports.BetterDiscordBot.bot = bot;}catch(e){console.warn('Using old version, not exporting functions.');};
+try{exports.BetterDiscordBot.bot = bot;}catch(e){console.warn('Using old version, not exporting functions.');}
