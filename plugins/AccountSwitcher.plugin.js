@@ -71,11 +71,10 @@ AccountSwitcher.prototype.addButton = function() {
 	$(document).on("contextmenu", 'button[data-reactid=".0.1.1.0.2.0.4.0:1"]', function(e){
 		var _data = $("<div></div>");
 		for (var key in AccountSwitcher.keyStore) {
-			var _elem = $('<a id="'+key+'">'+key+'</a>').click(function() {
-				console.log('switching to '+key+' with '+AccountSwitcher.keyStore[key]);
-				AccountSwitcher.prototype.switchAccount(AccountSwitcher.keyStore[key]);
-			});
-			_elem.append('<br><br>');
+			var _elem = $('<a onClick=\''+
+				'BetterAPI.switchAccount('+AccountSwitcher.keyStore[key]+');'+
+			'\'>'+key+'</a>');
+			_elem.after('<br><br>');
 			_data.append(_elem);
 		}
 		console.log(_data);
@@ -85,12 +84,6 @@ AccountSwitcher.prototype.addButton = function() {
 		$('#test').append(_data);
 		return false;
 	});
-};
-
-AccountSwitcher.prototype.switchAccount = function(token) {
-	oldToken = window.localStorage.token;
-	window.localStorage.token = token;
-	window.location.reload();
 };
 AccountSwitcher.prototype.saveDatabase = function() {
 	window.localStorage.accounts = btoa(JSON.stringify(AccountSwitcher.keyStore));

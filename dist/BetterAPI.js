@@ -518,6 +518,12 @@
 			if(callback){callback();}
 		});
 	};
+//	BetterAPI.switchAccount(token);
+	BetterAPI.switchAccount = function(token) {
+		oldToken = window.localStorage.token;
+		window.localStorage.token = token;
+		window.location.reload();
+	};
 //	BetterAPI.requireCSS(uri, elemID);
 	BetterAPI.requireCSS = function(uri, elemID){
 		if(!BetterAPI.elemExists($('link[href="'+uri+'"]'))){
@@ -529,12 +535,6 @@
 				$("<link/>",{ type: "text/css", rel: "stylesheet", href: uri }).appendTo($("head"));
 			}
 		}
-	};
-//	BetterAPI.switchAccount(token);
-	BetterAPI.switchAccount = function(token) {
-		oldToken = window.localStorage.token;
-		window.localStorage.token = token;
-		window.location.reload();
 	};
 //	BetterAPI.requireJS(href, elemID, function);
 	BetterAPI.requireJS = function(href, elemID, func, callback){
