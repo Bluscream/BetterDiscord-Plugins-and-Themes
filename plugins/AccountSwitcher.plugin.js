@@ -81,7 +81,7 @@ AccountSwitcher.prototype.addButton = function() {
 		var _data = $("<div></div>");
 		for (var key in AccountSwitcher.keyStore) {
 			var _elem = $('<button onClick=\''+
-				'BetterAPI.switchAccount('+AccountSwitcher.keyStore[key]+');'+
+				'BetterAPI.switchAccount("'+AccountSwitcher.keyStore[key]+'");'+
 			'\'>'+key+'</button><br>');
 			_data.append(_elem);
 		}
