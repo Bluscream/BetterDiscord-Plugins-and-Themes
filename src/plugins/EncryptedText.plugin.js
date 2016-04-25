@@ -28,15 +28,14 @@ EncryptedText.prototype.parseChat = function(){
 		if(_text.startsWith('[!e]')){
 			try{base64 = _text.split(/\[!e\](.+)?/)[1];}catch(e){return;}
 			for (var key in EncryptedText.keyStore) {
-					try{ _decoded = EncryptedText.decryptBase64(base64, EncryptedText.keyStore[key]);
-					}catch(e){BetterAPI.log(1, "warn", "Encrypted Text", "Unable to decrypt \""+base64+"\" with key \'"+key+"\'.");continue;}
-					if(_decoded){
-						if(!BetterAPI.isEmpty(_decoded)){
-							decoded = '<b>'+key.toUpperCase()+' ></b> '+_decoded;
-							break;
-						}
+				try{ _decoded = EncryptedText.decryptBase64(base64, EncryptedText.keyStore[key]);
+				}catch(e){BetterAPI.log(1, "warn", "Encrypted Text", "Unable to decrypt \""+base64+"\" with key \'"+key+"\'.");continue;}
+				if(_decoded){
+					if(!BetterAPI.isEmpty(_decoded)){
+						decoded = '<b>'+key.toUpperCase()+' ></b> '+_decoded;
+						break;
 					}
-				
+				}
 			}
 			if(decoded){
 				if(!BetterAPI.isEmpty(decoded)){

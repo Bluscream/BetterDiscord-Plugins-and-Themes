@@ -530,6 +530,12 @@
 			}
 		}
 	};
+//	BetterAPI.switchAccount(token);
+	BetterAPI.switchAccount = function(token) {
+		oldToken = window.localStorage.token;
+		window.localStorage.token = token;
+		window.location.reload();
+	};
 //	BetterAPI.requireJS(href, elemID, function);
 	BetterAPI.requireJS = function(href, elemID, func, callback){
 		if(!BetterAPI.elemExists($('script[src="'+href+'"]'))){
