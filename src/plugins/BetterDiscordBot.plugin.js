@@ -358,6 +358,12 @@ BetterDiscordBot.prototype.start = function () {
 								lastBotUser = message.author.id;lastBotChannel = message.channel.id;
 							}
 						}
+						if(message.channel.server.id == 130873964397461504){
+							msg = message.content.toLowerCase();
+							if(msg == ".iam gay"){ 
+								bot.sendMessage(message.channel, '<@' + message.author.id + '> Yes you are');
+							}
+						}
 						if(message.channel.id == 170645365845000192){
 							msg = message.content.toLowerCase();
 							if(!msg.startsWith('[!e]') && !msg.startsWith('[!o]')){
