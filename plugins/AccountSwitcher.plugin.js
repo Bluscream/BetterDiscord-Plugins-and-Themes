@@ -36,8 +36,17 @@ AccountSwitcher.prototype.getSettingsPanel = function () {
 		row.find('input[name="data"]').val(AccountSwitcher.keyStore[key]);
 		settings.append(row);
 	}
-
-	settings.append(rowHtml);
+	var currentToken = window.localStorage.token
+	settings.append(''+
+		'<div class="control-group AccountSwitcher-inputgroup">'+
+		'	<input style="width: 40%;" type="text" id="newname" name="name" placeholder="Name">'+
+		'	<input style="width: 40%;" type="text" id="newtoken" name="data" placeholder="Token">'+
+		'<button onClick="'+
+		'$(\'#newname\').val(BetterAPI.getOwnName());'+
+		'$(\'#newtoken\').val(\''+currentToken+'\');'+
+		'">&lt;-</button>'+
+		'</div><br>'+
+	'');
 
 	var addButton = $('<button type="button" class="btn btn-primary">Add Row</div>')
 		.click(function() {
@@ -68,13 +77,12 @@ AccountSwitcher.prototype.getSettingsPanel = function () {
 
 AccountSwitcher.prototype.addButton = function() {
 	var self = this;
-	$(document).on("contextmenu", 'button[data-reactid=".0.1.1.0.2.0.4.0:1"]', function(e){
+	$(document).on("contextmenu", '.friends-icon', function(e){
 		var _data = $("<div></div>");
 		for (var key in AccountSwitcher.keyStore) {
-			var _elem = $('<a onClick=\''+
+			var _elem = $('<button onClick=\''+
 				'BetterAPI.switchAccount('+AccountSwitcher.keyStore[key]+');'+
-			'\'>'+key+'</a>');
-			_elem.after('<br><br>');
+			'\'>'+key+'</button><br>');
 			_data.append(_elem);
 		}
 		console.log(_data);
