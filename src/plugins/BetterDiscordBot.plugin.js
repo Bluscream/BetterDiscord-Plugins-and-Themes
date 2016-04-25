@@ -177,12 +177,16 @@ BetterDiscordBot.prototype.start = function () {
 						var msg = message.content.toLowerCase();
 						var _continue = false;
 						if(msg.startsWith(prefix)){
-							// console.info(message);
+							console.info(message);
 							BetterAPI.loadSettings("lastMessage", lastMessage, true);
 							msg = msg.split(prefix)[1];
 							args = msg.split(' ');
 							cmd = args.shift();
-							console.info('Command \''+cmd+'\' with arguments \''+args+'\' was issued by '+message.author.name+' in channel #' + message.channel.name + ' on server ' + wS(message.channel.server.name)+'.');
+							if(message.channel.server){
+								console.info('Command \''+cmd+'\' with arguments \''+args+'\' was issued by '+message.author.name+' in channel #' + message.channel.name + ' on server ' + wS(message.channel.server.name)+'.');
+							}else{
+								console.info('Command \''+cmd+'\' with arguments \''+args+'\' was issued by '+message.author.name+' in channel #' + message.channel.name + ' per direct message.');
+							}
 							for (var key in BetterDiscordBot.botcommands) {
 								if(!lastMessage[key]){lastMessage[key] = {};}
 								if(lastMessage[key].hasOwnProperty(message.channel.id)){
@@ -315,7 +319,11 @@ BetterDiscordBot.prototype.start = function () {
 								if(args.length < 1){
 									var user = message.author;
 								}else{
-									var user = message.mentions[1];
+									if(message.channel.server){
+										var user = message.mentions[1];
+									}else{
+										var user = message.mentions[0];
+									}
 								}
 								if(user.bot){var _data = '**Bot Information**\n\n';
 								}else{var _data = '**User Information**\n\n';}
