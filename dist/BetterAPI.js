@@ -1138,7 +1138,7 @@ _pickedColor = {};
 			localStorage.setItem('BDplus', 'true');
 		}
 	})();
-	(BetterAPI.loadCredits = function() {
+	BetterAPI.loadCredits = function() {
 		$('.avatar-small').not('.credits').each(function(i,e){
 			for(key in bdcredits){
 				if (!bdcredits.hasOwnProperty(key)) continue;
@@ -1158,9 +1158,6 @@ _pickedColor = {};
 				}
 			}
 		}).addClass('credits');
-	})();
-	BetterAPI.prototype.onSwitch = function() {
-		BetterAPI.loadCredits();
-	}
+	};
 	BetterAPI.log(0, "info", "Better API", "Successfully loaded.");
 })();
