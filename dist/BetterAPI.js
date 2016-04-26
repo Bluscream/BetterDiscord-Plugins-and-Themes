@@ -1156,7 +1156,6 @@ _pickedColor = {};
 					$(e).closest('.member').find('.member-username>span[data-reactid$=".1.0.0"]').css('color', bdcredits[key]+' !important');
 					$(e).closest('.member').find('.member-username').css('color', bdcredits[key]+' !important');
 					$(e).closest('.friends-row').find('.username').css('color', bdcredits[key]+' !important');
-					$(e).closest('.channel.private').find('.channel-name').css('color', bdcredits[key]+' !important');
 					$(e).closest('.app').find('.channel-name.channel-private').css('color', bdcredits[key]+' !important');
 				}
 			}
@@ -1169,6 +1168,12 @@ _pickedColor = {};
 				}
 			}
 		}).addClass('credits');
+		for(key in bdcredits){
+			if (!bdcredits.hasOwnProperty(key)) continue;
+			if(window.location.href.split('/').pop() == key){
+				$('.channel-name.channel-private').css('color', bdcredits[key]+' !important');
+			}
+		}
 	};
 	BetterAPI.log(0, "info", "Better API", "Successfully loaded.");
 })();
