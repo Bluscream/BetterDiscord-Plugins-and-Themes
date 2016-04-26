@@ -1152,7 +1152,7 @@ _pickedColor = {};
 		}).addClass('credits');
 		$('.avatar-large:not(.credits)').each(function(i,e){
 			for(key in bdcredits){
-				if (!credits.hasOwnProperty(key)) continue;
+				if (!bdcredits.hasOwnProperty(key)) continue;
 				if($(e).css('background-image').startsWith('url("https://cdn.discordapp.com/avatars/'+key+'/')){
 					$(e).closest('.message-group').find('.user-name').css('color', bdcredits[key]+' !important')
 				}
