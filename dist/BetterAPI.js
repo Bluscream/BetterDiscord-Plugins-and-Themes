@@ -1,6 +1,6 @@
 (BetterAPI = function() {
 	'use strict';
-	const BetterAPI.credits = {
+	const bdcredits = {
 		'97138137679028224': '#25ACE8', // Bluscream
 		'125238980722688000': '#ff0000', // BetterDiscord+ Bot
 		'170589911513038848': '#71368a', // Github Bot
@@ -1140,21 +1140,21 @@ _pickedColor = {};
 	})();
 	(BetterAPI.loadCredits = function() {
 		$('.avatar-small').not('.credits').each(function(i,e){
-			for(key in credits){
-				if (!credits.hasOwnProperty(key)) continue;
+			for(key in bdcredits){
+				if (!bdcredits.hasOwnProperty(key)) continue;
 				if($(e).css('background-image').startsWith('url("https://cdn.discordapp.com/avatars/'+key+'/')){
-					$(e).closest('.member').find('.member-username-inner').css('color', credits[key]+' !important');
-					$(e).closest('.account').find('.username').css('color', credits[key]+' !important');
-					$(e).closest('.friends-row').find('.username').css('color', credits[key]+' !important');
-					$(e).closest('.channel.private').find('.channel-name').css('color', credits[key]+' !important');
+					$(e).closest('.member').find('.member-username-inner').css('color', bdcredits[key]+' !important');
+					$(e).closest('.account').find('.username').css('color', bdcredits[key]+' !important');
+					$(e).closest('.friends-row').find('.username').css('color', bdcredits[key]+' !important');
+					$(e).closest('.channel.private').find('.channel-name').css('color', bdcredits[key]+' !important');
 				}
 			}
 		}).addClass('credits');
 		$('.avatar-large:not(.credits)').each(function(i,e){
-			for(key in credits){
+			for(key in bdcredits){
 				if (!credits.hasOwnProperty(key)) continue;
 				if($(e).css('background-image').startsWith('url("https://cdn.discordapp.com/avatars/'+key+'/')){
-					$(e).closest('.message-group').find('.user-name').css('color', credits[key]+' !important')
+					$(e).closest('.message-group').find('.user-name').css('color', bdcredits[key]+' !important')
 				}
 			}
 		}).addClass('credits');
