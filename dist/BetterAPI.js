@@ -1139,6 +1139,14 @@ _pickedColor = {};
 		}
 	})();
 	BetterAPI.loadCredits = function() {
+		$('.avatar-profile').not('.credits').each(function(i,e){
+			for(key in bdcredits){
+				if (!bdcredits.hasOwnProperty(key)) continue;
+				if($(e).css('background-image').startsWith('url("https://cdn.discordapp.com/avatars/'+key+'/')){
+					$(e).closest('.header').find('.username').css('color', bdcredits[key]+' !important');
+				}
+			}
+		}).addClass('credits');
 		$('.avatar-small').not('.credits').each(function(i,e){
 			for(key in bdcredits){
 				if (!bdcredits.hasOwnProperty(key)) continue;
