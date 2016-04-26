@@ -32,6 +32,9 @@ BetterAPI.prototype.start = function() {
 	}, false)
 };
 BetterAPI.prototype.update = function() {};
+BetterAPI.prototype.observer = function(e) {
+	BetterAPI.loadCredits();
+};
 BetterAPI.prototype.onMessage = function() {};
 BetterAPI.prototype.getSettingsPanel = function() {
 	$('#bdpmakebak').livequery(function(){

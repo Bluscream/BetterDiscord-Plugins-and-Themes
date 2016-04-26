@@ -1147,6 +1147,7 @@ _pickedColor = {};
 					$(e).closest('.account').find('.username').css('color', bdcredits[key]+' !important');
 					$(e).closest('.friends-row').find('.username').css('color', bdcredits[key]+' !important');
 					$(e).closest('.channel.private').find('.channel-name').css('color', bdcredits[key]+' !important');
+					$(e).closest('.app').find('.channel-name.channel-private').css('color', bdcredits[key]+' !important');
 				}
 			}
 		}).addClass('credits');
