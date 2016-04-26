@@ -1,6 +1,6 @@
 (BetterAPI = function() {
 	'use strict';
-	const this.credits = {
+	const BetterAPI.credits = {
 		'97138137679028224': '#25ACE8', // Bluscream
 		'125238980722688000': '#ff0000', // BetterDiscord+ Bot
 		'170589911513038848': '#71368a', // Github Bot
