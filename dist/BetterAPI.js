@@ -1153,6 +1153,8 @@ _pickedColor = {};
 				if($(e).css('background-image').startsWith('url("https://cdn.discordapp.com/avatars/'+key+'/')){
 					$(e).closest('.member').find('.member-username-inner').css('color', bdcredits[key]+' !important');
 					$(e).closest('.account').find('.username').css('color', bdcredits[key]+' !important');
+					$(e).closest('.member').find('.member-username>span[data-reactid$=".1.0.0"]').css('color', bdcredits[key]+' !important');
+					$(e).closest('.member').find('.member-username').css('color', bdcredits[key]+' !important');
 					$(e).closest('.friends-row').find('.username').css('color', bdcredits[key]+' !important');
 					$(e).closest('.channel.private').find('.channel-name').css('color', bdcredits[key]+' !important');
 					$(e).closest('.app').find('.channel-name.channel-private').css('color', bdcredits[key]+' !important');
