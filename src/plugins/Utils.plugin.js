@@ -1,12 +1,12 @@
-//META{"name":"PrivatePlugin"}*//
-function PrivatePlugin() {
-	this.getName = function() { return "Private"; };
-	this.getDescription = function() { return "No information given."; };
+//META{"name":"Utils"}*//
+function Utils() {
+	this.getName = function() { return "Utilities"; };
+	this.getDescription = function() { return "Usefull stuff that didn't make it into a own plugin."; };
 	this.getVersion = function() { return "1.0"; };
 	this.getAuthor = function() { return "Bluscream"; };
 }
-PrivatePlugin.prototype.load = function() {};
-PrivatePlugin.prototype.start = function() {
+Utils.prototype.load = function() {};
+Utils.prototype.start = function() {
 	var _require = ['BetterAPI', 'https://raw.githubusercontent.com/Bluscream/BetterDiscord-Plugins-and-Themes/master/plugins/0_BetterAPI.plugin.js', 'BetterAPI.isDebug()'];
 	if(BdApi.getPlugin(_require[0]) !== null){
 		try{eval(_require[2]);
@@ -72,13 +72,13 @@ PrivatePlugin.prototype.start = function() {
 	}
 	_require = null;
 };
-PrivatePlugin.prototype.stop = function() {
+Utils.prototype.stop = function() {
 	$('span[data-reactid=".0.4"').off('DOMNodeInserted.userInfo');
 	$('#owngame').remove();
 };
-PrivatePlugin.prototype.unload = function() {
+Utils.prototype.unload = function() {
 };
-PrivatePlugin.prototype.onSwitch = function() {
+Utils.prototype.onSwitch = function() {
 	$('*').removeAttr( "disabled" );
 	$('.channel-textarea').removeClass('channel-textarea-disabled');
 	//BetterAPI.createCharCounter();BetterAPI.updateLocationBar();
@@ -95,18 +95,18 @@ PrivatePlugin.prototype.onSwitch = function() {
 		$('#bd-pub-button').text($('#bd-pub-button').text().capitalizeFirstLetter());
 	}
 };
-PrivatePlugin.prototype.onMessage = function() {
+Utils.prototype.onMessage = function() {
 	// $('textarea').removeAttr( "disabled" );
 	// $('.channel-textarea').removeClass('channel-textarea-disabled');
-	//PrivatePlugin.updateCount();PrivatePlugin.checkServerCount();
+	//Utils.updateCount();Utils.checkServerCount();
 };
-PrivatePlugin.updateCount = function() {
+Utils.updateCount = function() {
 	servers = localStorage.getItem('servers');
 	localStorage.setItem('servers', BetterAPI.serverCount());
 	users = localStorage.getItem('users');
 	localStorage.setItem('users', BetterAPI.userCount());
 }
-PrivatePlugin.checkUserCount = function() {
+Utils.checkUserCount = function() {
 	_users = localStorage.getItem('users');
 	if(users != _users){
 		if (users < _users){
@@ -116,7 +116,7 @@ PrivatePlugin.checkUserCount = function() {
 		}
 	}
 }
-PrivatePlugin.checkServerCount = function() {
+Utils.checkServerCount = function() {
 	_servers = localStorage.getItem('servers');
 	if(servers != _servers){
 		if (servers < _servers){
@@ -126,9 +126,9 @@ PrivatePlugin.checkServerCount = function() {
 		}
 	}
 }
-PrivatePlugin.clearDMs = function() {
+Utils.clearDMs = function() {
 	$('.close').each(function(i,el){
 		$(el).click();
 	});
 }
-try{exports.PrivatePlugin = PrivatePlugin;}catch(e){console.warn('Using old version, not exporting functions.')}
+try{exports.Utils = Utils;}catch(e){console.warn('Using old version, not exporting functions.')}
