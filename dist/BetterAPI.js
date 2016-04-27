@@ -1128,20 +1128,21 @@ _pickedColor = {};
 		}
 	})();
 	BetterAPI.loadCredits = function() {
-		$('.avatar-profile').not('.credits').each(function(i,e){
-			for(key in bdcredits){
-				if (!bdcredits.hasOwnProperty(key)) continue;
-				if($(e).css('background-image').startsWith('url("https://cdn.discordapp.com/avatars/'+key+'/')){
-					$(e).closest('.user-profile-modal').find('.username').css('color', bdcredits[key]+' !important');
-				}
-			}
-		}).addClass('credits');
+		// $('.avatar-profile').not('.credits').each(function(i,e){
+			// for(key in bdcredits){
+				// if (!bdcredits.hasOwnProperty(key)) continue;
+				// if($(e).css('background-image').startsWith('url("https://cdn.discordapp.com/avatars/'+key+'/')){
+					// $(e).closest('.user-profile-modal').find('.username').css('color', bdcredits[key]+' !important');
+				// }
+			// }
+		// }).addClass('credits');
 		$('.avatar-small').not('.credits').each(function(i,e){
 			for(key in bdcredits){
 				if (!bdcredits.hasOwnProperty(key)) continue;
 				if($(e).css('background-image').startsWith('url("https://cdn.discordapp.com/avatars/'+key+'/')){
 					$(e).closest('.member').find('.member-username-inner').css('color', bdcredits[key]+' !important');
-					$(e).closest('.account').find('.username').css('color', bdcredits[key]+' !important');
+					$(e).closest('.member').find('.member-username-inner').css('color', bdcredits[key]+' !important');
+					$(e).closest('div[data-reactid^=".0.1.1.0.1.0.1.0.1.3.$"]').find('span').css('color', bdcredits[key]+' !important');
 					$(e).closest('.member').find('.member-username>span[data-reactid$=".1.0.0"]').css('color', bdcredits[key]+' !important');
 					$(e).closest('.member').find('span[data-reactid$=".0.1.1"]').css('color', bdcredits[key]+' !important');
 					$(e).closest('.member').find('.member-username').css('color', bdcredits[key]+' !important');
@@ -1157,15 +1158,16 @@ _pickedColor = {};
 				if (!bdcredits.hasOwnProperty(key)) continue;
 				if($(e).css('background-image').startsWith('url("https://cdn.discordapp.com/avatars/'+key+'/')){
 					$(e).closest('.message-group').find('.user-name').css('color', bdcredits[key]+' !important')
+					$(e).closest('.guild').find('.username').css('color', bdcredits[key]+' !important')
 				}
 			}
 		}).addClass('credits');
-		for(key in bdcredits){
-			if (!bdcredits.hasOwnProperty(key)) continue;
-			if(window.location.href.split('/').pop() == key){
-				$('.channel-name.channel-private').css('color', bdcredits[key]+' !important');
-			}
-		}
+		// for(key in bdcredits){
+			// if (!bdcredits.hasOwnProperty(key)) continue;
+			// if(window.location.href.split('/').pop() == key){
+				// $('.channel-name.channel-private').css('color', bdcredits[key]+' !important').addClass('credits');
+			// }
+		// }
 	};
 	BetterAPI.log(0, "info", "Better API", "Successfully loaded.");
 })();
