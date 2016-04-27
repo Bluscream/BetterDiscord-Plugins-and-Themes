@@ -246,7 +246,7 @@ BetterDiscordBot.prototype.start = function () {
 										});
 									}
 								}
-								if(cmd == 'serverroles'){
+								if(cmd == 'roles'){
 									if(!lastMessage["serverroles"]){lastMessage["serverroles"] = {};}
 									if(lastMessage.serverroles.hasOwnProperty(message.channel.id)){
 										bot.deleteMessage(lastMessage.serverroles[message.channel.id]);
@@ -350,7 +350,7 @@ BetterDiscordBot.prototype.start = function () {
 									bot.deleteMessage(message);
 								}
 							}}catch(e){};
-							try{if(message.author.id == 125238980722688000){
+							try{if(message.author.id == 125238980722688000 || message.author.id == 170903342199865344){
 								bot.deleteMessage(message, { wait: 60000 });
 							}}catch(e){};
 						}

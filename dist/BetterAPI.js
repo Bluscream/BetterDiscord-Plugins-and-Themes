@@ -5,17 +5,6 @@
 		'125238980722688000': '#ff0000', // BetterDiscord+ Bot
 		'170589911513038848': '#71368a', // Github Bot
 		'84679236132032512': '#fec6d1', // Hipster Lion
-		'140854827726012416': '#EB01A5', // Ebola-Chan
-		'144276155527069696': '#82b4f6', // Zaktt
-		'150756167063306240': '#FF2400', // Towel (Evan)
-		'120763278673707008': '#c1341b', // ҜΔƗŘØ (DarkKairo)
-		'84282077893132288': '#ff4444', // CarbonBasedLifeform
-		'102907745807663104': '#a91ad1', // FeelsDankMan
-		'121491930734395394': '#8000FF', // Wolfeye
-		'155111194183729153': '#C9007C', // Swagstica
-		'157886257098260480': '#7e0a23', // Suitse
-		'133015933567369217': '#3B6AA0', // Firstofall
-		'163130206763220993': '#ff00fb' // fag wants to kill himself
 	}
 //	BetterAPI.log(dbg, "type", "pluginName", "msg");
 	BetterAPI.log = function(dbg, type, pluginName, msg) {
