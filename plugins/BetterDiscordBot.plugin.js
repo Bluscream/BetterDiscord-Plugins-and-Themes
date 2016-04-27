@@ -22,8 +22,8 @@ if(sregion){if(sregion.contains('-')){sregion=sregion.replaceAll('-',' ');sregio
 _data+='`Server Location`: '+sregion+'\n';}
 if(sroles){_data+='`Roles`: '+sroles.length+'\n';}
 if(uc){_data+='`Total users`: '+uc+'\n';}
-if(onuc){_data+='`Online users`: '+onuc+'\n';}
-if(offuc){_data+='`Offline users`: '+offuc+'\n';}
+if(onuc&&onuc!=uc){_data+='`Online users`: '+onuc+'\n';}
+if(offuc&&offuc!=uc){_data+='`Offline users`: '+offuc+'\n';}
 if(_data!='NaN'){bot.sendMessage(message.channel,_data,{},function(e,m){lastMessage["serverinfo"][m.channel.id]=m;BetterAPI.saveSettings("lastMessage",lastMessage,true);bot.deleteMessage(m,{wait:120000});});}}
 if(cmd=='roles'){if(!lastMessage["serverroles"]){lastMessage["serverroles"]={};}
 if(lastMessage.serverroles.hasOwnProperty(message.channel.id)){bot.deleteMessage(lastMessage.serverroles[message.channel.id]);}
