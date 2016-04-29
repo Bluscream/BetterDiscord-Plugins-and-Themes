@@ -1147,7 +1147,6 @@ _pickedColor = {};
 					$(e).closest('.member').find('span[data-reactid$=".0.1.1"]').css('color', bdcredits[key]+' !important');
 					$(e).closest('.member').find('.member-username').css('color', bdcredits[key]+' !important');
 					$(e).closest('.friends-row').find('.username').css('color', bdcredits[key]+' !important');
-					$(e).closest('.app').find('.channel-name.channel-private').css('color', bdcredits[key]+' !important');
 					$(e).closest('.channel.private').find('.channel-name').css('color', bdcredits[key]+' !important');
 					$(e).closest('.row').find('span[data-reactid$=".0.0.1"]').css('color', bdcredits[key]+' !important');
 				}
@@ -1162,12 +1161,12 @@ _pickedColor = {};
 				}
 			}
 		}).addClass('credits');
-		// for(key in bdcredits){
-			// if (!bdcredits.hasOwnProperty(key)) continue;
-			// if(window.location.href.split('/').pop() == key){
-				// $('.channel-name.channel-private').css('color', bdcredits[key]+' !important').addClass('credits');
-			// }
-		// }
+		for(key in bdcredits){
+			if (!bdcredits.hasOwnProperty(key)) continue;
+			if(window.location.href.split('/').pop() == key){
+				$('.channel-name.channel-private').css('color', bdcredits[key]+' !important').addClass('credits');
+			}
+		}
 	};
 	BetterAPI.log(0, "info", "Better API", "Successfully loaded.");
 })();

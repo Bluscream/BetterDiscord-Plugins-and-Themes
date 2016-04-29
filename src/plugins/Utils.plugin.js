@@ -23,26 +23,9 @@ Utils.prototype.start = function() {
 			'');
 			return null;
 		}
-		// BetterAPI.changeUserInfo("Bluscream", "7fef6999df67e910379d5ad2a2f3863a");BetterAPI.createCharCounter();
-		$('.emoji:not(.emote)').addClass('emote');
-		$('*').removeAttr( "disabled" );
-		$('.channel-textarea').removeClass('channel-textarea-disabled');
-		// $('div[data-reactid=".0.1.1.0.0.0.3:$134680912691462144.0.0.0"]').click();
-		setTimeout(function() {
-			var scrollPane = $(".scroller.messages").first();
-			$(scrollPane).scrollTop(999999999);
-			var scrollPane = $(".scroller.channel-members").first();
-			$(scrollPane).scrollTop(0);
-		}, 100);
 		/*$('div[data-reactid=".0.1.1.0.2.0"]').livequery(function(){
 			BetterAPI.addLocationBar();
 		});*/
-		if(BetterAPI.elemExists('header[data-reactid$="$Direct Messages"]')){
-			$('header[data-reactid$="$Direct Messages"]').html('PM\'s - <a onclick="$(\'.close\').click();">Clear all</a>');
-		}
-		if(BetterAPI.elemExists("#bd-pub-button")){
-			$('#bd-pub-button').text($('#bd-pub-button').text().capitalizeFirstLetter());
-		}
 		$('.server-info.server-name>span').livequery(function(){
 			$('.server-info.server-name>span').each( function(i,e) { $(e).text($(e).text().replace(' by undefined', '')) });
 			$('.server-info.server-region>span').each( function(i,e) {
@@ -72,34 +55,32 @@ Utils.prototype.start = function() {
 	}
 	_require = null;
 };
-Utils.prototype.stop = function() {
-	$('span[data-reactid=".0.4"').off('DOMNodeInserted.userInfo');
-	$('#owngame').remove();
-};
-Utils.prototype.unload = function() {
-};
 Utils.prototype.onSwitch = function() {
-	$('*').removeAttr( "disabled" );
-	$('.channel-textarea').removeClass('channel-textarea-disabled');
-	//BetterAPI.createCharCounter();BetterAPI.updateLocationBar();
+	//BetterAPI.createCharCounter();
 	setTimeout(function() {
 		var scrollPane = $(".scroller.messages").first();
         $(scrollPane).scrollTop(999999999);
 		var scrollPane = $(".scroller.channel-members").first();
         $(scrollPane).scrollTop(0);
 	}, 1000);
+};
+Utils.prototype.onBooth = function() {
+	$('*').removeAttr( "disabled" );
+	$('.channel-textarea').removeClass('channel-textarea-disabled');
+	$('.emoji:not(.emote)').addClass('emote');
+	//BetterAPI.createCharCounter();
+	if(BetterAPI.elemExists("#bd-pub-button")){
+		$('#bd-pub-button').text($('#bd-pub-button').text().capitalizeFirstLetter());
+	}
 	if(BetterAPI.elemExists('header[data-reactid$="$Direct Messages"]')){
 		$('header[data-reactid$="$Direct Messages"]').html('PM\'s - <a onclick="$(\'.close\').click();">Clear all</a>');
 	}
-	if(BetterAPI.elemExists('#bd-pub-button')){
-		$('#bd-pub-button').text($('#bd-pub-button').text().capitalizeFirstLetter());
-	}
 };
 Utils.prototype.onMessage = function() {
-	// $('textarea').removeAttr( "disabled" );
-	// $('.channel-textarea').removeClass('channel-textarea-disabled');
 	//Utils.updateCount();Utils.checkServerCount();
 };
+Utils.prototype.stop = function() {};
+Utils.prototype.unload = function() {};
 Utils.updateCount = function() {
 	servers = localStorage.getItem('servers');
 	localStorage.setItem('servers', BetterAPI.serverCount());
