@@ -2,7 +2,7 @@
 
 var DiscordJS = function () {
 	'use strict';
-	this.getName = function(){ return "DiscordJS Plugin"; }
+	this.getName = function(){ return "DiscordJS"; }
 	this.getDescription = function(){ return "Allows you to use DiscordJS Features."; }
 	this.getVersion = function(){ return "1"; }
 	this.getAuthor = function(){ return "Bluscream"; }
