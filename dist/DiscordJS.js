@@ -1,7 +1,7 @@
 (function() {
-	discordJS = {};
-	discordJS.token = localStorage.token.match(/\"(.+)\"/)[1];
-	discordJS.ready = false;
+	bot = {};
+	bot.token = localStorage.token.match(/\"(.+)\"/)[1];
+	bot.ready = false;
 	BetterAPI.log(0, "info", "Discord.JS", "Loading...");
 	
 	var saveDir = __dirname.replace('resources\\atom.asar\\renderer\\lib', 'resources');
@@ -11,21 +11,34 @@
 	BetterAPI.npm('discord.js', saveDir, function () {
 		var path = require('path');
 		var Discord = require(path.join(saveDir, "node_modules", "discord.js"));//saveDir + '\\node_modules\\discord.js
-		discordJS = new Discord.Client();
+		bot = new Discord.Client();
 		console.log("Discord.JS: Plugin Loaded for Bot. Starting Bot.");
-		discordJS.loginWithToken(discordJS.token).then(success).catch (err);
+		bot.loginWithToken(bot.token).then(success).catch (err);
 		console.log("Discord.JS: Logged in.");
 		bot.on("ready", function (data) {
 			console.log("BetterDiscordBot: Client connected.");
-			discordJS.ready = true;
+			bot.ready = true;
 		});
 		bot.on("disconnected", function (data) {
 			console.log("BetterDiscordBot: Client disconnected. Auto reconnecting...");
-			discordJS.ready = false;
+			bot.ready = false;
 			var _int = setInterval(function(){
-				bot.loginWithToken(discordJS.token).then(clearInterval(_int)).catch(err);
+				bot.loginWithToken(bot.token).then(clearInterval(_int)).catch(err);
 			}, 5000);
 		});
+		function err2(error) {
+			if (error) {
+				console.log(error);
+				return;
+			}
+		}
+		function success(token) {}
+		function err(error) {
+			if (error) {
+				console.log('Problem occurred while logging in! ' + error);
+				return;
+			}
+		}
 	});
 	BetterAPI.log(0, "info", "Discord.JS", "Successfully loaded.");
 })();
