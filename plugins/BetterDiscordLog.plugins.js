@@ -43,7 +43,7 @@ var BetterDiscordLogging = {
 };
 BetterDiscordLog.prototype.load = function() {};
 BetterDiscordLog.prototype.start = function () {
-	var _require = ['Discord.JS', 'https://raw.githubusercontent.com/Bluscream/BetterDiscord-Plugins-and-Themes/master/plugins/0_DiscordJS.plugin.js', 'bot.ready'];
+	var _require = ['Discord.JS', 'https://raw.githubusercontent.com/Bluscream/BetterDiscord-Plugins-and-Themes/indev/plugins/0_DiscordJS.plugin.js', 'bot.ready'];
 	if(BdApi.getPlugin(_require[0]) !== null){
 		try{eval(_require[2]);
 		}catch(e){
