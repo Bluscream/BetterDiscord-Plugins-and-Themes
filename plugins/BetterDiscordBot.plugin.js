@@ -73,44 +73,6 @@ var BetterDiscordBotting = {
 		debug : true
 	}
 };
-var BetterDiscordLogging = {
-	settings : {
-		enabled : true,
-		autoscroll : true,
-		debug : true
-	},
-	events : {
-		ready : true,
-		disconnected : true,
-		raw : false,
-		presence : false,
-		debug : true,
-		warn : true,
-		error : true,
-		message : false,
-		messageUpdated : false,
-		messageDeleted : true,
-		serverCreated : true,
-		serverUpdated : true,
-		serverDeleted : true,
-		channelCreated : true,
-		channelUpdated : true,
-		channelDeleted : true,
-		serverRoleCreated : true,
-		serverRoleUpdated : true,
-		serverRoleDeleted : true,
-		serverNewMember : true,
-		serverMemberUpdated : false,
-		serverMemberRemoved : true,
-		userTypingStarted : false,
-		userTypingStopped : false,
-		userUnbanned : true,
-		userBanned : true,
-		voiceJoin : false,
-		voiceStateUpdate : false,
-		voiceLeave : false
-	}
-};
 BetterDiscordBot.prototype.load = function() {};
 BetterDiscordBot.prototype.start = function () {
 	var _require = ['Discord.JS', 'https://raw.githubusercontent.com/Bluscream/BetterDiscord-Plugins-and-Themes/master/plugins/0_DiscordJS.plugin.js', 'bot.ready'];
@@ -409,67 +371,8 @@ BetterDiscordBot.prototype.loadDatabase = function() {
 		BetterDiscordBot.botcommands = BotCommands;
 	}
 };
-BetterDiscordBot.log = function (level, event, server, channel, msg) {
-	var time = moment().format("DD.MM.YY HH:mm:ss:SSS");
-	if ($('.logrow').length > 499) {
-		$('.logrow:first').remove();
-	}
-	$('.bdserverlog').append('' + '<tr class="logrow '+level.toLowerCase()+'">' + '<td class="' + level.toLowerCase() + '">' + time + '</td>' + '<td class="' + level.toLowerCase() + '">' + level.toUpperCase() + '</td>' + '<td class="' + level.toLowerCase() + '">' + event + '</td>' + '<td class="' + level.toLowerCase() + '">' + server + '</td>' + '<td class="' + level.toLowerCase() + '">' + channel + '</td>' + '<td class="' + level.toLowerCase() + '">' + msg + '</td>' + '</tr>' + '');
-	if (BetterDiscordLogging.settings.autoscroll && $('#bdlog').is(":visible")) {
-		$("#bdlogbody").scrollTop($("#bdlogbody")[0].scrollHeight);
-	}
-};
-wS = function (str) {
-	return '"' + str + '"';
-};
-wN = function (str) {
-	return '\'' + str + '\'';
-};
-wM = function (str) {
-	return '\'\'' + str + '\'\'';
-};
-wID = function (str) {
-	return '#' + str;
-};
-BetterDiscordBot.addLogWindow = function () {
-	$('body').append('<div class="bd-table" id="bdlog" style="' +
-	'position:fixed !important;' + 'min-width:80% !important;' +
-	'max-width:80% !important;' + 'min-height:0 !important;' +
-	'height:80% !important;' + 'max-height:80% !important;' +
-	'left:10% !important;' + 'top:10% !important;' +
-	'z-index:9999999 !important;' + 'background-color: rgba(46,49,54,0.9) !important;' +
-	'margin: auto;' + 'border: 1px solid #323232;' + 'box-shadow: 0 0 5px 3px rgba(30,30,30,.5);' +
-	'color: #EBEBEB;' + 'display:none;">' + '<div class="bd-alert-header">' + '<span>BetterDiscord Log</span>' +
-		'<span onclick="BetterDiscordLogging.settings.autoscroll = !BetterDiscordLogging.settings.autoscroll;">(Autoscroll)</span>' +
-		'<span onClick="$(\'.logrow.debug\').toggle();">[DEBUG]</span>' +
-		'<span onClick="$(\'.logrow.info\').toggle();">[INFO]</span>' +
-		'<span onClick="$(\'.logrow.warn\').toggle();">[WARN]</span>' +
-		'<span onClick="$(\'.logrow.error\').toggle();">[ERROR]</span>' +
-		'<span onClick="BetterDiscordBot.log(\'debug\', \'testEvent\', \'Test Server\', \'Test Channel\', \'This is a test log message.\');">+</span>' +
-		'<span onClick="$(\'.logrow\').remove();">-</span>' +
-		'<div class="bd-alert-closebtn" onclick="$(this).parent().parent().hide();">×</div>' + '</div>' +
-		'<div class="bd-alert-body" id="bdlogbody" style="overflow:auto;height:100%;"></div>' +
-	'</div>');
-	$('#bdlogbody').append('<table id="tg-yv9oF" class="bdserverlog tg" cellspacing="0" cellpadding="0" style="' + 'min-width:100% !important;' + 'max-width:100% !important;' + 'max-height:100% !important;' + 'overflow: auto;' + '">' + '<tr>' + '<th class="tg-031e">Time</th>' + '<th class="tg-031e">Level</th>' + '<th class="tg-yw4l">Event</th>' + '<th class="tg-yw4l">Server</th>' + '<th class="tg-yw4l">Channel</th>' + '<th class="tg-yw4l">Message</th>' + '</tr>' + '</table>');
-};
-BetterDiscordBot.debug = function (event, argu) {
-	console.info('=== ' + event + ' START ===');
-	for (var arg = 0; arg < argu.length; ++arg) {
-		console.log(argu[arg]);
-	}
-	console.warn('=== ' + event + ' STOP ===');
-};
-BetterDiscordBot.prototype.stop = function () {
-	var ignoreCommands = true;
-	console.log("Bot Plugin Stopped.");
-};
-BetterDiscordBot.prototype.unload = function () {
-	var ignoreCommands = true;
-	console.log("Plugin Unloaded for Bot. Not logging out but ignoring the commands.");
-};
-BetterDiscordBot.prototype.update = function () {
-	console.log("A Fake thing here this plugin does not update for others.");
-};
+BetterDiscordBot.prototype.stop = function () {};
+BetterDiscordBot.prototype.unload = function () {};
 BetterDiscordBot.prototype.getName = function () {
 	return "BetterDiscordBot";
 };
@@ -484,4 +387,3 @@ BetterDiscordBot.prototype.getAuthor = function () {
 };
 BetterDiscordBot.prototype.onMessage = function () {};
 try{exports.BetterDiscordBot = BetterDiscordBot;}catch(e){console.warn('Using old version, not exporting functions.');}
-try{exports.BetterDiscordBot.bot = bot;}catch(e){console.warn('Using old version, not exporting functions.');}
