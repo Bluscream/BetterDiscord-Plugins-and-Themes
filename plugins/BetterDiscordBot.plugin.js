@@ -98,11 +98,10 @@ BetterDiscordBot.prototype.start = function () {
 		var lastBotChannel = 0;
 		var _int = setInterval(function(){
 			try{
+				bot.on("ready", function (data) {
+					clearInterval(_int);
+				});
 				bot.on("message", function (message) {
-					if (BetterDiscordLogging.events.message) {
-						if (debugging) { BetterDiscordBot.debug('message', arguments); }
-						BetterDiscordBot.log('info', 'message', '<a href="https://discordapp.com/channels/' + message.channel.server.id + '/">' + message.channel.server.name + '</a>', '<a href="https://discordapp.com/channels/' + message.channel.server.id + '/' + message.channel.id + '">#' + message.channel.name + '</a>', 'Message ' + wM(message.cleanContent) + ' got created by ' + wN(message.author.username) + '.');
-					}
 					if (BetterDiscordBotting.settings.enabled) {
 						if(message.channel.server){
 							var prefix = '<@' + BetterAPI.getOwnID() + '> ';
@@ -136,7 +135,9 @@ BetterDiscordBot.prototype.start = function () {
 										BetterAPI.saveSettings("lastMessage", lastMessage, true);
 									}catch(e){
 										console.error('Bot is unable to process command '+command+'\n\n.Error Message: '+e+'\n\nAction:\n\n'+action);
-										Core.prototype.alert('BetterDiscordBot - Error', 'Bot is unable to process command <span style="color:orange"><b>'+command+'</b></span>.<br><br>Error Message: <span style="color:red">'+e+'</span><br><br>Action:<br><br>'+action);
+										if(e != "TypeError: Converting circular structure to JSON"){
+											Core.prototype.alert('BetterDiscordBot - Error', 'Bot is unable to process command <span style="color:orange"><b>'+command+'</b></span>.<br><br>Error Message: <span style="color:red">'+e+'</span><br><br>Action:<br><br>'+action);
+										}
 									}
 								}
 							}
@@ -292,8 +293,7 @@ BetterDiscordBot.prototype.start = function () {
 						}
 					}
 				});
-			}catch(e){console.warn('try: '+e)};
-			clearInterval(_int)
+			}catch(e){};
 		}, 2000);
 	}else{
 		Core.prototype.alert('Required plugin not found!',''+
@@ -306,17 +306,19 @@ BetterDiscordBot.prototype.start = function () {
 	}
 	_require = null;
 };
-BetterDiscordBot.prototype.onSwitch = function () {
-	if (!BetterAPI.elemExists('#bdlogbutton')) {
-		$('span[style="background-image:url(\'/assets/cfb80ab4c0c135cdcb4dbcf0db124c4d.svg\');"]').parent().before('<button id="bdlogbutton" type="button"><span style="background-image:url(\'https://cdn3.iconfinder.com/data/icons/file-format-2/512/log_.log_file_file_format_document_extension_format-128.png\');color:white;"></span></button>');
-		$('#bdlogbutton').click(function () {
-			if (!BetterAPI.elemExists('#bdlog')) {
-				BetterDiscordBot.addLogWindow();
-			}
-			$('#bdlog').toggle();
-		});
-	}
+wS = function (str) {
+	return '"' + str + '"';
 };
+wN = function (str) {
+	return '\'' + str + '\'';
+};
+wM = function (str) {
+	return '\'\'' + str + '\'\'';
+};
+wID = function (str) {
+	return '#' + str;
+};
+BetterDiscordBot.prototype.onSwitch = function () {};
 BetterDiscordBot.prototype.getSettingsPanel = function() {
 	var self = this;
 	var settings = $('<div class="form" style="max-width:100%;"></div>');

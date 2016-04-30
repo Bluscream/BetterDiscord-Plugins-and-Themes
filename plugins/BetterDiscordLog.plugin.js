@@ -91,6 +91,7 @@ BetterDiscordLog.prototype.start = function () {
 						}
 						BetterDiscordLog.log('info', 'ready', '', '', 'Client is ready.');
 						console.log("BetterDiscordLog: Client connected.");
+						clearInterval(_int);
 					}
 				});
 				bot.on("disconnected", function (data) {
