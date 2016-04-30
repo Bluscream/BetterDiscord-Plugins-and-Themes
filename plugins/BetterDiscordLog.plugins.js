@@ -76,258 +76,261 @@ BetterDiscordLog.prototype.start = function () {
 			$('#bdlog').toggle();
 		};
 		var lastBanned = 0;
-		bot.on("message", function (message) {
-			if (BetterDiscordLogging.events.message) {
-				if (debugging) { BetterDiscordLog.debug('message', arguments); }
-				BetterDiscordLog.log('info', 'message', '<a href="https://discordapp.com/channels/' + message.channel.server.id + '/">' + message.channel.server.name + '</a>', '<a href="https://discordapp.com/channels/' + message.channel.server.id + '/' + message.channel.id + '">#' + message.channel.name + '</a>', 'Message ' + wM(message.cleanContent) + ' got created by ' + wN(message.author.username) + '.');
-			}
-		});
-		bot.on("ready", function (data) {
-			if (BetterDiscordLogging.events.ready) {
-				if (debugging) {
-					BetterDiscordLog.debug('ready', arguments);
+		var _int = setInterval(function(){
+			bot.on("message", function (message) {
+				if (BetterDiscordLogging.events.message) {
+					if (debugging) { BetterDiscordLog.debug('message', arguments); }
+					BetterDiscordLog.log('info', 'message', '<a href="https://discordapp.com/channels/' + message.channel.server.id + '/">' + message.channel.server.name + '</a>', '<a href="https://discordapp.com/channels/' + message.channel.server.id + '/' + message.channel.id + '">#' + message.channel.name + '</a>', 'Message ' + wM(message.cleanContent) + ' got created by ' + wN(message.author.username) + '.');
 				}
-				BetterDiscordLog.log('info', 'ready', '', '', 'Client is ready.');
-				console.log("BetterDiscordLog: Client connected.");
-			}
-		});
-		bot.on("disconnected", function (data) {
-			if (BetterDiscordLogging.events.disconnected) {
-				if (debugging) {
-					BetterDiscordLog.debug('disconnected', arguments);
+			});
+			bot.on("ready", function (data) {
+				if (BetterDiscordLogging.events.ready) {
+					if (debugging) {
+						BetterDiscordLog.debug('ready', arguments);
+					}
+					BetterDiscordLog.log('info', 'ready', '', '', 'Client is ready.');
+					console.log("BetterDiscordLog: Client connected.");
 				}
-				BetterDiscordLog.log('info', 'disconnected', '', '', 'Client got disconnected.');
-			}
-		});
-		bot.on("raw", function (data) {
-			if (BetterDiscordLogging.events.raw) {
-				if (debugging) {
-					BetterDiscordLog.debug('raw', arguments);
+			});
+			bot.on("disconnected", function (data) {
+				if (BetterDiscordLogging.events.disconnected) {
+					if (debugging) {
+						BetterDiscordLog.debug('disconnected', arguments);
+					}
+					BetterDiscordLog.log('info', 'disconnected', '', '', 'Client got disconnected.');
 				}
-				BetterDiscordLog.log('info', 'raw', '', '', 'Got raw data.');
-			}
-		});
-		bot.on("debug", function () {
-			if (BetterDiscordLogging.events.debug) {
-				if (debugging) {
-					BetterDiscordLog.debug('debug', arguments);
+			});
+			bot.on("raw", function (data) {
+				if (BetterDiscordLogging.events.raw) {
+					if (debugging) {
+						BetterDiscordLog.debug('raw', arguments);
+					}
+					BetterDiscordLog.log('info', 'raw', '', '', 'Got raw data.');
 				}
-				BetterDiscordLog.log('debug', 'debug', '', '', arguments[0].capitalizeFirstLetter());
-			}
-		});
-		bot.on("warn", function () {
-			if (BetterDiscordLogging.events.warn) {
-				if (debugging) {
-					BetterDiscordLog.debug('warn', arguments);
+			});
+			bot.on("debug", function () {
+				if (BetterDiscordLogging.events.debug) {
+					if (debugging) {
+						BetterDiscordLog.debug('debug', arguments);
+					}
+					BetterDiscordLog.log('debug', 'debug', '', '', arguments[0].capitalizeFirstLetter());
 				}
-				BetterDiscordLog.log('warn', 'warn', '', '', arguments[0].capitalizeFirstLetter());
-			}
-		});
-		bot.on("error", function (data) {
-			if (BetterDiscordLogging.events.error) {
-				if (debugging) {
-					BetterDiscordLog.debug('error', arguments);
+			});
+			bot.on("warn", function () {
+				if (BetterDiscordLogging.events.warn) {
+					if (debugging) {
+						BetterDiscordLog.debug('warn', arguments);
+					}
+					BetterDiscordLog.log('warn', 'warn', '', '', arguments[0].capitalizeFirstLetter());
 				}
-				BetterDiscordLog.log('error', 'error', '', '', arguments[0].capitalizeFirstLetter());
-			}
-		});
-		bot.on("presence", function (olduser, newuser) {
-			if (BetterDiscordLogging.events.presence) {
-				if (debugging) {
-					BetterDiscordLog.debug('presence', arguments);
+			});
+			bot.on("error", function (data) {
+				if (BetterDiscordLogging.events.error) {
+					if (debugging) {
+						BetterDiscordLog.debug('error', arguments);
+					}
+					BetterDiscordLog.log('error', 'error', '', '', arguments[0].capitalizeFirstLetter());
 				}
-				BetterDiscordLog.log('info', 'presence', '', '', wN(olduser.username) + ' changed presence.');
-			}
-		});
-		bot.on("messageUpdated", function (oldmessage, message) {
-			if (BetterDiscordLogging.events.messageUpdated) {
-				if (debugging) {
-					BetterDiscordLog.debug('messageUpdated', arguments);
+			});
+			bot.on("presence", function (olduser, newuser) {
+				if (BetterDiscordLogging.events.presence) {
+					if (debugging) {
+						BetterDiscordLog.debug('presence', arguments);
+					}
+					BetterDiscordLog.log('info', 'presence', '', '', wN(olduser.username) + ' changed presence.');
 				}
-				BetterDiscordLog.log('info', 'messageUpdated', '<a href="https://discordapp.com/channels/' + channel.server.id + '/">' + channel.server.name + '</a>', '<a href="https://discordapp.com/channels/' + channel.server.id + '/' + channel.id + '">#' + channel.name + '</a>', 'Message ' + wID(oldmessage.id) + ' got edited by ' + wN(oldmessage.author.username) + '.');
-			}
-		});
-		bot.on("messageDeleted", function (message, channel) {
-			if (BetterDiscordLogging.events.messageDeleted) {
-				if (debugging) {
-					BetterDiscordLog.debug('messageDeleted', arguments);
+			});
+			bot.on("messageUpdated", function (oldmessage, message) {
+				if (BetterDiscordLogging.events.messageUpdated) {
+					if (debugging) {
+						BetterDiscordLog.debug('messageUpdated', arguments);
+					}
+					BetterDiscordLog.log('info', 'messageUpdated', '<a href="https://discordapp.com/channels/' + channel.server.id + '/">' + channel.server.name + '</a>', '<a href="https://discordapp.com/channels/' + channel.server.id + '/' + channel.id + '">#' + channel.name + '</a>', 'Message ' + wID(oldmessage.id) + ' got edited by ' + wN(oldmessage.author.username) + '.');
 				}
-				try {
-					BetterDiscordLog.log('info', 'messageDeleted', '<a href="https://discordapp.com/channels/' + channel.server.id + '/">' + channel.server.name + '</a>', '<a href="https://discordapp.com/channels/' + channel.server.id + '/' + channel.id + '">#' + channel.name + '</a>', 'Message ' + wM(message.cleanContent) + ' by ' + wN(message.author.username) + ' got deleted' + '.');
-				} catch (e) {}
-			}
-		});
-		bot.on("serverCreated", function (server) {
-			if (BetterDiscordLogging.events.serverCreated) {
-				if (debugging) {
-					BetterDiscordLog.debug('serverCreated', arguments);
+			});
+			bot.on("messageDeleted", function (message, channel) {
+				if (BetterDiscordLogging.events.messageDeleted) {
+					if (debugging) {
+						BetterDiscordLog.debug('messageDeleted', arguments);
+					}
+					try {
+						BetterDiscordLog.log('info', 'messageDeleted', '<a href="https://discordapp.com/channels/' + channel.server.id + '/">' + channel.server.name + '</a>', '<a href="https://discordapp.com/channels/' + channel.server.id + '/' + channel.id + '">#' + channel.name + '</a>', 'Message ' + wM(message.cleanContent) + ' by ' + wN(message.author.username) + ' got deleted' + '.');
+					} catch (e) {}
 				}
-				BetterDiscordLog.log('info', 'serverCreated', '', '', 'Server ' + wS(server.name) + ' was created' + '.');
-			}
-		});
-		bot.on("serverUpdated", function (oldserver, server) {
-			if (BetterDiscordLogging.events.serverUpdated) {
-				if (debugging) {
-					BetterDiscordLog.debug('serverUpdated', arguments);
+			});
+			bot.on("serverCreated", function (server) {
+				if (BetterDiscordLogging.events.serverCreated) {
+					if (debugging) {
+						BetterDiscordLog.debug('serverCreated', arguments);
+					}
+					BetterDiscordLog.log('info', 'serverCreated', '', '', 'Server ' + wS(server.name) + ' was created' + '.');
 				}
-				BetterDiscordLog.log('info', 'serverUpdated', '', '', 'Server ' + wS(server.name) + ' was edited' + '.');
-			}
-		});
-		bot.on("serverDeleted", function (server) {
-			if (BetterDiscordLogging.events.serverDeleted) {
-				if (debugging) {
-					BetterDiscordLog.debug('serverDeleted', arguments);
+			});
+			bot.on("serverUpdated", function (oldserver, server) {
+				if (BetterDiscordLogging.events.serverUpdated) {
+					if (debugging) {
+						BetterDiscordLog.debug('serverUpdated', arguments);
+					}
+					BetterDiscordLog.log('info', 'serverUpdated', '', '', 'Server ' + wS(server.name) + ' was edited' + '.');
 				}
-				BetterDiscordLog.log('info', 'serverDeleted', '', '', 'Server ' + wS(server.name) + ' was deleted' + '.');
-			}
-		});
-		bot.on("channelCreated", function (channel) {
-			if (BetterDiscordLogging.events.channelCreated) {
-				if (debugging) {
-					BetterDiscordLog.debug('channelCreated', arguments);
+			});
+			bot.on("serverDeleted", function (server) {
+				if (BetterDiscordLogging.events.serverDeleted) {
+					if (debugging) {
+						BetterDiscordLog.debug('serverDeleted', arguments);
+					}
+					BetterDiscordLog.log('info', 'serverDeleted', '', '', 'Server ' + wS(server.name) + ' was deleted' + '.');
 				}
-				try {
-					BetterDiscordLog.log('info', 'channelCreated', '<a href="https://discordapp.com/channels/' + channel.server.id + '/">' + channel.server.name + '</a>', '', 'Channel <a href="https://discordapp.com/channels/' + channel.server.id + '/' + channel.id + '">#' + channel.name + '</a> was created' + '.');
-				} catch (e) {}
-			}
-		});
-		bot.on("channelUpdated", function (oldchannel, channel) {
-			if (BetterDiscordLogging.events.channelUpdated) {
-				if (debugging) {
-					BetterDiscordLog.debug('channelUpdated', arguments);
+			});
+			bot.on("channelCreated", function (channel) {
+				if (BetterDiscordLogging.events.channelCreated) {
+					if (debugging) {
+						BetterDiscordLog.debug('channelCreated', arguments);
+					}
+					try {
+						BetterDiscordLog.log('info', 'channelCreated', '<a href="https://discordapp.com/channels/' + channel.server.id + '/">' + channel.server.name + '</a>', '', 'Channel <a href="https://discordapp.com/channels/' + channel.server.id + '/' + channel.id + '">#' + channel.name + '</a> was created' + '.');
+					} catch (e) {}
 				}
-				try {
-					BetterDiscordLog.log('info', 'channelUpdated', '<a href="https://discordapp.com/channels/' + channel.server.id + '/">' + channel.server.name + '</a>', '', 'Channel ' + wN(oldchannel.name) + ' was edited to <a href="https://discordapp.com/channels/' + channel.server.id + '/' + channel.id + '">#' + channel.name + '</a>.');
-				} catch (e) {}
-			}
-		});
-		bot.on("channelDeleted", function (channel) {
-			if (BetterDiscordLogging.events.channelDeleted) {
-				if (debugging) {
-					BetterDiscordLog.debug('channelDeleted', arguments);
+			});
+			bot.on("channelUpdated", function (oldchannel, channel) {
+				if (BetterDiscordLogging.events.channelUpdated) {
+					if (debugging) {
+						BetterDiscordLog.debug('channelUpdated', arguments);
+					}
+					try {
+						BetterDiscordLog.log('info', 'channelUpdated', '<a href="https://discordapp.com/channels/' + channel.server.id + '/">' + channel.server.name + '</a>', '', 'Channel ' + wN(oldchannel.name) + ' was edited to <a href="https://discordapp.com/channels/' + channel.server.id + '/' + channel.id + '">#' + channel.name + '</a>.');
+					} catch (e) {}
 				}
-				try {
-					BetterDiscordLog.log('info', 'channelDeleted', '<a href="https://discordapp.com/channels/' + channel.server.id + '/">' + channel.server.name + '</a>', '', 'Channel ' + wN(channel.name) + ' was deleted' + '.');
-				} catch (e) {}
-			}
-		});
-		bot.on("serverRoleCreated", function (role) {
-			if (BetterDiscordLogging.events.serverRoleCreated) {
-				if (debugging) {
-					BetterDiscordLog.debug('serverRoleCreated', arguments);
+			});
+			bot.on("channelDeleted", function (channel) {
+				if (BetterDiscordLogging.events.channelDeleted) {
+					if (debugging) {
+						BetterDiscordLog.debug('channelDeleted', arguments);
+					}
+					try {
+						BetterDiscordLog.log('info', 'channelDeleted', '<a href="https://discordapp.com/channels/' + channel.server.id + '/">' + channel.server.name + '</a>', '', 'Channel ' + wN(channel.name) + ' was deleted' + '.');
+					} catch (e) {}
 				}
-				BetterDiscordLog.log('info', 'serverRoleCreated', '<a href="https://discordapp.com/channels/' + role.server.id + '">' + role.server.name + '</a>', '', 'Role <text style="color:' + role.colorAsHex() + '">\'' + role.name + '\'</text> was created' + '.');
-			}
-		});
-		bot.on("serverRoleUpdated", function (oldrole, role) {
-			if (BetterDiscordLogging.events.serverRoleUpdated) {
-				if (debugging) {
-					BetterDiscordLog.debug('serverRoleUpdated', arguments);
+			});
+			bot.on("serverRoleCreated", function (role) {
+				if (BetterDiscordLogging.events.serverRoleCreated) {
+					if (debugging) {
+						BetterDiscordLog.debug('serverRoleCreated', arguments);
+					}
+					BetterDiscordLog.log('info', 'serverRoleCreated', '<a href="https://discordapp.com/channels/' + role.server.id + '">' + role.server.name + '</a>', '', 'Role <text style="color:' + role.colorAsHex() + '">\'' + role.name + '\'</text> was created' + '.');
 				}
-				BetterDiscordLog.log('info', 'serverRoleUpdated', '<a href="https://discordapp.com/channels/' + role.server.id + '">' + role.server.name + '</a>', '', 'Role ' + wN('<text style="color:' + oldrole.colorAsHex() + '">' + oldrole.name + '</text>') + ' was edited to ' + wN('<text style="color:' + role.colorAsHex() + '">' + role.name + '</text>') + '.');
-			}
-		});
-		bot.on("serverRoleDeleted", function (role) {
-			if (BetterDiscordLogging.events.serverRoleDeleted) {
-				if (debugging) {
-					BetterDiscordLog.debug('serverRoleDeleted', arguments);
+			});
+			bot.on("serverRoleUpdated", function (oldrole, role) {
+				if (BetterDiscordLogging.events.serverRoleUpdated) {
+					if (debugging) {
+						BetterDiscordLog.debug('serverRoleUpdated', arguments);
+					}
+					BetterDiscordLog.log('info', 'serverRoleUpdated', '<a href="https://discordapp.com/channels/' + role.server.id + '">' + role.server.name + '</a>', '', 'Role ' + wN('<text style="color:' + oldrole.colorAsHex() + '">' + oldrole.name + '</text>') + ' was edited to ' + wN('<text style="color:' + role.colorAsHex() + '">' + role.name + '</text>') + '.');
 				}
-				BetterDiscordLog.log('info', 'serverRoleDeleted', '<a href="https://discordapp.com/channels/' + role.server.id + '">' + role.server.name + '</a>', '', 'Role <text style="color:' + role.colorAsHex() + '">\'' + role.name + '\'</text> was deleted' + '.');
-			}
-		});
-		bot.on("serverNewMember", function (server, user) {
-			if (BetterDiscordLogging.events.serverNewMember) {
-				if (debugging) {
-					BetterDiscordLog.debug('serverNewMember', arguments);
+			});
+			bot.on("serverRoleDeleted", function (role) {
+				if (BetterDiscordLogging.events.serverRoleDeleted) {
+					if (debugging) {
+						BetterDiscordLog.debug('serverRoleDeleted', arguments);
+					}
+					BetterDiscordLog.log('info', 'serverRoleDeleted', '<a href="https://discordapp.com/channels/' + role.server.id + '">' + role.server.name + '</a>', '', 'Role <text style="color:' + role.colorAsHex() + '">\'' + role.name + '\'</text> was deleted' + '.');
 				}
-				if (server.id == BetterAPI.getCurrentServerID()) {
-					alertify.notify('<span style="color:green !important;">' + wN(user.name) + ' joined.</span>');
+			});
+			bot.on("serverNewMember", function (server, user) {
+				if (BetterDiscordLogging.events.serverNewMember) {
+					if (debugging) {
+						BetterDiscordLog.debug('serverNewMember', arguments);
+					}
+					if (server.id == BetterAPI.getCurrentServerID()) {
+						alertify.notify('<span style="color:green !important;">' + wN(user.name) + ' joined.</span>');
+					}
+					BetterDiscordLog.log('info', 'serverNewMember', '<a href="https://discordapp.com/channels/' + server.id + '/">' + server.name + '</a>', '', wN('<a href="https://canary.discordapp.com/channels/@me/' + user.id + '">' + user.name + '</a>') + ' joined' + '.');
 				}
-				BetterDiscordLog.log('info', 'serverNewMember', '<a href="https://discordapp.com/channels/' + server.id + '/">' + server.name + '</a>', '', wN('<a href="https://canary.discordapp.com/channels/@me/' + user.id + '">' + user.name + '</a>') + ' joined' + '.');
-			}
-		});
-		bot.on("serverMemberUpdated", function (server, user) {
-			if (BetterDiscordLogging.events.serverMemberUpdated) {
-				if (debugging) {
-					BetterDiscordLog.debug('serverMemberUpdated', arguments);
+			});
+			bot.on("serverMemberUpdated", function (server, user) {
+				if (BetterDiscordLogging.events.serverMemberUpdated) {
+					if (debugging) {
+						BetterDiscordLog.debug('serverMemberUpdated', arguments);
+					}
+					BetterDiscordLog.log('info', 'serverMemberUpdated', '<a href="https://discordapp.com/channels/' + server.id + '">' + server.name + '</a>', '', wN('<a href="https://canary.discordapp.com/channels/@me/' + user.id + '">' + user.name + '</a>') + ' updated' + '.');
 				}
-				BetterDiscordLog.log('info', 'serverMemberUpdated', '<a href="https://discordapp.com/channels/' + server.id + '">' + server.name + '</a>', '', wN('<a href="https://canary.discordapp.com/channels/@me/' + user.id + '">' + user.name + '</a>') + ' updated' + '.');
-			}
-		});
-		bot.on("serverMemberRemoved", function (server, user) {
-			if (BetterDiscordLogging.events.serverMemberRemoved) {
-				if (debugging) {
-					BetterDiscordLog.debug('serverMemberRemoved', arguments);
+			});
+			bot.on("serverMemberRemoved", function (server, user) {
+				if (BetterDiscordLogging.events.serverMemberRemoved) {
+					if (debugging) {
+						BetterDiscordLog.debug('serverMemberRemoved', arguments);
+					}
+					if (server.id == BetterAPI.getCurrentServerID() && user.id != lastBanned) {
+						alertify.success('<span style="color:red !important;">' + wN(user.name) + ' left or kicked.</span>');
+					}else{lastBanned = 0;}
+					BetterDiscordLog.log('info', 'serverMemberRemoved', '<a href="https://discordapp.com/channels/' + server.id + '">' + server.name + '</a>', '', wN('<a href="https://canary.discordapp.com/channels/@me/' + user.id + '">' + user.name + '</a>') + ' left or was kicked' + '.');
 				}
-				if (server.id == BetterAPI.getCurrentServerID() && user.id != lastBanned) {
-					alertify.success('<span style="color:red !important;">' + wN(user.name) + ' left or kicked.</span>');
-				}else{lastBanned = 0;}
-				BetterDiscordLog.log('info', 'serverMemberRemoved', '<a href="https://discordapp.com/channels/' + server.id + '">' + server.name + '</a>', '', wN('<a href="https://canary.discordapp.com/channels/@me/' + user.id + '">' + user.name + '</a>') + ' left or was kicked' + '.');
-			}
-		});
-		bot.on("userTypingStarted", function (user, channel) {
-			if (BetterDiscordLogging.events.userTypingStarted) {
-				if (debugging) {
-					BetterDiscordLog.debug('userTypingStarted', arguments);
+			});
+			bot.on("userTypingStarted", function (user, channel) {
+				if (BetterDiscordLogging.events.userTypingStarted) {
+					if (debugging) {
+						BetterDiscordLog.debug('userTypingStarted', arguments);
+					}
+					BetterDiscordLog.log('info', 'userTypingStarted', '<a href="https://discordapp.com/channels/' + server.id + '">' + server.name + '</a>', '<a href="https://discordapp.com/channels/' + channel.server.id + '/' + channel.id + '">#' + channel.name + '</a>', wN(user.name) + ' started typing in ' + wS(channel.name) + '.');
 				}
-				BetterDiscordLog.log('info', 'userTypingStarted', '<a href="https://discordapp.com/channels/' + server.id + '">' + server.name + '</a>', '<a href="https://discordapp.com/channels/' + channel.server.id + '/' + channel.id + '">#' + channel.name + '</a>', wN(user.name) + ' started typing in ' + wS(channel.name) + '.');
-			}
-		});
-		bot.on("userTypingStopped", function (user, channel) {
-			if (BetterDiscordLogging.events.userTypingStopped) {
-				if (debugging) {
-					BetterDiscordLog.debug('userTypingStopped', arguments);
+			});
+			bot.on("userTypingStopped", function (user, channel) {
+				if (BetterDiscordLogging.events.userTypingStopped) {
+					if (debugging) {
+						BetterDiscordLog.debug('userTypingStopped', arguments);
+					}
+					BetterDiscordLog.log('info', 'userTypingStopped', '<a href="https://discordapp.com/channels/' + server.id + '">' + server.name + '</a>', '<a href="https://discordapp.com/channels/' + channel.server.id + '/' + channel.id + '">#' + channel.name + '</a>', wN(user.name) + ' stopped typing in ' + wS(channel.name) + '.');
 				}
-				BetterDiscordLog.log('info', 'userTypingStopped', '<a href="https://discordapp.com/channels/' + server.id + '">' + server.name + '</a>', '<a href="https://discordapp.com/channels/' + channel.server.id + '/' + channel.id + '">#' + channel.name + '</a>', wN(user.name) + ' stopped typing in ' + wS(channel.name) + '.');
-			}
-		});
-		bot.on("userUnbanned", function (user, server) {
-			if (BetterDiscordLogging.events.userUnbanned) {
-				if (debugging) {
-					BetterDiscordLog.debug('userUnbanned', arguments);
+			});
+			bot.on("userUnbanned", function (user, server) {
+				if (BetterDiscordLogging.events.userUnbanned) {
+					if (debugging) {
+						BetterDiscordLog.debug('userUnbanned', arguments);
+					}
+					if (server.id == BetterAPI.getCurrentServerID()) {
+						alertify.success(wN(user.name) + ' was unbanned.');
+					}
+					BetterDiscordLog.log('info', 'userUnbanned', '<a href="https://discordapp.com/channels/' + server.id + '">' + server.name + '</a>', '', wN(user.name) + ' was unbanned' + '.');
 				}
-				if (server.id == BetterAPI.getCurrentServerID()) {
-					alertify.success(wN(user.name) + ' was unbanned.');
+			});
+			bot.on("userBanned", function (user, server) {
+				if (BetterDiscordLogging.events.userBanned) {
+					if (debugging) {
+						BetterDiscordLog.debug('userBanned', arguments);
+					}
+					if (server.id == BetterAPI.getCurrentServerID()) {
+						lastBanned = user.id;
+						alertify.error(wN(user.name) + ' was banned.');
+					}
+					BetterDiscordLog.log('info', 'userBanned', '<a href="https://discordapp.com/channels/' + server.id + '">' + server.name + '</a>', '', wN(user.name) + ' was banned' + '.');
 				}
-				BetterDiscordLog.log('info', 'userUnbanned', '<a href="https://discordapp.com/channels/' + server.id + '">' + server.name + '</a>', '', wN(user.name) + ' was unbanned' + '.');
-			}
-		});
-		bot.on("userBanned", function (user, server) {
-			if (BetterDiscordLogging.events.userBanned) {
-				if (debugging) {
-					BetterDiscordLog.debug('userBanned', arguments);
+			});
+			bot.on("voiceJoin", function (voicechannel, user) {
+				if (BetterDiscordLogging.events.voiceJoin) {
+					if (debugging) {
+						BetterDiscordLog.debug('voiceJoin', arguments);
+					}
+					BetterDiscordLog.log('info', 'voiceJoin', '<a href="https://discordapp.com/channels/' + voicechannel.server.id + '">' + voicechannel.server.name + '</a>', voicechannel.name, wN(user.name) + ' joined voice channel ' + wS(voicechannel.id) + '.');
 				}
-				if (server.id == BetterAPI.getCurrentServerID()) {
-					lastBanned = user.id;
-					alertify.error(wN(user.name) + ' was banned.');
+			});
+			bot.on("voiceStateUpdate", function (voicechannel, user) {
+				if (BetterDiscordLogging.events.voiceStateUpdate) {
+					if (debugging) {
+						BetterDiscordLog.debug('voiceStateUpdate', arguments);
+					}
+					BetterDiscordLog.log('info', 'voiceStateUpdate', '<a href="https://discordapp.com/channels/' + voicechannel.server.id + '">' + voicechannel.server.name + '</a>', voicechannel.name, wN(user.name) + ' updated voice channel ' + wS(voicechannel.id) + '.');
 				}
-				BetterDiscordLog.log('info', 'userBanned', '<a href="https://discordapp.com/channels/' + server.id + '">' + server.name + '</a>', '', wN(user.name) + ' was banned' + '.');
-			}
-		});
-		bot.on("voiceJoin", function (voicechannel, user) {
-			if (BetterDiscordLogging.events.voiceJoin) {
-				if (debugging) {
-					BetterDiscordLog.debug('voiceJoin', arguments);
+			});
+			bot.on("voiceLeave", function (voicechannel, user) {
+				if (BetterDiscordLogging.events.voiceLeave) {
+					if (debugging) {
+						BetterDiscordLog.debug('voiceLeave', arguments);
+					}
+					BetterDiscordLog.log('info', 'voiceLeave', '<a href="https://discordapp.com/channels/' + voicechannel.server.id + '">' + voicechannel.server.name + '</a>', voicechannel.name, wN(user.name) + ' left voice channel ' + wS(voicechannel.id) + '.');
 				}
-				BetterDiscordLog.log('info', 'voiceJoin', '<a href="https://discordapp.com/channels/' + voicechannel.server.id + '">' + voicechannel.server.name + '</a>', voicechannel.name, wN(user.name) + ' joined voice channel ' + wS(voicechannel.id) + '.');
-			}
-		});
-		bot.on("voiceStateUpdate", function (voicechannel, user) {
-			if (BetterDiscordLogging.events.voiceStateUpdate) {
-				if (debugging) {
-					BetterDiscordLog.debug('voiceStateUpdate', arguments);
-				}
-				BetterDiscordLog.log('info', 'voiceStateUpdate', '<a href="https://discordapp.com/channels/' + voicechannel.server.id + '">' + voicechannel.server.name + '</a>', voicechannel.name, wN(user.name) + ' updated voice channel ' + wS(voicechannel.id) + '.');
-			}
-		});
-		bot.on("voiceLeave", function (voicechannel, user) {
-			if (BetterDiscordLogging.events.voiceLeave) {
-				if (debugging) {
-					BetterDiscordLog.debug('voiceLeave', arguments);
-				}
-				BetterDiscordLog.log('info', 'voiceLeave', '<a href="https://discordapp.com/channels/' + voicechannel.server.id + '">' + voicechannel.server.name + '</a>', voicechannel.name, wN(user.name) + ' left voice channel ' + wS(voicechannel.id) + '.');
-			}
-		});
+			});
+			clearInterval(_int)
+		}, 2000);
 	}else{
 		Core.prototype.alert('Required plugin not found!',''+
 				'A requirement is missing: <b>'+_require[0]+'</b><br>'+
