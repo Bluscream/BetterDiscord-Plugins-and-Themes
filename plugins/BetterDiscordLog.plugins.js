@@ -97,11 +97,6 @@ BetterDiscordLog.prototype.start = function () {
 					BetterDiscordLog.debug('disconnected', arguments);
 				}
 				BetterDiscordLog.log('info', 'disconnected', '', '', 'Client got disconnected.');
-				console.log("BetterDiscordLog: Client disconnected. Auto reconnecting...");
-				var _int = setInterval(function(){
-					bot.loginWithToken(localStorage.token.match(/\"(.+)\"/)[1]).then(clearInterval(_int)).catch (err);
-				}, 5000);
-				
 			}
 		});
 		bot.on("raw", function (data) {
@@ -333,19 +328,6 @@ BetterDiscordLog.prototype.start = function () {
 				BetterDiscordLog.log('info', 'voiceLeave', '<a href="https://discordapp.com/channels/' + voicechannel.server.id + '">' + voicechannel.server.name + '</a>', voicechannel.name, wN(user.name) + ' left voice channel ' + wS(voicechannel.id) + '.');
 			}
 		});
-		function err2(error) {
-			if (error) {
-				console.log(error);
-				return;
-			}
-		}
-		function success(token) {}
-		function err(error) {
-			if (error) {
-				console.log('Problem occurred while logging in! ' + error);
-				return;
-			}
-		}
 	}else{
 		Core.prototype.alert('Required plugin not found!',''+
 				'A requirement is missing: <b>'+_require[0]+'</b><br>'+
