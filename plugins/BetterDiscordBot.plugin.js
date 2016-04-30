@@ -292,7 +292,7 @@ BetterDiscordBot.prototype.start = function () {
 						}
 					}
 				});
-			}catch(e){};
+			}catch(e){console.warn('try: '+e)};
 			clearInterval(_int)
 		}, 2000);
 	}else{
