@@ -18,7 +18,7 @@
 			}catch(e){console.log("[%cBetterDiscord%c] " + "%c"+pluginName+"%c" + ": " + msg, "color: orange; font-weight: bold;", "", "color:red;text-decoration:underline;", "");}
 		}	
 	};
-	try{bot = BetterDiscordBot.constructor.bot;}catch(e){BetterAPI.log(0, "warn", "Better API", "BetterDiscordBot not found!");}
+	// try{bot = BetterDiscordBot.constructor.bot;}catch(e){BetterAPI.log(0, "warn", "Better API", "BetterDiscordBot not found!");}
 	BetterAPI.log(0, "info", "Better API", "Loading...");
 //	'String'.capitalizeFirstLetter();
 	String.prototype.capitalizeFirstLetter = function() {
