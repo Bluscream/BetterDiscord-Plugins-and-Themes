@@ -56,11 +56,7 @@ var BetterDiscordBot = function() {
 				'bot.sendMessage(message.channel, _data, {}, function(e,m) {'+
 					'lastMessage["uptime"][m.channel.id] = m;'+ 
 					'bot.deleteMessage(m, { wait: 120000 });'+
-					// 'setTimeout(function(){ lastMessage["uptime"][m.channel.id] = 0;bot.deleteMessage(m); }, 120000); '+
 			'});',
-		// 'serverinfo': '',
-		// 'channelinfo': '',
-		// 'userinfo': '',
 	};
 	this.loadDatabase();
 };
@@ -96,15 +92,21 @@ BetterDiscordBot.prototype.start = function () {
 		debugging = BetterAPI.isDebug();
 		var lastBotUser = 0;
 		var lastBotChannel = 0;
-		var _int = setInterval(function(){
+		// var _int = setInterval(function(){
+		setTimeout(function() {
 			try{
-				bot.on("ready", function (data) {
-					clearInterval(_int);
-				});
+				// bot.on("ready", function (data) {
+					// clearInterval(_int);
+				// });
 				bot.on("message", function (message) {
+					// console.warn(message);
 					if (BetterDiscordBotting.settings.enabled) {
 						if(message.channel.server){
-							var prefix = '<@' + BetterAPI.getOwnID() + '> ';
+							if(message.content.startsWith('<@' + BetterAPI.getOwnID() + '> ')){
+								var prefix = '<@' + BetterAPI.getOwnID() + '> ';
+							}else if(message.content.startsWith('<@!' + BetterAPI.getOwnID() + '> ')){
+								var prefix = '<@!' + BetterAPI.getOwnID() + '> ';
+							}
 						}else{
 							var prefix = '!';
 						}
@@ -293,8 +295,8 @@ BetterDiscordBot.prototype.start = function () {
 						}
 					}
 				});
-			}catch(e){};
-		}, 2000);
+			}catch(e){console.error(e)};
+		}, 7500);
 	}else{
 		Core.prototype.alert('Required plugin not found!',''+
 				'A requirement is missing: <b>'+_require[0]+'</b><br>'+

@@ -11,7 +11,7 @@ Utils.prototype.start = function() {
 	if(BdApi.getPlugin(_require[0]) !== null){
 		try{eval(_require[2]);
 		}catch(e){
-			Core.prototype.alert('Private Plugin - Requirement not started!',''+
+			Core.prototype.alert('Utilities - Requirement not started!',''+
 				'A requirement is not started: <b>'+_require[0]+'<b><br>'+
 				'<br>'+
 				'Click <a onClick="'+
@@ -44,6 +44,67 @@ Utils.prototype.start = function() {
 				$(e).text(_text);
 			});
 		});
+		// BetterAPI.addLink("status", "Status", "status", "lg");
+		// $('#status').click(function(){
+			// BetterAPI.openStatusPopup();
+		// });
+		// BetterAPI.addLink("plus", "+", "https://discordapp.com/widget?id=134680912691462144&theme=dark", "sm");
+		// $('#plus').click(function(){
+			// $.jAlert({
+				// 'iframe': $('#plus').attr('href'),
+				// 'size': $('#plus').attr('size'),
+				// 'theme': 'black',
+				// 'title': 'BD+ (0kdpwyLsTTT8fB2t)'
+			 // });
+		// });
+		// BetterAPI.addLink("link_bots", "Bots", "https://www.carbonitex.net/Discord/bots", "lg");
+		// $('#link_bots').click(function(){
+			// $.jAlert({
+				// 'iframe': $('#link_bots').attr('href'),
+				// 'size': $('#link_bots').attr('size'),
+				// 'theme': 'black',
+				// 'title': 'Discord Bots'
+			 // });
+		// });
+		$('.user-settings-modal-account').livequery(function(){
+			if ($("#userinfopanel").length <= 0) {
+				id = BetterAPI.getOwnID();
+				avatarID = BetterAPI.getOwnAvatarID();
+				if(!avatarID){
+					avatarID = BetterAPI.getUserAvatarIDbyName(name);
+				}
+				var _label = '';
+				if (BetterAPI.isUID(id)) {
+					_label = _label + '<div class="control-group" id="userinfopanel">'+
+						'<label for="settings-username">'+
+							'<span>Unique ID</span>'+
+						'</label>'+
+						'<input id="settings-username" type="text" value="'+id+'"></div>';
+				}
+				if (avatarID) {
+					_label = _label + '<div class="control-group" id="userinfopanel">'+
+						'<label for="settings-username">'+
+							'<span>Avatar ID</span>'+
+						'</label>'+
+						'<input id="settings-username" type="text" value="'+avatarID+'"></div>'
+				}
+				$('div[data-reactid=".0.5.$=1$UserSettingsModal.0.0.1.0.$ACCOUNT.0.1:1.0"]').append(_label);
+			}
+		});
+		$('button[data-reactid=".0.5.$=1$modal1.0.0.1.0"]').livequery(function(){
+			if(!BetterAPI.elemExists('.submitall')){
+				$('.button-primary').after('&nbsp;<button type="submit" class="button button-primary submitall" data-reactid=".0.5.$=1$modal11.0.0.1.2" onclick="BetterAPI.bulkUpload();"><span data-reactid=".0.5.$=1$modal11.0.0.1.2.0">Upload all</span></button>');
+			}
+		});
+		// $('.markdown-modal-footer').livequery(function(){
+			// if($('#bdcl').length <= 0){
+				// $('.markdown-modal-footer').append(' | <a id="bdchangelog">BD Change Log</a>');
+				// $('#bdchangelog').click(function(){
+					// $('span[data-reactid=".0.5"]').remove();
+					// $("body").append(Core.prototype.constructChangelog());
+				// });
+			// }
+		// });
 	}else{
 		Core.prototype.alert('Required plugin not found!',''+
 			'A requirement is missing: <b>'+_require[0]+'</b><br>'+
@@ -75,38 +136,11 @@ Utils.prototype.onBooth = function() {
 	if(BetterAPI.elemExists('header[data-reactid$="$Direct Messages"]')){
 		$('header[data-reactid$="$Direct Messages"]').html('PM\'s - <a onclick="$(\'.close\').click();">Clear all</a>');
 	}
+	BetterAPI.enableTextSelection();
 };
-Utils.prototype.onMessage = function() {
-	//Utils.updateCount();Utils.checkServerCount();
-};
+Utils.prototype.onMessage = function() {};
 Utils.prototype.stop = function() {};
 Utils.prototype.unload = function() {};
-Utils.updateCount = function() {
-	servers = localStorage.getItem('servers');
-	localStorage.setItem('servers', BetterAPI.serverCount());
-	users = localStorage.getItem('users');
-	localStorage.setItem('users', BetterAPI.userCount());
-}
-Utils.checkUserCount = function() {
-	_users = localStorage.getItem('users');
-	if(users != _users){
-		if (users < _users){
-			alertify.success(Math.abs(users-_users)+' users(s) joined.');
-		}else{
-			alertify.error(Math.abs(users-_users)+' users(s) left.');
-		}
-	}
-}
-Utils.checkServerCount = function() {
-	_servers = localStorage.getItem('servers');
-	if(servers != _servers){
-		if (servers < _servers){
-			alertify.success(Math.abs(servers-_servers)+' server(s) added.');
-		}else{
-			alertify.error(Math.abs(servers-_servers)+' server(s) removed.');
-		}
-	}
-}
 Utils.clearDMs = function() {
 	$('.close').each(function(i,el){
 		$(el).click();
