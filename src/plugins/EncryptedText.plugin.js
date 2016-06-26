@@ -11,7 +11,7 @@ var _settings = {
 }
 
 EncryptedText.prototype.parseChat = function(){
-	$(".message-text>.markup>span:not(.EncryptedText_parsed").each(function(i,el){
+	$(".message-text>.markup").each(function(i,el){
 		var e = $(el); var _text = e.text();var base64;var _decoded;var decoded;var key;
 		if(_text.startsWith('[!o]')){
 			try{base64 = _text.split(/\[!o\](.+)?/)[1];}catch(e){return;}
