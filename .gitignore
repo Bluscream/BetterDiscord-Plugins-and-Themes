@@ -59,3 +59,4 @@ logs.log
 plugins/node_modules/
 tmp/
 src/plugins/Private.plugin.js
+lib/
