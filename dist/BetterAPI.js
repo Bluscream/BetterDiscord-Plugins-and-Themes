@@ -16,7 +16,7 @@
 		} else {
 			try{eval('console.'+type+'("[%cBetterDiscord%c] " + "%c"+pluginName+"%c" + ": " + msg, "color: orange; font-weight: bold;", "", "color:red;text-decoration:underline;", "");');
 			}catch(e){console.log("[%cBetterDiscord%c] " + "%c"+pluginName+"%c" + ": " + msg, "color: orange; font-weight: bold;", "", "color:red;text-decoration:underline;", "");}
-		}	
+		}
 	};
 	// try{bot = BetterDiscordBot.constructor.bot;}catch(e){BetterAPI.log(0, "warn", "Better API", "BetterDiscordBot not found!");}
 	BetterAPI.log(0, "info", "Better API", "Loading...");
@@ -155,7 +155,7 @@
 	};
 //	BetterAPI.toggleDebug();
 	BetterAPI.toggleDebug = function() {
-		if(BetterAPI.isDebug()){ localStorage.setItem('debug', '0');		
+		if(BetterAPI.isDebug()){ localStorage.setItem('debug', '0');
 		}else{ localStorage.setItem('debug', '1'); }
 	};
 //	BetterAPI.update();
@@ -343,7 +343,7 @@
 		for (var i=0, strLen=content.length; i<strLen; i++) {
 			bufView[i] = content.charCodeAt(i);
 		}
-		
+
 		window.requestFileSystem = window.requestFileSystem || window.webkitRequestFileSystem;
 
 		window.requestFileSystem(window.TEMPORARY, 1024*1024, function(fs) {
@@ -456,7 +456,7 @@
 		var _js =	'<script class="JSTest" type="text/javascript">'+
 						'var jsver = 1.0;'+
 					'</script>';
-		for (i = 1; i < 10; i++) { 
+		for (i = 1; i < 10; i++) {
 			_js +=	'<script class="JSTest" language="Javascript1.'+i+'">'+
 						'var jsver = 1.'+i+';'+
 					'</script>';
@@ -464,7 +464,7 @@
 		$('body').append(_js);
 		$('.JSTest').remove();
 		return jsver;
-		
+
 	};
 //	BetterAPI.getVersions();
 	(BetterAPI.getVersions = function() {
@@ -532,10 +532,10 @@
 		var fs = require('fs');
 		fs.access(path, fs.F_OK, function(err) {
 			if (!err) {
-				if(BetterAPI.debugging()){console.log('\''+path+'\' does exists.');}
+				if(BetterAPI.debugging){console.log('\''+path+'\' does exists.');}
 				 return true;
 			} else {
-				if(BetterAPI.debugging()){console.log('\''+path+'\' does NOT exist.');}
+				if(BetterAPI.debugging){console.log('\''+path+'\' does NOT exist.');}
 				 return false;
 			}
 		});
@@ -608,25 +608,25 @@
 		}
 	};
 	BetterAPI.requireCSS("https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.0-beta.1/jquery-ui.min.css", "JQueryUICSS");
-	BetterAPI.requireCSS("https://cdn.rawgit.com/VersatilityWerks/jAlert/master/src/jAlert-v3.css", "jAlertCSS");
+	BetterAPI.requireCSS("https://cdn.rawgit.com/VersatilityWerks/jAlert/master/src/jAlert.css", "jAlertCSS");
 	//BetterAPI.requireCSS("https://cdn.rawgit.com/fabien-d/alertify.js/0.3.11/themes/alertify.default.css");
 	//BetterAPI.requireCSS("https://cdn.rawgit.com/sciactive/pnotify/master/dist%2Fpnotify.css");
 	//BetterAPI.requireCSS("https://cdn.rawgit.com/twbs/bootstrap/master/dist/css/bootstrap.min.css");
 	BetterAPI.requireCSS("https://cdn.jsdelivr.net/alertifyjs/1.6.1/css/alertify.min.css");
 	BetterAPI.requireCSS("https://cdn.jsdelivr.net/alertifyjs/1.6.1/css/themes/default.min.css");
-	BetterAPI.requireJS("https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0-beta1/jquery.min.js", "JQueryJS" , "$()"); // 
+	BetterAPI.requireJS("https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0-beta1/jquery.min.js", "JQueryJS" , "$()"); //
 	BetterAPI.requireJS("https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.0-beta.1/jquery-ui.min.js", "JQueryUIJS", "$().draggable();"); //
 	BetterAPI.requireJS("https://cdn.rawgit.com/carhartl/jquery-cookie/master/src/jquery.cookie.js", "JQCookieJS", "$.cookie()"); //
-	BetterAPI.requireJS("https://cdn.rawgit.com/brandonaaron/livequery/1.1.1/jquery.livequery.js", "LiveQueryJS"); // 
-	BetterAPI.requireJS("https://cdn.rawgit.com/VersatilityWerks/jAlert/master/src/jAlert-v3.min.js", "JAlertJS"); // https://github.com/VersatilityWerks/jAlert#quick-use-requires-jalert-functionsjs
+	BetterAPI.requireJS("https://cdn.rawgit.com/brandonaaron/livequery/1.1.1/jquery.livequery.js", "LiveQueryJS"); //
+	BetterAPI.requireJS("https://cdn.rawgit.com/VersatilityWerks/jAlert/master/src/jAlert.min.js", "JAlertJS"); // https://github.com/VersatilityWerks/jAlert#quick-use-requires-jalert-functionsjs
 	BetterAPI.requireJS("https://cdn.rawgit.com/VersatilityWerks/jAlert/master/src/jAlert-functions.min.js", "JAlertfuncJS");
 	BetterAPI.requireJS("https://cdn.jsdelivr.net/alertifyjs/1.6.1/alertify.min.js", "AlertifyJS","alertify"); // http://alertifyjs.com/
 	BetterAPI.requireJS("https://cdn.rawgit.com/craigmccoy/jquery-charcount/master/jquery.charcount.min.js", "CharcountJS"); // https://github.com/craigmccoy/jquery-charcount#quick-documentation
 	BetterAPI.requireJS("https://cdnjs.cloudflare.com/ajax/libs/dragula/3.6.3/dragula.min.js", "DragulaJS");
 	BetterAPI.requireJS("https://cdn.rawgit.com/jberryman/dilly.js/master/dilly.js", "withDelayJS", "withDelay"); // https://github.com/jberryman/dilly.js#toc1
 	BetterAPI.requireJS("https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.12.0/moment.min.js", "momentJS", "moment"); // http://momentjs.com/docs/#/use-it/
-	//BetterAPI.requireJS("https://cdn.rawgit.com/flesler/jquery.scrollTo/master/jquery.scrollTo.min.js"); // 
-	//BetterAPI.requireJS("https://cdn.rawgit.com/andreyfedoseev/jquery-ocupload/master/jquery.ocupload-min.js"); // 
+	//BetterAPI.requireJS("https://cdn.rawgit.com/flesler/jquery.scrollTo/master/jquery.scrollTo.min.js"); //
+	//BetterAPI.requireJS("https://cdn.rawgit.com/andreyfedoseev/jquery-ocupload/master/jquery.ocupload-min.js"); //
 	//BetterAPI.requireJS("https://cdnjs.cloudflare.com/ajax/libs/floatthead/1.4.0/jquery.floatThead.min.js"); // http://mkoryak.github.io/floatThead/
 	//BetterAPI.requireJS("https://cdn.rawgit.com/ianpgall/js-console-listener/master/console-listener.js"); // https://github.com/ianpgall/js-console-listener#use
 	//BetterAPI.requireJS("https://cdn.rawgit.com/fabien-d/alertify.js/0.3.11/lib/alertify.min.js"); // https://github.com/fabien-d/alertify.js/wiki/How-to-Use#usage
@@ -724,7 +724,7 @@ _pickedColor = {};
 			num = num + parseInt($(i).text());
 		});
 		return num;
-	};	
+	};
 //	BetterAPI.onlineUserCount();
 	BetterAPI.onlineUserCount = function() {
 		return parseInt($('span[data-reactid$="$online.2"]').text());
@@ -740,7 +740,7 @@ _pickedColor = {};
 //	BetterAPI.getUserIdByName("name");
 	BetterAPI.getUserIdByName = function(name) {
 		var nick = "";
-		var match = "";		
+		var match = "";
 		var users = $(".member-username");
 		for(var i = 0 ; i < users.length ; i++) {
 			var user = $(users[i]);
@@ -764,7 +764,7 @@ _pickedColor = {};
 				}
 			});
 		}
-		match = ""+match;	
+		match = ""+match;
 		if(BetterAPI.isUID(match)) {
 			BetterAPI.log(1, "log", "Better API", "UID of \""+nick+"\" is \""+match+"\" with a length of "+match.length+" chars.");
 			return match;
@@ -829,20 +829,20 @@ _pickedColor = {};
 //	BetterAPI.getUserAvatarID(id);
 	BetterAPI.getUserAvatarID = function(id) {
 		var match = null;
-		$(".avatar-small").each(function(){ 
+		$(".avatar-small").each(function(){
 			url = $(this).css("background-image");
 			if(id == url.match(/\d+/)) {
 				match = url.split("/").pop(-1).slice(0, -5);
 				return false;
-			}        
+			}
 		});
 		if(!match) {
-			$(".avatar-large").each(function(){ 
+			$(".avatar-large").each(function(){
 				url = $(this).css("background-image");
 				if(id == url.match(/\d+/)) {
 					match = url.split("/").pop(-1).slice(0, -5);
 					return false;
-				}        
+				}
 			});
 		}
 		return match;
@@ -850,13 +850,13 @@ _pickedColor = {};
 //	BetterAPI.getUserAvatarIDbyName("name");
 	BetterAPI.getUserAvatarIDbyName = function(name) {
 		var match = null;
-		$(".avatar-small").each(function(){ 
+		$(".avatar-small").each(function(){
 			var _name = $(this).next().children().text();
 			if(name == _name) {
 				var url = $(this).css("background-image");
 				match = url.split("/").pop(-1).slice(0, -5);
 				return false;
-			}        
+			}
 		});
 		if(!match) {
 			$(".avatar-large").each(function(){
@@ -865,7 +865,7 @@ _pickedColor = {};
 					var url = $(this).css("background-image");
 					match = url.split("/").pop(-1).slice(0, -5);
 					return false;
-				}        
+				}
 			});
 		}
 		return match;
@@ -873,13 +873,13 @@ _pickedColor = {};
 //	BetterAPI.getAvatarURLbyName("name");
 	BetterAPI.getAvatarURLbyName = function(name) {
 		var match = null;
-		$(".avatar-small").each(function(){ 
+		$(".avatar-small").each(function(){
 			var _name = $(this).next().children().text();
 			if(name == _name) {
 				var url = $(this).css("background-image");
 				match = url.substring(4, url.length - 1);
 				// match = match.replace('"', '');
-			}        
+			}
 		});
 		if(!match) {
 			$(".avatar-large").each(function(){
@@ -888,7 +888,7 @@ _pickedColor = {};
 					var url = $(this).css("background-image");
 					match = url.substring(4, url.length - 1);
 					// match = match.replace('"', '');
-				}        
+				}
 			});
 		}
 		return match;
@@ -896,20 +896,20 @@ _pickedColor = {};
 //	BetterAPI.getAvatarURL(id);
 	BetterAPI.getAvatarURL = function(id) {
 		var match = null;
-		$(".avatar-small").each(function(){ 
+		$(".avatar-small").each(function(){
 			var url = $(this).css("background-image");
 			if(id == url.match(/\d+/)) {
 				match = url.substring(4, url.length - 1);
 				return false;
-			}        
+			}
 		});
 		if(!match) {
-			$(".avatar-large").each(function(){ 
+			$(".avatar-large").each(function(){
 				var url = $(this).css("background-image");
 				if(id == url.match(/\d+/)) {
 					match = url.substring(4, url.length - 1);
 					return false;
-				}        
+				}
 			});
 		}
 		return match;
@@ -969,7 +969,7 @@ _pickedColor = {};
 	BetterAPI.onlineFriendsCount = function() {
 		return $('.friends-online').text().replace(' Online', '');
 	};
-	
+
 //	BetterAPI.addUserLabel("divID", "label", "<html>");
 	BetterAPI.addUserLabel = function(divID, label, html) {
 		divID = divID.startsWith("#") ? divID.substring(1) : divID;
@@ -1046,7 +1046,7 @@ _pickedColor = {};
 	b64toBlob = function(b64Data) {
 		var pieces = b64Data.split(',');
 		var contentType = pieces[0].substr(5).split(';')[0];
-		var data = pieces[1];    
+		var data = pieces[1];
 		var byteCharacters = atob(data);
 		var byteNumbers = new Array(byteCharacters.length);
 		for (var i = 0; i < byteCharacters.length; i++) {
@@ -1084,9 +1084,9 @@ _pickedColor = {};
 				// .do(function(){
 					// $('button[data-reactid=".0.5.$=1$modal4.0.0.1.2"]').click();
 				// });
-		// (function myLoop (i) {          
-			// setTimeout(function () {   
-				// alert('hello');          //  your code here                
+		// (function myLoop (i) {
+			// setTimeout(function () {
+				// alert('hello');          //  your code here
 				// if (--i) myLoop(i);      //  decrement i and call myLoop again if i > 0
 			// }, 3000)
 		// })(10);                        //  pass the number of iterations as an argument

@@ -29,7 +29,7 @@ var AvatarHover  = function() {
 	};
 
 	this.unload = function() {
-		var e = document.getElementById("AvatarHover"); 
+		var e = document.getElementById("AvatarHover");
 		if(e) e.parentNode.removeChild(e);
 	};
 
@@ -78,7 +78,7 @@ AvatarHover.prototype.settings = {
 	"avatarBackgroundColor":"#303336",
 	"avatarBorderRadius": "4px",
 	"avatarBorderSize": "1px",
-	"avatarBorderColor": "black"	
+	"avatarBorderColor": "black"
 };
 
 AvatarHover.prototype.size = function(obj) {
@@ -127,7 +127,7 @@ AvatarHover.prototype.init = function() {
 	if(this.settings['isHoverChatUsers']) {
 		this.selector("div.channel-members-wrap", ".avatar-small");
 		this.selector("div.channel-members-wrap", ".avatar-large");
-	}	
+	}
 };
 
 AvatarHover.prototype.selector = function (elem, subElemClass) {
@@ -144,9 +144,9 @@ AvatarHover.prototype.selector = function (elem, subElemClass) {
 					that.setAvatarSize($(this));
 
 					$("#AvatarHover").css({
-						"display":"block", 
+						"display":"block",
 						"background-color": that.settings['avatarBackgroundColor'],
-						"border-radius": that.settings['avatarBorderRadius'], 
+						"border-radius": that.settings['avatarBorderRadius'],
 						"border": that.settings['avatarBorderSize'] + " solid "+ that.settings['avatarBorderColor'],
 						"background-image": $(this).css("background-image")
 					});
@@ -169,7 +169,7 @@ AvatarHover.prototype.selector = function (elem, subElemClass) {
 };
 
 AvatarHover.prototype.setAvatarSize = function(self) {
-	var newWidth = this.isLarge || this.settings['isLarge'] ? 256 : 128, 
+	var newWidth = this.isLarge || this.settings['isLarge'] ? 256 : 128,
 	newHeight = this.isLarge || this.settings['isLarge'] ? 256 : 128;
 
 	var offset = self.offset();
@@ -223,8 +223,8 @@ AvatarHover.prototype.saveSettings = function() {
 
 AvatarHover.prototype.loadSettings = function() {
 	var settings = this.getSettingsFile();
-	try { 
-		var tmpSettings = JSON.parse(_fs.readFileSync(settings)); 
+	try {
+		var tmpSettings = JSON.parse(_fs.readFileSync(settings));
 
 		if(this.size(this.settings) == this.size(tmpSettings))
 			this.settings = tmpSettings;
@@ -260,54 +260,54 @@ AvatarHover.prototype.getPanel = function() {
 		'<tr><td width="50%"><label for="avatarBGColor">Avatar BG Color: </label></td>'+
 				'<td><input type="color" placeholder="#012345" id="avatarBGColor" value="'+
 				this.settings['avatarBackgroundColor']+
-				'"></td></tr>' + 
+				'"></td></tr>' +
         '<tr><td><hr></td><td></td></tr>'+
         '<tr><td><label for="avatarBorderRadius">Avatar BorderRadius: </label></td>'+
 				'<td><input type="text" placeholder="0px" id="avatarBorderRadius" value="'+
 				this.settings['avatarBorderRadius']+
-				'"></td></tr>' + 
+				'"></td></tr>' +
 		'<tr><td><hr></td><td></td></tr>'+
        	'<tr><td><label for="avatarBorderSize">Avatar BorderSize: </label></td>'+
 				'<td><input type="text" placeholder="1px" id="avatarBorderSize" value="'+
 				this.settings['avatarBorderSize']+
-				'"></td></tr>' + 
+				'"></td></tr>' +
 		'<tr><td><hr></td><td></td></tr>'+
     	'<tr><td><label for="avatarBorderColor">Avatar BorderColor: </label></td>'+
 				'<td><input type="color" placeholder="0px" id="avatarBorderColor" value="'+
 				this.settings['avatarBorderColor']+
-				'"></td></tr>' + 
+				'"></td></tr>' +
 
     	'<tr><td><hr></td><td></td></tr>'+
     	'<tr><td><label for="avatarIsShown">Avatar Force Show: </label></td>'+
 				'<td><input type="checkbox" id="avatarIsShown" '+
 				(this.settings['isShown'] ? "checked": "")+
-				'></td></tr>' + 
+				'></td></tr>' +
     	'<tr><td><label for="avatarIsLarge">Avatar Force Large: </label></td>'+
 				'<td><input type="checkbox" id="avatarIsLarge" '+
 				(this.settings['isLarge'] ? "checked": "")+
-				'></td></tr>' + 
+				'></td></tr>' +
 
 		'<tr><td><hr></td><td></td></tr>'+
 		'<tr><td><label for="avatarIsHoverGuilds">Hover Guilds: </label></td>'+
 				'<td><input type="checkbox" id="avatarIsHoverGuilds" '+
 				(this.settings['isHoverGuilds'] ? "checked": "")+
-				'></td></tr>' + 
+				'></td></tr>' +
 		'<tr><td><label for="avatarIsHoverChannels">Hover Channels/DM Users: </label></td>'+
 				'<td><input type="checkbox" id="avatarIsHoverChannels" '+
 				(this.settings['isHoverChannels'] ? "checked": "")+
-				'></td></tr>' + 
+				'></td></tr>' +
 		'<tr><td><label for="avatarIsHoverFriends">Hover Friends List: </label></td>'+
 				'<td><input type="checkbox" id="avatarIsHoverFriends" '+
 				(this.settings['isHoverFriends'] ? "checked": "")+
-				'></td></tr>' + 
+				'></td></tr>' +
 		'<tr><td><label for="avatarIsHoverChatMessages">Hover Chat Messages: </label></td>'+
 				'<td><input type="checkbox" id="avatarIsHoverChatMessages" '+
 				(this.settings['isHoverChatMessages'] ? "checked": "")+
-				'></td></tr>' + 
+				'></td></tr>' +
 		'<tr><td><label for="avatarIsHoverChatUsers">Hover Chat Users: </label></td>'+
 				'<td><input type="checkbox" id="avatarIsHoverChatUsers" '+
 				(this.settings['isHoverChatUsers'] ? "checked": "")+
-				'></td></tr>' + 
+				'></td></tr>' +
 
     	'<tr><td><hr></td><td><hr></td></tr>'+
     	'<tr><td></td><td>'+
@@ -325,4 +325,4 @@ AvatarHover.prototype.getPanel = function() {
         '});</script>';
 };
 
-exports.AvatarHover = AvatarHover;
+try{exports.AvatarHover=AvatarHover;}catch(e){console.warn('AvatarHover: Using old version, not exporting functions.');}

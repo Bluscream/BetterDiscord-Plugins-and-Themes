@@ -1,6 +1,0 @@
-//META{"name":"DiscordJS"}*//
-var DiscordJS=function(){'use strict';this.getName=function(){return"DiscordJS";}
-this.getDescription=function(){return"Allows you to use DiscordJS Features.";}
-this.getVersion=function(){return"1";}
-this.getAuthor=function(){return"Bluscream";}};DiscordJS.prototype.load=function(){var source;var debug=false;if(debug){source="https://raw.githubusercontent.com/Bluscream/BetterDiscord-Plugins-and-Themes/indev/dist/DiscordJS.js";}else{source="https://raw.githubusercontent.com/Bluscream/BetterDiscord-Plugins-and-Themes/indev/dist/DiscordJS.min.js";}
-$("<script/>",{type:"text/javascript",src:source,id:"DiscordJS"}).appendTo($("head"));};DiscordJS.prototype.start=function(){};DiscordJS.prototype.onSwitch=function(){};DiscordJS.prototype.onMessage=function(){};DiscordJS.prototype.observer=function(e){};DiscordJS.prototype.stop=function(){};DiscordJS.prototype.unload=function(){};DiscordJS.prototype.getSettingsPanel=function(){return"<h3>Settings Panel</h3>";};try{exports.DiscordJS=DiscordJS;}catch(e){console.warn('DiscordJS: Using old BetterDiscord version, not exporting functions.')}

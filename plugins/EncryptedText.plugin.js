@@ -257,4 +257,4 @@ EncryptedText.sendTextMessage = function(text) {
 	  contentType: false
 	});
 };
-try{exports.EncryptedText = EncryptedText;}catch(e){console.warn('Using old version, not exporting functions.')}
+try{exports.EncryptedText = EncryptedText;}catch(e){console.warn('Encrypted Text: Using old version, not exporting functions.')}
