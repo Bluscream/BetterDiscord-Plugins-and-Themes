@@ -1,0 +1,60 @@
+//META{"name":"material_switches","description":"Turns checkboxes into Material Design switches","author":"Beard_Design","version":"1.1.0"}*//{}
+
+/*---------------------Made By Beard Design-----------------------*/
+.checkbox .checkbox-inner input[type=checkbox]:checked+span:after{
+    background:#7289DA!important;
+    top:-3px;
+    border-right:0px;
+    border-bottom:0px;
+    transform:translate(10px,0px);
+    animation-name:none!important;
+    transition-delay:0s!important;
+}
+
+.checkbox .checkbox-inner input[type=checkbox]:checked+span{
+    background:#ADB8E1;
+    border:0px;
+    height:15px;
+    width:30px;
+    top:2px;
+    border-radius:100px;
+    animation-name:none!important;
+    
+}
+.checkbox .checkbox-inner span{
+    top:2px;
+    height:15px;
+    width:30px;
+    border-radius:100px;
+    border:0px;
+    background:#A6A6A6;
+}
+.checkbox .checkbox-inner+span{
+    margin-left:20px;
+}
+.checkbox .checkbox-inner span:after{
+    content: "";
+    position: absolute;
+    background:#fff;
+    transform:rotate(0deg)translate(-5px,0px);
+    height:20px!important;
+    width:20px!important;
+    top:-3px;
+    border-radius:100px;
+    border-right:0px;
+    border-bottom:0px;
+    transition: all 200ms ease!important;
+    box-shadow:0px 2px 3px rgba(0,0,0,0.3);
+}
+.checkbox:active .checkbox-inner input[type=checkbox]:checked+span{
+    transform:scale(1)!important;
+    transition:all 100ms ease;
+    
+}
+.bda-slist .checkbox {
+    margin-top: -116px;
+}
+.context-menu .checkbox{
+	transform:translate(-13px);
+}
+/*---------------------Made By Beard Design-----------------------*/
