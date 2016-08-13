@@ -17,18 +17,17 @@ class BanTroughBots{
   getReactInstance(node){ return node[ Object.keys(node).find((key)=>key.startsWith("__reactInternalInstance"))] }
   getReactObject(node){ return ((inst) => (inst._currentElement._owner._instance) )(this.getReactInstance(node)) }
   showBanModal(bot, user){
+      $('.callout-backdrop.botbans').remove();
       let modal= $(`<span><div class="callout-backdrop botbans" style="background-color:#000; opacity:0.85"></div><div class="modal" style="opacity: 1">
           <div class="modal-inner">
               <form class="form">
                   <div class="form-header">
-                      <header>Ban <font color="red">`+user.username+`</font> through <font color="green">`+bot+`</font</header>
+                      <header>Ban <font color="red">`+user.username+`</font> through <font color="green">`+bot+`</font></header>
                   </div>
                   <div class="form-inner">
                       <div class="control-group">
-                          <label for="tagtext">
-                              Reason
-                          </label>
-                          <input type="text" id="banreason" name="reason" >
+                          <label for="reason">Reason</label>
+                          <input type="text" id="banreason" name="reason" />
                       </div>
                   </div>
                   <div class="form-actions">
@@ -38,17 +37,17 @@ class BanTroughBots{
               </form>
           </div>
       </div></span>`).on("submit","form",(e)=>{
-        e.preventDefault();var reason = $('#banreason').val();
-        if(!this.isEmpty(reason.trim())){
+        e.preventDefault();var reason = e.target.elements.banreason.value;
+        if(!this.isEmpty(reason) && !this.isEmpty(this.settings[bot].commandReason)){
           var _msg = this.settings[bot].commandReason.replace('{name}', user.username);
-          var _msg = this.settings[bot].commandReason.replace('{discriminator}', user.discriminator);
-          var _msg = this.settings[bot].commandReason.replace('{id}', user.id);
-          var _msg = this.settings[bot].commandReason.replace('{reason}', reason);
+          var _msg = _msg.replace('{discriminator}', user.discriminator);
+          var _msg = _msg.replace('{id}', user.id);
+          var _msg = _msg.replace('{reason}', reason);
           this.sendTextMessage(_msg);
         }else{
           var _msg = this.settings[bot].command.replace('{name}', user.username);
-          var _msg = this.settings[bot].command.replace('{discriminator}', user.discriminator);
-          var _msg = this.settings[bot].command.replace('{id}', user.id);
+          var _msg = _msg.replace('{discriminator}', user.discriminator);
+          var _msg = _msg.replace('{id}', user.id);
           this.sendTextMessage(_msg);
         }
         modal.remove();
