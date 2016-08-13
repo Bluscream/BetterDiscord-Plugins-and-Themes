@@ -6,7 +6,7 @@
 	// var saveDir = __dirname.replace('plugins', 'resources');
 	// var saveDir = __dirname.slice(0, __dirname.indexOf("\\", __dirname.lastIndexOf('Discord') + "Discord".length + 1) + 1) + "resources";
 	BetterAPI.npm('discord.js', process.env.APPDATA + '/BetterDiscord/', function () {
-		var Discord = require(process.env.APPDATA + '/BetterDiscord/node_modules/discord.js'));
+		var Discord = require(process.env.APPDATA + '/BetterDiscord/node_modules/discord.js');
 		bot = new Discord.Client();
 		bot.token = localStorage.token.match(/\"(.+)\"/)[1];
 		bot.ready = false;
