@@ -43,7 +43,7 @@ class BanTroughBots{
           var _msg = this.settings[bot].commandReason.replace('{name}', user.username);
           var _msg = this.settings[bot].commandReason.replace('{discriminator}', user.discriminator);
           var _msg = this.settings[bot].commandReason.replace('{id}', user.id);
-          var _msg = this.settings[bot].commandReason.replace('{reason}', user.reason);
+          var _msg = this.settings[bot].commandReason.replace('{reason}', reason);
           this.sendTextMessage(_msg);
         }else{
           var _msg = this.settings[bot].command.replace('{name}', user.username);
