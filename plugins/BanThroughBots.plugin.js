@@ -50,10 +50,10 @@ class BanTroughBots{
           var _msg = _msg.replace('{id}', user.id);
           this.sendTextMessage(_msg);
         }
-        modal.remove();
+        modal.remove();$('.modal').remove();
       })
       .appendTo("#app-mount>:first-child")
-      .on("click",".callout-backdrop,button.btn-default",(e)=>{modal.remove()})
+      .on("click",".callout-backdrop,button.btn-default",(e)=>{modal.remove();$('.modal').remove();})
       modal.find("#banreason").click().focus();
   }
   sendTextMessage(text){
@@ -74,7 +74,7 @@ class BanTroughBots{
   //console.log("%c["+this.getName()+"]", 'font-weight: bold;color: green;' ,...arguments)
   }
   stop(){
-		$('.botban').remove();
+		$('.botbans').remove();
 	}
   start(){
     this.loadDatabase();
