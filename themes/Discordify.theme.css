@@ -12,6 +12,11 @@
 	color: #FFF;
 }
 
+input[type="number"] {
+	background-color:#1C1C1F !important;
+	color:white !important;
+}
+
 .create-guild-container .create-or-join .actions .or {display: none;}
 .create-guild-container .create-or-join .actions {
 	background-color: #121314 !important;
@@ -212,11 +217,11 @@
 	color: #FFFFFF;
 	border-bottom: 0px !important;
 }
-	
+
 .links {
 	display: none;
 }
-	
+
 .scroller-wrap .scroller::-webkit-scrollbar-thumb {
 	border: 3px solid #121314 !important;
 	background-color: #1C1C1F !important;
@@ -226,7 +231,7 @@
 	border: 3px solid transparent !important;
 	background-color: transparent !important;
 }
-	
+
 .title-wrap, #bd-customcss-detach-container {
 	border-bottom: 0px !important;
 	background-color: #1C1C1F !important;
@@ -465,8 +470,8 @@ div.control-group .shortcut-recorder input[type=text] {
 }
 
 .form .control-group input[type=email],
-.form .control-group input[type=password], 
-.form .control-group input[type=text], 
+.form .control-group input[type=password],
+.form .control-group input[type=text],
 .form .control-group textarea {
 	border-radius: 10px !important;
 	background-color: #1C1C1F;

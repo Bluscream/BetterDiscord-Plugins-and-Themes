@@ -4,7 +4,10 @@ class BanTroughBots{
   constructor(){
     this.settings = {
       "Spectra":{ command:"%ban byid {id}", commandReason:"%ban byid {id} for {reason}"},
-      "NadekoBot":{ command:".ban <@{id}>", commandReason:".ban <@{id}> {reason}"}
+      "NadekoBot":{ command:".ban <@{id}>", commandReason:".ban <@{id}> {reason}", purge:".prune <@{id}> {purge}"},
+      "Tatsumaki":{ command:"t@ban <@{id}>", commandReason:"t@ban <@{id}> {reason}", purge:"t@prune {purge} <@{id}>"},
+      "WildBot":{ command:"++ban <@{id}>"},
+      "RH1-NO":{ command:"!!ban <@{id}>", commandReason:'!!ban <@{id}> "{reason}"', purge:"!!purge {purge} <@{id}>"}
     }
   }
   isEmpty(s) {
@@ -29,25 +32,37 @@ class BanTroughBots{
                           <label for="reason">Reason</label>
                           <input type="text" id="banreason" name="reason" />
                       </div>
+                      <div class="control-group">
+                          <label for="purge">Purge messages</label>
+                          <input type="number" id="banpurge" name="purge" value="0" style="max-width:30% !important;" />
+                          &nbsp;<input type="checkbox" name="purgeall" value="All" onclick="$('#banpurge').prop('disabled', function(i, v) { return !v; });"> All
+                      </div>
                   </div>
                   <div class="form-actions">
-                      <button type="button" class="btn btn-default">Cancel</button>
-                      <button type="submit" class="btn btn-primary">Ban</button>
+                      <button type="button" class="btn btn-default close">Cancel</button>
+                      <button type="submit" class="btn btn-primary red">Ban</button>
                   </div>
               </form>
           </div>
       </div></span>`).on("submit","form",(e)=>{
-        e.preventDefault();var reason = e.target.elements.banreason.value;
+        e.preventDefault();var reason = e.target.elements.banreason.value; var purge = e.target.elements.purge.value;// : e.target.elements.purgeall.value
+        if(!this.isEmpty(purge) && purge > 0 && !this.isEmpty(this.settings[bot].purge)){
+          var _msg = this.settings[bot].purge.replace('{name}', user.username);
+          _msg = _msg.replace('{discriminator}', user.discriminator);
+          _msg = _msg.replace('{id}', user.id);
+          _msg = _msg.replace('{purge}', purge);
+          this.sendTextMessage(_msg);
+        }
         if(!this.isEmpty(reason) && !this.isEmpty(this.settings[bot].commandReason)){
           var _msg = this.settings[bot].commandReason.replace('{name}', user.username);
-          var _msg = _msg.replace('{discriminator}', user.discriminator);
-          var _msg = _msg.replace('{id}', user.id);
-          var _msg = _msg.replace('{reason}', reason);
+          _msg = _msg.replace('{discriminator}', user.discriminator);
+          _msg = _msg.replace('{id}', user.id);
+          _msg = _msg.replace('{reason}', reason);
           this.sendTextMessage(_msg);
         }else{
           var _msg = this.settings[bot].command.replace('{name}', user.username);
-          var _msg = _msg.replace('{discriminator}', user.discriminator);
-          var _msg = _msg.replace('{id}', user.id);
+          _msg = _msg.replace('{discriminator}', user.discriminator);
+          _msg = _msg.replace('{id}', user.id);
           this.sendTextMessage(_msg);
         }
         modal.remove();$('.modal').remove();
@@ -109,6 +124,7 @@ class BanTroughBots{
   };
 
   onContextMenu( context ){
+    var that = this;
     let inst = this.getReactInstance( context )
     if (!inst) return;
 	this.log(inst._currentElement._owner._instance.props.type)
@@ -121,17 +137,13 @@ class BanTroughBots{
         let { id, username, discriminator } = inst._currentElement._owner._instance.props.user;
         this.log(inst._currentElement._owner._instance.props.user)
         let data = { id, username, discriminator }
-        $(context).append('<div class="item-group botbans" />');
-        for (var key in this.settings) {
-          if (!this.settings.hasOwnProperty(key)) continue;
-          data["use"] = key;
-          $(context).find('.botbans').append(`<div id="`+key+`" class="item">
-                        			<span id="`+key+`">Ban with `+key+`</span>
-                        			<div id="`+key+`" class="hint"></div>
-                            </div>`)
-            .on("click.botbans","#"+key,data,this.onContextMenuClick.bind(this))
-        }
-        //$(context).append('</div>');
+        $(context).append(`<div class="item-group botbans">
+        <div class="item item-subMenu">Ban through Bot
+        </div></div>`);
+        //$(context).find('.botbans-menu').on("hover",null,data,this.onContextMenuHover.bind(this))
+        $( ".botbans>.item-subMenu" ).hover(function() { console.log(this);that.onContextMenuHover(this, data) },
+          function() { $( this ).find( ".botbans-menu" ).remove(); }
+        );
     }
 
     this.log(this.getReactObject( context).props.type)
@@ -141,6 +153,17 @@ class BanTroughBots{
   onContextMenuClick(e){
     $(e.delegateTarget).hide()
     this.showBanModal(e.target.id, e.data)
+  }
+  onContextMenuHover(e, data){
+    $(e).append('<div class="context-menu botbans-menu" ></div>');
+    for (var key in this.settings) {
+      if (!this.settings.hasOwnProperty(key)) continue;
+      $(e).find('.botbans-menu').append(`<div class="botbans-submenu"><div id="`+key+`" class="item danger">
+                          <span id="`+key+`">Ban with `+key+`</span>
+                          <div id="`+key+`" class="hint"></div>
+                        </div><div>`)
+        .on("click.botbans-submenu","#"+key,data,this.onContextMenuClick.bind(this))
+    }
   }
 // BOT SPECIFIC
   waitForElement(css,callback){
@@ -160,13 +183,14 @@ class BanTroughBots{
   getSettingsPanel() {
   	var self = this;
   	var settings = $('<div class="form"></div>');
-  	settings.append('<h1 style="font-weight: bold">Bots:</h1>');
+  	settings.append('<h1 style="font-weight: bold">Bot Setup:</h1>');
 
   	var rowHtml = "";
-  	rowHtml += '<div class="control-group BanThroughBot-inputgroup">';
-  	rowHtml += '	<input style="width: 15%;" type="text" name="name" placeholder="Name">';
-  	rowHtml += '	<input style="width: 35%;" type="text" name="data" placeholder="Command">';
-  	rowHtml += '	<input style="width: 35%;" type="text" name="dataReason" placeholder="Command with Reason">';
+  	rowHtml += '<div class="control-group BanThroughBot-inputgroup" style="width:850px !important;">';
+  	rowHtml += '	<input style="width: 100px;" type="text" name="name" placeholder="Name">';
+  	rowHtml += '	<input style="width: 225px;" type="text" name="data" placeholder="Command">';
+  	rowHtml += '	<input style="width: 225px;" type="text" name="dataReason" placeholder="Command with Reason">';
+  	rowHtml += '	<input style="width: 225px;" type="text" name="dataPurge" placeholder="Purge Command">';
   	rowHtml += '</div><br>';
 
   	for (var key in this.settings) {
@@ -175,6 +199,7 @@ class BanTroughBots{
   		row.find('input[name="name"]').val(key);
   		row.find('input[name="data"]').val(this.settings[key].command);
   		row.find('input[name="dataReason"]').val(this.settings[key].commandReason);
+  		row.find('input[name="dataPurge"]').val(this.settings[key].purge);
   		settings.append(row);
   	}
   	settings.append(rowHtml);
@@ -189,8 +214,10 @@ class BanTroughBots{
   				var $e = $(el);
   				var key = $e.find('input[name="name"]').val();
   				var data = $e.find('input[name="data"]').val();
+  				var dataReason = $e.find('input[name="dataReason"]').val();
+  				var dataPurge = $e.find('input[name="dataPurge"]').val();
   				if (key.trim() === "" || data.trim() === "") return;
-  				self.settings[key] = data;
+  				self.settings[key] = { command:data, commandReason:dataReason, purge:dataPurge};
   			});
   			self.saveDatabase();
   			var $b = $(this).text('Saved!');
@@ -199,7 +226,8 @@ class BanTroughBots{
 
   	settings.append(addButton);
   	settings.append(saveButton);
-  	return settings;
+  	setTimeout(function(){ $(".bd-psm").css("width", "900px"); }, 100);
+    return settings;
   };
 	getName(){return "Ban through bots"};
 	getDescription(){return "Adds items to the contextmenu to ban through bots faster."};
