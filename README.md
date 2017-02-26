@@ -15,7 +15,7 @@ Everything goes to ``` %appdata%\BetterDiscord\ ```
 
 `3.` Get **BetterDiscord+** from https://github.com/Bluscream/BetterDiscord/releases/download/3/BetterDiscord.Setup.exe
 
-Or get the plugins you want manually from https://github.com/Bluscream/BetterDiscord/tree/master/plugins or https://github.com/Bluscream/BetterDiscord/archive/master.zip
+Or get the plugins you want manually from https://github.com/Bluscream/BetterDiscord-Plugins-and-Themes/tree/master/plugins or https://github.com/Bluscream/BetterDiscord-Plugins-and-Themes/archive/master.zip
 
 `4.` If you used the installer continue with step `5.` Otherwise place the plugins you want in `%appdata%\BetterDiscord\plugins\`.
 
