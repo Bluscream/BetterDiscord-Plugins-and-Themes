@@ -619,7 +619,7 @@
 	BetterAPI.requireJS("https://cdn.rawgit.com/carhartl/jquery-cookie/master/src/jquery.cookie.js", "JQCookieJS", "$.cookie()"); //
 	BetterAPI.requireJS("https://cdn.rawgit.com/brandonaaron/livequery/1.1.1/jquery.livequery.js", "LiveQueryJS"); //
 	BetterAPI.requireJS("https://raw.githubusercontent.com/VersatilityWerks/jAlert/master/dist/jAlert.css", "JAlertJS"); // https://github.com/VersatilityWerks/jAlert#quick-use-requires-jalert-functionsjs
-	BetterAPI.requireJS("https://raw.githubusercontent.com/VersatilityWerks/jAlert/master/dist/jAlert-functions.min.js", "JAlertfuncJS");
+	//BetterAPI.requireJS("https://raw.githubusercontent.com/VersatilityWerks/jAlert/master/dist/jAlert-functions.min.js", "JAlertfuncJS");
 	BetterAPI.requireJS("https://cdn.jsdelivr.net/alertifyjs/1.6.1/alertify.min.js", "AlertifyJS","alertify"); // http://alertifyjs.com/
 	BetterAPI.requireJS("https://cdn.rawgit.com/craigmccoy/jquery-charcount/master/jquery.charcount.min.js", "CharcountJS"); // https://github.com/craigmccoy/jquery-charcount#quick-documentation
 	BetterAPI.requireJS("https://cdnjs.cloudflare.com/ajax/libs/dragula/3.6.3/dragula.min.js", "DragulaJS");
