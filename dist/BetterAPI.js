@@ -1,5 +1,6 @@
 (BetterAPI = function() {
 	// 'use strict';
+	old_alert = alert;
 	bdcredits = {
 		'97138137679028224': '#25ACE8', // Bluscream
 		'125238980722688000': '#ff0000', // BetterDiscord+ Bot
@@ -1168,5 +1169,7 @@ _pickedColor = {};
 			}
 		}
 	};
+	alert = old_alert;
+	window.alert = old_alert;
 	BetterAPI.log(0, "info", "Better API", "Successfully loaded.");
 })();
