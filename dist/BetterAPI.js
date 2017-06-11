@@ -609,7 +609,7 @@
 		}
 	};
 	BetterAPI.requireCSS("https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.0-beta.1/jquery-ui.min.css", "JQueryUICSS");
-	BetterAPI.requireCSS("https://cdn.rawgit.com/VersatilityWerks/jAlert/master/src/jAlert.css", "jAlertCSS");
+	BetterAPI.requireCSS("https://raw.githubusercontent.com/VersatilityWerks/jAlert/master/dist/jAlert.css", "jAlertCSS");
 	//BetterAPI.requireCSS("https://cdn.rawgit.com/fabien-d/alertify.js/0.3.11/themes/alertify.default.css");
 	//BetterAPI.requireCSS("https://cdn.rawgit.com/sciactive/pnotify/master/dist%2Fpnotify.css");
 	//BetterAPI.requireCSS("https://cdn.rawgit.com/twbs/bootstrap/master/dist/css/bootstrap.min.css");
@@ -619,7 +619,7 @@
 	BetterAPI.requireJS("https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.0-beta.1/jquery-ui.min.js", "JQueryUIJS", "$().draggable();"); //
 	BetterAPI.requireJS("https://cdn.rawgit.com/carhartl/jquery-cookie/master/src/jquery.cookie.js", "JQCookieJS", "$.cookie()"); //
 	BetterAPI.requireJS("https://cdn.rawgit.com/brandonaaron/livequery/1.1.1/jquery.livequery.js", "LiveQueryJS"); //
-	BetterAPI.requireJS("https://raw.githubusercontent.com/VersatilityWerks/jAlert/master/dist/jAlert.css", "JAlertJS"); // https://github.com/VersatilityWerks/jAlert#quick-use-requires-jalert-functionsjs
+	BetterAPI.requireJS("https://raw.githubusercontent.com/VersatilityWerks/jAlert/master/dist/jAlert.min.js", "JAlertJS"); // https://github.com/VersatilityWerks/jAlert#quick-use-requires-jalert-functionsjs
 	//BetterAPI.requireJS("https://raw.githubusercontent.com/VersatilityWerks/jAlert/master/dist/jAlert-functions.min.js", "JAlertfuncJS");
 	BetterAPI.requireJS("https://cdn.jsdelivr.net/alertifyjs/1.6.1/alertify.min.js", "AlertifyJS","alertify"); // http://alertifyjs.com/
 	BetterAPI.requireJS("https://cdn.rawgit.com/craigmccoy/jquery-charcount/master/jquery.charcount.min.js", "CharcountJS"); // https://github.com/craigmccoy/jquery-charcount#quick-documentation
