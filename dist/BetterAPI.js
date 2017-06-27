@@ -2,7 +2,7 @@
 	// 'use strict';
 	old_alert = alert;
 	bdcredits = {
-		'97138137679028224': '#25ACE8', // Bluscream
+		//'97138137679028224': '#25ACE8', // Bluscream
 		'125238980722688000': '#ff0000', // BetterDiscord+ Bot
 		'170589911513038848': '#71368a', // Github Bot
 		'84679236132032512': '#fec6d1', // Hipster Lion
