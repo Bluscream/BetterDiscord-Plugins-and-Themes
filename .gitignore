@@ -61,3 +61,4 @@ tmp/
 src/plugins/Private.plugin.js
 lib/
 node_modules/
+.idea/
