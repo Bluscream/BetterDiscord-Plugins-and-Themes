@@ -1,0 +1,59 @@
+//META{"name":"Server_Grid","description":"Display servers in 3 column grid","author":"Jiiks","version":"1.0"}*//{}
+.guilds-wrapper{width: 180px;}
+.guilds-wrapper .scroller-wrap{width: 200px;}
+.guilds-wrapper .guilds {
+    display: flex;
+    flex-flow: row wrap;
+    padding-left: 0;
+    align-content: flex-start;
+}
+.guilds-wrapper .guilds .guild {
+	margin-left: 8px;
+    margin-top: 8px;
+}
+.guilds-wrapper .guilds .guild.unread::before {
+	left: -2px;
+    top: 5px;
+    z-index:9000;
+}
+.guilds-wrapper .guilds .guild:first-child {
+    position: relative; 
+    left: 0;
+    margin: auto;
+    margin-top: 15px;
+}
+#bd-pub-li {
+	position: absolute;
+    top: 0px;
+    left: 0px;
+}
+#bd-pub-li #bd-pub-button {
+    position:absolute;
+    width: 100%;
+	text-align: center;
+}
+.guilds-wrapper .guilds .guild-separator {
+	position: relative;
+    width: 100%;
+    margin-top: 10px;
+}
+.guilds-wrapper .guilds .friends-online {
+	position: relative;
+    width: 100%;
+    margin: auto;
+    margin-top: 5px;
+}
+.guilds-wrapper .guilds .guild.selected:before {
+    display: none;
+}
+.guilds-wrapper .guilds .guild {
+	position: relative;
+}
+.guilds-wrapper .guilds .dms {
+    width: 100%;
+    display: flex;
+    flex-flow: row wrap;
+}
+.guilds-wrapper .guilds .dms .guild {
+    left: 0;
+}

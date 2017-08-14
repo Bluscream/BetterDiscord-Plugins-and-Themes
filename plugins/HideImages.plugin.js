@@ -2,11 +2,18 @@
 
 var HideImages = function() {};
 
+HideImages.prototype.customStyles = document.createElement("style");
+HideImages.prototype.customStyles.id = "hide-images-style";
+HideImages.prototype.customStyles.appendChild(document.createTextNode(
+    ".embed-image, .embed-thumbnail, .attachment-image { display:none!important;}"));
+
 HideImages.prototype.data = {};
-HideImages.prototype.dataVersion = "1";
+HideImages.prototype.dataVersion = "2";
 HideImages.prototype.defaultData = function() {
     return {
-        version: "1"
+        version: "2",
+        from: "00:00",
+        until: "23:59"
     };
 }
 HideImages.prototype.loadData = function() {
@@ -40,17 +47,19 @@ HideImages.prototype.getChannelID = function() {
 };
 
 HideImages.prototype.hideImages = function() {
-    $(".embed-image").css("display", "none");
-    $(".embed-thumbnail").css("display", "none");
-    $(".attachment-image").css("display", "none");
+    if (!document.contains(document.getElementById("hide-images-style")))
+        document.documentElement.insertBefore(this.customStyles, null);
 }
 HideImages.prototype.showImages = function() {
-
-    $(".embed-image").css("display", "block");
-    $(".embed-thumbnail").css("display", "block");
-    $(".attachment-image").css("display", "block");
+    if (document.contains(document.getElementById("hide-images-style")))
+        document.documentElement.removeChild(this.customStyles);
 }
 HideImages.prototype.act = function() {
+    var now = /\d{2}:\d{2}/.exec((new Date()).toTimeString())[0];
+    if (now < this.data.from || now > this.data.until) {
+        this.showImages();
+        return;
+    }
     var serverID = this.getServerID();
     var channelID = this.getChannelID();
     if (this.data[serverID] == undefined) {
@@ -78,16 +87,11 @@ HideImages.prototype.stop = function() {
 };
 
 HideImages.prototype.onMessage = function() {
-    this.act();
-    var self = this;
-    setTimeout(function() {
-        self.act();
-    }, 200);
+    //this.act();
 };
 
 HideImages.prototype.onSwitch = function() {
     this.act();
-    var self = this;
 };
 
 HideImages.prototype.observer = function(e) {
@@ -154,9 +158,40 @@ HideImages.prototype.observer = function(e) {
         }
     }
 };
+HideImages.prototype.saveSettings = function() {
+    this.data.from = document.getElementById("hide-images-from").value;
+    this.data.until = document.getElementById("hide-images-until").value;
+    document.getElementById("hide-images-msg").innerHTML="Settings saved!";
+    setTimeout(function(){
+      document.getElementById("hide-images-msg").innerHTML="";
+    }, 2000);
+    this.saveData();
+};
 
 HideImages.prototype.getSettingsPanel = function() {
-    return "";
+    var settings = "<h3><b>Settings Panel</b></h3><br/>";
+    settings += "Scheduler - <i>Format: \"hh:mm\" (24h)</i><br/><br/>";
+
+    settings +="<form class='form' style='margin-top:10px'>"
+    settings += "Hide images on selected channels-<br/>";
+    settings += "<div class='control-group'>";
+    settings += "<label>From</label><br/>";
+    settings += "<input type='text' id='hide-images-from' value='" + this.data.from + "'/><br/>";
+    settings += "</div>";
+    settings += "<div class='control-group'>";
+    settings += "<label>Until</label><br/>";
+    settings += "<input type='text' id='hide-images-until' value='" + this.data.until + "'/><br/>";
+    settings += "</div>";
+
+    settings += "<div style='margin-top:10px'>"
+    settings += "<button type='button' class='btn btn-primary' onclick='BdApi.getPlugin(\"Hide Images\").saveSettings()'>Save</button><br/>";
+    settings += "</div>"
+    settings +="</form>"
+
+    settings += "<div id='hide-images-msg' style='margin-top:10px'><div><br/>";
+
+    return settings;
+
 };
 
 HideImages.prototype.getName = function() {
@@ -168,7 +203,7 @@ HideImages.prototype.getDescription = function() {
 };
 
 HideImages.prototype.getVersion = function() {
-    return "0.2.4";
+    return "0.3.1";
 };
 
 HideImages.prototype.getAuthor = function() {
