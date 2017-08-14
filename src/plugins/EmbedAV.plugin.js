@@ -221,18 +221,18 @@ function EmbedAV() {
 
         embedAutoPlay = options.embedAutoPlay;
         if (preventAutoPlay) {
-			      console.log("[BetterDiscord] EmbedAV: Preventing Autoplay");
+			//console.log("[BetterDiscord] EmbedAV: Preventing Autoplay");
             options.embedAutoPlay = false;
         }
 
         if (options.embedAudio) {
-			      //console.log("[BetterDiscord] EmbedAV: embedAudio enabled, embedding audio and spotify");
+			//console.log("[BetterDiscord] EmbedAV: embedAudio enabled, embedding audio and spotify");
             this.process(links, 'audio');
             this.process(links, 'spotify');
             this.process(links, 'spotifyp');
         }
         if (options.embedVideo) {
-			      //console.log("[BetterDiscord] EmbedAV: embedVideo enabled, embedding videos");
+			//console.log("[BetterDiscord] EmbedAV: embedVideo enabled, embedding videos");
             this.process(links, 'video');
         }
 		if (options.embedImage) {
