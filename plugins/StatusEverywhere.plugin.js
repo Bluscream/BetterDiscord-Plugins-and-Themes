@@ -14,16 +14,27 @@ var popout=$('div[class*="userPopout"]');var block=popout.find('div[class*="stat
 popout.remove()
 return block}
 start(){BdApi.injectCSS(this.getShortName(),`.message-group .avatar-large {margin-left: 5px}
+
 .status.hidden {
+
  transform: scale(0,0);
+
  transform-origin: 50% 50%!important;
+
 }
+
 .status {
+
  height: auto;
+
  transition: 5s cubic-bezier(.2,0,0,1) !important;
+
  transform: scale(1,1);
+
  transform-origin: 50% 50%!important;
+
 }
+
    `)
 $('.message-group .avatar-large').each((index,elem)=>{if(!$(elem).find('.status').length)$(elem).append(this.getAuthorStatus(elem))})}
 stop(){BdApi.clearCSS(this.getShortName())
