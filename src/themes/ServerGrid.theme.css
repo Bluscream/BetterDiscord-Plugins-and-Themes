@@ -1,4 +1,4 @@
-//META{"name":"Server_Grid","description":"Display servers in 3 column grid","author":"Jiiks","version":"1.0"}*//{}
+//META{"name":"Server_Grid","description":"Display servers in 3 column grid","author":"Jiiks","version":"1.0"}*//
 .guilds-wrapper{width: 180px;}
 .guilds-wrapper .scroller-wrap{width: 200px;}
 .guilds-wrapper .guilds {
@@ -17,7 +17,7 @@
     z-index:9000;
 }
 .guilds-wrapper .guilds .guild:first-child {
-    position: relative; 
+    position: relative;
     left: 0;
     margin: auto;
     margin-top: 15px;
