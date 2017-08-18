@@ -61,6 +61,32 @@ div[style*="/96835534579589120/"]
 }
 .guild a[href*="/194170124859736065/"] {
     animation: sharex 10s linear infinite !important;
-    background-image: url(https://getsharex.com/img/ShareX_Logo_256.png) !important;
+    background-image: url(https://getsharex.com/img/ShareX_Logo_256.png) !important; 
 }
 @keyframes sharex { to { filter: hue-rotate(360deg); } }
+
+/*Nitro Tag*/
+.avatar-large[style*="/a_"]+.comment .username-wrapper:before {
+    background: url('https://canary.discordapp.com/assets/65f0a0df5563e21de7b1aeeafaf31d78.svg') 50% 50% / contain no-repeat;
+    float:left;
+    content: '';
+    width: 21px;
+    height: 16px;
+    margin: 0 5px 0 -5px;
+}
+.avatar-small[style*="/a_"]+.member-inner .member-username:before {
+    background: url('https://canary.discordapp.com/assets/65f0a0df5563e21de7b1aeeafaf31d78.svg') 50% 50% / contain no-repeat;
+    float:left;
+    content: '';
+    width: 21px;
+    height: 16px;
+    margin: 0 5px 0 -5px;
+}
+.message.message-sending .markup{
+    animation:messages-slide-up 200ms cubic-bezier(.3,0,0,1),opacity 50ms ease;
+}
+@keyframes messages-slide-up{
+    from{
+        transform: translate(0,5px);
+    }
+}

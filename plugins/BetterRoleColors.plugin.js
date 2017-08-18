@@ -2,14 +2,14 @@
 let BetterRoleColors=(function(){class Plugin{getName(){return"BetterRoleColors"}
 getShortName(){return"BRC"}
 getDescription(){return"Adds server-based role colors to typing, voice, popouts, modals and more! Support Server: bit.ly/ZeresServer"}
-getVersion(){return"0.3.9"}
+getVersion(){return"1.0.0-rc2"}
 getAuthor(){return"Zerebos"}
 getGithubLink(){return"https://raw.githubusercontent.com/rauenzi/BetterDiscordAddons/master/Plugins/BetterRoleColors/BetterRoleColors.plugin.js"}
 constructor(){this.isOpen=false
 this.hasUpdate=false
 this.remoteVersion=""
-this.defaultSettings={modules:{typing:true,voice:true,mentions:true},popouts:{username:false,discriminator:false,nickname:true,fallback:true},modals:{username:true,discriminator:false},auditLog:{username:true,discriminator:false},account:{username:true,discriminator:false}}
-this.settings={modules:{typing:true,voice:true,mentions:true},popouts:{username:false,discriminator:false,nickname:true,fallback:true},modals:{username:true,discriminator:false},auditLog:{username:true,discriminator:false},account:{username:true,discriminator:false}}
+this.defaultSettings={modules:{typing:true,voice:true,mentions:false},popouts:{username:false,discriminator:false,nickname:true,fallback:true},modals:{username:true,discriminator:false},auditLog:{username:true,discriminator:false},account:{username:true,discriminator:false}}
+this.settings={modules:{typing:true,voice:true,mentions:false},popouts:{username:false,discriminator:false,nickname:true,fallback:true},modals:{username:true,discriminator:false},auditLog:{username:true,discriminator:false},account:{username:true,discriminator:false}}
 this.mainCSS=""
 this.colorData={}}
 loadSettings(){try{$.extend(true,this.settings,bdPluginStorage.get(this.getShortName(),"plugin-settings"));}
@@ -24,14 +24,14 @@ load(){$.get(this.getGithubLink(),(result)=>{var ver=result.match(/"[0-9]+\.[0-9
 this.remoteVersion=ver;ver=ver.split(".")
 var lver=this.getVersion().split(".")
 if(ver[0]>lver[0])this.hasUpdate=true;else if(ver[0]==lver[0]&&ver[1]>lver[1])this.hasUpdate=true;else if(ver[0]==lver[0]&&ver[1]==lver[1]&&ver[2]>lver[2])this.hasUpdate=true;else this.hasUpdate=false;});}
-unload(){};start(){this.loadSettings();this.loadData()
-BdApi.injectCSS(this.getShortName()+"-style",this.mainCSS);BdApi.injectCSS(this.getShortName()+"-settings",SettingField.getCSS(this.getName()));this.getAllColors()}
-stop(){this.saveData()
-this.decolorize()
+unload(){};start(){this.loadSettings();BdApi.injectCSS(this.getShortName()+"-style",this.mainCSS);BdApi.injectCSS(this.getShortName()+"-settings",SettingField.getCSS(this.getName()));this.getAllUsers()
+this.currentServer=this.getCurrentServer()}
+stop(){this.decolorize()
 this.saveSettings();$("*").off("."+this.getShortName());BdApi.clearCSS(this.getShortName()+"-style");BdApi.clearCSS(this.getShortName()+"-settings");}
-onSwitch(){};getReactInstance(node){let instance=node[Object.keys(node).find((key)=>key.startsWith("__reactInternalInstance"))]
+onSwitch(){if(this.currentServer==this.getCurrentServer())return;this.currentServer=this.getCurrentServer()
+this.getAllUsers()}
+getReactInstance(node){let instance=node[Object.keys(node).find((key)=>key.startsWith("__reactInternalInstance"))]
 instance['getReactProperty']=function(path){var value=path.split(".").reduce(function(obj,prop){return obj&&obj[prop];},this);return value;};return instance;}
-getReactProperty(object,path){var value=path.split(".").reduce(function(obj,prop){return obj&&obj[prop];},object);return value;}
 isServer(){return this.getCurrentServer()?true:false}
 getCurrentServer(){return this.getReactInstance($('.channels-wrap')[0]).getReactProperty('_currentElement.props.children.0.props.guildId')}
 getRGB(color){var result;if(result=/rgb\(\s*([0-9]{1,3})\s*,\s*([0-9]{1,3})\s*,\s*([0-9]{1,3})\s*\)/.exec(color))return[parseInt(result[1]),parseInt(result[2]),parseInt(result[3])];if(result=/rgb\(\s*([0-9]+(?:\.[0-9]+)?)\%\s*,\s*([0-9]+(?:\.[0-9]+)?)\%\s*,\s*([0-9]+(?:\.[0-9]+)?)\%\s*\)/.exec(color))return[parseFloat(result[1])*2.55,parseFloat(result[2])*2.55,parseFloat(result[3])*2.55];if(result=/#([a-fA-F0-9]{2})([a-fA-F0-9]{2})([a-fA-F0-9]{2})/.exec(color))return[parseInt(result[1],16),parseInt(result[2],16),parseInt(result[3],16)];if(result=/#([a-fA-F0-9])([a-fA-F0-9])([a-fA-F0-9])/.exec(color))return[parseInt(result[1]+result[1],16),parseInt(result[2]+result[2],16),parseInt(result[3]+result[3],16)];}
@@ -40,79 +40,69 @@ return'rgb('+rgb[0]+','+rgb[1]+','+rgb[2]+')';}
 lightenColor(color,percent){var rgb=this.getRGB(color);for(var i=0;i<rgb.length;i++){rgb[i]=Math.round(Math.min(255,rgb[i]+rgb[i]*(percent/100)));}
 return'rgb('+rgb[0]+','+rgb[1]+','+rgb[2]+')';}
 rgbToAlpha(color,alpha){var rgb=this.getRGB(color);return'rgba('+rgb[0]+','+rgb[1]+','+rgb[2]+','+alpha+')';}
-addColorData(server,user,color){if(server===undefined||user===undefined||color===undefined)return;if(this.colorData[server]===undefined)this.colorData[server]={};if(color)this.colorData[server][user]=color;else if(this.colorData[server][user]!==undefined)delete this.colorData[server][user];}
-getColorData(server,user){if(server===undefined||user===undefined||this.colorData[server]===undefined||this.colorData[server][user]===undefined)return"";else return this.colorData[server][user];}
 observer(e){if(e.removedNodes.length){var removed=$(e.removedNodes[0])
 if(removed.hasClass("spinner")||removed.prop("tagName")=="STRONG"){this.colorizeTyping()}}
-if(!e.addedNodes.length)return;var elem=$(e.addedNodes[0]);if(elem.find(".containerDefault-7RImuF").length||elem.find(".avatarContainer-303pFz").length){this.getVoiceColors()
-this.colorizeVoice()}
+if(!e.addedNodes.length)return;var elem=$(e.addedNodes[0]);if(elem.find(".containerDefault-7RImuF").length||elem.find(".avatarContainer-303pFz").length){this.colorizeVoice()}
 if(elem.find("strong").length||elem.find(".spinner").length||elem.hasClass("typing")||elem.prop("tagName")=="STRONG"){this.colorizeTyping()}
 if(elem.find(".guild-settings-audit-logs").length||elem.hasClass("guild-settings-audit-logs")||elem.find(".userHook-DFT5u7").length||elem.hasClass("userHook-DFT5u7")){this.colorizeAuditLog()}
 if(elem.find('div[class*="userPopout"]').length||elem.hasClass("userPopout-4pfA0d")){this.colorizePopout()}
 if(elem.find("#user-profile-modal").length||elem.is("#user-profile-modal")){this.colorizeModal()}
 if(elem.find(".message-group").length||elem.hasClass("message-group")){this.colorizeMentions(elem)}
 if(elem.find(".message").length||elem.hasClass("message")){this.colorizeMentions(elem.parents('.message-group'))}
-if(elem.find(".member-username-inner").length){this.getMemberListColors()
-this.colorize()}
-if(elem.parents(".messages.scroller").length||elem.find(".message-group").parents(".messages.scroller").length){this.getMessageColors()
-this.colorize()}
+if(elem.find(".member-username-inner").length){this.colorize()}
+if(elem.parents(".messages.scroller").length||elem.find(".message-group").parents(".messages.scroller").length){this.colorize()}
 if(elem.find("#friends").length||elem.is("#friends")){this.colorize()}}
-getAllColors(){this.getMemberListColors()
-this.getVoiceColors()
-this.getMessageColors()
-this.saveData()}
-getRoleFromPopout(){if(!$('.userPopout-4pfA0d').find(".member-role").length)return"";return $('.userPopout-4pfA0d').find(".member-role")[0].style.color;}
-getMemberListColors(){if(!this.isServer())return;let server=this.getCurrentServer()
-setTimeout(()=>{$('.member').each((index,elem)=>{var user=$(elem).find('.member-username-inner').text()
-if(user){var color=$(elem).find('.member-username-inner')[0].style.color;if(this.settings.modules.typing)this.addColorData(server,user,color);this.addColorData(server,this.getReactInstance(elem).getReactProperty('_currentElement.props.children.0.props.user.id'),color)}});},100)}
-getVoiceColors(){if(!this.isServer())return;let server=this.getCurrentServer()
-setTimeout(()=>{$('.draggable-3SphXU').each((index,elem)=>{var user=$(elem).find(".avatarContainer-303pFz").siblings().first().text()
-var userAlt=this.getReactInstance(elem).getReactProperty('_currentElement.props.children.props.user.id')
-if(this.getColorData(server,user)&&(!this.getColorData(server,userAlt)==!this.settings.modules.typing))return;$(elem).children().first().click()
-var popout=$('div[class*="userPopout"]');var color=this.getRoleFromPopout()
-popout.remove()
-if(this.settings.modules.typing)this.addColorData(server,user,color);this.addColorData(server,userAlt,color)});},100)}
-getMessageColors(){if(!this.isServer())return;let server=this.getCurrentServer()
-setTimeout(()=>{$('.message-group').each((index,elem)=>{var user=$(elem).find('.user-name').text()
-if(user){var color=$(elem).find('.user-name')[0].style.color;if(this.settings.modules.typing)this.addColorData(server,user,color);this.addColorData(server,this.getReactInstance(elem).getReactProperty('_currentElement.props.children.0.props.children.props.user.id'),color)}});},100)}
+getAllUsers(){this.users=[]
+if(!$('.channel-members').length||$('.private-channels').length)return;let groups=this.getReactInstance($('.channel-members').parent().parent().parent()[0])._renderedChildren[".1"]._instance.state.memberGroups
+for(let i=0;i<groups.length;i++){this.users.push(...groups[i].users)}}
+getUserByID(id){var user=this.users.find((user)=>{return user.user.id==id})
+if(!user)this.getAllUsers();user=this.users.find((user)=>{return user.user.id==id})
+if(user)return user;else return{colorString:""};}
+getUserByNick(nickname){var user=this.users.find((user)=>{return user.nick==nickname})
+if(!user)this.getAllUsers();user=this.users.find((user)=>{return user.nick==nickname})
+if(user)return user;else return{colorString:""};}
+getColorByID(id){let color=this.getUserByID(id).colorString
+if(color)return color;else return"";}
+getColorByNick(nickname){let color=this.getUserByNick(nickname).colorString
+if(color)return color;else return"";}
 colorize(){this.colorizeTyping()
 this.colorizeVoice()
 this.colorizeMentions()
 this.colorizeAccountStatus()}
 colorizeAccountStatus(){if(!this.settings.account.username&&!this.settings.account.discriminator)return;let server=this.getCurrentServer()
-setTimeout(()=>{let account=$('.accountDetails-15i-_e')
+let account=$('.accountDetails-15i-_e')
 let user=this.getReactInstance(account[0]).getReactProperty('_hostParent._currentElement.props.children.1.props.user.id')
-let color=this.getColorData(server,user)
-if(this.settings.account.username)account.find(".username")[0].style.setProperty("color",color,"important");if(this.settings.account.discriminator)account.find(".discriminator").css("opacity",1)[0].style.setProperty("color",color,"important");},100)}
+let color=this.getColorByID(user)
+if(this.settings.account.username)account.find(".username")[0].style.setProperty("color",color,"important");if(this.settings.account.discriminator)account.find(".discriminator").css("opacity",1)[0].style.setProperty("color",color,"important");}
 colorizeTyping(){if(!this.settings.modules.typing)return;let server=this.getCurrentServer()
-setTimeout(()=>{$(".typing strong").each((index,elem)=>{var user=$(elem).text();$(elem).css("color",this.getColorData(server,user));});},100)}
+$(".typing strong").each((index,elem)=>{var user=$(elem).text();$(elem).css("color",this.getColorByNick(user));});}
 colorizeVoice(){if(!this.settings.modules.voice)return;let server=this.getCurrentServer()
-setTimeout(()=>{$(".draggable-3SphXU").each((index,elem)=>{var user=this.getReactInstance(elem).getReactProperty('_currentElement.props.children.props.user.id')
-$(elem).find(".avatarContainer-303pFz").siblings().first().css("color",this.getColorData(server,user));});},100)}
+$(".draggable-3SphXU").each((index,elem)=>{var user=this.getReactInstance(elem).getReactProperty('_currentElement.props.children.props.user.id')
+$(elem).find(".avatarContainer-303pFz").siblings().first().css("color",this.getColorByID(user));});}
 colorizeMentions(node){if(!this.settings.modules.mentions)return;let server=this.getCurrentServer()
 var searchSpace=node===undefined?$(".message-group .message"):node
-setTimeout(()=>{$(".message-group .message").each((index,elem)=>{var messageNum=$(elem).index()
+$(".message-group .message").each((index,elem)=>{var messageNum=$(elem).index()
 var instance=this.getReactInstance(elem)
 $(elem).find('.message-text > .markup > .mention:contains("@")').each((index,elem)=>{var users=instance.getReactProperty(`_hostParent._currentElement.props.children.0.${messageNum}.props.message.content`).match(/<@!?[0-9]+>/g)
 if(!users)return true;var user=users[index]
 if(!user)return true;user=user.replace(/<|@|!|>/g,"")
-var textColor=this.getColorData(server,user)
+var textColor=this.getColorByID(user)
 $(elem).css("color",textColor);if(textColor){$(elem).css("background",this.rgbToAlpha(textColor,0.1));$(elem).on("mouseenter."+this.getShortName(),()=>{$(elem).css("color","#FFFFFF");$(elem).css("background",this.rgbToAlpha(textColor,0.7));})
-$(elem).on("mouseleave."+this.getShortName(),()=>{$(elem).css("color",textColor);$(elem).css("background",this.rgbToAlpha(textColor,0.1));})}})});},100)}
+$(elem).on("mouseleave."+this.getShortName(),()=>{$(elem).css("color",textColor);$(elem).css("background",this.rgbToAlpha(textColor,0.1));})}})});}
 colorizePopout(){if(!this.settings.popouts.username&&!this.settings.popouts.discriminator&&!this.settings.popouts.nickname)return;let server=this.getCurrentServer()
 $('.userPopout-4pfA0d').each((index,elem)=>{var user=$(elem).text()
 var user=this.getReactInstance(elem).getReactProperty('_hostParent._currentElement.props.children.props.user.id')
-if(!user)return true;var color=this.getColorData(server,user)
+if(!user)return true;let color=this.getColorByID(user)
 var hasNickname=$(elem).find('.headerName-2N8Pdz').length
-if(!color)color=this.getRoleFromPopout();if((color&&this.settings.popouts.username)||(!hasNickname&&this.settings.popouts.fallback))$(elem).find('.headerTag-3zin_i span:first-child')[0].style.setProperty("color",color,"important");if(color&&this.settings.popouts.discriminator)$(elem).find('.headerDiscriminator-3fLlCR')[0].style.setProperty("color",color,"important");if(color&&this.settings.popouts.nickname&&hasNickname)$(elem).find('.headerName-2N8Pdz')[0].style.setProperty("color",color,"important");});}
+if((color&&this.settings.popouts.username)||(!hasNickname&&this.settings.popouts.fallback))$(elem).find('.headerTag-3zin_i span:first-child')[0].style.setProperty("color",color,"important");if(color&&this.settings.popouts.discriminator)$(elem).find('.headerDiscriminator-3fLlCR')[0].style.setProperty("color",color,"important");if(color&&this.settings.popouts.nickname&&hasNickname)$(elem).find('.headerName-2N8Pdz')[0].style.setProperty("color",color,"important");});}
 colorizeModal(){if(!this.settings.modals.username&&!this.settings.modals.discriminator)return;let server=this.getCurrentServer()
 $("#user-profile-modal").each((index,elem)=>{var user=this.getReactInstance(elem).getReactProperty('_currentElement.props.children.3.props.user.id')
-var color=this.getColorData(server,user)
+let color=this.getColorByID(user)
 if(color&&this.settings.modals.username)$(elem).find('.username')[0].style.setProperty("color",color,"important");if(color&&this.settings.modals.discriminator)$(elem).find('.discriminator')[0].style.setProperty("color",color,"important");});}
 colorizeAuditLog(){if(!this.settings.auditLog.username&&!this.settings.auditLog.discriminator)return;let server=this.getReactInstance($('.guild-settings-audit-logs')[0]).getReactProperty('_currentElement.props.children.props.children._owner._currentElement.props.guildId')
 $(".userHook-DFT5u7").each((index,elem)=>{var index=$(elem).index()?2:0
 let user=this.getReactInstance(elem).getReactProperty(`_hostParent._currentElement.props.children.${index}.props.user.id`)
-let color=this.getColorData(server,user)
+let color=this.getColorByID(user)
 if(this.settings.auditLog.username)$(elem).children().first().css("color",color);if(this.settings.auditLog.discriminator){$(elem).children(".discrim-xHdOK3").css("color",color).css("opacity",1)}});}
 decolorize(){this.decolorizeTyping()
 this.decolorizeMentions()
